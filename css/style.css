@@ -546,6 +546,10 @@ footer {
         left: 50%;
         transform: translateX(-50%);
     }
+
+    .shop-intro-content {
+        padding: 2.5rem 1.5rem;
+    }
 }
 
 /* Animation on scroll */
