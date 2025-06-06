@@ -33,6 +33,8 @@ body {
     margin: auto;
     overflow: hidden;
     padding: 0 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 h1, h2, h3 {
@@ -527,8 +529,10 @@ footer {
     }
 
     .shop-intro-content {
-        padding: 2.5rem 1.5rem;
+        padding: 2rem 1.5rem;
         text-align: left;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     #shop-intro h2 {
@@ -541,18 +545,36 @@ footer {
     }
 
     .shop-intro-text p {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        padding-right: 0;
+        max-width: 100%;
     }
     
     .shop-intro-list {
-        margin-top: 1.5rem;
+        margin-top: 1rem;
     }
 
     .shop-intro-list ul {
         padding-left: 0;
         text-align: left;
         display: block;
+        max-width: 100%;
+    }
+    
+    .shop-intro-list ul li {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+        padding-right: 0;
+        max-width: 100%;
+        word-break: normal;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .shop-intro-list ul li i {
+        flex-shrink: 0;
+        margin-right: 10px;
     }
 
     #cta {
@@ -565,6 +587,33 @@ footer {
         font-size: 2rem;
         left: 20px;
         bottom: 20px;
+    }
+}
+
+@media(max-width: 480px) {
+    .shop-intro-content {
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+    }
+    
+    #shop-intro h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .shop-intro-text p {
+        font-size: 0.9rem;
+    }
+    
+    .shop-intro-list ul li {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 0.6rem;
+    }
+    
+    .shop-intro-list ul li i {
+        font-size: 1.2rem;
+        margin-right: 8px;
     }
 }
 
@@ -587,7 +636,7 @@ section.visible {
 
 .shop-intro-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 3rem;
     align-items: center;
     background: #fff;
@@ -617,11 +666,15 @@ section.visible {
 }
 
 .shop-intro-text p {
-    word-break: break-word;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    word-break: normal;
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
     white-space: normal;
+    max-width: 100%;
 }
 
 .shop-intro-list ul li {
@@ -637,4 +690,10 @@ section.visible {
     color: var(--orange-accent);
     margin-right: 15px;
     font-size: 1.4rem;
+}
+
+#shop-intro .container {
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
 } 
