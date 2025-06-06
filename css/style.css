@@ -597,6 +597,10 @@ section.visible {
     background-color: var(--primary-color);
 }
 
+.shop-intro-text p {
+    word-break: break-word;
+}
+
 .shop-intro-list ul li {
     font-size: 1.1rem;
     margin-bottom: 1rem;
