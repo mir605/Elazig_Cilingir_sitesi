@@ -526,6 +526,32 @@ footer {
         grid-template-columns: 1fr;
     }
 
+    .shop-intro-content {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .shop-intro-text p {
+        word-break: break-all;
+    }
+
+    #shop-intro h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .shop-intro-list {
+        margin-top: 1.5rem;
+    }
+
+    .shop-intro-list ul {
+        display: inline-block;
+        text-align: left;
+        padding: 0;
+    }
+
     #cta {
         clip-path: none;
     }
@@ -547,14 +573,6 @@ footer {
     #shop-intro h2::after {
         left: 50%;
         transform: translateX(-50%);
-    }
-
-    .shop-intro-content {
-        padding: 2rem 2rem;
-        margin: 0 0.5rem;
-        max-width: calc(100vw - 2rem);
-        overflow-wrap: break-word;
-        word-wrap: break-word;
     }
 
     .shop-intro-text {
