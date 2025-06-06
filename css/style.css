@@ -548,7 +548,9 @@ footer {
     }
 
     .shop-intro-content {
-        padding: 40px 24px;
+        padding: 2.5rem 1.5rem;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
 }
 
@@ -575,9 +577,12 @@ section.visible {
     gap: 3rem;
     align-items: center;
     background: #fff;
-    padding: 40px 24px;
+    padding: 4rem;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 #shop-intro h2 {
@@ -599,6 +604,10 @@ section.visible {
 
 .shop-intro-text p {
     word-break: break-word;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    white-space: normal;
 }
 
 .shop-intro-list ul li {
