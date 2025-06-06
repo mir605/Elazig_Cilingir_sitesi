@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elazığ Çilingir - Oto Anahtar</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo-text">ELAZIĞ ÇİLİNGİR</a>
+            <ul class="nav-links">
+                <li><a href="#services">Hizmetlerimiz</a></li>
+                <li><a href="#values">Değerlerimiz</a></li>
+                <li><a href="#testimonials">Yorumlar</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+            <div class="menu-btn"><i class="fas fa-bars"></i></div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <video autoplay muted loop id="hero-video">
+                <source src="assets/intro-video.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
+            <div class="hero-content">
+                <h1>Elazığ Çilingir ve Anahtarcı</h1>
+                <p>Güvenilir ve hızlı çilingir hizmetleri. Bir telefon uzağınızdayız.</p>
+                <a href="#contact" class="btn">Hemen Ulaşın</a>
+            </div>
+        </section>
+
+        <section id="shop-intro">
+            <div class="container">
+                <div class="shop-intro-content">
+                    <div class="shop-intro-text">
+                        <h2>Tüm Anahtar İşleri İçin Tek Mağaza</h2>
+                        <p>ELAZIĞ ÇİLİNGİR, her anahtarla ilgili ihtiyacı çözmek için son teknoloji, mükemmel altyapı ve uzman ekibi ile donatılmıştır. Tüm daire ve araba kapı açma işlemleri, orijinal araba anahtarları ve uzaktan kumanda imalatı, garaj kumandaları bizden sorulur...</p>
+                    </div>
+                    <div class="shop-intro-list">
+                        <ul>
+                            <li><i class="fas fa-arrow-alt-circle-right"></i> Araba Anahtar ve Kumandası</li>
+                            <li><i class="fas fa-arrow-alt-circle-right"></i> Daire Kapı Açma İşlemi</li>
+                            <li><i class="fas fa-arrow-alt-circle-right"></i> Araba Kapı Açma İşlemi</li>
+                            <li><i class="fas fa-arrow-alt-circle-right"></i> Garaj Uzaktan Kumanda Yapımı</li>
+                            <li><i class="fas fa-arrow-alt-circle-right"></i> Her Türlü Anahtar Çoğaltımı</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="container">
+            <h2>Hizmetlerimiz</h2>
+            <div class="swiper-container service-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <img src="assets/anahtar.jpeg" alt="Oto Anahtar">
+                            <h3>Oto Anahtar ve Kumanda</h3>
+                            <p>Her marka ve model araç için anahtar kopyalama, tamiri ve kumanda çoğaltma hizmetleri.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <img src="assets/kapi.jpeg" alt="Çilingir Hizmeti">
+                            <h3>Çelik Kapı Açma</h3>
+                            <p>Çelik kapı açılır ev anahtarı ve oto anahtar kumanda çoğaltma işlemleri yapılır.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <img src="assets/yedek-anahtar.jpeg" alt="Anahtar Kopyalama">
+                            <h3>Anahtar Çoğaltma</h3>
+                            <p>Ev, ofis ve kasa anahtarlarınızın yedeklerini modern cihazlarımızla hızlıca hazırlıyoruz.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <img src="assets/WhatsApp Image 2025-05-28 at 19.32.34.jpeg" alt="Immobilizer Anahtar">
+                            <h3>Immobilizer Anahtar</h3>
+                            <p>Elektronik ve immobilizer oto anahtar yapımı ve tamiri konusunda profesyonel çözümler sunuyoruz.</p>
+                        </div>
+                    </div>
+                     <div class="swiper-slide">
+                        <div class="card">
+                            <img src="assets/WhatsApp Image 2025-05-28 at 19.32.35.jpeg" alt="Kepenk Kumandası">
+                            <h3>Kepenk ve Bariyer Kumandası</h3>
+                            <p>Otomatik kapı, kepenk ve bariyer sistemleriniz için kumanda kopyalama ve tamir hizmetleri.</p>
+                        </div>
+                    </div>
+                     <div class="swiper-slide">
+                        <div class="card">
+                            <img src="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).jpeg" alt="Kilit Değişimi">
+                            <h3>Kilit Değişimi ve Montajı</h3>
+                            <p>Ev ve iş yerleriniz için her türlü kilit sistemi değişimi ve montajı güvenle yapılır.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <section id="values">
+            <div class="container">
+                <h2>Temel Değerlerimiz</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">Görevimiz</button>
+                        <div class="accordion-content">
+                            <p>Müşterilerimizin her birine yüksek kalite, güvenilir ve tutarlı müşteri hizmeti sunmaya gayret ediyoruz. Memnuniyetiniz gurur kaynağımızdır.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">Vizyonumuz</button>
+                        <div class="accordion-content">
+                            <p>Elazığ'da çilingir ve anahtarcılık hizmetlerinde akla gelen ilk, en güvenilir ve en yenilikçi firma olmak. Güvenliğiniz ve memnuniyetiniz önceliğimizdir.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">Neden Biz?</button>
+                        <div class="accordion-content">
+                            <p>7/24 kesintisiz hizmet, son teknoloji ekipmanlar, uzman kadro ve uygun fiyat politikamızla daima yanınızdayız. Acil durumlarda bir telefon kadar yakınız.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container">
+                <h3>HIZLI VE EKONOMİK</h3>
+                <p>Uzmanından hızlı ve ekonomik çilingir hizmeti alın...</p>
+                <div class="cta-numbers">
+                    <a href="tel:+905432109949">0543 210 99 49</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="container">
+            <h2>Müşteri Yorumları</h2>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p>"Gece yarısı evde anahtarımı unuttuğumda 15 dakikada geldiler ve kapıyı hasarsız açtılar. Gerçekten hayat kurtarıcı bir hizmet."</p>
+                    <span>- Ahmet Y.****</span>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Arabamın anahtarını kaybetmiştim, yerinde yeni anahtar yaptılar. Hem çok hızlı hem de yetkili servisten çok daha uygun fiyata geldi."</p>
+                    <span>- Elif K.****</span>
+                </div>
+                <div class="testimonial-card">
+                    <p>"İş yerimin kepenk kumandasını kopyalattım. Çok ilgililer ve işlerini gerçekten iyi biliyorlar. Kesinlikle tavsiye ederim."</p>
+                    <span>- Mehmet A.****</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>İletişim</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Bize Ulaşın</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A Elazığ Merkez</p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:+905432109949">0543 210 99 49</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@elazigcilingir.com">info@elazigcilingir.com</a></p>
+                    <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/muratotoanahtar23" target="_blank">muratotoanahtar23</a></p>
+                </div>
+                <div id="map"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-logo-text">ELAZIĞ ÇİLİNGİR</p>
+            <p>&copy; 2024 Elazığ Çilingir. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+    <a href="https://wa.me/905432109949?text=Merhaba%2C%20web%20sitenizden%20ulaşıyorum." target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
+    <a href="#" class="scroll-up-btn"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/script.js"></script>
+</body>
+</html> 
