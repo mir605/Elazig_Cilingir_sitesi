@@ -527,8 +527,7 @@ footer {
     }
 
     .shop-intro-content {
-        padding: 2.5rem;
-        margin: 0;
+        padding: 2.5rem 1.5rem;
         text-align: left;
     }
 
@@ -566,29 +565,6 @@ footer {
         font-size: 2rem;
         left: 20px;
         bottom: 20px;
-    }
-
-    #shop-intro h2 {
-        text-align: center;
-        max-width: 100%;
-        padding-right: 1rem;
-    }
-
-    #shop-intro h2::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .shop-intro-text {
-        max-width: 100%;
-        overflow: hidden;
-    }
-
-    .shop-intro-text p {
-        max-width: 100%;
-        padding-right: 1rem;
-        overflow-wrap: break-word;
-        word-break: break-word;
     }
 }
 
