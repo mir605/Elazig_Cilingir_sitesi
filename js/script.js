@@ -352,24 +352,38 @@
         }
     }
 
-    // Video optimization and lazy autoplay
+    // Video optimization and lazy autoplay with mobile optimizations
     function initVideoOptimization() {
         const video = document.getElementById('hero-video');
         if (!video) return;
+
+        // Mobile detection
+        const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        // Mobile specific optimizations
+        if (isMobile) {
+            video.preload = 'none';
+            // Don't autoplay on mobile to save bandwidth
+            video.removeAttribute('autoplay');
+            // Reduce video quality for mobile (if you have multiple sources)
+        }
 
         // Intersection Observer to start video when in view
         const videoObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const vid = entry.target;
-                    vid.play().catch(e => {
-                        console.log('Video autoplay failed:', e);
-                    });
+                    // Only autoplay on desktop or when user interacts
+                    if (!isMobile) {
+                        vid.play().catch(e => {
+                            console.log('Video autoplay failed:', e);
+                        });
+                    }
                     videoObserver.unobserve(vid);
                 }
             });
         }, {
-            threshold: 0.25
+            threshold: isMobile ? 0.1 : 0.25
         });
 
         videoObserver.observe(video);
@@ -380,7 +394,7 @@
                 const vid = entry.target;
                 if (!entry.isIntersecting) {
                     vid.pause();
-                } else if (vid.paused) {
+                } else if (vid.paused && !isMobile) {
                     vid.play().catch(e => {
                         console.log('Video play failed:', e);
                     });
@@ -391,6 +405,17 @@
         });
 
         pauseObserver.observe(video);
+
+        // Add click to play for mobile
+        if (isMobile) {
+            video.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            });
+        }
     }
 
     // Performance monitoring

@@ -90,7 +90,7 @@
             font-family: var(--font-family-base);
             margin: 0;
             padding: 0;
-            background-color: #f8fafc;
+            background-color: #f9fffe;
             color: var(--text-color);
             font-display: swap;
         }
@@ -116,6 +116,9 @@
             font-size: 1.1em;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
             letter-spacing: 1px;
+        }
+        .hero-text-dark {
+            color: var(--light-color);
         }
     </style>
     
@@ -163,12 +166,12 @@
                 playsinline
                 id="hero-video"
                 aria-label="Elazığ Çilingir Tanıtım Videosu">
-                <source src="assets/intro-video.mp4" type="video/mp4">
+                <source src="assets/intro-video-.mp4" type="video/mp4">
                 Tarayıcınız video etiketini desteklemiyor.
             </video>
             <div class="hero-content">
-                <h1><span class="hero-brand">ELAZIĞ ÇİLİNGİR</span> 7/24 Acil Elazığ Çilingir ve Elazığ Anahtarcı Hizmeti</h1>
-                <p>Güvenilir ve hızlı <strong>elazığ çilingir</strong> ve <strong>elazığ anahtarcı</strong> hizmetleri. Acil elazığ çilingir, anahtar kopyalama ve immobilizer anahtar ihtiyaçlarınız için bir telefon uzağınızdayız.</p>
+                <h1><span class="hero-brand">ELAZIĞ ÇİLİNGİR</span> <span class="hero-text-dark">7/24 Acil Elazığ Çilingir ve Elazığ Anahtarcı Hizmeti</span></h1>
+                <p class="hero-text-dark">Güvenilir ve hızlı <strong>elazığ çilingir</strong> ve <strong>elazığ anahtarcı</strong> hizmetleri. Acil elazığ çilingir, anahtar kopyalama ve immobilizer anahtar ihtiyaçlarınız için bir telefon uzağınızdayız.</p>
                 <a href="#contact" class="btn">Hemen Ulaşın</a>
             </div>
         </section>

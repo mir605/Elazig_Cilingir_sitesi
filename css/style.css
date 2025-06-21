@@ -30,7 +30,7 @@ html {
 body {
     font-family: var(--font-family-base);
     line-height: 1.6;
-    background-color: #f8fafc;
+    background-color: #f9fffe;
     color: var(--text-color);
     font-size: clamp(0.875rem, 2.5vw, 1rem);
     overflow-x: hidden;
@@ -217,6 +217,10 @@ header nav {
     display: inline-block;
 }
 
+.hero-text-dark {
+    color: var(--light-color);
+}
+
 #hero p {
     font-size: clamp(1.125rem, 3vw, 1.5rem);
     margin-bottom: 2rem;
@@ -382,12 +386,12 @@ header nav {
 /* Values Section */
 #values {
     padding: clamp(4rem, 8vw, 6rem) 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: linear-gradient(135deg, #f9fffe 0%, #f0f9ff 100%);
 }
 
 .values-subtitle {
     text-align: center;
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-size: clamp(2rem, 6vw, 3.5rem);
     color: var(--dark-color);
     margin-bottom: 3rem;
     font-weight: 400;
@@ -553,7 +557,7 @@ header nav {
 /* Contact Section */
 #contact {
     padding: clamp(4rem, 8vw, 6rem) 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: linear-gradient(135deg, #f9fffe 0%, #f0f9ff 100%);
 }
 
 .contact-content {
@@ -688,6 +692,16 @@ section.visible {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Mobile Performance Optimizations */
+    * {
+        will-change: auto;
+    }
+
+    /* Reduce animations for better performance */
+    section {
+        transition: opacity 0.3s ease-out;
+    }
+
     /* Navigation */
     .nav-links {
         display: none;
@@ -714,10 +728,26 @@ section.visible {
         display: block;
     }
 
-    /* Hero adjustments */
+    /* Hero adjustments - Mobile optimized */
     #hero {
         height: 100vh;
         min-height: 500px;
+    }
+
+    #hero-video {
+        transform: translateX(-50%) translateY(-50%) scale(1.1);
+        object-fit: cover;
+    }
+
+    /* Optimize hero content for mobile */
+    .hero-content {
+        padding: 0 1rem;
+        max-width: 100%;
+    }
+
+    .hero-text-dark {
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        line-height: 1.4;
     }
 
     /* Grid layouts become single column */
@@ -725,15 +755,27 @@ section.visible {
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+        padding: 2rem;
     }
 
     .services-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Optimize service cards for mobile */
+    .service-card {
+        padding: 1rem;
+    }
+
+    .service-card img {
+        height: 150px;
     }
 
     /* Testimonials stacked */
     .testimonial-cards {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     /* Fixed buttons smaller */
@@ -752,6 +794,23 @@ section.visible {
     .scroll-up-btn {
         bottom: 20px;
         right: 20px;
+    }
+
+    /* Reduce shadows for better performance */
+    .service-card,
+    .testimonial-card {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Optimize typography for mobile */
+    h1 { 
+        font-size: clamp(1.8rem, 6vw, 2.5rem); 
+        line-height: 1.2;
+    }
+    
+    h2 { 
+        font-size: clamp(1.5rem, 5vw, 2rem); 
+        margin-bottom: 2rem;
     }
 }
 

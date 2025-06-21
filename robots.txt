@@ -1,20 +1,48 @@
+# Elazığ Çilingir - robots.txt
+# Updated: 2024-12-18
+
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemap location
 Sitemap: https://www.elazigcilingir.net/sitemap.xml
 
-# Block access to admin areas
+# Block access to sensitive areas
 Disallow: /admin/
 Disallow: /private/
+Disallow: /config/
 Disallow: /*.json$
 Disallow: /sw.js
+Disallow: /src_assets/
 
-# Allow important assets
+# Allow important assets for SEO
 Allow: /css/
 Allow: /js/
 Allow: /assets/
 Allow: /manifest.json
+Allow: /favicon.ico
+Allow: /robots.txt
+Allow: /sitemap.xml
 
-# Crawl-delay for bots
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 3
+
+# Block bad bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+# General crawl delay
 Crawl-delay: 1 
