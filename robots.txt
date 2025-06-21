@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.elazigcilingir.net/sitemap.xml
+
+# Block access to admin areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /sw.js
+
+# Allow important assets
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+Allow: /manifest.json
+
+# Crawl-delay for bots
+Crawl-delay: 1 

@@ -1,114 +1,456 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu
+// Modern JavaScript with performance optimizations
+(function() {
+    'use strict';
+
+    // Performance optimization: Use passive event listeners where possible
+    const passiveSupported = (function() {
+        let supported = false;
+        try {
+            const options = {
+                get passive() {
+                    supported = true;
+                    return false;
+                }
+            };
+            window.addEventListener('test', null, options);
+            window.removeEventListener('test', null, options);
+        } catch (err) {
+            supported = false;
+        }
+        return supported;
+    })();
+
+    const eventOptions = passiveSupported ? { passive: true } : false;
+
+    // Utility functions
+    const debounce = (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    };
+
+    const throttle = (func, limit) => {
+        let inThrottle;
+        return function(...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    };
+
+    // Mobile menu functionality
+    function initMobileMenu() {
     const menuBtn = document.querySelector('.menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
-    menuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
+        if (!menuBtn || !navLinks) return;
 
-    // Header scroll effect
+    menuBtn.addEventListener('click', () => {
+            const isActive = navLinks.classList.contains('active');
+        navLinks.classList.toggle('active');
+            
+            // Update ARIA attributes for accessibility
+            menuBtn.setAttribute('aria-expanded', !isActive);
+            menuBtn.setAttribute('aria-label', isActive ? 'Menüyü Aç' : 'Menüyü Kapat');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.setAttribute('aria-label', 'Menüyü Aç');
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.setAttribute('aria-label', 'Menüyü Aç');
+                menuBtn.focus();
+            }
+        });
+    }
+
+    // Header scroll effect with throttling for better performance
+    function initHeaderScroll() {
     const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
+        if (!header) return;
+
+        const handleScroll = throttle(() => {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-    });
+        }, 16); // ~60fps
 
-    // Initialize Swiper for service cards
-    const serviceSlider = new Swiper('.service-slider', {
-        loop: true,
-        spaceBetween: 30,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        breakpoints: {
-            640: {
-              slidesPerView: 1,
-            },
-            768: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
+        window.addEventListener('scroll', handleScroll, eventOptions);
+    }
+
+    // Smooth scroll for anchor links
+    function initSmoothScroll() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                    const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const navLinks = document.querySelector('.nav-links');
+                    const menuBtn = document.querySelector('.menu-btn');
+                    if (navLinks?.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuBtn?.setAttribute('aria-expanded', 'false');
+                    }
         }
     });
+        });
+    }
 
-    // Accordion for core values
+    // Accordion functionality with accessibility
+    function initAccordion() {
     const accordionItems = document.querySelectorAll('.accordion-item');
+        
     accordionItems.forEach(item => {
         const header = item.querySelector('.accordion-header');
-        header.addEventListener('click', () => {
-            const openItem = document.querySelector('.accordion-item.active');
-            if (openItem && openItem !== item) {
-                openItem.classList.remove('active');
-                openItem.querySelector('.accordion-content').style.maxHeight = 0;
-            }
-
-            item.classList.toggle('active');
             const content = item.querySelector('.accordion-content');
-            if (item.classList.contains('active')) {
+            
+            if (!header || !content) return;
+
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other accordion items
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        const otherContent = otherItem.querySelector('.accordion-content');
+                        const otherHeader = otherItem.querySelector('.accordion-header');
+                        if (otherContent) otherContent.style.maxHeight = '0';
+                        if (otherHeader) otherHeader.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Toggle current item
+                item.classList.toggle('active');
+                header.setAttribute('aria-expanded', !isActive);
+                
+                if (!isActive) {
                 content.style.maxHeight = content.scrollHeight + 'px';
             } else {
-                content.style.maxHeight = 0;
+                    content.style.maxHeight = '0';
+                }
+            });
+
+            // Handle keyboard navigation
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    header.click();
             }
         });
     });
+    }
     
-    // Scroll to top button
+    // Scroll to top button with throttling
+    function initScrollToTop() {
     const scrollUpBtn = document.querySelector('.scroll-up-btn');
-    window.addEventListener('scroll', () => {
+        if (!scrollUpBtn) return;
+
+        const handleScroll = throttle(() => {
         if (window.scrollY > 300) {
             scrollUpBtn.classList.add('show');
         } else {
             scrollUpBtn.classList.remove('show');
         }
-    });
+        }, 16);
+
+        window.addEventListener('scroll', handleScroll, eventOptions);
+
+        scrollUpBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Lazy loading for images with Intersection Observer
+    function initLazyLoading() {
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '20px 0px'
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    }
+
+    // Intersection Observer for section animations
+    function initScrollAnimations() {
+        if ('IntersectionObserver' in window) {
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('section').forEach(section => {
+                sectionObserver.observe(section);
+            });
+        } else {
+            // Fallback for browsers without Intersection Observer
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('visible');
+            });
+        }
+    }
+
+    // Lazy load map when map section is in viewport
+    function initMapLazyLoading() {
+        const mapElement = document.getElementById('map');
+        if (!mapElement) return;
+
+        let mapLoaded = false;
+
+        const mapObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !mapLoaded) {
+                    loadMap();
+                    mapLoaded = true;
+                    mapObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '100px 0px'
+        });
+
+        mapObserver.observe(mapElement);
+    }
+
+    // Load map function
+    function loadMap() {
+        if (typeof L === 'undefined') {
+            // Load Leaflet CSS
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+            link.crossOrigin = '';
+            document.head.appendChild(link);
+
+            // Load Leaflet JS
+            const script = document.createElement('script');
+            script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+            script.crossOrigin = '';
+            script.onload = initializeMap;
+            document.head.appendChild(script);
+        } else {
+            initializeMap();
+        }
+    }
 
     // Initialize Leaflet map
+    function initializeMap() {
     const mapElement = document.getElementById('map');
-    if (mapElement) {
+        if (!mapElement || typeof L === 'undefined') return;
+
+        try {
         const lat = 38.669472;
         const lon = 39.205833;
 
-        const map = L.map('map').setView([lat, lon], 16);
+            const map = L.map('map', {
+                center: [lat, lon],
+                zoom: 16,
+                scrollWheelZoom: false,
+                touchZoom: true,
+                doubleClickZoom: true,
+                boxZoom: false,
+                keyboard: true,
+                dragging: true
+            });
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 18
         }).addTo(map);
 
         const customIcon = L.icon({
-            iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+                iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
-            shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+                shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
             shadowSize: [41, 41],
             shadowAnchor: [12, 41]
         });
         
-        L.marker([lat, lon], {icon: customIcon}).addTo(map)
-            .bindPopup('<b>Elazığ Çilingir</b><br>Olgunlar mahallesi, Şehit Feyzi Gürsu caddesi, No 1/A, Elazığ Merkez')
+            L.marker([lat, lon], { icon: customIcon })
+                .addTo(map)
+                .bindPopup('<strong>Elazığ Çilingir</strong><br>Olgunlar mahallesi, Şehit Feyzi Gürsu caddesi, No 1/A, Elazığ Merkez')
             .openPopup();
+
+            // Enable scroll wheel zoom when map is clicked
+            map.on('click', () => {
+                map.scrollWheelZoom.enable();
+            });
+
+            // Disable scroll wheel zoom when mouse leaves map
+            map.on('mouseout', () => {
+                map.scrollWheelZoom.disable();
+            });
+
+        } catch (error) {
+            console.warn('Map initialization failed:', error);
+            mapElement.innerHTML = '<p style="text-align: center; padding: 2rem;">Harita yüklenemedi. Lütfen sayfayı yenileyin.</p>';
+        }
     }
-    
-    // Animate on scroll
-    const observer = new IntersectionObserver((entries) => {
+
+    // Video optimization
+    function initVideoOptimization() {
+        const video = document.getElementById('hero-video');
+        if (!video) return;
+
+        // Pause video when not in viewport to save bandwidth
+        if ('IntersectionObserver' in window) {
+            const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+                        video.play().catch(() => {
+                            // Video play failed, possibly due to autoplay policy
+                            console.log('Video autoplay prevented');
+                        });
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            videoObserver.observe(video);
+        }
+
+        // Handle video load errors
+        video.addEventListener('error', () => {
+            console.warn('Video failed to load');
+            video.style.display = 'none';
+        });
+
+        // Optimize video loading
+        video.addEventListener('loadstart', () => {
+            video.style.objectFit = 'cover';
+        });
+    }
+
+    // Performance monitoring
+    function initPerformanceMonitoring() {
+        if ('PerformanceObserver' in window) {
+            try {
+                const observer = new PerformanceObserver((list) => {
+                    const entries = list.getEntries();
+                    entries.forEach(entry => {
+                        if (entry.entryType === 'navigation') {
+                            // Log performance metrics for debugging
+                            const metrics = {
+                                dns: entry.domainLookupEnd - entry.domainLookupStart,
+                                connect: entry.connectEnd - entry.connectStart,
+                                ttfb: entry.responseStart - entry.requestStart,
+                                download: entry.responseEnd - entry.responseStart,
+                                domLoad: entry.domContentLoadedEventEnd - entry.domContentLoadedEventStart,
+                                totalTime: entry.loadEventEnd - entry.navigationStart
+                            };
+                            console.log('Performance Metrics:', metrics);
             }
         });
-    }, {
-        threshold: 0.15
-    });
+                });
+                observer.observe({ entryTypes: ['navigation'] });
+            } catch (error) {
+                console.warn('Performance monitoring failed:', error);
+            }
+        }
+    }
 
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
+    // Initialize all functionality when DOM is ready
+    function init() {
+        initMobileMenu();
+        initHeaderScroll();
+        initSmoothScroll();
+        initAccordion();
+        initScrollToTop();
+        initLazyLoading();
+        initScrollAnimations();
+        initMapLazyLoading();
+        initVideoOptimization();
+        
+        // Initialize performance monitoring in development
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            initPerformanceMonitoring();
+        }
+    }
+
+    // DOM ready check
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    // Service Worker registration for better caching (optional)
+    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
     });
 }); 
+    }
+
+})(); 
