@@ -77,12 +77,56 @@
     <!-- Critical CSS -->
     <link rel="stylesheet" href="css/style.css">
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="assets/hero-poster.webp" as="image">
+    <!-- Critical CSS Inline - en kritik CSS'i burada inline olarak ekleriz -->
+    <style>
+        :root {
+            --primary-color: #E53935;
+            --light-color: #ECEFF1;
+            --dark-color: #263238;
+            --text-color: #37474F;
+            --font-family-base: 'Inter', 'Roboto', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        body {
+            font-family: var(--font-family-base);
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: var(--text-color);
+            font-display: swap;
+        }
+        #hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            color: var(--light-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero-content {
+            max-width: 800px;
+            padding: 0 1rem;
+            z-index: 1;
+        }
+        .hero-brand {
+            color: var(--primary-color);
+            font-weight: 900;
+            font-size: 1.1em;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+        }
+    </style>
+    
+    <!-- Preload most critical resources -->
+    <link rel="preload" href="assets/hero-bg.webp" as="image">
+    
+    <!-- Font loading optimization -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
     
-    <!-- Non-critical CSS loading -->
+    <!-- Defer non-critical Font Awesome -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     
@@ -112,9 +156,8 @@
     <main>
         <section id="hero">
             <video 
-                preload="none" 
-                poster="assets/hero-poster.webp" 
-                autoplay 
+                preload="metadata" 
+                poster="assets/hero-bg.webp" 
                 muted 
                 loop 
                 playsinline
@@ -152,35 +195,35 @@
         </section>
 
         <section id="services" class="container">
-            <h2><span class="brand-highlight">Elazığ Çilingir</span> ve <span class="brand-highlight">Elazığ Anahtarcı</span> Hizmetlerimiz</h2>
+            <h2><span class="brand-highlight">Hizmetlerimiz</span></h2>
             <div class="services-grid">
                 <article class="service-card">
-                    <img src="assets/anahtar.webp" alt="Elazığ Oto Çilingir ve Elazığ Anahtarcı" loading="lazy" width="300" height="200">
+                    <img src="assets/anahtar.webp" alt="Elazığ Oto Çilingir ve Elazığ Anahtarcı" loading="lazy" width="300" height="200" decoding="async">
                     <h3>Elazığ Oto Çilingir ve Elazığ Anahtarcı Hizmeti</h3>
                     <p>Her marka ve model araç için elazığ oto çilingir, elazığ anahtarcı, anahtar kopyalama, immobilizer anahtar yapımı ve oto kumanda çoğaltma hizmetleri. Elazığ çilingir uzmanından profesyonel oto anahtar çözümleri.</p>
                 </article>
                 <article class="service-card">
-                    <img src="assets/kapi.webp" alt="Acil Elazığ Çilingir ve Elazığ Anahtarcı" loading="lazy" width="300" height="200">
+                    <img src="assets/kapi.webp" alt="Acil Elazığ Çilingir ve Elazığ Anahtarcı" loading="lazy" width="300" height="200" decoding="async">
                     <h3>Acil Elazığ Çilingir - Daire ve Çelik Kapı Açma</h3>
                     <p>7/24 acil elazığ çilingir hizmeti ile çelik kapı açma, daire kapı açma, ev anahtarı tamiri ve elazığ anahtarcı hizmetleri. Acil çilingir ihtiyaçlarınızda hızlı müdahale.</p>
                 </article>
                 <article class="service-card">
-                    <img src="assets/yedek-anahtar.webp" alt="Elazığ Anahtar Kopyalama ve Elazığ Anahtarcı" loading="lazy" width="300" height="200">
+                    <img src="assets/yedek-anahtar.webp" alt="Elazığ Anahtar Kopyalama ve Elazığ Anahtarcı" loading="lazy" width="300" height="200" decoding="async">
                     <h3>Elazığ Anahtar Kopyalama ve Çoğaltma</h3>
                     <p>Ev, ofis, daire ve kasa anahtarlarınızın yedeklerini modern teknoloji ile elazığ anahtarcı hizmeti. Elazığ çilingir uzmanından hızlı ve güvenilir anahtar kopyalama çözümleri.</p>
                 </article>
                 <article class="service-card">
-                    <img src="assets/WhatsApp Image 2025-05-28 at 19.32.34.webp" alt="Elazığ Immobilizer Anahtar ve Elazığ Çilingir" loading="lazy" width="300" height="200">
+                    <img src="assets/WhatsApp Image 2025-05-28 at 19.32.34.webp" alt="Elazığ Immobilizer Anahtar ve Elazığ Çilingir" loading="lazy" width="300" height="200" decoding="async">
                     <h3>Elazığ Immobilizer Anahtar Yapımı</h3>
                     <p>Elektronik ve immobilizer oto anahtar yapımı, chip anahtar programlama ve tamiri konusunda elazığ çilingir ve elazığ anahtarcı profesyonel çözümleri. Tüm araç markalarına uyumlu.</p>
                 </article>
                 <article class="service-card">
-                    <img src="assets/WhatsApp Image 2025-05-28 at 19.32.35.webp" alt="Elazığ Kepenk Kumandası ve Elazığ Çilingir" loading="lazy" width="300" height="200">
+                    <img src="assets/WhatsApp Image 2025-05-28 at 19.32.35.webp" alt="Elazığ Kepenk Kumandası ve Elazığ Çilingir" loading="lazy" width="300" height="200" decoding="async">
                     <h3>Elazığ Kepenk ve Bariyer Kumandası</h3>
                     <p>Otomatik kapı, garaj kapısı, kepenk ve bariyer sistemleriniz için kumanda kopyalama, tamir ve programlama hizmetleri. Elazığ çilingir uzmanından güvenilir çözümler.</p>
                 </article>
                 <article class="service-card">
-                    <img src="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).webp" alt="Elazığ Kilit Değiştirme ve Elazığ Çilingir" loading="lazy" width="300" height="200">
+                    <img src="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).webp" alt="Elazığ Kilit Değiştirme ve Elazığ Çilingir" loading="lazy" width="300" height="200" decoding="async">
                     <h3>Elazığ Kilit Değiştirme ve Montajı</h3>
                     <p>Ev, daire ve iş yerleriniz için elazığ kilit değiştirme, kilit tamiri, güvenlik kilidi montajı ve elazığ çilingir hizmetleri. Elazığ anahtarcı uzmanından güvenli kilit çözümleri.</p>
                 </article>
@@ -189,7 +232,8 @@
 
         <section id="values">
             <div class="container">
-                <h2>7/24 <span class="brand-highlight">Elazığ Çilingir</span> ve <span class="brand-highlight">Elazığ Anahtarcı</span> - Temel Değerlerimiz</h2>
+                <h2>7/24 <span class="brand-highlight">Elazığ Çilingir</span></h2>
+                <p class="values-subtitle">Temel Değerlerimiz</p>
                 <div class="accordion">
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">Görevimiz</button>
@@ -215,8 +259,8 @@
 
         <section id="cta">
             <div class="container">
-                <h3>HIZLI VE EKONOMİK <span class="cta-brand">ELAZIĞ ÇİLİNGİR</span> ve <span class="cta-brand">ELAZIĞ ANAHTARCI</span></h3>
-                <p>Uzmanından hızlı ve ekonomik 7/24 <strong>elazığ çilingir</strong> ve <strong>elazığ anahtarcı</strong> hizmeti alın...</p>
+                <h3><span class="cta-brand">ELAZIĞ ÇİLİNGİR</span></h3>
+                <p>Hızlı ve ekonomik 7/24 <strong>elazığ çilingir</strong> hizmeti alın...</p>
                 <div class="cta-numbers">
                     <a href="tel:+905432109949" aria-label="Telefon ile ara">0543 210 99 49</a>
                 </div>
@@ -242,10 +286,10 @@
         </section>
 
         <section id="contact" class="container">
-            <h2><span class="brand-highlight">Elazığ Çilingir</span> ve <span class="brand-highlight">Elazığ Anahtarcı</span> İletişim</h2>
+            <h2><span class="brand-highlight">Elazığ Çilingir</span> İletişim</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Acil <span class="brand-highlight">Elazığ Çilingir</span> ve <span class="brand-highlight">Elazığ Anahtarcı</span> - Bize Ulaşın</h3>
+                    <h3>Bize Ulaşın</h3>
                     <address>
                         <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A Elazığ Merkez</p>
                         <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+905432109949">0543 210 99 49</a></p>

@@ -352,39 +352,45 @@
         }
     }
 
-    // Video optimization
+    // Video optimization and lazy autoplay
     function initVideoOptimization() {
         const video = document.getElementById('hero-video');
         if (!video) return;
 
-        // Pause video when not in viewport to save bandwidth
-        if ('IntersectionObserver' in window) {
-            const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                        video.play().catch(() => {
-                            // Video play failed, possibly due to autoplay policy
-                            console.log('Video autoplay prevented');
-                        });
-                    } else {
-                        video.pause();
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            videoObserver.observe(video);
-        }
-
-        // Handle video load errors
-        video.addEventListener('error', () => {
-            console.warn('Video failed to load');
-            video.style.display = 'none';
+        // Intersection Observer to start video when in view
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const vid = entry.target;
+                    vid.play().catch(e => {
+                        console.log('Video autoplay failed:', e);
+                    });
+                    videoObserver.unobserve(vid);
+                }
+            });
+        }, {
+            threshold: 0.25
         });
 
-        // Optimize video loading
-        video.addEventListener('loadstart', () => {
-            video.style.objectFit = 'cover';
+        videoObserver.observe(video);
+
+        // Pause video when not visible to save resources
+        const pauseObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const vid = entry.target;
+                if (!entry.isIntersecting) {
+                    vid.pause();
+                } else if (vid.paused) {
+                    vid.play().catch(e => {
+                        console.log('Video play failed:', e);
+                    });
+                }
+            });
+        }, {
+            threshold: 0.1
         });
+
+        pauseObserver.observe(video);
     }
 
     // Performance monitoring

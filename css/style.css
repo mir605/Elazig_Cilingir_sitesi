@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Teko:wght@400;700&display=swap');
+/* Font imports removed - using preload in HTML instead for better performance */
 
 :root {
     --primary-color: #E53935; /* Kırmızı tonu */
@@ -181,7 +181,7 @@ header nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
     z-index: -1;
 }
 
@@ -472,16 +472,16 @@ header nav {
 }
 
 .cta-brand {
-    color: var(--primary-color);
+    color: var(--light-color);
     font-weight: 900;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     letter-spacing: 1px;
 }
 
 #cta p strong {
     color: var(--primary-color);
     font-weight: 700;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 .cta-numbers a {

@@ -2,6 +2,31 @@
 
 Modern, performanslı ve mobil uyumlu Elazığ Çilingir web sitesi. Bu proje, son teknoloji web standartları kullanılarak optimize edilmiştir.
 
+## 🚀 PageSpeed Insights Optimizasyonları
+
+### Uygulandı ✅
+- **LCP Optimizasyonu**: Kritik CSS inline, hero content optimized
+- **Font Loading**: Preload + font-display: swap
+- **Image Optimization**: WebP format, lazy loading, decoding="async"
+- **Video Optimization**: preload="metadata", lazy autoplay
+- **Render Blocking**: Non-critical CSS deferred
+- **Critical Path**: CSS imports removed, inlined critical styles
+
+### Önerilir 📋
+1. **Video Sıkıştırma**: `intro-video.mp4` (6.3MB) → max 2MB'a düşürülmeli
+2. **Image Resize**: `anahtar.webp` (61KB) → max 30KB'a optimize edilmeli
+3. **Font Awesome**: Sadece kullanılan iconlar subset olarak yüklenmeli
+4. **Service Worker**: Daha agresif caching stratejileri
+
+## 📊 Hedef Performans Metrikleri
+
+- **LCP**: < 2.5s (Şu an: 4.29s)
+- **FID**: < 100ms
+- **CLS**: < 0.1
+- **FCP**: < 1.8s
+- **SI**: < 3.4s
+- **TBT**: < 200ms
+
 ## 🚀 Performans Özellikleri
 
 - **Core Web Vitals Optimized**: LCP < 2.5s, FID < 100ms, CLS < 0.1
