@@ -181,7 +181,7 @@ header nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%);
+    background: rgba(0, 0, 0, 0.5);
     z-index: -1;
 }
 
@@ -376,12 +376,21 @@ header nav {
 .service-card p {
     line-height: 1.6;
     opacity: 0.9;
+    font-weight: 600;
 }
 
 /* Values Section */
 #values {
     padding: clamp(4rem, 8vw, 6rem) 0;
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.values-subtitle {
+    text-align: center;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--dark-color);
+    margin-bottom: 3rem;
+    font-weight: 400;
 }
 
 .accordion {
@@ -445,7 +454,7 @@ header nav {
 
 /* CTA Section */
 #cta {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #c62828 100%);
+    background: #263238;
     color: var(--light-color);
     text-align: center;
     padding: clamp(3rem, 6vw, 4rem) 0;
@@ -463,23 +472,23 @@ header nav {
 }
 
 .cta-brand {
-    color: #FFF;
+    color: var(--primary-color);
     font-weight: 900;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     letter-spacing: 1px;
 }
 
 #cta p strong {
-    color: #FFD700;
+    color: var(--primary-color);
     font-weight: 700;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 .cta-numbers a {
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 700;
     color: var(--light-color);
-    background: rgba(255,255,255,0.2);
+    background: var(--primary-color);
     padding: 1rem 2rem;
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
@@ -489,7 +498,7 @@ header nav {
 
 .cta-numbers a:hover,
 .cta-numbers a:focus {
-    background: rgba(255,255,255,0.3);
+    background: #c62828;
     transform: scale(1.05);
 }
 
@@ -555,6 +564,7 @@ header nav {
 
 .contact-info h3 {
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .contact-info address {
