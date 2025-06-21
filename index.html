@@ -120,6 +120,36 @@
         .hero-text-dark {
             color: var(--light-color);
         }
+        
+        /* Critical Hero Styles - optimize LCP */
+        #hero h1 {
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            color: var(--light-color);
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            line-height: 1.2;
+            font-weight: 700;
+        }
+        
+        #hero p {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);
+            border: none;
+            border-radius: clamp(8px, 1vw, 12px);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
     </style>
     
     <!-- Preload most critical resources -->
@@ -129,9 +159,18 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
     
-    <!-- Defer non-critical Font Awesome -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <!-- Custom minimal icons instead of Font Awesome -->
+    <style>
+        /* Minimal CSS Icons - replace Font Awesome for better performance */
+        .icon-arrow-right::before { content: "→"; font-weight: bold; }
+        .icon-phone::before { content: "📞"; }
+        .icon-envelope::before { content: "✉"; }
+        .icon-location::before { content: "📍"; }
+        .icon-instagram::before { content: "📷"; }
+        .icon-whatsapp::before { content: "💬"; }
+        .icon-arrow-up::before { content: "↑"; font-weight: bold; }
+        .icon-bars::before { content: "☰"; }
+    </style>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
@@ -152,14 +191,14 @@
                 <li><a href="#testimonials">Yorumlar</a></li>
                 <li><a href="#contact">İletişim</a></li>
             </ul>
-            <div class="menu-btn" aria-label="Menüyü Aç"><i class="fas fa-bars"></i></div>
+            <div class="menu-btn" aria-label="Menüyü Aç"><i class="icon-bars"></i></div>
         </nav>
     </header>
 
     <main>
         <section id="hero">
             <video 
-                preload="metadata" 
+                preload="none" 
                 poster="assets/hero-bg.webp" 
                 muted 
                 loop 
@@ -185,12 +224,12 @@
                     </div>
                     <div class="shop-intro-list">
                         <ul>
-                            <li><i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i> Elazığ Oto Çilingir ve Elazığ Anahtarcı Hizmeti</li>
-                            <li><i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i> Acil Elazığ Çilingir - Daire ve Çelik Kapı Açma</li>
-                            <li><i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i> 7/24 Elazığ Çilingir - Araba Kapı Açma Hizmeti</li>
-                            <li><i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i> Elazığ Kilit Değiştirme ve Garaj Kumandası</li>
-                            <li><i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i> Elazığ Anahtar Kopyalama ve İmmobilizer Anahtar</li>
-                            <li><i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i> Elazığ Anahtarcı - Chip Anahtar Programlama</li>
+                            <li><i class="icon-arrow-right" aria-hidden="true"></i> Elazığ Oto Çilingir ve Elazığ Anahtarcı Hizmeti</li>
+                            <li><i class="icon-arrow-right" aria-hidden="true"></i> Acil Elazığ Çilingir - Daire ve Çelik Kapı Açma</li>
+                            <li><i class="icon-arrow-right" aria-hidden="true"></i> 7/24 Elazığ Çilingir - Araba Kapı Açma Hizmeti</li>
+                            <li><i class="icon-arrow-right" aria-hidden="true"></i> Elazığ Kilit Değiştirme ve Garaj Kumandası</li>
+                            <li><i class="icon-arrow-right" aria-hidden="true"></i> Elazığ Anahtar Kopyalama ve İmmobilizer Anahtar</li>
+                            <li><i class="icon-arrow-right" aria-hidden="true"></i> Elazığ Anahtarcı - Chip Anahtar Programlama</li>
                         </ul>
                     </div>
                 </div>
@@ -201,17 +240,17 @@
             <h2><span class="brand-highlight">Hizmetlerimiz</span></h2>
             <div class="services-grid">
                 <article class="service-card">
-                    <img src="assets/anahtar.webp" alt="Elazığ Oto Çilingir ve Elazığ Anahtarcı" loading="lazy" width="300" height="200" decoding="async">
+                    <img src="assets/anahtar.webp" alt="Elazığ Oto Çilingir ve Elazığ Anahtarcı" loading="lazy" width="250" height="167" decoding="async">
                     <h3>Elazığ Oto Çilingir ve Elazığ Anahtarcı Hizmeti</h3>
                     <p>Her marka ve model araç için elazığ oto çilingir, elazığ anahtarcı, anahtar kopyalama, immobilizer anahtar yapımı ve oto kumanda çoğaltma hizmetleri. Elazığ çilingir uzmanından profesyonel oto anahtar çözümleri.</p>
                 </article>
                 <article class="service-card">
-                    <img src="assets/kapi.webp" alt="Acil Elazığ Çilingir ve Elazığ Anahtarcı" loading="lazy" width="300" height="200" decoding="async">
+                    <img src="assets/kapi.webp" alt="Acil Elazığ Çilingir ve Elazığ Anahtarcı" loading="lazy" width="250" height="167" decoding="async">
                     <h3>Acil Elazığ Çilingir - Daire ve Çelik Kapı Açma</h3>
                     <p>7/24 acil elazığ çilingir hizmeti ile çelik kapı açma, daire kapı açma, ev anahtarı tamiri ve elazığ anahtarcı hizmetleri. Acil çilingir ihtiyaçlarınızda hızlı müdahale.</p>
                 </article>
                 <article class="service-card">
-                    <img src="assets/yedek-anahtar.webp" alt="Elazığ Anahtar Kopyalama ve Elazığ Anahtarcı" loading="lazy" width="300" height="200" decoding="async">
+                    <img src="assets/yedek-anahtar.webp" alt="Elazığ Anahtar Kopyalama ve Elazığ Anahtarcı" loading="lazy" width="250" height="167" decoding="async">
                     <h3>Elazığ Anahtar Kopyalama ve Çoğaltma</h3>
                     <p>Ev, ofis, daire ve kasa anahtarlarınızın yedeklerini modern teknoloji ile elazığ anahtarcı hizmeti. Elazığ çilingir uzmanından hızlı ve güvenilir anahtar kopyalama çözümleri.</p>
                 </article>
@@ -294,10 +333,10 @@
                 <div class="contact-info">
                     <h3>Bize Ulaşın</h3>
                     <address>
-                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A Elazığ Merkez</p>
-                        <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+905432109949">0543 210 99 49</a></p>
-                        <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:info@elazigcilingir.com">info@elazigcilingir.com</a></p>
-                        <p><i class="fab fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/muratotoanahtar23" target="_blank" rel="noopener noreferrer">muratotoanahtar23</a></p>
+                                                  <p><i class="icon-location" aria-hidden="true"></i> Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A Elazığ Merkez</p>
+                        <p><i class="icon-phone" aria-hidden="true"></i> <a href="tel:+905432109949">0543 210 99 49</a></p>
+                                                  <p><i class="icon-envelope" aria-hidden="true"></i> <a href="mailto:info@elazigcilingir.com">info@elazigcilingir.com</a></p>
+                                                  <p><i class="icon-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/muratotoanahtar23" target="_blank" rel="noopener noreferrer">muratotoanahtar23</a></p>
                     </address>
                 </div>
                 <div id="map" aria-label="Elazığ Çilingir Konum Haritası"></div>

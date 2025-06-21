@@ -368,25 +368,29 @@
             // Reduce video quality for mobile (if you have multiple sources)
         }
 
-        // Intersection Observer to start video when in view
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const vid = entry.target;
-                    // Only autoplay on desktop or when user interacts
-                    if (!isMobile) {
-                        vid.play().catch(e => {
-                            console.log('Video autoplay failed:', e);
-                        });
+        // Delay video loading to prioritize LCP
+        setTimeout(() => {
+            // Intersection Observer to start video when in view
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const vid = entry.target;
+                        // Set preload only when needed
+                        if (!isMobile) {
+                            vid.preload = 'metadata';
+                            vid.play().catch(e => {
+                                console.log('Video autoplay failed:', e);
+                            });
+                        }
+                        videoObserver.unobserve(vid);
                     }
-                    videoObserver.unobserve(vid);
-                }
+                });
+            }, {
+                threshold: isMobile ? 0.1 : 0.25
             });
-        }, {
-            threshold: isMobile ? 0.1 : 0.25
-        });
 
-        videoObserver.observe(video);
+            videoObserver.observe(video);
+        }, isMobile ? 3000 : 1500); // Delay more on mobile
 
         // Pause video when not visible to save resources
         const pauseObserver = new IntersectionObserver((entries) => {
