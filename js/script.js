@@ -362,35 +362,17 @@
 
         // Mobile specific optimizations
         if (isMobile) {
-            video.preload = 'none';
-            // Don't autoplay on mobile to save bandwidth
-            video.removeAttribute('autoplay');
-            // Reduce video quality for mobile (if you have multiple sources)
+            video.preload = 'metadata';
+            // Keep autoplay on mobile but with lighter preload
         }
 
-        // Delay video loading to prioritize LCP
-        setTimeout(() => {
-            // Intersection Observer to start video when in view
-            const videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const vid = entry.target;
-                        // Set preload only when needed
-                        if (!isMobile) {
-                            vid.preload = 'metadata';
-                            vid.play().catch(e => {
-                                console.log('Video autoplay failed:', e);
-                            });
-                        }
-                        videoObserver.unobserve(vid);
-                    }
-                });
-            }, {
-                threshold: isMobile ? 0.1 : 0.25
+        // Ensure video plays immediately when loaded
+        video.addEventListener('loadedmetadata', () => {
+            video.play().catch(e => {
+                console.log('Video autoplay failed:', e);
+                // Fallback: show play button or poster
             });
-
-            videoObserver.observe(video);
-        }, isMobile ? 3000 : 1500); // Delay more on mobile
+        });
 
         // Pause video when not visible to save resources
         const pauseObserver = new IntersectionObserver((entries) => {

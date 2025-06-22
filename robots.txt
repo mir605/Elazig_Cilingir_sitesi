@@ -1,5 +1,5 @@
 # Elazığ Çilingir - robots.txt
-# Updated: 2024-12-18
+# Updated: 2025-01-14
 
 User-agent: *
 Allow: /
@@ -11,9 +11,10 @@ Sitemap: https://www.elazigcilingir.net/sitemap.xml
 Disallow: /admin/
 Disallow: /private/
 Disallow: /config/
-Disallow: /*.json$
-Disallow: /sw.js
 Disallow: /src_assets/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /node_modules/
 
 # Allow important assets for SEO
 Allow: /css/
@@ -23,6 +24,7 @@ Allow: /manifest.json
 Allow: /favicon.ico
 Allow: /robots.txt
 Allow: /sitemap.xml
+Allow: /sw.js
 
 # Specific bot instructions
 User-agent: Googlebot
@@ -37,11 +39,23 @@ User-agent: YandexBot
 Allow: /
 Crawl-delay: 3
 
-# Block bad bots
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Block bad bots and scrapers
 User-agent: SemrushBot
 Disallow: /
 
 User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
 Disallow: /
 
 # General crawl delay
