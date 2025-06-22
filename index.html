@@ -47,6 +47,12 @@
     <meta name="language" content="Turkish">
     <meta name="revisit-after" content="7 days">
     
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; connect-src 'self' https:; font-src 'self' https:;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
     <!-- Critical CSS Inline - Ultra Optimized -->
     <style>
         *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f8f9fa;color:#333;line-height:1.6}header{background:linear-gradient(135deg,#2c3e50,#1a1a2e);color:#fff;padding:15px 0;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}.header-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 40px}.logo{font-size:1.8rem;font-weight:700;background:linear-gradient(to right,#dc2626,#ea580c);-webkit-background-clip:text;background-clip:text;color:transparent;display:flex;align-items:center}.nav-links{display:flex;list-style:none}.nav-links li{margin-left:25px}.nav-links a{color:#fff;text-decoration:none;font-weight:500;padding:5px 10px;border-radius:4px;transition:all .3s}.nav-links a:hover{background:rgba(255,255,255,.1)}.hero{position:relative;height:80vh;display:flex;align-items:center;color:#fff;text-align:center;overflow:hidden}#hero-video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translateX(-50%) translateY(-50%);z-index:-1;object-fit:cover}.hero::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:0}.hero-content{max-width:800px;margin:0 auto;padding:20px;position:relative;z-index:1}.hero h1{font-size:3rem;margin-bottom:20px;line-height:1.2}.hero-brand{color:#dc2626;font-weight:700}.hero p{font-size:1.3rem;margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto}.btn{display:inline-block;background:linear-gradient(to right,#dc2626,#ea580c);color:#fff;padding:15px 35px;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:all .3s;border:0;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.2)}.btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3)}.menu-btn{display:none;color:#fff;background:0;border:0;font-size:1.5rem;cursor:pointer}@media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.hero h1{font-size:2.2rem}.hero p{font-size:1.1rem}}
@@ -119,30 +125,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Performance optimizations */
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        img.lazy {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        img.lazy.loaded {
-            opacity: 1;
-        }
-        
-        /* Reduce paint and layout thrashing */
-        * {
-            will-change: auto;
-        }
-        
-        .hero, .hero-content, .btn {
-            will-change: transform;
-        }
+        /* Performance optimizations - Minified */
+        img{max-width:100%;height:auto;display:block}img.lazy{opacity:0;transition:opacity .3s}img.lazy.loaded{opacity:1}*{will-change:auto}.hero,.hero-content,.btn{will-change:transform}
         
         body {
             background-color: #f8f9fa;
@@ -319,9 +303,10 @@
         }
         
         .shop-intro {
-            background-color: white;
+            background-color: #fefefe;
+            border: 1px solid #e5e7eb;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 50px;
             margin: 30px 0;
         }
@@ -402,10 +387,11 @@
         }
         
         .service-card {
-            background: white;
+            background: #fdfdfd;
+            border: 1px solid #e5e7eb;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
         }
         
@@ -481,9 +467,9 @@
             color: #374151;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             position: relative;
-            border: 1px solid #fce7f3;
+            border: 2px solid #f3e8ff;
         }
         
         .testimonial-card:before {
@@ -507,7 +493,7 @@
         
         .testimonial-card cite {
             font-weight: 600;
-            color: #dc2626;
+            color: #b91c1c;
             font-style: normal;
         }
         
@@ -536,7 +522,30 @@
         
         .footer-section p {
             margin-bottom: 20px;
-            color: #bbb;
+            color: #ccc;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .footer-section ul li a:hover,
+        .footer-section ul li a:focus {
+            color: #dc2626;
+            outline: 2px solid #dc2626;
+            outline-offset: 2px;
         }
         
         .footer-section h3 {
@@ -560,7 +569,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 15px;
-            color: #bbb;
+            color: #ccc;
         }
         
         .contact-info i {
@@ -572,7 +581,7 @@
             text-align: center;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #bbb;
+            color: #ccc;
             font-size: 0.9rem;
         }
         
@@ -635,9 +644,10 @@
         
         /* Bize Ulaşın bölümü için güncellenmiş tasarım */
         #contact {
-            background-color: white;
+            background-color: #fefefe;
+            border: 1px solid #e5e7eb;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 50px;
             margin: 50px 0;
         }
@@ -650,9 +660,10 @@
         
         .contact-info-card {
             background: #e9ecef;
+            border: 1px solid #d1d5db;
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
         
         .contact-info-card h3 {
@@ -876,8 +887,11 @@
     </header>
 
     <section class="hero">
-        <video autoplay muted loop playsinline preload="metadata" id="hero-video" poster="assets/hero-bg.webp">
+        <video autoplay muted loop playsinline preload="metadata" id="hero-video" poster="assets/hero-bg.webp" 
+               aria-label="Dekoratif arka plan videosu - ses içermez" role="img">
             <source src="assets/intro-video-.mp4" type="video/mp4">
+            <track kind="descriptions" src="data:text/vtt;base64,V0VCVlRUCgowMDowMDowMC4wMDAgLS0+IDAwOjAwOjEwLjAwMApEZWtvcmF0aWYgYXJrYSBwbGFuIHZpZGVvc3UgLSBzZXMgaWNlcm1leg==" 
+                   srclang="tr" label="Türkçe açıklama">
             </video>
         <div class="container hero-content">
             <h1><span class="hero-brand">ELAZIĞ ÇİLİNGİR</span> <span>7/24 Acil Elazığ Çilingir ve Anahtarcı Hizmeti</span></h1>
@@ -1104,26 +1118,43 @@
                             });
                         }
                         
-                        // Load Leaflet CSS and JS (optimized)
+                        // Load minimal Leaflet with lazy loading
                         if (!window.L) {
-                            // Check if CSS already loaded
-                            if (!document.querySelector('link[href*="leaflet.css"]')) {
-                                const link = document.createElement('link');
-                                link.rel = 'stylesheet';
-                                link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-                                document.head.appendChild(link);
+                            // Intersection Observer for map loading
+                            const mapObserver = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        loadLeafletLibrary();
+                                        mapObserver.unobserve(entry.target);
+                                    }
+                                });
+                            }, { threshold: 0.1 });
+                            
+                            const mapElement = document.getElementById('map');
+                            if (mapElement) {
+                                mapObserver.observe(mapElement);
                             }
                             
-                            // Load minimal Leaflet JS
-                            const script = document.createElement('script');
-                            script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-                            script.onload = initMap;
-                            script.onerror = () => {
-                                console.warn('Leaflet failed to load, using fallback');
-                                // Fallback to simple div
-                                document.getElementById('map').innerHTML = '<p style="text-align: center; padding: 20px;">Harita yüklenemedi. <a href="https://g.co/kgs/XC4jBSU" target="_blank">Konumumuzu görüntülemek için tıklayın</a></p>';
-                            };
-                            document.head.appendChild(script);
+                            function loadLeafletLibrary() {
+                                // Check if CSS already loaded
+                                if (!document.querySelector('link[href*="leaflet.css"]')) {
+                                    const link = document.createElement('link');
+                                    link.rel = 'stylesheet';
+                                    link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                                    document.head.appendChild(link);
+                                }
+                                
+                                // Load minimal Leaflet JS
+                                const script = document.createElement('script');
+                                script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                                script.onload = initMap;
+                                script.onerror = () => {
+                                    console.warn('Leaflet failed to load, using fallback');
+                                    // Fallback to simple div
+                                    document.getElementById('map').innerHTML = '<p style="text-align: center; padding: 20px; color: #333;">Harita yüklenemedi. <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: underline;">Konumumuzu görüntülemek için tıklayın</a></p>';
+                                };
+                                document.head.appendChild(script);
+                            }
                         } else {
                             initMap();
                         }
@@ -1171,13 +1202,15 @@
         </div>
     </footer>
     
-    <a href="https://wa.me/905432109949" class="whatsapp-btn" target="_blank">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+    <a href="https://wa.me/905432109949" class="whatsapp-btn" target="_blank" 
+       aria-label="WhatsApp ile iletişime geç - 0543 210 99 49" 
+       title="WhatsApp ile iletişime geç">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.516"/>
         </svg>
     </a>
     
-    <button class="scroll-up-btn">↑</button>
+    <button class="scroll-up-btn" aria-label="Sayfanın başına dön" title="Sayfanın başına dön">↑</button>
 
     <script>
         // Performance optimized JavaScript
