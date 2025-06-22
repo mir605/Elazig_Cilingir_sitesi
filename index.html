@@ -320,10 +320,11 @@
         }
         
         .shop-intro-header h2 {
-            font-size: 2.2rem;
+            font-size: 4.2rem;
             color: #2c3e50;
             margin-bottom: 20px;
             line-height: 1.3;
+            font-weight: 800;
         }
         
         .shop-intro-header p {
@@ -783,7 +784,7 @@
             }
             
             .shop-intro-header h2 {
-                font-size: 1.8rem;
+                font-size: 2.8rem;
             }
             
             .shop-intro-header p {
@@ -1097,23 +1098,51 @@
                     <script>
                         // OpenStreetMap with Leaflet (Free alternative to Google Maps)
                         function initMap() {
-                            const lat = 38.669472;
-                            const lng = 39.205833;
-                            
-                            const map = L.map('map').setView([lat, lng], 16);
-                            
-                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                attribution: '© OpenStreetMap contributors'
-                            }).addTo(map);
-                            
-                            // Add marker with popup
-                            const marker = L.marker([lat, lng]).addTo(map);
-                            marker.bindPopup('<strong>Elazığ Çilingir</strong><br>Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A<br><a href="https://www.openstreetmap.org/?mlat=38.669472&mlon=39.205833#map=16/38.669472/39.205833" target="_blank">Haritada Görüntüle</a>').openPopup();
-                            
-                            // Click event to open in external map
-                            marker.on('click', function() {
-                                window.open('https://www.openstreetmap.org/?mlat=38.669472&mlon=39.205833#map=16/38.669472/39.205833', '_blank');
-                            });
+                            try {
+                                const lat = 38.6748;
+                                const lng = 39.2264;
+                                
+                                const map = L.map('map', {
+                                    center: [lat, lng],
+                                    zoom: 16,
+                                    zoomControl: true,
+                                    scrollWheelZoom: false
+                                });
+                                
+                                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                                    maxZoom: 19
+                                }).addTo(map);
+                                
+                                // Add custom marker
+                                const marker = L.marker([lat, lng]).addTo(map);
+                                marker.bindPopup(`
+                                    <div style="text-align: center; font-family: Arial, sans-serif;">
+                                        <strong style="color: #dc2626; font-size: 16px;">ELAZIĞ ÇİLİNGİR & ANAHTARCI</strong><br>
+                                        <p style="margin: 5px 0; font-size: 14px;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A</p>
+                                        <p style="margin: 5px 0; font-size: 14px;"><strong>📞 0543 210 99 49</strong></p>
+                                        <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: none; font-weight: bold;">🗺️ Google Maps'te Aç</a>
+                                    </div>
+                                `).openPopup();
+                                
+                                // Click event to open Google My Business
+                                marker.on('click', function() {
+                                    window.open('https://g.co/kgs/XC4jBSU', '_blank');
+                                });
+                                
+                                // Enable zoom on click
+                                map.on('click', function() {
+                                    map.scrollWheelZoom.enable();
+                                });
+                                
+                                map.on('mouseout', function() {
+                                    map.scrollWheelZoom.disable();
+                                });
+                                
+                            } catch (error) {
+                                console.error('Map initialization failed:', error);
+                                document.getElementById('map').innerHTML = '<p style="text-align: center; padding: 20px; color: #333;">Harita yüklenemedi. <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: underline;">Konumumuzu görüntülemek için tıklayın</a></p>';
+                            }
                         }
                         
                         // Load minimal Leaflet with lazy loading
