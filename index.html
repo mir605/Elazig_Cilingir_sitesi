@@ -658,8 +658,8 @@
         }
         
         .contact-info-card {
-            background: linear-gradient(135deg, #fef7ed 0%, #fed7aa 100%);
-            border: 1px solid #fdba74;
+            background: #fef7f0;
+            border: 1px solid #fed7aa;
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
@@ -731,12 +731,25 @@
         #map {
             position: relative;
             z-index: 1;
-            width: 100% !important;
-            height: 400px !important;
+            width: 100%;
+            height: 400px;
             background-color: #f8f9fa;
         }
         
-
+        /* Ensure proper tile rendering */
+        .leaflet-container {
+            background-color: #f8f9fa;
+            font-family: inherit;
+        }
+        
+        .leaflet-tile-loaded {
+            opacity: 1;
+            transition: opacity 0.2s;
+        }
+        
+        .leaflet-fade-anim .leaflet-tile {
+            transition: opacity 0.2s;
+        }
         
         /* Leaflet controls and tiles z-index fix */
         .leaflet-control-container {
@@ -749,32 +762,32 @@
             z-index: 2 !important;
         }
         
-        /* Stable OpenStreetMap CSS fixes */
-        .leaflet-container {
-            background: #f8f9fa !important;
-            font-family: inherit !important;
+        /* Fix for OpenStreetMap tile loading issues */
+        .leaflet-tile-container {
+            transform: translate3d(0,0,0);
         }
         
         .leaflet-tile {
-            filter: none !important;
-            opacity: 1 !important;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            max-width: none;
+            max-height: none;
         }
         
-        .leaflet-tile-loaded {
-            opacity: 1 !important;
+        .leaflet-layer {
+            opacity: 1;
         }
         
-        .leaflet-zoom-anim .leaflet-zoom-animated {
-            transition: transform 0.25s cubic-bezier(0,0,0.25,1) !important;
+        .leaflet-pane {
+            z-index: auto;
         }
         
-        .leaflet-popup-content-wrapper {
-            border-radius: 8px !important;
-            box-shadow: 0 3px 14px rgba(0,0,0,0.4) !important;
+        .leaflet-map-pane {
+            z-index: 1;
         }
         
-        .leaflet-popup-tip {
-            box-shadow: none !important;
+        .leaflet-tile-pane {
+            z-index: 1;
         }
         
         /* Performance optimizations */
@@ -940,9 +953,9 @@
                     <p>
                         <strong>ELAZIĞ ÇİLİNGİR</strong> ve <strong>ELAZIĞ ANAHTARCI</strong> olarak, elazığ kilit değiştirme, elazığ oto çilingir, anahtar kopyalama ve acil çilingir hizmetlerimizle her anahtarla ilgili ihtiyacı çözmek için son teknoloji, mükemmel altyapı ve uzman ekibi ile donatılmıştır. 7/24 elazığ çilingir hizmeti sunarak, tüm daire ve araba kapı açma işlemleri, immobilizer anahtar yapımı, chip anahtar programlama ve uzaktan kumanda imalatı konularında acil elazığ çilingir ihtiyaçlarınızı karşılıyoruz. Elazığ anahtarcı hizmetlerimizle her türlü anahtar probleminize çözüm sunuyoruz.
                     </p>
-                </div>
+                    </div>
                 
-                <div class="shop-intro-list">
+                    <div class="shop-intro-list">
                     <div class="intro-item">
                         <div class="item-icon">→</div>
                         <div class="item-text">Elazığ Oto Çilingir ve Elazığ Anahtarcı Hizmeti</div>
@@ -951,17 +964,17 @@
                     <div class="intro-item">
                         <div class="item-icon">→</div>
                         <div class="item-text">Acil Elazığ Çilingir - Daire ve Çelik Kapı Açma</div>
-                    </div>
+                </div>
                     
                     <div class="intro-item">
                         <div class="item-icon">→</div>
                         <div class="item-text">7/24 Elazığ Çilingir - Araba Kapı Açma Hizmeti</div>
-                    </div>
+            </div>
                     
                     <div class="intro-item">
                         <div class="item-icon">→</div>
                         <div class="item-text">Elazığ Kilit Değiştirme ve Garaj Kumandası</div>
-                    </div>
+                        </div>
                     
                     <div class="intro-item">
                         <div class="item-icon">→</div>
@@ -971,10 +984,10 @@
                     <div class="intro-item">
                         <div class="item-icon">→</div>
                         <div class="item-text">Elazığ Anahtarcı - Chip Anahtar Programlama</div>
+                        </div>
                     </div>
+                        </div>
                     </div>
-                </div>
-            </div>
         </section>
 
     <section id="services">
@@ -992,23 +1005,23 @@
                     <div class="service-content">
                         <h3>Elazığ Oto Çilingir ve Anahtarcı</h3>
                         <p>Her marka ve model araç için elazığ oto çilingir, anahtar kopyalama, immobilizer anahtar yapımı ve oto kumanda çoğaltma hizmetleri. Elazığ çilingir uzmanından profesyonel çözümler.</p>
-                    </div>
                         </div>
+                    </div>
                 
                 <div class="service-card">
                     <div class="service-img">
                         <img data-src="assets/kapi.webp" alt="Acil Daire Kapı Açma" class="lazy" width="300" height="200">
-                    </div>
+                        </div>
                     <div class="service-content">
                         <h3>Acil Daire Kapı Açma</h3>
                         <p>7/24 acil elazığ çilingir hizmeti ile çelik kapı açma, daire kapı açma, ev anahtarı tamiri hizmetleri. Acil çilingir ihtiyaçlarınızda hızlı müdahale.</p>
                     </div>
-                        </div>
+                </div>
                 
                 <div class="service-card">
                     <div class="service-img">
                         <img data-src="assets/yedek-anahtar.webp" alt="Araba Kapı Açma Hizmeti" class="lazy" width="300" height="200">
-                    </div>
+            </div>
                     <div class="service-content">
                         <h3>Araba Kapı Açma Hizmeti</h3>
                         <p>Arabada kilitli kaldıysanız, acil elazığ oto çilingir hizmetimizle dakikalar içerisinde yanınızdayız. Hasarsız araba kapı açma garantisi.</p>
@@ -1018,22 +1031,22 @@
                 <div class="service-card">
                     <div class="service-img">
                         <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).webp" alt="Kilit Değiştirme ve Tamiri" class="lazy" width="300" height="200">
-                    </div>
+                        </div>
                     <div class="service-content">
                         <h3>Kilit Değiştirme ve Tamiri</h3>
                         <p>Ev, daire ve iş yerleriniz için elazığ kilit değiştirme, kilit tamiri, güvenlik kilidi montajı ve elazığ çilingir hizmetleri.</p>
                     </div>
-            </div>
+                        </div>
                 
                 <div class="service-card">
                     <div class="service-img">
                         <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.35.webp" alt="Kumanda Programlama" class="lazy" width="300" height="200">
-                        </div>
+                    </div>
                     <div class="service-content">
                         <h3>Kumanda Programlama</h3>
                         <p>Garaj kapısı, kepenk ve bariyer sistemleriniz için kumanda kopyalama, tamir ve programlama hizmetleri. Elazığ anahtarcı ekibimizle.</p>
-                    </div>
                         </div>
+                    </div>
                 
                 <div class="service-card">
                     <div class="service-img">
@@ -1053,8 +1066,8 @@
             <h3>7/24 <span class="brand-highlight">ELAZIĞ ÇİLİNGİR</span> ve <span class="brand-highlight">ELAZIĞ ANAHTARCI</span> HİZMETİ</h3>
             <p>Hızlı ve ekonomik çözümler için hemen bizi arayın</p>
             <a href="tel:+905432109949" class="btn">0543 210 99 49</a>
-                </div>
-    </section>
+            </div>
+        </section>
 
     <section id="testimonials">
         <div class="container">
@@ -1087,7 +1100,7 @@
             <div class="section-title">
                 <h2>Bize <span class="brand-highlight">Ulaşın</span></h2>
                 <p>Elazığ çilingir ve anahtarcı hizmetlerimiz için hemen iletişime geçin</p>
-            </div>
+                </div>
             
             <div class="contact-container">
                 <div class="contact-info-card">
@@ -1127,154 +1140,159 @@
                 </div>
                 
                 <div class="map-container">
-                    <div id="map" style="width: 100%; height: 400px; border-radius: 12px; overflow: hidden; background: #f8f9fa;"></div>
+                    <div id="map" style="width: 100%; height: 400px; border-radius: 12px; overflow: hidden;"></div>
                     <script>
-                        // Stable OpenStreetMap implementation
-                        function initMap() {
-                            try {
-                                const lat = 38.6748;
-                                const lng = 39.2264;
+                        // OpenStreetMap with Leaflet (Free alternative to Google Maps)
+                                                    function initMap() {
+                                try {
+                                    // Clear any existing map instance
+                                    const mapContainer = document.getElementById('map');
+                                    if (mapContainer._leaflet_id) {
+                                        mapContainer._leaflet_id = null;
+                                    }
+                                    mapContainer.innerHTML = '';
+                                    
+                                    const lat = 38.6748;
+                                    const lng = 39.2264;
+                                    
+                                    const map = L.map('map', {
+                                        center: [lat, lng],
+                                        zoom: 16,
+                                        zoomControl: true,
+                                        scrollWheelZoom: false,
+                                        fadeAnimation: true,
+                                        zoomAnimation: true,
+                                        markerZoomAnimation: true,
+                                        attributionControl: true
+                                    });
+                                    
+                                    // Force map to refresh after initialization
+                                    setTimeout(() => {
+                                        map.invalidateSize();
+                                    }, 200);
                                 
-                                // Clear any existing map
-                                const mapDiv = document.getElementById('map');
-                                mapDiv.innerHTML = '';
-                                
-                                // Initialize map with stable settings
-                                const map = L.map('map', {
-                                    center: [lat, lng],
-                                    zoom: 16,
-                                    zoomControl: true,
-                                    scrollWheelZoom: false,
-                                    doubleClickZoom: true,
-                                    boxZoom: false,
-                                    keyboard: false,
-                                    dragging: true,
-                                    touchZoom: true
-                                });
-                                
-                                // Use single, reliable tile server
-                                const tileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                                // Use reliable OpenStreetMap tile server
+                                const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                                     maxZoom: 18,
-                                    minZoom: 12,
+                                    minZoom: 10,
                                     tileSize: 256,
+                                    zoomOffset: 0,
                                     detectRetina: true,
                                     updateWhenIdle: false,
                                     updateWhenZooming: false,
                                     keepBuffer: 2
                                 });
                                 
-                                tileLayer.addTo(map);
-                                
-                                // Add marker after tiles load
-                                tileLayer.on('load', function() {
-                                    const marker = L.marker([lat, lng]).addTo(map);
-                                    marker.bindPopup(`
-                                        <div style="text-align: center; font-family: Arial, sans-serif; min-width: 200px;">
-                                            <strong style="color: #dc2626; font-size: 16px; display: block; margin-bottom: 8px;">ELAZIĞ ÇİLİNGİR & ANAHTARCI</strong>
-                                            <p style="margin: 5px 0; font-size: 13px; color: #555;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A</p>
-                                            <p style="margin: 8px 0; font-size: 14px; font-weight: bold;">📞 0543 210 99 49</p>
-                                            <a href="https://g.co/kgs/XC4jBSU" target="_blank" 
-                                               style="color: #dc2626; text-decoration: none; font-weight: bold; 
-                                                      background: #fef2f2; padding: 5px 10px; border-radius: 5px; 
-                                                      display: inline-block; margin-top: 5px;">
-                                                🗺️ Google Maps'te Aç
-                                            </a>
-                                        </div>
-                                    `).openPopup();
-                                    
-                                    // Click event
-                                    marker.on('click', function() {
-                                        window.open('https://g.co/kgs/XC4jBSU', '_blank');
-                                    });
+                                // Add tile layer with error handling
+                                tileLayer.on('tileerror', function(e) {
+                                    console.warn('Tile error:', e);
                                 });
                                 
-                                // Map interaction events
+                                tileLayer.addTo(map);
+                                
+                                // Add custom marker
+                                const marker = L.marker([lat, lng]).addTo(map);
+                                marker.bindPopup(`
+                                    <div style="text-align: center; font-family: Arial, sans-serif;">
+                                        <strong style="color: #dc2626; font-size: 16px;">ELAZIĞ ÇİLİNGİR & ANAHTARCI</strong><br>
+                                        <p style="margin: 5px 0; font-size: 14px;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A</p>
+                                        <p style="margin: 5px 0; font-size: 14px;"><strong>📞 0543 210 99 49</strong></p>
+                                        <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: none; font-weight: bold;">🗺️ Google Maps'te Aç</a>
+                                    </div>
+                                `).openPopup();
+                                
+                                // Click event to open Google My Business
+                                marker.on('click', function() {
+                                    window.open('https://g.co/kgs/XC4jBSU', '_blank');
+                                });
+                                
+                                // Enable zoom on click
                                 map.on('click', function() {
                                     map.scrollWheelZoom.enable();
                                 });
                                 
-                                map.on('mouseout', function() {
-                                    map.scrollWheelZoom.disable();
-                                });
-                                
-                                // Force resize after short delay
-                                setTimeout(() => {
-                                    map.invalidateSize(true);
-                                }, 200);
-                                
-                                // Handle window resize
-                                window.addEventListener('resize', () => {
-                                    setTimeout(() => {
-                                        map.invalidateSize(true);
-                                    }, 100);
-                                });
+                                                                 map.on('mouseout', function() {
+                                     map.scrollWheelZoom.disable();
+                                 });
+                                 
+                                 // Handle tile loading errors
+                                 map.on('tileerror', function(e) {
+                                     console.warn('Tile loading error:', e);
+                                     // Retry loading after a short delay
+                                     setTimeout(() => {
+                                         map.invalidateSize();
+                                     }, 1000);
+                                 });
+                                 
+                                 // Ensure tiles are loaded properly
+                                 map.on('tileload', function() {
+                                     map.invalidateSize();
+                                 });
                                 
                             } catch (error) {
                                 console.error('Map initialization failed:', error);
-                                showMapFallback();
+                                document.getElementById('map').innerHTML = '<p style="text-align: center; padding: 20px; color: #333;">Harita yüklenemedi. <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: underline;">Konumumuzu görüntülemek için tıklayın</a></p>';
                             }
                         }
                         
-                        function showMapFallback() {
-                            document.getElementById('map').innerHTML = `
-                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; 
-                                           background: linear-gradient(135deg, #fef7ed 0%, #fed7aa 100%); 
-                                           border: 2px solid #fdba74; border-radius: 12px;">
-                                    <div style="text-align: center; padding: 30px;">
-                                        <div style="font-size: 48px; margin-bottom: 15px;">🗺️</div>
-                                        <h3 style="color: #dc2626; margin-bottom: 10px;">Harita Yüklenemedi</h3>
-                                        <p style="color: #555; margin-bottom: 15px;">Konumumuzu görüntülemek için:</p>
-                                        <a href="https://g.co/kgs/XC4jBSU" target="_blank" 
-                                           style="background: #dc2626; color: white; padding: 12px 24px; 
-                                                  border-radius: 8px; text-decoration: none; font-weight: bold;
-                                                  display: inline-block; transition: all 0.3s;">
-                                            Google Maps'te Aç
-                                        </a>
-                                    </div>
-                                </div>
-                            `;
-                        }
-                        
-                        // Load Leaflet library
-                        function loadLeafletLibrary() {
-                            // Load CSS first
-                            if (!document.querySelector('link[href*="leaflet.css"]')) {
-                                const link = document.createElement('link');
-                                link.rel = 'stylesheet';
-                                link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-                                link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-                                link.crossOrigin = '';
-                                document.head.appendChild(link);
+                        // Load minimal Leaflet with lazy loading
+                        if (!window.L) {
+                            // Intersection Observer for map loading
+                            const mapObserver = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        loadLeafletLibrary();
+                                        mapObserver.unobserve(entry.target);
+                                    }
+                                });
+                            }, { threshold: 0.1 });
+                            
+                            const mapElement = document.getElementById('map');
+                            if (mapElement) {
+                                mapObserver.observe(mapElement);
                             }
                             
-                            // Load JS
-                            const script = document.createElement('script');
-                            script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-                            script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
-                            script.crossOrigin = '';
-                            script.onload = initMap;
-                            script.onerror = showMapFallback;
-                            document.head.appendChild(script);
-                        }
-                        
-                        // Initialize when map comes into view
-                        const mapObserver = new IntersectionObserver((entries) => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    if (window.L) {
-                                        initMap();
-                                    } else {
-                                        loadLeafletLibrary();
-                                    }
-                                    mapObserver.unobserve(entry.target);
+                            function loadLeafletLibrary() {
+                                // Prevent multiple loading
+                                if (window.leafletLoaded || window.L) {
+                                    initMap();
+                                    return;
                                 }
-                            });
-                        }, { threshold: 0.1 });
-                        
-                        const mapElement = document.getElementById('map');
-                        if (mapElement) {
-                            mapObserver.observe(mapElement);
+                                
+                                window.leafletLoaded = true;
+                                
+                                // Check if CSS already loaded
+                                if (!document.querySelector('link[href*="leaflet.css"]')) {
+                                    const link = document.createElement('link');
+                                    link.rel = 'stylesheet';
+                                    link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                                    link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+                                    link.crossOrigin = '';
+                                    document.head.appendChild(link);
+                                }
+                                
+                                // Load Leaflet JS only if not already loaded
+                                if (!document.querySelector('script[src*="leaflet.js"]')) {
+                                    const script = document.createElement('script');
+                                    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                                    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+                                    script.crossOrigin = '';
+                                    script.onload = () => {
+                                        // Wait for CSS to load
+                                        setTimeout(initMap, 100);
+                                    };
+                                    script.onerror = () => {
+                                        console.warn('Leaflet failed to load, using fallback');
+                                        document.getElementById('map').innerHTML = '<p style="text-align: center; padding: 20px; color: #333;">Harita yüklenemedi. <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: underline;">Konumumuzu görüntülemek için tıklayın</a></p>';
+                                    };
+                                    document.head.appendChild(script);
+                                } else {
+                                    initMap();
+                                }
+                            }
+                        } else {
+                            initMap();
                         }
                     </script>
                 </div>
@@ -1470,5 +1488,4 @@
         })();
     </script>
 </body>
-</html> 
 </html> 
