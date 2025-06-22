@@ -731,9 +731,21 @@
         #map {
             position: relative;
             z-index: 1;
+            width: 100% !important;
+            height: 400px !important;
+            background-color: #f8f9fa;
         }
         
-        /* Leaflet controls z-index fix */
+        /* Ensure proper tile rendering */
+        .leaflet-container {
+            background-color: #f8f9fa !important;
+        }
+        
+        .leaflet-tile-loaded {
+            opacity: 1 !important;
+        }
+        
+        /* Leaflet controls and tiles z-index fix */
         .leaflet-control-container {
             position: relative;
             z-index: 2 !important;
@@ -742,6 +754,28 @@
         .leaflet-control {
             position: relative;
             z-index: 2 !important;
+        }
+        
+        /* Fix for OpenStreetMap tile loading issues */
+        .leaflet-tile-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .leaflet-tile {
+            max-width: none !important;
+            max-height: none !important;
+            width: 256px !important;
+            height: 256px !important;
+        }
+        
+        .leaflet-layer {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .leaflet-pane {
+            z-index: auto;
         }
         
         /* Performance optimizations */
@@ -1106,13 +1140,49 @@
                                     center: [lat, lng],
                                     zoom: 16,
                                     zoomControl: true,
-                                    scrollWheelZoom: false
+                                    scrollWheelZoom: false,
+                                    preferCanvas: false,
+                                    renderer: L.svg(),
+                                    fadeAnimation: true,
+                                    zoomAnimation: true,
+                                    markerZoomAnimation: true
                                 });
                                 
-                                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                                    maxZoom: 19
-                                }).addTo(map);
+                                // Force map to refresh after initialization
+                                setTimeout(() => {
+                                    map.invalidateSize();
+                                }, 100);
+                                
+                                // Try multiple tile servers for better reliability
+                                const tileUrls = [
+                                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                    'https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png',
+                                    'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
+                                ];
+                                
+                                let tileLayer;
+                                for (let i = 0; i < tileUrls.length; i++) {
+                                    try {
+                                        tileLayer = L.tileLayer(tileUrls[i], {
+                                            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                                            maxZoom: 19,
+                                            minZoom: 10,
+                                            tileSize: 256,
+                                            zoomOffset: 0,
+                                            crossOrigin: true,
+                                            errorTileUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII='
+                                        });
+                                        tileLayer.addTo(map);
+                                        break;
+                                    } catch (e) {
+                                        console.warn('Failed to load tile server:', tileUrls[i]);
+                                        if (i === tileUrls.length - 1) {
+                                            // Fallback to simple map
+                                            document.getElementById('map').innerHTML = '<p style="text-align: center; padding: 20px; color: #333;">Harita yüklenemedi. <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: underline;">Konumumuzu görüntülemek için tıklayın</a></p>';
+                                            return;
+                                        }
+                                    }
+                                }
                                 
                                 // Add custom marker
                                 const marker = L.marker([lat, lng]).addTo(map);
@@ -1135,9 +1205,23 @@
                                     map.scrollWheelZoom.enable();
                                 });
                                 
-                                map.on('mouseout', function() {
-                                    map.scrollWheelZoom.disable();
-                                });
+                                                                 map.on('mouseout', function() {
+                                     map.scrollWheelZoom.disable();
+                                 });
+                                 
+                                 // Handle tile loading errors
+                                 map.on('tileerror', function(e) {
+                                     console.warn('Tile loading error:', e);
+                                     // Retry loading after a short delay
+                                     setTimeout(() => {
+                                         map.invalidateSize();
+                                     }, 1000);
+                                 });
+                                 
+                                 // Ensure tiles are loaded properly
+                                 map.on('tileload', function() {
+                                     map.invalidateSize();
+                                 });
                                 
                             } catch (error) {
                                 console.error('Map initialization failed:', error);
