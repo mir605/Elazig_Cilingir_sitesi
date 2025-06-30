@@ -826,14 +826,44 @@
             width: 100% !important;
             height: 400px !important;
             background-color: #f8f9fa;
+            border-radius: 12px;
+            overflow: hidden;
         }
         
-
-        
-        /* Clean Leaflet styles */
+        /* Leaflet harita stilleri */
         .leaflet-container {
             background-color: #f8f9fa;
             font-family: inherit;
+            border-radius: 12px;
+        }
+        
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .leaflet-popup-tip {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .leaflet-control-zoom {
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .leaflet-control-zoom a {
+            border-radius: 4px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .leaflet-control-zoom a:hover {
+            background-color: #dc2626;
+            color: white;
+        }
+        
+        .leaflet-marker-icon {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
         
         /* Performance optimizations */
@@ -1233,15 +1263,114 @@
                 <div class="map-container">
                     <div id="map"></div>
                                             <script>
-                        // Basit map fallback - Google Maps linki
+                        // OpenStreetMap with Leaflet
                         (function() {
-                            try {
-                                const mapElement = document.getElementById('map');
-                                if (mapElement) {
-                                    mapElement.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px; border: 1px solid #e5e7eb;"><div style="text-align: center; padding: 20px;"><h3 style="color: #2c3e50; margin-bottom: 1rem;">📍 Konum</h3><p style="margin-bottom: 10px; color: #666;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p><a href="https://maps.app.goo.gl/goKmYgERBhHaGAds7" target="_blank" style="color: #dc2626; text-decoration: underline; font-weight: bold;">🗺️ Google Maps\'te Görüntüle</a></div></div>';
+                            let mapInitialized = false;
+                            
+                            function initializeMap() {
+                                if (mapInitialized || !window.L) return;
+                                mapInitialized = true;
+                                
+                                try {
+                                    // Koordinatlar - Elazığ
+                                    const lat = 38.6695;
+                                    const lng = 39.2058;
+                                    
+                                    // Harita oluştur
+                                    const map = L.map('map').setView([lat, lng], 16);
+                                    
+                                    // OpenStreetMap tile layer ekle
+                                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                        attribution: '© OpenStreetMap contributors',
+                                        maxZoom: 19
+                                    }).addTo(map);
+                                    
+                                    // Marker ve popup ekle
+                                    const marker = L.marker([lat, lng]).addTo(map);
+                                    marker.bindPopup(`
+                                        <div style="text-align: center; padding: 10px; font-family: Arial, sans-serif;">
+                                            <h3 style="color: #dc2626; margin: 0 0 8px 0;">🔑 ELAZIĞ ÇİLİNGİR</h3>
+                                            <p style="margin: 4px 0; font-size: 13px;"><strong>📍 Adres:</strong><br>Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A</p>
+                                            <p style="margin: 4px 0; font-size: 13px;"><strong>📞 Telefon:</strong><br><a href="tel:+905432109949" style="color: #dc2626; text-decoration: none;">0543 210 99 49</a></p>
+                                            <p style="margin: 4px 0; font-size: 13px;"><strong>⏰ Çalışma Saatleri:</strong><br>7/24 Hizmetinizdeyiz</p>
+                                        </div>
+                                    `).openPopup();
+                                    
+                                    // Scroll zoom kontrolü
+                                    map.scrollWheelZoom.disable();
+                                    map.on('focus', () => map.scrollWheelZoom.enable());
+                                    map.on('blur', () => map.scrollWheelZoom.disable());
+                                    
+                                } catch (error) {
+                                    console.error('Harita yüklenemedi:', error);
+                                    document.getElementById('map').innerHTML = `
+                                        <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
+                                            <div style="text-align: center; padding: 20px;">
+                                                <h3 style="color: #2c3e50; margin-bottom: 1rem;">📍 Konum</h3>
+                                                <p style="margin-bottom: 10px; color: #666;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p>
+                                                <p style="color: #666;">Harita yüklenemedi</p>
+                                            </div>
+                                        </div>
+                                    `;
                                 }
-                            } catch (error) {
-                                console.error('Map fallback failed:', error);
+                            }
+                            
+                            // Leaflet kütüphanesini yükle
+                            function loadLeaflet() {
+                                if (window.L) {
+                                    initializeMap();
+                                    return;
+                                }
+                                
+                                // CSS yükle
+                                const css = document.createElement('link');
+                                css.rel = 'stylesheet';
+                                css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                                css.onload = () => {
+                                    // JavaScript yükle
+                                    const script = document.createElement('script');
+                                    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                                    script.onload = () => setTimeout(initializeMap, 100);
+                                    script.onerror = () => {
+                                        document.getElementById('map').innerHTML = `
+                                            <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
+                                                <div style="text-align: center; padding: 20px;">
+                                                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">📍 Konum</h3>
+                                                    <p style="margin-bottom: 10px; color: #666;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p>
+                                                    <p style="color: #666;">Harita yüklenemedi</p>
+                                                </div>
+                                            </div>
+                                        `;
+                                    };
+                                    document.head.appendChild(script);
+                                };
+                                css.onerror = () => {
+                                    document.getElementById('map').innerHTML = `
+                                        <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
+                                            <div style="text-align: center; padding: 20px;">
+                                                <h3 style="color: #2c3e50; margin-bottom: 1rem;">📍 Konum</h3>
+                                                <p style="margin-bottom: 10px; color: #666;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p>
+                                                <p style="color: #666;">Harita yüklenemedi</p>
+                                            </div>
+                                        </div>
+                                    `;
+                                };
+                                document.head.appendChild(css);
+                            }
+                            
+                            // Harita görünür olduğunda yükle
+                            const observer = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        loadLeaflet();
+                                        observer.unobserve(entry.target);
+                                    }
+                                });
+                            }, { threshold: 0.1 });
+                            
+                            const mapElement = document.getElementById('map');
+                            if (mapElement) {
+                                observer.observe(mapElement);
                             }
                         })();
                     </script>
