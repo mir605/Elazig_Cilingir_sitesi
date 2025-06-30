@@ -5,7 +5,551 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akıllı Kilitler ve Kartlı Sistemler: Geleceğin Güvenliği | Elazığ Çilingir</title>
     <meta name="description" content="Akıllı kilitler ve kartlı sistemler hakkında detaylı bilgiler. Avantajları, dezavantajları ve güvenlik özellikleri.">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0d4c92;
+            --secondary: #1e88e5;
+            --accent: #ff6b00;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Stili */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Blog Hero Section */
+        .blog-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 140px 0 80px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .blog-hero h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .blog-meta i {
+            margin-right: 5px;
+        }
+
+        .blog-lead {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Blog Content */
+        .blog-content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 50px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .blog-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 0 12px 12px 0;
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        ul li strong {
+            color: var(--primary);
+        }
+
+        .feature-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #0d4c92, #1e88e5);
+            border-radius: 12px;
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .icon-box {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 3px solid var(--accent);
+        }
+
+        .icon-box i {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-right: 15px;
+            min-width: 40px;
+        }
+
+        .icon-box-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .icon-box-content p {
+            margin-bottom: 0;
+            color: var(--gray);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--light);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* CTA Stili */
+        .blog-cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-cta::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-cta::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-cta h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog-cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+        }
+
+        .cta-btn:hover {
+            background-color: #e65a00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        /* Blog Navigation */
+        .blog-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 60px;
+        }
+
+        .blog-back {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .blog-back:hover {
+            color: var(--accent);
+        }
+
+        .blog-back i {
+            margin-right: 8px;
+        }
+
+        /* Footer Stili */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            opacity: 0.7;
+        }
+
+        /* Floating Buttons */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .scroll-up-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 998;
+        }
+
+        .scroll-up-btn.visible {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .blog-hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .blog-content {
+                padding: 40px 30px;
+            }
+            
+            .feature-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-btn {
+                display: block;
+            }
+            
+            .blog-hero {
+                padding: 120px 0 60px;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-lead {
+                font-size: 1.1rem;
+            }
+            
+            .blog-content {
+                padding: 30px 20px;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .feature-image {
+                height: 250px;
+                font-size: 1.2rem;
+            }
+            
+            .blog-cta {
+                padding: 2rem 1.5rem;
+            }
+            
+            .blog-cta h3 {
+                font-size: 1.5rem;
+            }
+            
+            .blog-cta p {
+                font-size: 1rem;
+            }
+            
+            .cta-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .blog-hero {
+                padding: 100px 0 50px;
+            }
+            
+            .blog-hero h1 {
+                font-size: 1.7rem;
+            }
+            
+            .blog-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .feature-image {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -24,26 +568,51 @@
         </div>
     </header>
 
-    <main style="padding-top: 100px;">
+    <section class="blog-hero">
+        <div class="container">
+            <h1>Akıllı Kilitler ve Kartlı Sistemler: Geleceğin Güvenliği</h1>
+            <p class="blog-lead">Günümüzde güvenlik teknolojileri hızla gelişiyor ve klasik mekanik kilit sistemlerinin yerini akıllı kilitler ve kartlı geçiş sistemleri alıyor. Bu yeni nesil güvenlik çözümleri, hem konfor hem de yüksek güvenlik sağlama amacıyla tasarlanmıştır.</p>
+            <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> 30 Haziran 2025</span>
+                <span><i class="far fa-clock"></i> 5 dakika okuma</span>
+                <span><i class="far fa-folder"></i> Güvenlik Teknolojileri</span>
+            </div>
+        </div>
+    </section>
+
+    <main>
         <article class="blog-post">
             <div class="container">
-                <div class="blog-header">
-                    <h1>Akıllı Kilitler ve Kartlı Sistemler: Geleceğin Güvenliği</h1>
-                    <p class="blog-lead">Günümüzde güvenlik teknolojileri hızla gelişiyor ve klasik mekanik kilit sistemlerinin yerini akıllı kilitler ve kartlı geçiş sistemleri alıyor. Bu yeni nesil güvenlik çözümleri, hem konfor hem de yüksek güvenlik sağlama amacıyla tasarlanmıştır.</p>
-                </div>
-
                 <div class="blog-content">
-                    <p>Özellikle Elazığ çilingir ve anahtarcı hizmetlerinde bu teknolojilerin önemi giderek artmaktadır.</p>
+                    <div class="feature-image">
+                        <div>Akıllı Kilit Sistemleri - Modern Güvenlik Çözümleri</div>
+                    </div>
+
+                    <p>Özellikle Elazığ çilingir ve anahtarcı hizmetlerinde bu teknolojilerin önemi giderek artmaktadır. Akıllı kilit sistemleri, geleneksel anahtarların yerini alarak hem konforu artırıyor hem de güvenlik seviyesini yükseltiyor.</p>
 
                     <h2>Akıllı Kilit Nedir?</h2>
                     <p>Akıllı kilitler, geleneksel anahtar kullanımını ortadan kaldırarak, elektronik ve dijital teknolojilerle çalışan kilit sistemleridir. Bu sistemler, genellikle Wi-Fi, Bluetooth veya NFC gibi kablosuz iletişim teknolojileri aracılığıyla kontrol edilir.</p>
 
-                    <p>Kullanıcılar, akıllı telefon uygulamaları, kart okuyucular veya biyometrik sensörler ile kapılarını açabilir ve kapatabilir.</p>
+                    <div class="icon-box">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div class="icon-box-content">
+                            <h3>Akıllı Telefon Kontrolü</h3>
+                            <p>Kullanıcılar, akıllı telefon uygulamaları ile kapılarını uzaktan açıp kapatabilir, erişim izinlerini yönetebilir.</p>
+                        </div>
+                    </div>
+
+                    <div class="icon-box">
+                        <i class="fas fa-fingerprint"></i>
+                        <div class="icon-box-content">
+                            <h3>Biyometrik Erişim</h3>
+                            <p>Parmak izi, yüz tanıma gibi biyometrik teknolojilerle güvenli ve kişiye özel erişim sağlanır.</p>
+                        </div>
+                    </div>
 
                     <h2>Kartlı Sistemler Nasıl Çalışır?</h2>
                     <p>Kartlı sistemler, genellikle ofisler, siteler veya otellerde yaygın olarak kullanılan elektronik erişim kontrol sistemleridir. Kullanıcılar, kendilerine verilen RFID kart veya manyetik kartı bir okuyucuya okutarak kapıya giriş sağlar.</p>
 
-                    <p>Sistem, kart üzerindeki bilgiyi doğrulayarak kapının açılmasına izin verir.</p>
+                    <p>Sistem, kart üzerindeki bilgiyi doğrulayarak kapının açılmasına izin verir. Bu sistemler merkezi olarak yönetilebilir, erişim izinleri anlık olarak güncellenebilir.</p>
 
                     <h2>Akıllı Kilitlerin Avantajları</h2>
                     <ul>
@@ -59,6 +628,8 @@
                         <li><strong>Yaygın ve uygun maliyetli:</strong> Ofislerde ve apartmanlarda kolayca uygulanabilir</li>
                         <li><strong>Kolay yönetim:</strong> Kartlar kolayca iptal edilir veya yenisi verilir</li>
                         <li><strong>Kopyalama riski düşük:</strong> Manyetik kartların veya RFID kartların kopyalanması zordur</li>
+                        <li><strong>Merkezi kontrol:</strong> Tüm erişim noktaları tek bir sistemden yönetilebilir</li>
+                        <li><strong>Zamanlı erişim:</strong> Belirli saat aralıklarında erişim izni verilebilir</li>
                     </ul>
 
                     <h2>Dezavantajları ve Dikkat Edilmesi Gerekenler</h2>
@@ -67,22 +638,60 @@
                         <li><strong>Siber güvenlik riskleri:</strong> Wi-Fi veya Bluetooth üzerinden yetkisiz erişim riskleri olabilir</li>
                         <li><strong>Enerji bağımlılığı:</strong> Batarya bitimi halinde kilit işlevsiz kalabilir</li>
                         <li><strong>Kart kaybı veya çalınması:</strong> Kartlı sistemlerde kart kaybı, yetkisiz kişilere erişim izni verilmesi riskini taşır</li>
+                        <li><strong>Kurulum maliyeti:</strong> Geleneksel kilitlere göre daha yüksek ilk yatırım maliyeti</li>
                     </ul>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Özellik</th>
+                                <th>Akıllı Kilitler</th>
+                                <th>Kartlı Sistemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kurulum Maliyeti</td>
+                                <td>Orta-Yüksek</td>
+                                <td>Düşük-Orta</td>
+                            </tr>
+                            <tr>
+                                <td>Kullanım Kolaylığı</td>
+                                <td>Çok Kolay</td>
+                                <td>Kolay</td>
+                            </tr>
+                            <tr>
+                                <td>Uzaktan Kontrol</td>
+                                <td>Var</td>
+                                <td>Yok (Temel sistemler)</td>
+                            </tr>
+                            <tr>
+                                <td>Enerji Bağımlılığı</td>
+                                <td>Yüksek</td>
+                                <td>Düşük</td>
+                            </tr>
+                            <tr>
+                                <td>En İyi Kullanım Alanı</td>
+                                <td>Evler, Villa, Küçük Ofisler</td>
+                                <td>Apartmanlar, Oteller, Büyük Ofisler</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                     <h2>Elazığ Çilingir ve Anahtarcı Hizmetlerinde Akıllı Kilitler</h2>
                     <p>Elazığ'da çilingir ve anahtarcı firmamız, akıllı kilit kurulumu, bakım ve onarımı konusunda uzman ekiplerle çalışmaktadır. Ev, iş yeri veya site güvenliğinizi artırmak için size en uygun akıllı kilit sistemini öneriyor, montajını gerçekleştiriyoruz.</p>
 
-                    <p>Ayrıca sistemin tüm özelliklerini size detaylıca anlatıyor, gerektiğinde teknik destek sunuyoruz.</p>
+                    <p>Ayrıca sistemin tüm özelliklerini size detaylıca anlatıyor, gerektiğinde teknik destek sunuyoruz. Profesyonel ekibimiz, akıllı kilit sistemlerinin yanı sıra kartlı geçiş sistemleri, biyometrik güvenlik çözümleri ve merkezi kilit sistemleri konusunda da hizmet vermektedir.</p>
 
-                    <div class="blog-cta" style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
-                        <h3 style="color: #dc2626;">Akıllı Kilit Sistemi Kurulumu</h3>
-                        <p>Modern güvenlik çözümleri için profesyonel destek alın!</p>
-                        <a href="tel:+905432109949" style="background: #dc2626; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; display: inline-block; margin-top: 1rem;">0543 210 99 49</a>
+                    <div class="blog-cta">
+                        <h3>Akıllı Kilit Sistemi Kurulumu</h3>
+                        <p>Modern güvenlik çözümleri için profesyonel destek alın! Uzman ekibimiz size en uygun çözümü sunacaktır.</p>
+                        <a href="tel:+905432109949" class="cta-btn">Hemen Arayın: 0543 210 99 49</a>
                     </div>
                 </div>
 
                 <div class="blog-navigation">
-                    <a href="../index.html#blog" class="blog-back">← Ana Sayfaya Dön</a>
+                    <a href="../index.html#blog" class="blog-back"><i class="fas fa-arrow-left"></i> Tüm Yazılara Dön</a>
                 </div>
             </div>
         </article>
@@ -103,5 +712,42 @@
     </a>
 
     <button class="scroll-up-btn">↑</button>
+
+    <script>
+        // Scroll to top button
+        const scrollUpBtn = document.querySelector('.scroll-up-btn');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollUpBtn.classList.add('visible');
+            } else {
+                scrollUpBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollUpBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Resize event for mobile menu
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
 </body>
-</html> 
+</html>
