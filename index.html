@@ -306,6 +306,39 @@
             color: #333;
         }
         
+        /* Blog başlık bölümü */
+        .blog-section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+        }
+        
+        .blog-section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .blog-section-header h2:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #dc2626, #ea580c);
+            border-radius: 2px;
+        }
+        
+        .blog-section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
         .shop-intro {
             background-color: #fefefe;
             border: 1px solid #e5e7eb;
@@ -601,80 +634,7 @@
             font-size: 0.9rem;
         }
         
-        /* Blog Section Styles */
-        #blog {
-            background-color: #f8f9fa;
-        }
-        
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .blog-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid #e5e7eb;
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .blog-card-content {
-            padding: 25px;
-        }
-        
-        .blog-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
-        
-        .blog-category {
-            background: #dc2626;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-        
-        .blog-date, .blog-read-time {
-            color: #666;
-            font-weight: 500;
-        }
-        
-        .blog-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #2c3e50;
-            line-height: 1.4;
-        }
-        
-        .blog-card p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .blog-read-more {
-            color: #dc2626;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        
-        .blog-read-more:hover {
-            color: #b91c1c;
-        }
+
         
         /* WhatsApp butonu sol alt köşede */
         .whatsapp-btn {
@@ -948,18 +908,17 @@
                 padding: 30px;
             }
             
-            .blog-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+            .blog-section-header h2 {
+                font-size: 2rem;
             }
             
-            .blog-card-content {
-                padding: 20px;
+            .blog-section-header p {
+                font-size: 1.1rem;
             }
             
-            .blog-meta {
-                flex-wrap: wrap;
-                gap: 10px;
+            .blog-section-header {
+                padding: 30px 0;
+                margin-bottom: 30px;
             }
         }
         
@@ -1034,6 +993,12 @@
         </section>
 
     <section class="container">
+        <!-- Blog Başlığı -->
+        <div class="blog-section-header">
+            <h2>Bloglarımız</h2>
+            <p>Anahtar ve çilingir hizmetleri hakkında bilgilendirici yazılarımız</p>
+        </div>
+        
         <div class="shop-intro">
                 <div class="shop-intro-content">
                 <div class="shop-intro-header">
@@ -1177,18 +1142,7 @@
             </div>
         </section>
 
-    <!-- Blog Section -->
-    <section id="blog">
-        <div class="container">
-            <h2>Blog</h2>
-            <div id="blog-content" class="blog-grid">
-                <!-- Blog posts will be loaded here -->
-            </div>
-            <div class="blog-loading" style="text-align: center; padding: 2rem;">
-                <p>Blog yazıları yükleniyor...</p>
-            </div>
-        </div>
-    </section>
+
 
     <section id="testimonials">
         <div class="container">
@@ -1543,43 +1497,6 @@
                 }
             });
             
-            // Blog functionality - Güvenli versiyon
-            function loadBlogPosts() {
-                const blogContent = document.getElementById('blog-content');
-                const blogLoading = document.querySelector('.blog-loading');
-                
-                // Blog yükleme yerine direkt shop-intro linklerini göster
-                if (blogContent && blogLoading) {
-                    blogContent.innerHTML = `
-                        <div class="blog-fallback" style="text-align: center; padding: 2rem;">
-                            <h3 style="color: #2c3e50; margin-bottom: 1rem;">Blog Yazılarımız</h3>
-                            <p style="color: #666; margin-bottom: 2rem;">Aşağıdaki linklerden blog yazılarımıza ulaşabilirsiniz:</p>
-                            <div style="display: grid; gap: 1rem; max-width: 600px; margin: 0 auto;">
-                                <a href="blog/araba-anahtarlari-nasil-calisir.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
-                                    → Araba Anahtarları Nasıl Çalışır?
-                                </a>
-                                <a href="blog/kilit-sistemleri-guvenlik.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
-                                    → Kilit Sistemleri ve Güvenlik
-                                </a>
-                                <a href="blog/acil-cilingir-hizmetleri.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
-                                    → Acil Çilingir Hizmetleri
-                                </a>
-                                <a href="blog/yedek-anahtar-kopyalama.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
-                                    → Yedek Anahtar Kopyalama
-                                </a>
-                                <a href="blog/arac-anahtari-kopyalama-islemi.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
-                                    → Araç Anahtarı Kopyalama İşlemi
-                                </a>
-                                <a href="blog/cilingir-hizmeti-ne-zaman-nasil-alinir.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
-                                    → Çilingir Hizmeti Ne Zaman Alınır?
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                    blogLoading.style.display = 'none';
-                }
-            }
-
             // Open map function
             window.openMap = function() {
                 // Direct link to Google Maps location
@@ -1588,9 +1505,6 @@
                 // Open the Google Maps location directly
                 window.open(businessUrl, '_blank');
             };
-            
-            // Load blog posts when page loads
-            loadBlogPosts();
         })();
     </script>
 </body>
