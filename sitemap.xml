@@ -4,12 +4,82 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-<url>
-  <loc>https://www.elazigcilingir.net/</loc>
-  <lastmod>2025-01-14T10:00:00+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>1.0</priority>
-</url>
+  <url>
+    <loc>https://www.elazigcilingir.net/</loc>
+    <lastmod>2025-01-14T10:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+    
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/araba-anahtarlari-nasil-calisir.html</loc>
+    <lastmod>2025-01-14T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/kilit-sistemleri-guvenlik.html</loc>
+    <lastmod>2025-01-12T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/acil-cilingir-hizmetleri.html</loc>
+    <lastmod>2025-01-10T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/yedek-anahtar-kopyalama.html</loc>
+    <lastmod>2025-01-08T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/arac-anahtari-kopyalama-islemi.html</loc>
+    <lastmod>2025-01-14T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/cilingir-hizmeti-ne-zaman-nasil-alinir.html</loc>
+    <lastmod>2025-01-14T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/akilli-kilitler-kartli-sistemler.html</loc>
+    <lastmod>2025-01-14T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/ev-anahtarlari-kopyalanirken-dikkat-edilmesi-gerekenler.html</loc>
+    <lastmod>2025-01-14T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/kilit-degistirmek-anahtar-kopyalamak-hangisi-guvenli.html</loc>
+    <lastmod>2025-01-14T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.elazigcilingir.net/blog/elazigda-guvenilir-anahtarci-nasil-bulunur.html</loc>
+    <lastmod>2025-01-14T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
 <url>
   <loc>https://www.elazigcilingir.net/#services</loc>

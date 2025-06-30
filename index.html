@@ -34,21 +34,27 @@
     <meta name="author" content="Elazığ Çilingir">
     <meta name="geo.region" content="TR-23">
     <meta name="geo.placename" content="Elazığ">
-    <meta name="geo.position" content="38.669472;39.205833">
-    <meta name="ICBM" content="38.669472, 39.205833">
+    <meta name="geo.position" content="38.6695;39.2058">
+    <meta name="ICBM" content="38.6695, 39.2058">
     <link rel="canonical" href="https://www.elazigcilingir.net/">
     
     <!-- HTTPS and WWW redirect optimization -->
     <script>
-        if (location.protocol !== 'https:' || !location.hostname.startsWith('www.')) {
-            location.replace('https://www.elazigcilingir.net' + location.pathname + location.search + location.hash);
+        try {
+            if (typeof window !== 'undefined' && window.location) {
+                const loc = window.location;
+                if (loc.hostname === 'elazigcilingir.net' && loc.protocol === 'https:') {
+                    window.location.replace('https://www.elazigcilingir.net' + loc.pathname + loc.search + loc.hash);
+                }
+            }
+        } catch(e) {
+            // Redirect hatası sessizce yok sayılır
         }
     </script>
     <meta name="language" content="Turkish">
     <meta name="revisit-after" content="7 days">
     
     <!-- Security Headers - Client-side only -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; connect-src 'self' https:; font-src 'self' https:;">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     
     <!-- Critical CSS Inline - Ultra Optimized -->
@@ -86,8 +92,8 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "38.6748",
-        "longitude": "39.2264"
+        "latitude": "38.6695",
+        "longitude": "39.2058"
       },
       "openingHours": "Mo-Su 00:00-23:59",
       "sameAs": [
@@ -376,6 +382,17 @@
             font-weight: 600;
             color: #444;
             transition: color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        a.item-text {
+            color: #444;
+            text-decoration: none;
+        }
+        
+        a.item-text:hover {
+            color: #dc2626;
+            font-weight: 700;
         }
         
         .services-grid {
@@ -582,6 +599,81 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #ccc;
             font-size: 0.9rem;
+        }
+        
+        /* Blog Section Styles */
+        #blog {
+            background-color: #f8f9fa;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .blog-card-content {
+            padding: 25px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .blog-category {
+            background: #dc2626;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .blog-date, .blog-read-time {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .blog-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+        
+        .blog-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .blog-read-more {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .blog-read-more:hover {
+            color: #b91c1c;
         }
         
         /* WhatsApp butonu sol alt köşede */
@@ -825,6 +917,20 @@
             #contact {
                 padding: 30px;
             }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .blog-card-content {
+                padding: 20px;
+            }
+            
+            .blog-meta {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -878,6 +984,7 @@
             <ul class="nav-links">
                 <li><a href="#services">Hizmetlerimiz</a></li>
                 <li><a href="#about">Hakkımızda</a></li>
+                <li><a href="#blog">Blog</a></li>
                 <li><a href="#testimonials">Yorumlar</a></li>
                 <li><a href="#contact">İletişim</a></li>
             </ul>
@@ -886,12 +993,9 @@
     </header>
 
     <section class="hero">
-        <video autoplay muted loop playsinline preload="metadata" id="hero-video" poster="assets/hero-bg.webp" 
-               aria-label="Dekoratif arka plan videosu - ses içermez" aria-hidden="true">
+        <video autoplay muted loop playsinline preload="none" id="hero-video" poster="assets/hero-bg.webp">
             <source src="assets/intro-video-.mp4" type="video/mp4">
-            <track kind="descriptions" src="data:text/vtt;base64,V0VCVlRUCgowMDowMDowMC4wMDAgLS0+IDAwOjAwOjEwLjAwMApEZWtvcmF0aWYgYXJrYSBwbGFuIHZpZGVvc3UgLSBzZXMgaWNlcm1leg==" 
-                   srclang="tr" label="Türkçe açıklama">
-            </video>
+        </video>
         <div class="container hero-content">
             <h1><span class="hero-brand">ELAZIĞ ÇİLİNGİR</span> <span>7/24 Acil Elazığ Çilingir ve Anahtarcı Hizmeti</span></h1>
             <p>Güvenilir ve hızlı elazığ çilingir ve elazığ anahtarcı hizmetleri. Acil kapı açma, anahtar kopyalama ve immobilizer anahtar ihtiyaçlarınız için bir telefon uzağınızdayız.</p>
@@ -912,33 +1016,53 @@
                     <div class="shop-intro-list">
                     <div class="intro-item">
                         <div class="item-icon">→</div>
-                        <div class="item-text">Elazığ Oto Çilingir ve Elazığ Anahtarcı Hizmeti</div>
+                        <a href="blog/araba-anahtarlari-nasil-calisir.html" class="item-text">Araba Anahtarları Nasıl Çalışır? Akıllı Anahtar Sistemleri</a>
                     </div>
                     
                     <div class="intro-item">
                         <div class="item-icon">→</div>
-                        <div class="item-text">Acil Elazığ Çilingir - Daire ve Çelik Kapı Açma</div>
-                </div>
-                    
-                    <div class="intro-item">
-                        <div class="item-icon">→</div>
-                        <div class="item-text">7/24 Elazığ Çilingir - Araba Kapı Açma Hizmeti</div>
-            </div>
-                    
-                    <div class="intro-item">
-                        <div class="item-icon">→</div>
-                        <div class="item-text">Elazığ Kilit Değiştirme ve Garaj Kumandası</div>
-                        </div>
-                    
-                    <div class="intro-item">
-                        <div class="item-icon">→</div>
-                        <div class="item-text">Elazığ Anahtar Kopyalama ve İmmobilizer Anahtar</div>
+                        <a href="blog/kilit-sistemleri-guvenlik.html" class="item-text">Kilit Sistemleri ve Güvenlik Teknolojileri</a>
                     </div>
                     
                     <div class="intro-item">
                         <div class="item-icon">→</div>
-                        <div class="item-text">Elazığ Anahtarcı - Chip Anahtar Programlama</div>
-                        </div>
+                        <a href="blog/acil-cilingir-hizmetleri.html" class="item-text">Acil Çilingir Hizmetleri: Ne Zaman İhtiyaç Duyarsınız?</a>
+                    </div>
+                    
+                    <div class="intro-item">
+                        <div class="item-icon">→</div>
+                        <a href="blog/yedek-anahtar-kopyalama.html" class="item-text">Yedek Anahtar Kopyalama: Güvenlik ve Dikkat Edilmesi Gerekenler</a>
+                    </div>
+                    
+                    <div class="intro-item">
+                        <div class="item-icon">→</div>
+                        <a href="blog/arac-anahtari-kopyalama-islemi.html" class="item-text">Araç Anahtarı Kopyalama İşlemi Nasıl Yapılır? Güvenli mi?</a>
+                    </div>
+                    
+                    <div class="intro-item">
+                        <div class="item-icon">→</div>
+                        <a href="blog/cilingir-hizmeti-ne-zaman-nasil-alinir.html" class="item-text">Çilingir Hizmeti Ne Zaman ve Nasıl Alınır? Acil Durum Rehberi</a>
+                    </div>
+                    
+                    <div class="intro-item">
+                        <div class="item-icon">→</div>
+                        <a href="blog/akilli-kilitler-kartli-sistemler.html" class="item-text">Akıllı Kilitler ve Kartlı Sistemler: Geleceğin Güvenliği</a>
+                    </div>
+                    
+                    <div class="intro-item">
+                        <div class="item-icon">→</div>
+                        <a href="blog/ev-anahtarlari-kopyalanirken-dikkat-edilmesi-gerekenler.html" class="item-text">Ev Anahtarları Kopyalanırken Nelere Dikkat Edilmeli?</a>
+                    </div>
+                    
+                    <div class="intro-item">
+                        <div class="item-icon">→</div>
+                        <a href="blog/kilit-degistirmek-anahtar-kopyalamak-hangisi-guvenli.html" class="item-text">Kilit Değiştirmek mi? Anahtar Kopyalamak mı? Hangisi Daha Güvenli?</a>
+                    </div>
+                    
+                    <div class="intro-item">
+                        <div class="item-icon">→</div>
+                        <a href="blog/elazigda-guvenilir-anahtarci-nasil-bulunur.html" class="item-text">Elazığ'da Güvenilir Anahtarcı Nasıl Bulunur?</a>
+                    </div>
                     </div>
                         </div>
                     </div>
@@ -1023,6 +1147,19 @@
             </div>
         </section>
 
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="container">
+            <h2>Blog</h2>
+            <div id="blog-content" class="blog-grid">
+                <!-- Blog posts will be loaded here -->
+            </div>
+            <div class="blog-loading" style="text-align: center; padding: 2rem;">
+                <p>Blog yazıları yükleniyor...</p>
+            </div>
+        </div>
+    </section>
+
     <section id="testimonials">
         <div class="container">
             <div class="section-title">
@@ -1095,103 +1232,16 @@
                 
                 <div class="map-container">
                     <div id="map"></div>
-                    <script>
-                        // Clean OpenStreetMap implementation
+                                            <script>
+                        // Basit map fallback - Google Maps linki
                         (function() {
-                            let mapInitialized = false;
-                            
-                            function initializeMap() {
-                                if (mapInitialized || !window.L) return;
-                                mapInitialized = true;
-                                
-                                try {
-                                    // Coordinates for Elazığ address
-                                    const lat = 38.6748;
-                                    const lng = 39.2264;
-                                    
-                                    // Initialize map
-                                    const map = L.map('map').setView([lat, lng], 16);
-                                    
-                                    // Add OpenStreetMap tiles
-                                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                        attribution: '© OpenStreetMap contributors',
-                                        maxZoom: 19
-                                    }).addTo(map);
-                                    
-                                    // Add marker with popup
-                                    const marker = L.marker([lat, lng]).addTo(map);
-                                    marker.bindPopup(`
-                                        <div style="text-align: center; padding: 10px; font-family: Arial, sans-serif;">
-                                            <h3 style="color: #dc2626; margin: 0 0 8px 0;">ELAZIĞ ÇİLİNGİR</h3>
-                                            <p style="margin: 4px 0; font-size: 13px;"><strong>📍 Adres:</strong><br>Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A</p>
-                                            <p style="margin: 4px 0; font-size: 13px;"><strong>📞 Telefon:</strong><br><a href="tel:+905432109949" style="color: #dc2626; text-decoration: none;">0543 210 99 49</a></p>
-                                            <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: none; font-weight: bold; font-size: 12px;">🗺️ Google Maps'te Görüntüle</a>
-                                        </div>
-                                    `).openPopup();
-                                    
-                                    // Disable scroll wheel zoom initially
-                                    map.scrollWheelZoom.disable();
-                                    
-                                    // Enable scroll wheel zoom on map focus
-                                    map.on('focus', () => map.scrollWheelZoom.enable());
-                                    map.on('blur', () => map.scrollWheelZoom.disable());
-                                    
-                                } catch (error) {
-                                    console.error('Map initialization failed:', error);
-                                    document.getElementById('map').innerHTML = `
-                                        <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
-                                            <div style="text-align: center; padding: 20px;">
-                                                <p style="margin-bottom: 10px; color: #666;">Harita yüklenemedi</p>
-                                                <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: underline;">Konumumuzu Google Maps'te görüntüle</a>
-                                            </div>
-                                        </div>
-                                    `;
+                            try {
+                                const mapElement = document.getElementById('map');
+                                if (mapElement) {
+                                    mapElement.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px; border: 1px solid #e5e7eb;"><div style="text-align: center; padding: 20px;"><h3 style="color: #2c3e50; margin-bottom: 1rem;">📍 Konum</h3><p style="margin-bottom: 10px; color: #666;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p><a href="https://maps.app.goo.gl/goKmYgERBhHaGAds7" target="_blank" style="color: #dc2626; text-decoration: underline; font-weight: bold;">🗺️ Google Maps\'te Görüntüle</a></div></div>';
                                 }
-                            }
-                            
-                            // Load Leaflet library
-                            function loadLeaflet() {
-                                if (window.L) {
-                                    initializeMap();
-                                    return;
-                                }
-                                
-                                // Load CSS
-                                const css = document.createElement('link');
-                                css.rel = 'stylesheet';
-                                css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-                                document.head.appendChild(css);
-                                
-                                // Load JS
-                                const script = document.createElement('script');
-                                script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-                                script.onload = () => setTimeout(initializeMap, 100);
-                                script.onerror = () => {
-                                    document.getElementById('map').innerHTML = `
-                                        <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
-                                            <div style="text-align: center; padding: 20px;">
-                                                <p style="margin-bottom: 10px; color: #666;">Harita yüklenemedi</p>
-                                                <a href="https://g.co/kgs/XC4jBSU" target="_blank" style="color: #dc2626; text-decoration: underline;">Konumumuzu Google Maps'te görüntüle</a>
-                                            </div>
-                                        </div>
-                                    `;
-                                };
-                                document.head.appendChild(script);
-                            }
-                            
-                            // Load map when visible
-                            const observer = new IntersectionObserver((entries) => {
-                                entries.forEach(entry => {
-                                    if (entry.isIntersecting) {
-                                        loadLeaflet();
-                                        observer.unobserve(entry.target);
-                                    }
-                                });
-                            });
-                            
-                            const mapElement = document.getElementById('map');
-                            if (mapElement) {
-                                observer.observe(mapElement);
+                            } catch (error) {
+                                console.error('Map fallback failed:', error);
                             }
                         })();
                     </script>
@@ -1213,6 +1263,7 @@
                     <ul>
                         <li><a href="#services">Hizmetlerimiz</a></li>
                         <li><a href="#about">Hakkımızda</a></li>
+                        <li><a href="#blog">Blog</a></li>
                         <li><a href="#testimonials">Müşteri Yorumları</a></li>
                         <li><a href="#contact">İletişim</a></li>
                     </ul>
@@ -1320,32 +1371,18 @@
                     });
                 }
                 
-                // Video optimization - Enhanced
+                // Video basit fallback
                 const video = document.getElementById('hero-video');
                 if (video) {
-                    // Optimize video loading
-                    video.addEventListener('loadedmetadata', () => {
-                        video.play().catch(() => {
-                            // Fallback to poster if autoplay fails
-                            video.style.display = 'none';
-                            document.querySelector('.hero').style.backgroundImage = 'url(assets/hero-bg.webp)';
-                            document.querySelector('.hero').style.backgroundSize = 'cover';
-                            document.querySelector('.hero').style.backgroundPosition = 'center';
-                        });
+                    video.addEventListener('error', () => {
+                        video.style.display = 'none';
+                        const hero = document.querySelector('.hero');
+                        if (hero) {
+                            hero.style.backgroundImage = 'url(assets/hero-bg.webp)';
+                            hero.style.backgroundSize = 'cover';
+                            hero.style.backgroundPosition = 'center';
+                        }
                     });
-                    
-                    // Pause video when not visible to save resources
-                    const videoObserver = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                video.play().catch(() => {});
-                            } else {
-                                video.pause();
-                            }
-                        });
-                    }, { threshold: 0.25 });
-                    
-                    videoObserver.observe(video);
                 }
                 
                 // Lazy loading for images
@@ -1377,14 +1414,54 @@
                 }
             });
             
+            // Blog functionality - Güvenli versiyon
+            function loadBlogPosts() {
+                const blogContent = document.getElementById('blog-content');
+                const blogLoading = document.querySelector('.blog-loading');
+                
+                // Blog yükleme yerine direkt shop-intro linklerini göster
+                if (blogContent && blogLoading) {
+                    blogContent.innerHTML = `
+                        <div class="blog-fallback" style="text-align: center; padding: 2rem;">
+                            <h3 style="color: #2c3e50; margin-bottom: 1rem;">Blog Yazılarımız</h3>
+                            <p style="color: #666; margin-bottom: 2rem;">Aşağıdaki linklerden blog yazılarımıza ulaşabilirsiniz:</p>
+                            <div style="display: grid; gap: 1rem; max-width: 600px; margin: 0 auto;">
+                                <a href="blog/araba-anahtarlari-nasil-calisir.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
+                                    → Araba Anahtarları Nasıl Çalışır?
+                                </a>
+                                <a href="blog/kilit-sistemleri-guvenlik.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
+                                    → Kilit Sistemleri ve Güvenlik
+                                </a>
+                                <a href="blog/acil-cilingir-hizmetleri.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
+                                    → Acil Çilingir Hizmetleri
+                                </a>
+                                <a href="blog/yedek-anahtar-kopyalama.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
+                                    → Yedek Anahtar Kopyalama
+                                </a>
+                                <a href="blog/arac-anahtari-kopyalama-islemi.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
+                                    → Araç Anahtarı Kopyalama İşlemi
+                                </a>
+                                <a href="blog/cilingir-hizmeti-ne-zaman-nasil-alinir.html" style="color: #dc2626; text-decoration: none; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s; display: block;">
+                                    → Çilingir Hizmeti Ne Zaman Alınır?
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    blogLoading.style.display = 'none';
+                }
+            }
+
             // Open map function
             window.openMap = function() {
-                // Direct link to Google My Business listing
-                const businessUrl = "https://g.co/kgs/XC4jBSU";
+                // Direct link to Google Maps location
+                const businessUrl = "https://maps.app.goo.gl/goKmYgERBhHaGAds7";
                 
-                // Open the Google My Business listing directly
+                // Open the Google Maps location directly
                 window.open(businessUrl, '_blank');
             };
+            
+            // Load blog posts when page loads
+            loadBlogPosts();
         })();
     </script>
 </body>
