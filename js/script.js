@@ -198,6 +198,51 @@
         });
     }
 
+    // Blog navigation functionality
+    window.toggleBlog = function() {
+        const currentPage = window.location.pathname.toLowerCase();
+        
+        if (currentPage.includes('blog.html') || currentPage.includes('/blog/')) {
+            // Currently on blog page or blog article, go to home
+            window.location.href = '/';
+        } else {
+            // Currently on home page, go to blog list
+            window.location.href = 'blog.html';
+        }
+    };
+
+    // Update blog button text based on current page
+    function updateBlogButton() {
+        const blogNavBtn = document.getElementById('blog-nav-btn');
+        const currentPage = window.location.pathname.toLowerCase();
+        
+        if (blogNavBtn) {
+            // Check if we're on blog.html or in blog directory
+            if (currentPage.includes('blog.html') || currentPage.includes('/blog/')) {
+                blogNavBtn.textContent = 'Ana Sayfa';
+                blogNavBtn.setAttribute('aria-label', 'Ana sayfaya dön');
+            } else {
+                blogNavBtn.textContent = 'Blog';
+                blogNavBtn.setAttribute('aria-label', 'Blog sayfasına git');
+            }
+        }
+    }
+
+    // Initialize blog button on page load
+    function initBlogButton() {
+        // Run immediately
+        updateBlogButton();
+        
+        // Run after a small delay to ensure DOM is fully loaded
+        setTimeout(updateBlogButton, 100);
+        
+        // Update button on page navigation
+        window.addEventListener('popstate', updateBlogButton);
+        
+        // Update on hash change
+        window.addEventListener('hashchange', updateBlogButton);
+    }
+
     // Lazy loading for images with Intersection Observer
     function initLazyLoading() {
         if ('IntersectionObserver' in window) {
@@ -276,19 +321,15 @@
     // Load map function
     function loadMap() {
         if (typeof L === 'undefined') {
-            // Load Leaflet CSS
+            // Load Local Leaflet CSS
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-            link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-            link.crossOrigin = '';
+            link.href = 'vendor/leaflet/leaflet.css';
             document.head.appendChild(link);
 
-            // Load Leaflet JS
+            // Load Local Leaflet JS
             const script = document.createElement('script');
-            script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-            script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
-            script.crossOrigin = '';
+            script.src = 'vendor/leaflet/leaflet.js';
             script.onload = initializeMap;
             document.head.appendChild(script);
         } else {
@@ -322,11 +363,11 @@
         }).addTo(map);
 
         const customIcon = L.icon({
-                iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                iconUrl: 'vendor/leaflet/images/marker-icon.png',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
-                shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+                shadowUrl: 'vendor/leaflet/images/marker-shadow.png',
             shadowSize: [41, 41],
             shadowAnchor: [12, 41]
         });
@@ -432,6 +473,99 @@
         }
     }
 
+    // Mobile Services Slider
+    function initMobileServicesSlider() {
+        const servicesGrid = document.getElementById('servicesGrid');
+        const servicesIndicator = document.getElementById('servicesIndicator');
+        const serviceCards = document.querySelectorAll('.service-card');
+        const indicators = document.querySelectorAll('.indicator-dot');
+        
+        if (!servicesGrid || !servicesIndicator || serviceCards.length === 0) return;
+        
+        // Only activate on mobile devices
+        if (window.innerWidth <= 768) {
+            let currentIndex = 0;
+            
+            // Function to update active indicator
+            function updateActiveIndicator(index) {
+                indicators.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                currentIndex = index;
+            }
+            
+            // Function to scroll to specific card
+            function scrollToCard(index) {
+                if (index >= 0 && index < serviceCards.length) {
+                    const cardWidth = serviceCards[0].offsetWidth;
+                    const gap = 16; // 1rem gap
+                    const scrollPosition = index * (cardWidth + gap);
+                    
+                    servicesGrid.scrollTo({
+                        left: scrollPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    updateActiveIndicator(index);
+                }
+            }
+            
+            // Add click listeners to indicators
+            indicators.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    scrollToCard(index);
+                });
+            });
+            
+            // Listen to scroll events to update active indicator
+            let scrollTimeout;
+            servicesGrid.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const scrollLeft = servicesGrid.scrollLeft;
+                    const cardWidth = serviceCards[0].offsetWidth;
+                    const gap = 16;
+                    const newIndex = Math.round(scrollLeft / (cardWidth + gap));
+                    
+                    if (newIndex !== currentIndex && newIndex >= 0 && newIndex < serviceCards.length) {
+                        updateActiveIndicator(newIndex);
+                    }
+                }, 150);
+            });
+            
+            // Touch swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            servicesGrid.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            servicesGrid.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0 && currentIndex < serviceCards.length - 1) {
+                        // Swipe left - next card
+                        scrollToCard(currentIndex + 1);
+                    } else if (diff < 0 && currentIndex > 0) {
+                        // Swipe right - previous card
+                        scrollToCard(currentIndex - 1);
+                    }
+                }
+            }
+            
+            // Initialize first indicator as active
+            updateActiveIndicator(0);
+        }
+    }
+
     // Initialize all functionality when DOM is ready
     function init() {
         initMobileMenu();
@@ -439,10 +573,12 @@
         initSmoothScroll();
         initAccordion();
         initScrollToTop();
+        initBlogButton();
         initLazyLoading();
         initScrollAnimations();
         initMapLazyLoading();
         initVideoOptimization();
+        initMobileServicesSlider();
         
         // Initialize performance monitoring in development
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {

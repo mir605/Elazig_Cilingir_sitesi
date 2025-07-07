@@ -3,23 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Araba Anahtarları Nasıl Çalışır? | Elazığ Çilingir</title>
-    <meta name="description" content="Modern araba anahtarlarının teknolojisi ve çalışma prensipleri hakkında detaylı bilgiler.">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Araba Anahtarları Nasıl Çalışır? Akıllı Anahtar Sistemleri | Elazığ Oto Çilingir</title>
+    <meta name="description" content="Araba anahtarları nasıl çalışır? İmmobilizer, smart key, proximity anahtar sistemleri hakkında detaylı bilgiler. Elazığ oto çilingir uzmanından teknik rehber.">
+    <link rel="stylesheet" href="../css/style.css?v=2.1">
+    
+    <!-- ANA SAYFA İLE BİREBİR AYNI NAVBAR -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Performance optimizations - Minified */
+        img{max-width:100%;height:auto;display:block}img.lazy{opacity:0;transition:opacity .3s}img.lazy.loaded{opacity:1}*{will-change:auto}.hero,.hero-content,.btn{will-change:transform}
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a1a2e) !important;
+            color: white !important;
+            padding: 15px 0 !important;
+            position: fixed !important;
+            width: 100% !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+            backdrop-filter: none !important;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #dc2626, #ea580c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin-left: 35px;
+        }
+        
+        .nav-links a {
+            color: white !important;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 1rem;
+            white-space: nowrap;
+            min-width: auto;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+        
+        .menu-btn {
+            display: none;
+            color: white;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+                max-width: 100%;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1a1a2e;
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .menu-btn {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+    </style>
 </head>
 <body class="blog-article">
     <header>
-        <div class="container">
-            <nav>
-                <a href="../index.html" class="logo-text">ELAZIĞ ÇİLİNGİR</a>
-                <ul class="nav-links">
-                    <li><a href="../index.html#services">Hizmetlerimiz</a></li>
-                    <li><a href="../index.html#about">Hakkımızda</a></li>
-                    <li><a href="../index.html#testimonials">Müşteri Yorumları</a></li>
-                    <li><a href="../index.html#contact">İletişim</a></li>
-                </ul>
-                <button class="menu-btn">☰</button>
-            </nav>
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-icon">🔑</span>
+                <span>ELAZIĞ ÇİLİNGİR & ANAHTARCI</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#services">Hizmetlerimiz</a></li>
+                <li><a href="../index.html#about">Hakkımızda</a></li>
+                <li><a href="../index.html">Ana Sayfa</a></li>
+                <li><a href="../index.html#testimonials">Yorumlar</a></li>
+                <li><a href="../index.html#contact">İletişim</a></li>
+            </ul>
+            <div class="menu-btn">☰</div>
         </div>
     </header>
 
@@ -27,52 +159,294 @@
         <article class="blog-container">
             <div class="blog-header">
                 <div class="blog-meta-info">
-                    <span class="blog-category-tag">Teknoloji</span>
-                    <span>14 Ocak 2025</span>
-                    <span>5 dk okuma</span>
+                    <span>8 Mart 2025</span>
+                    <span>6 dk okuma</span>
                 </div>
-                <h1 class="blog-title">Araba Anahtarları Nasıl Çalışır? Akıllı Anahtar Sistemleri ve Transponder Teknolojisi</h1>
-                <p class="blog-lead">Günümüzde araç anahtarları sadece bir metal parçasından ibaret değil. Teknolojinin gelişmesiyle birlikte otomobil güvenlik sistemleri de akıllandı.</p>
+                <h1 class="blog-title">Araba Anahtarları Nasıl Çalışır? Akıllı Anahtar Sistemleri</h1>
+                <p class="blog-lead">Modern araç anahtarlarının çalışma prensibi, akıllı anahtar teknolojileri ve güvenlik sistemleri hakkında kapsamlı teknik rehber. Elazığ oto çilingir uzmanından profesyonel bilgiler.</p>
             </div>
 
             <div class="blog-content">
-                    <p>Modern araba anahtarları, geleneksel metal anahtarlardan çok daha karmaşık teknolojiler içerir. Bu yazıda, araç anahtarlarının nasıl çalıştığını ve günümüz teknolojilerini inceleyeceğiz.</p>
+                <p><strong>Araba anahtarları</strong>, modern teknolojinin en ilginç örneklerinden biridir. <strong>Elazığ oto çilingir</strong> olarak 15 yılı aşkın deneyimimizle, araç anahtar sistemlerinin evrimini yakından takip ettik. <strong>Araç anahtar teknolojileri</strong>, basit mekanik sistemlerden günümüzün karmaşık elektronik sistemlerine kadar uzun bir yol kat etmiştir. <strong>Elazığ çilingir</strong> hizmetlerimizde en çok sorular aldığımız konu olan araç anahtarlarının çalışma prensiplerini detaylı olarak açıklıyoruz.</p>
 
-                    <h2>Transponder Teknolojisi</h2>
-                    <p>Transponder, "transmitter" (verici) ve "responder" (yanıtlayıcı) kelimelerinin birleşiminden oluşur. Araç anahtarlarında kullanılan transponder çipleri, aracın immobilizer sistemi ile iletişim kurar.</p>
+                <h2>Araba Anahtarlarının Tarihsel Gelişimi</h2>
+                <p><strong>Otomobil anahtarları</strong>, otomobilin icadıyla birlikte sürekli gelişim göstermiştir. Bu gelişim süreci, güvenlik ihtiyaçları ve teknolojik ilerlemelerle paralel olarak şekillenmiştir.</p>
 
-                    <h3>Çalışma Prensibi</h3>
-                    <ul>
-                        <li>Anahtar kontak deliğine sokulduğunda transponder aktifleşir</li>
-                        <li>Araç bilgisayarı belirli bir frekans gönderir</li>
-                        <li>Transponder bu sinyali alır ve kodlanmış yanıt verir</li>
-                        <li>Kod doğruysa araç çalışmaya başlar</li>
-                    </ul>
+                <h3>Geleneksel Mekanik Anahtarlar (1900-1980)</h3>
+                <ul>
+                    <li><strong>Basit metal anahtarlar</strong> - Sadece kontak ve kilit açma işlevi</li>
+                    <li><strong>Tek parça tasarım</strong> - Metal kesim ile üretim</li>
+                    <li><strong>Sınırlı güvenlik</strong> - Kolayca kopyalanabilir</li>
+                    <li><strong>Manuel kullanım</strong> - Tüm işlemler fiziksel temas gerektiriyor</li>
+                </ul>
 
-                    <h2>Akıllı Anahtar Sistemleri</h2>
-                    <p>Smart key olarak da bilinen bu sistemler, anahtarı kontak deliğine sokmadan aracı çalıştırma imkanı sağlar.</p>
+                <h3>Elektronik Entegrasyon Dönemi (1980-2000)</h3>
+                <ul>
+                    <li><strong>İlk elektronik sistemler</strong> - Basit alarm entegrasyonu</li>
+                    <li><strong>Kumanda özelliği</strong> - Uzaktan kapı açma sistemi</li>
+                    <li><strong>İki parçalı tasarım</strong> - Mekanik + elektronik birleşimi</li>
+                    <li><strong>Frekans tabanlı iletişim</strong> - 315-433 MHz band kullanımı</li>
+                </ul>
 
-                    <h3>Özellikler</h3>
-                    <ul>
-                        <li>Proximity detection (yakınlık algılama)</li>
-                        <li>Push-button start (butonla çalıştırma)</li>
-                        <li>Keyless entry (anahtarsız giriş)</li>
-                        <li>Uzaktan motor çalıştırma</li>
-                    </ul>
+                <h3>Akıllı Anahtar Çağı (2000-Günümüz)</h3>
+                <ul>
+                    <li><strong>İmmobilizer teknolojisi</strong> - Çip tabanlı güvenlik</li>
+                    <li><strong>Smart key sistemleri</strong> - Yakınlık sensörlü teknoloji</li>
+                    <li><strong>Keyless entry</strong> - Temassız giriş sistemleri</li>
+                    <li><strong>Dijital anahtar</strong> - Smartphone entegrasyonu</li>
+                </ul>
 
-                    <h2>Güvenlik Açısından Önem</h2>
-                    <p>Modern anahtar teknolojileri araç hırsızlığını büyük ölçüde azaltmıştır. Rolling code teknolojisi sayesinde her kullanımda farklı kodlar üretilir.</p>
+                <h2>Modern Araç Anahtar Türleri ve Çalışma Prensipleri</h2>
+                <p><strong>Günümüz araç anahtarları</strong> karmaşık elektronik sistemlerdir ve her biri farklı teknolojiler kullanır:</p>
+
+                <h3>1. İmmobilizer Anahtarları</h3>
+                <p><strong>İmmobilizer sistemi</strong>, 1990'lardan itibaren araçlarda standart hale gelen en önemli güvenlik teknologisidir:</p>
+
+                <h4>Çalışma Prensibi:</h4>
+                <ul>
+                    <li><strong>Transponder çip</strong> - Anahtar başında gömülü mikroçip</li>
+                    <li><strong>Frekans okuma</strong> - 125 kHz veya 134 kHz frekansta sinyal</li>
+                    <li><strong>Kod doğrulama</strong> - Araç bilgisayarı ile çip kodu eşleştirme</li>
+                    <li><strong>Motor blokajı</strong> - Yanlış kod durumunda motor çalıştırma engeli</li>
+                </ul>
+
+                <h4>Güvenlik Özellikleri:</h4>
+                <ul>
+                    <li><strong>Benzersiz kod sistemi</strong> - Her anahtar farklı şifreleme</li>
+                    <li><strong>Rolling code teknolojisi</strong> - Her kullanımda değişen şifre</li>
+                    <li><strong>Kriptolama koruması</strong> - 40-128 bit şifreleme</li>
+                    <li><strong>Klonlama koruması</strong> - Çip kopyalama güvenlik önlemleri</li>
+                </ul>
+
+                <h3>2. Smart Key (Akıllı Anahtar) Sistemleri</h3>
+                <p><strong>Smart key teknolojisi</strong>, araç kullanımında devrim yaratan proximity (yakınlık) tabanlı sistemdir:</p>
+
+                <h4>Teknik Özellikler:</h4>
+                <ul>
+                    <li><strong>RFID teknolojisi</strong> - 13.56 MHz frekans kullanımı</li>
+                    <li><strong>Yakınlık algılama</strong> - 1-2 metre mesafe tespiti</li>
+                    <li><strong>Bidirectional iletişim</strong> - Çift yönlü veri alışverişi</li>
+                    <li><strong>Şifreli haberleşme</strong> - AES 128-bit şifreleme</li>
+                </ul>
+
+                <h4>Çalışma Mekanizması:</h4>
+                <ul>
+                    <li><strong>Yaklaşma tespiti</strong> - Anahtar araç yakınına geldiğinde aktivasyon</li>
+                    <li><strong>Kimlik doğrulama</strong> - Çoklu güvenlik katmanı kontrolü</li>
+                    <li><strong>Otomatik kilitleme</strong> - Anahtar uzaklaştığında kilitleme</li>
+                    <li><strong>Push-button start</strong> - Düğme ile motor çalıştırma</li>
+                </ul>
+
+                <h3>3. Keyless Entry Sistemleri</h3>
+                <p><strong>Keyless entry</strong>, modern araçlarda standart hale gelen konfor teknologisidir:</p>
+
+                <h4>Sistem Bileşenleri:</h4>
+                <ul>
+                    <li><strong>Uzaktan kumanda modülü</strong> - Anahtar içerisindeki verici</li>
+                    <li><strong>Alıcı anteni</strong> - Araç üzerindeki sinyal alıcısı</li>
+                    <li><strong>Kontrol ünitesi</strong> - Merkezi kilit bilgisayarı</li>
+                    <li><strong>Aktüatör motorları</strong> - Kapı kilit mekanizmaları</li>
+                </ul>
+
+                <h4>İşlev Özellikleri:</h4>
+                <ul>
+                    <li><strong>Çoklu kanal</strong> - Farklı frekanslar için yedeklilik</li>
+                    <li><strong>Menzil kontrolü</strong> - 30-100 metre arası çalışma mesafesi</li>
+                    <li><strong>Güvenlik zaman aşımı</strong> - Belirli süre sonra kilitleme</li>
+                    <li><strong>Pil durumu göstergesi</strong> - Düşük pil uyarı sistemi</li>
+                </ul>
+
+                <h2>Araç Anahtar Güvenlik Teknolojileri</h2>
+                <p>Modern araç anahtarlarında kullanılan gelişmiş güvenlik teknolojileri:</p>
+
+                <h3>Rolling Code (Kayan Kod) Sistemi</h3>
+                <ul>
+                    <li><strong>Dinamik şifreleme</strong> - Her kullanımda farklı kod üretimi</li>
+                    <li><strong>Senkronizasyon</strong> - Anahtar ve araç arasında kod eşleştirme</li>
+                    <li><strong>Tekrar kullanım engeli</strong> - Aynı kodun tekrar geçerliliği yok</li>
+                    <li><strong>Milyonlarca kombinasyon</strong> - Kırılması neredeyse imkansız</li>
+                </ul>
+
+                <h3>Frequency Hopping (Frekans Atlama)</h3>
+                <ul>
+                    <li><strong>Çoklu frekans</strong> - Birden fazla kanal kullanımı</li>
+                    <li><strong>Karışım önleme</strong> - Diğer cihazlardan etkilenme engeli</li>
+                    <li><strong>Sinyal takibi güçlüğü</strong> - Dinleme ve kopyalama koruması</li>
+                    <li><strong>Otomatik kanal seçimi</strong> - En uygun frekansı bulma</li>
+                </ul>
+
+                <h3>Bidirectional Authentication (Çift Yönlü Doğrulama)</h3>
+                <ul>
+                    <li><strong>Karşılıklı tanıma</strong> - Hem anahtar hem araç doğrulama</li>
+                    <li><strong>Challenge-response</strong> - Soru-cevap protokolü</li>
+                    <li><strong>Zaman damgası</strong> - İşlem zamanı kontrolü</li>
+                    <li><strong>Replay attack koruması</strong> - Eski sinyal tekrarı engeli</li>
+                </ul>
+
+                <h2>Elazığ'da Araç Anahtar Hizmetleri</h2>
+                <p><strong>Elazığ oto çilingir</strong> olarak sunduğumuz kapsamlı araç anahtar hizmetleri:</p>
+
+                <h3>Araç Anahtar Kopyalama Hizmetleri</h3>
+                <ul>
+                    <li><strong>Klasik araç anahtar kopyalama</strong> - Mekanik anahtarlar için</li>
+                    <li><strong>İmmobilizer anahtar programlama</strong> - Çipli anahtar yapımı</li>
+                    <li><strong>Smart key kopyalama</strong> - Proximity anahtar üretimi</li>
+                    <li><strong>Keyless kumanda eşleştirme</strong> - Uzaktan kumanda programlama</li>
+                </ul>
+
+                <h3>Acil Araç Anahtar Hizmetleri</h3>
+                <ul>
+                    <li><strong>Araç kapısı açma</strong> - Hasarsız kilit açma teknikleri</li>
+                    <li><strong>Anahtar kırılması</strong> - Kilitte kırılan anahtar çıkarma</li>
+                    <li><strong>Kontak tamiri</strong> - Kontak silindir değişimi</li>
+                    <li><strong>Kayıp anahtar yapımı</strong> - Sıfırdan anahtar üretimi</li>
+                </ul>
+
+                <h3>Marka Bazında Uzmanlık Alanları</h3>
+                <ul>
+                    <li><strong>Volkswagen-Audi-Skoda</strong> - VAG grubu araç anahtarları</li>
+                    <li><strong>BMW-Mercedes-Audi</strong> - Premium araç anahtar sistemleri</li>
+                    <li><strong>Toyota-Honda-Nissan</strong> - Japon araç teknolojileri</li>
+                    <li><strong>Ford-Opel-Peugeot</strong> - Avrupa araç anahtar sistemleri</li>
+                    <li><strong>Renault-Dacia</strong> - Renault grubu araç anahtarları</li>
+                    <li><strong>Hyundai-Kia</strong> - Kore araç anahtar teknolojileri</li>
+                </ul>
+
+                <h2>Araç Anahtar Problemleri ve Çözümleri</h2>
+                <p>En sık karşılaşılan araç anahtar sorunları ve profesyonel çözüm yöntemleri:</p>
+
+                <h3>Elektronik Anahtar Problemleri</h3>
+                <ul>
+                    <li><strong>Pil bitimi sorunu</strong> - Pil değişimi ve kalite kontrolü</li>
+                    <li><strong>Sinyal zayıflığı</strong> - Anten ve verici kontrolü</li>
+                    <li><strong>Çip hasarı</strong> - Transponder değişimi ve programlama</li>
+                    <li><strong>Su hasarı</strong> - Elektronik kart tamiri veya değişimi</li>
+                </ul>
+
+                <h3>Mekanik Anahtar Problemleri</h3>
+                <ul>
+                    <li><strong>Anahtar aşınması</strong> - Yeniden kesim veya değişim</li>
+                    <li><strong>Kilit silindir aşınması</strong> - Silindir tamiri veya değişimi</li>
+                    <li><strong>Anahtar kırılması</strong> - Profesyonel çıkarma teknikleri</li>
+                    <li><strong>Kilit blokajı</strong> - Kilit mekanizması temizlik ve tamiri</li>
+                </ul>
+
+                <h3>Sistem Programlama Sorunları</h3>
+                <ul>
+                    <li><strong>Eşleştirme hatası</strong> - Anahtar-araç senkronizasyonu</li>
+                    <li><strong>Kod kaybı</strong> - Yeniden programlama işlemi</li>
+                    <li><strong>Multiple anahtar sorunu</strong> - Çoklu anahtar koordinasyonu</li>
+                    <li><strong>Sistem reset</strong> - Tam sistem formatı ve kurulumu</li>
+                </ul>
+
+                <h2>Araç Anahtar Bakım ve Koruma Önerileri</h2>
+                <p>Araç anahtarlarınızın uzun ömürlü olması için önemli bakım önerileri:</p>
+
+                <h3>Günlük Kullanım Önerileri</h3>
+                <ul>
+                    <li><strong>Aşırı basınçtan kaçının</strong> - Anahtarı zorlamayın</li>
+                    <li><strong>Su temasından koruyun</strong> - Nem ve sıvı temasını önleyin</li>
+                    <li><strong>Düşürmeyin</strong> - Darbe ve çarpma hasarları önleyin</li>
+                    <li><strong>Yabancı cisimlerden koruyun</strong> - Toz, kir, magnetik alan</li>
+                </ul>
+
+                <h3>Düzenli Bakım İşlemleri</h3>
+                <ul>
+                    <li><strong>Pil kontrolleri</strong> - 6 ayda bir pil durumu kontrolü</li>
+                    <li><strong>Temizlik işlemleri</strong> - Hafif nemli bez ile temizlik</li>
+                    <li><strong>İşlev testleri</strong> - Tüm fonksiyonların düzenli kontrolü</li>
+                    <li><strong>Yedek anahtar hazırlama</strong> - İkinci anahtar bulundurma</li>
+                </ul>
+
+                <h3>Uzun Süreli Saklama</h3>
+                <ul>
+                    <li><strong>Uygun ortam</strong> - Kuru ve serin mekan seçimi</li>
+                    <li><strong>Pil çıkarma</strong> - Uzun süre kullanılmayacaksa pil çıkarın</li>
+                    <li><strong>Koruyucu kılıf</strong> - Anahtarı koruyucu kılıfta saklayın</li>
+                    <li><strong>Periyodik kontrol</strong> - Aylık işlevsellik kontrolü</li>
+                </ul>
+
+                <h2>Gelecek Araç Anahtar Teknolojileri</h2>
+                <p>Araç anahtar teknolojilerinin gelecekteki gelişim yönleri:</p>
+
+                <h3>Smartphone Entegrasyonu</h3>
+                <ul>
+                    <li><strong>Digital key uygulamaları</strong> - Telefon üzerinden araç kontrolü</li>
+                    <li><strong>NFC teknolojisi</strong> - Yakın alan iletişimi ile açma</li>
+                    <li><strong>Bluetooth 5.0</strong> - Geliştirilmiş kablosuz bağlantı</li>
+                    <li><strong>Cloud entegrasyonu</strong> - Bulut tabanlı anahtar yönetimi</li>
+                </ul>
+
+                <h3>Biometrik Güvenlik</h3>
+                <ul>
+                    <li><strong>Parmak izi tanıma</strong> - Biyometrik kimlik doğrulama</li>
+                    <li><strong>Yüz tanıma</strong> - Kamera tabanlı güvenlik</li>
+                    <li><strong>Ses tanıma</strong> - Vokal kimlik doğrulama</li>
+                    <li><strong>Çoklu biyometrik</strong> - Kombine güvenlik sistemleri</li>
+                </ul>
+
+                <h3>Yapay Zeka Entegrasyonu</h3>
+                <ul>
+                    <li><strong>Kullanım paterni öğrenme</strong> - AI tabanlı kişiselleştirme</li>
+                    <li><strong>Güvenlik riski analizi</strong> - Otomatik güvenlik değerlendirmesi</li>
+                    <li><strong>Prediktif bakım</strong> - Sistem arızalarını önceden tespit</li>
+                    <li><strong>Otomatik güncelleme</strong> - Over-the-air güvenlik güncellemeleri</li>
+                </ul>
+
+                <h2>Sık Sorulan Sorular</h2>
+                <p>Araç anahtarları konusunda en çok merak edilen konular:</p>
+
+                <h3>Teknik Sorular</h3>
+                <ul>
+                    <li><strong>İmmobilizer anahtarı kaç defa kopyalanabilir?</strong> - Araç tipine göre 2-8 adet</li>
+                    <li><strong>Smart key pili ne kadar dayanır?</strong> - Normal kullanımda 2-3 yıl</li>
+                    <li><strong>Kayıp anahtar için yeni anahtar yapılabilir mi?</strong> - Evet, özel ekipmanla mümkün</li>
+                    <li><strong>Eski araçlara smart key takılabilir mi?</strong> - Uygun kit ile mümkün</li>
+                </ul>
+
+                <h3>Güvenlik Soruları</h3>
+                <ul>
+                    <li><strong>Araç anahtarı klonlanabilir mi?</strong> - Modern anahtarlar için çok zor</li>
+                    <li><strong>Rolling code ne kadar güvenli?</strong> - Kırılması milyonlarca yıl sürer</li>
+                    <li><strong>Sinyal jamming nasıl önlenir?</strong> - Yakınlık sensörlü teknolojilerle</li>
+                    <li><strong>Eski kod ile araç çalışır mı?</strong> - Hayır, her kod bir kez geçerli</li>
+                </ul>
 
                 <div class="blog-cta">
-                    <h3>Araç Anahtar Sorunlarınız için</h3>
-                    <p>Profesyonel çilingir hizmetleri için bizi arayın!</p>
+                    <h3>Profesyonel Araç Anahtar Hizmetleri</h3>
+                    <p>Tüm araç markaları için anahtar kopyalama, programlama ve acil çilingir hizmetleri. Elazığ oto çilingir uzmanından 7/24 hızlı çözümler!</p>
                     <a href="tel:+905432109949" class="blog-cta-btn">0543 210 99 49</a>
                 </div>
             </div>
 
-            <div class="blog-navigation">
-                <a href="../index.html" class="blog-back-btn">Ana Sayfaya Dön</a>
+            <div class="blog-comments">
+                <h3>Okuyucu Yorumları</h3>
+                
+                <div class="comment">
+                    <p>"Araç anahtarlarının bu kadar karmaşık teknolojiler içerdiğini bilmiyordum. Çok aydınlatıcı bir yazı olmuş."</p>
+                    <div class="comment-author">- Murat B****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Smart key sistemi hakkında detaylı bilgi aradığım bir yazıydı. Teşekkürler, çok faydalı oldu."</p>
+                    <div class="comment-author">- Fatma K****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"İmmobilizer konusunda çok kafa karışıklığım vardı. Bu yazı ile her şey netleşti."</p>
+                    <div class="comment-author">- Serkan A****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Gelecek teknolojiler bölümü çok ilginç. Arabalar gerçekten çok gelişiyor."</p>
+                    <div class="comment-author">- Elif T****</div>
+                </div>
             </div>
+
+                    <div class="blog-navigation">
+            <a href="../index.html" class="blog-back-btn">Ana Sayfaya Dön</a>
+            <a href="../blog.html" class="blog-back-btn">Blog Listesine Dön</a>
+        </div>
         </article>
     </main>
 
@@ -91,5 +465,55 @@
     </a>
 
     <button class="scroll-up-btn">↑</button>
+    
+    <script>
+        (function() {
+            'use strict';
+            
+            function ready(fn) {
+                if (document.readyState !== 'loading') {
+                    fn();
+                } else {
+                    document.addEventListener('DOMContentLoaded', fn);
+                }
+            }
+            
+            ready(function() {
+                const menuBtn = document.querySelector('.menu-btn');
+                const navLinks = document.querySelector('.nav-links');
+                
+                if (menuBtn && navLinks) {
+                    menuBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        navLinks.classList.toggle('active');
+                    });
+                    
+                    document.addEventListener('click', (e) => {
+                        if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                            navLinks.classList.remove('active');
+                        }
+                    });
+                }
+                
+                const scrollUpBtn = document.querySelector('.scroll-up-btn');
+                if (scrollUpBtn) {
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 300) {
+                            scrollUpBtn.classList.add('show');
+                        } else {
+                            scrollUpBtn.classList.remove('show');
+                        }
+                    });
+                    
+                    scrollUpBtn.addEventListener('click', () => {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    });
+                }
+            });
+        })();
+    </script>
 </body>
 </html> 

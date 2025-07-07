@@ -5,67 +5,333 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kilit Değiştirmek mi? Anahtar Kopyalamak mı? Hangisi Daha Güvenli? | Elazığ Çilingir</title>
     <meta name="description" content="Kilit değiştirmek ile anahtar kopyalamak arasındaki farklar ve hangisinin daha güvenli olduğu hakkında detaylı bilgiler.">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css?v=2.1">
+    
+    <!-- ANA SAYFA İLE BİREBİR AYNI NAVBAR -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Performance optimizations - Minified */
+        img{max-width:100%;height:auto;display:block}img.lazy{opacity:0;transition:opacity .3s}img.lazy.loaded{opacity:1}*{will-change:auto}.hero,.hero-content,.btn{will-change:transform}
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a1a2e) !important;
+            color: white !important;
+            padding: 15px 0 !important;
+            position: fixed !important;
+            width: 100% !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+            backdrop-filter: none !important;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #dc2626, #ea580c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin-left: 35px;
+        }
+        
+        .nav-links a {
+            color: white !important;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 1rem;
+            white-space: nowrap;
+            min-width: auto;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #dc2626, #ea580c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+            color: #dc2626;
+        }
+        
+        .menu-btn {
+            display: none;
+            color: white;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1a1a2e;
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .menu-btn {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            
+            .header-container {
+                padding: 0 20px;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="blog-article">
     <header>
-        <div class="container">
-            <nav>
-                <a href="../index.html" class="logo-text">ELAZIĞ ÇİLİNGİR</a>
-                <ul class="nav-links">
-                    <li><a href="../index.html#services">Hizmetlerimiz</a></li>
-                    <li><a href="../index.html#about">Hakkımızda</a></li>
-                    <li><a href="../index.html#blog">Blog</a></li>
-                    <li><a href="../index.html#testimonials">Müşteri Yorumları</a></li>
-                    <li><a href="../index.html#contact">İletişim</a></li>
-                </ul>
-                <button class="menu-btn">☰</button>
-            </nav>
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-icon">🔑</span>
+                <span>ELAZIĞ ÇİLİNGİR & ANAHTARCI</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#services">Hizmetlerimiz</a></li>
+                <li><a href="../index.html#about">Hakkımızda</a></li>
+                <li><a href="../index.html">Ana Sayfa</a></li>
+                <li><a href="../index.html#testimonials">Yorumlar</a></li>
+                <li><a href="../index.html#contact">İletişim</a></li>
+            </ul>
+            <div class="menu-btn">☰</div>
         </div>
     </header>
 
     <main style="padding-top: 100px;">
-        <article class="blog-post">
-            <div class="container">
-                <div class="blog-header">
-                    <h1>Kilit Değiştirmek mi? Anahtar Kopyalamak mı? Hangisi Daha Güvenli?</h1>
-                    <p class="blog-lead">Güvenlik konusu, ev, iş yeri veya aracımız için her zaman önceliğimiz olmuştur. Kapı kilitleri ve anahtarlar da bu güvenliğin temel unsurlarıdır.</p>
+        <article class="blog-container">
+            <div class="blog-header">
+                <div class="blog-meta-info">
+                    <span>7 Haziran 2025</span>
+                    <span>5 dk okuma</span>
                 </div>
+                <h1 class="blog-title">Kilit Değiştirmek mi? Anahtar Kopyalamak mı? Hangisi Daha Güvenli?</h1>
+                <p class="blog-lead">Kilit değiştirmek ile anahtar kopyalamak arasındaki farklar ve hangisinin daha güvenli olduğu hakkında detaylı bilgiler. Doğru seçim için profesyonel rehber.</p>
+            </div>
 
-                <div class="blog-content">
-                    <h2>Anahtar Kopyalama Nedir?</h2>
-                    <p>Anahtar kopyalama, mevcut anahtarınızın aynısını çoğaltmak anlamına gelir. Bu işlem, genellikle yeni bir anahtar ihtiyacında veya yedek anahtar oluşturmak için yapılır.</p>
+            <div class="blog-content">
+                <p>Ev güvenliği konusunda en sık karşılaşılan ikilem, kilit değiştirmek ile anahtar kopyalamak arasında seçim yapmaktır. Elazığ çilingir hizmetlerinde her iki seçeneğin de kendine özgü avantaj ve dezavantajları bulunur.</p>
 
-                    <h2>Kilit Değiştirme Nedir?</h2>
-                    <p>Kilit değiştirme ise kapının kilit mekanizmasının tamamen yenisi ile değiştirilmesi işlemidir. Bu işlem genellikle eski kilit arızalandığında veya güvenlik seviyesi artırılmak istendiğinde tercih edilir.</p>
+                <h2>Kilit Değiştirme Seçeneği</h2>
+                <p>Kilit değiştirmenin ne zaman ve neden tercih edilmesi gerektiği:</p>
 
-                    <h2>Hangisi Daha Güvenli?</h2>
-                    
-                    <h3>Anahtar Kopyalamanın Güvenliği</h3>
-                    <p>Anahtar kopyalama işlemi, sadece anahtarınızın çoğaltılmasıdır. Eğer anahtarınız kaybolur ya da yetkisiz kişilerin eline geçerse, ev veya iş yeriniz risk altında olabilir. Bu yüzden, anahtar kopyalamayı sadece güvenilir firmalarına yaptırmalısınız.</p>
+                <h3>Kilit Değiştirmenin Avantajları</h3>
+                <ul>
+                    <li>Tamamen yeni güvenlik sistemi</li>
+                    <li>Eski anahtarların geçersiz hale gelmesi</li>
+                    <li>Güvenlik seviyesini yükseltme imkanı</li>
+                    <li>Modern kilit teknolojilerine geçiş</li>
+                </ul>
 
-                    <h3>Kilit Değiştirmenin Güvenliği</h3>
-                    <p>Kilit değiştirmek, güvenliği artırmanın en etkili yollarından biridir. Özellikle taşınma sonrası, anahtar kaybı sonrası veya kilit arızası durumunda yeni bir kilit taktırmak, eski anahtarların kullanılmasını engeller.</p>
+                <h3>Ne Zaman Kilit Değiştirmeli?</h3>
+                <ul>
+                    <li>Yeni eve taşınma durumunda</li>
+                    <li>Anahtar kaybı yaşandığında</li>
+                    <li>Güvenlik endişesi oluştuğunda</li>
+                    <li>Kilit eskidiğinde veya arızalandığında</li>
+                </ul>
 
-                    <h2>Ne Zaman Hangi İşlem Tercih Edilmeli?</h2>
-                    <ul>
-                        <li><strong>Yedek Anahtar İhtiyacı:</strong> Anahtarınız kaybolmadıysa ve sadece yedek gerekiyorsa, anahtar kopyalama yeterlidir</li>
-                        <li><strong>Anahtar Kaybı:</strong> Anahtarınız kaybolduysa, mutlaka kilit değiştirilmelidir</li>
-                        <li><strong>Kilit Arızası:</strong> Kilit çalışmıyorsa, değiştirilmesi daha sağlıklı olur</li>
-                        <li><strong>Güvenlik Artırma:</strong> Daha güvenli kilit sistemlerine geçiş için kilit değişimi önerilir</li>
-                    </ul>
+                <h2>Anahtar Kopyalama Seçeneği</h2>
+                <p>Anahtar kopyalamanın hangi durumlarda tercih edilmesi gerektiği:</p>
 
-                    <div class="blog-cta" style="background: #dc2626; color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
-                        <h3>Kilit ve Anahtar Hizmetleri</h3>
-                        <p>Güvenliğiniz için en doğru çözümü birlikte belirleyelim!</p>
-                        <a href="tel:+905432109949" style="background: white; color: #dc2626; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; display: inline-block; margin-top: 1rem; font-weight: bold;">0543 210 99 49</a>
-                    </div>
-                </div>
+                <h3>Anahtar Kopyalamanın Avantajları</h3>
+                <ul>
+                    <li>Düşük maliyet</li>
+                    <li>Hızlı işlem süresi</li>
+                    <li>Mevcut sistemi koruma</li>
+                    <li>Pratik çözüm</li>
+                </ul>
 
-                <div class="blog-navigation">
-                    <a href="../index.html#blog" class="blog-back">← Ana Sayfaya Dön</a>
+                <h3>Ne Zaman Anahtar Kopyalamak Yeterli?</h3>
+                <ul>
+                    <li>Yedek anahtar ihtiyacı</li>
+                    <li>Aile üyeleri için ek anahtar</li>
+                    <li>Güvenlik endişesi yoksa</li>
+                    <li>Kilit yeni ve kaliteliyse</li>
+                </ul>
+
+                <h2>Güvenlik Açısından Karşılaştırma</h2>
+                <p>Her iki seçeneğin güvenlik açısından değerlendirilmesi:</p>
+
+                <h3>Kilit Değiştirme - Güvenlik</h3>
+                <ul>
+                    <li>En yüksek güvenlik seviyesi</li>
+                    <li>Tüm eski anahtarlar geçersiz</li>
+                    <li>Yeni güvenlik teknolojileri</li>
+                    <li>Uzun vadeli güvenlik çözümü</li>
+                </ul>
+
+                <h3>Anahtar Kopyalama - Güvenlik</h3>
+                <ul>
+                    <li>Mevcut güvenlik seviyesi korunur</li>
+                    <li>Eski anahtarlar geçerliliğini sürdürür</li>
+                    <li>Kopyalama riski göz önünde bulundurulmalı</li>
+                    <li>Kısa vadeli çözüm</li>
+                </ul>
+
+                <h2>Maliyet Analizi</h2>
+                <p>Her iki seçeneğin maliyet açısından değerlendirilmesi:</p>
+
+                <h3>Kilit Değiştirme Maliyeti</h3>
+                <ul>
+                    <li>Yeni kilit malzeme bedeli</li>
+                    <li>İşçilik ücreti</li>
+                    <li>Kurulum süresi</li>
+                    <li>Uzun vadeli yatırım</li>
+                </ul>
+
+                <h3>Anahtar Kopyalama Maliyeti</h3>
+                <ul>
+                    <li>Sadece anahtar malzeme bedeli</li>
+                    <li>Minimal işçilik</li>
+                    <li>Hızlı teslim</li>
+                    <li>Kısa vadeli çözüm</li>
+                </ul>
+
+                <h2>Hangi Durumda Hangisi Tercih Edilmeli?</h2>
+                <p>Durum analizi ve doğru seçim rehberi:</p>
+
+                <h3>Kilit Değiştirme Gereken Durumlar</h3>
+                <ul>
+                    <li>Yeni ev sahibi olma</li>
+                    <li>Güvenlik endişesi yaşama</li>
+                    <li>Anahtar kaybetme</li>
+                    <li>Kilit eskimesi veya arızası</li>
+                    <li>Güvenlik seviyesini artırma isteği</li>
+                </ul>
+
+                <h3>Anahtar Kopyalama Yeterli Durumlar</h3>
+                <ul>
+                    <li>Sadece yedek anahtar ihtiyacı</li>
+                    <li>Güvenlik endişesi bulunmama</li>
+                    <li>Bütçe kısıtlaması</li>
+                    <li>Acil çözüm arayışı</li>
+                    <li>Geçici kullanım</li>
+                </ul>
+
+                <h2>Elazığ Çilingir Önerisi</h2>
+                <p>Profesyonel çilingir görüşü ve önerilerimiz:</p>
+
+                <p>Güvenlik önceliğinizse ve bütçeniz uygunsa kilit değiştirmeyi tercih edin. Sadece pratik bir çözüm arıyorsanız anahtar kopyalama yeterli olabilir. Her durumda profesyonel değerlendirme önemlidir.</p>
+
+                <h3>Karar Verme Kriterleri</h3>
+                <ul>
+                    <li>Güvenlik ihtiyacınızı değerlendirin</li>
+                    <li>Bütçenizi göz önünde bulundurun</li>
+                    <li>Aciliyet derecesini belirleyin</li>
+                    <li>Uzun vadeli planlarınızı düşünün</li>
+                    <li>Profesyonel görüş alın</li>
+                </ul>
+
+                <div class="blog-cta">
+                    <h3>Güvenlik Danışmanlığı</h3>
+                    <p>Size en uygun çözümü belirlemek için profesyonel danışmanlık alın!</p>
+                    <a href="tel:+905432109949" class="blog-cta-btn">0543 210 99 49</a>
                 </div>
             </div>
+
+            <div class="blog-comments">
+                <h3>Okuyucu Yorumları</h3>
+                
+                <div class="comment">
+                    <p>"Kilit değiştirmek mi anahtar kopyalamak mı diye çok kararsızdım. Bu yazı karar vermeme çok yardımcı oldu."</p>
+                    <div class="comment-author">- Canan G****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Maliyet karşılaştırması çok faydalı. Hangi durumda ne yapmam gerektiğini artık biliyorum."</p>
+                    <div class="comment-author">- Hüseyin M****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Güvenlik açısından hangi seçeneğin daha iyi olduğunu merak ediyordum. Artık net bilgiye sahibim."</p>
+                    <div class="comment-author">- Esra V****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Kilit değiştirme süreci hakkında detaylı bilgi almıştım. Çok bilgilendirici bir karşılaştırma."</p>
+                    <div class="comment-author">- Bora K****</div>
+                </div>
+            </div>
+
+                    <div class="blog-navigation">
+            <a href="../index.html" class="blog-back-btn">Ana Sayfaya Dön</a>
+            <a href="../blog.html" class="blog-back-btn">Blog Listesine Dön</a>
+        </div>
         </article>
     </main>
 
@@ -84,5 +350,42 @@
     </a>
 
     <button class="scroll-up-btn">↑</button>
+    
+    <!-- Ana sayfa ile aynı JavaScript functionality -->
+    <script>
+        // Ana sayfa navbar JavaScript ile birebir aynı
+        (function() {
+            'use strict';
+            
+            // DOM ready check
+            function ready(fn) {
+                if (document.readyState !== 'loading') {
+                    fn();
+                } else {
+                    document.addEventListener('DOMContentLoaded', fn);
+                }
+            }
+            
+            ready(function() {
+                // Mobile menu toggle - Ana sayfa ile aynı
+                const menuBtn = document.querySelector('.menu-btn');
+                const navLinks = document.querySelector('.nav-links');
+                
+                if (menuBtn && navLinks) {
+                    menuBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        navLinks.classList.toggle('active');
+                    });
+                    
+                    // Close menu on outside click
+                    document.addEventListener('click', (e) => {
+                        if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                            navLinks.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        })();
+    </script>
 </body>
 </html> 

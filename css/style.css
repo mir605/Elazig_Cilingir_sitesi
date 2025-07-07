@@ -1,14 +1,14 @@
 /* Font imports removed - using preload in HTML instead for better performance */
 
 :root {
-    --primary-color: #E53935; /* Kırmızı tonu */
-    --secondary-color: #3949AB; /* Koyu mavi */
+    --primary-color: #FF7043; /* Turuncu */
+    --secondary-color: #E53935; /* Kırmızı */
     --dark-color: #263238;   /* Koyu gri */
     --light-color: #ECEFF1;  /* Açık gri */
     --text-color: #37474F;
     --font-family-base: 'Inter', 'Roboto', 'Segoe UI', system-ui, -apple-system, sans-serif;
     --font-family-heading: 'Inter', 'Roboto', 'Segoe UI', system-ui, -apple-system, sans-serif;
-    --orange-accent: #FF7043;
+    --orange-accent: #FF8A65;
     --shadow-light: 0 2px 10px rgba(0,0,0,0.05);
     --shadow-medium: 0 4px 20px rgba(0,0,0,0.1);
     --shadow-heavy: 0 10px 30px rgba(0,0,0,0.15);
@@ -37,20 +37,20 @@ body {
         radial-gradient(circle at 40% 80%, rgba(220, 38, 38, 0.05) 0%, transparent 50%),
         url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.02'%3E%3Cpath d='M30 10c5.5 0 10 4.5 10 10s-4.5 10-10 10-10-4.5-10-10 4.5-10 10-10zm0 2c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     color: var(--text-color);
-    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    font-size: clamp(0.85rem, 2.2vw, 1rem);
     overflow-x: hidden;
 }
 
 .container {
-    max-width: min(1200px, 100% - var(--container-padding) * 2);
+    max-width: min(1400px, 100% - var(--container-padding) * 2);
     margin: 0 auto;
     padding: 0 var(--container-padding);
 }
 
 @media (max-width: 768px) {
     .container {
-        max-width: 85%;
-        padding: 0 2vw;
+        max-width: 95%;
+        padding: 0 1vw;
     }
 }
 
@@ -62,9 +62,9 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--dark-color);
 }
 
-h1 { font-size: clamp(2.5rem, 8vw, 4rem); }
-h2 { font-size: clamp(2rem, 6vw, 3.5rem); text-align: center; margin-bottom: 3rem; }
-h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+h1 { font-size: clamp(2rem, 6vw, 4rem); }
+h2 { font-size: clamp(1.6rem, 5vw, 3.5rem); text-align: center; margin-bottom: 3rem; }
+h3 { font-size: clamp(1.3rem, 3.5vw, 2.2rem); }
 
 a {
     text-decoration: none;
@@ -86,18 +86,17 @@ img {
     display: block;
 }
 
-/* Header */
+/* Header - Sabit üst bar tüm sayfalarda */
 header {
-    background: rgba(38, 50, 56, 0.95);
-    backdrop-filter: blur(10px);
-    color: var(--light-color);
-    padding: 1rem 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(135deg, #2c3e50, #1a1a2e) !important;
+    color: white !important;
+    padding: 15px 0 !important;
+    position: fixed !important;
+    width: 100% !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: none !important;
 }
 
 header.scrolled {
@@ -110,54 +109,67 @@ header nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
 }
 
-.logo-text {
-    font-family: var(--font-family-heading);
-    font-size: clamp(1.5rem, 4vw, 2rem);
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo, .logo-text {
+    font-size: 1.8rem;
     font-weight: 700;
-    color: var(--light-color);
+    background: linear-gradient(to right, #dc2626, #ea580c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    letter-spacing: 1px;
+}
+
+.logo-icon {
+    margin-right: 10px;
+    font-size: 2rem;
+    color: #dc2626;
 }
 
 .nav-links {
     display: flex;
-    gap: 2rem;
-    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.nav-links li a {
-    color: var(--light-color);
-    padding: 0.5rem 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border-radius: var(--border-radius);
-    font-size: clamp(0.875rem, 2vw, 1rem);
+.nav-links li {
+    margin-left: 35px;
 }
 
-.nav-links li a:hover,
-.nav-links li a:focus {
-    color: var(--orange-accent);
-    background: rgba(255,255,255,0.1);
+.nav-links a {
+    color: white !important;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: 4px;
+    transition: all 0.3s;
+    font-size: 1rem;
+    white-space: nowrap;
+    min-width: auto;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
 }
 
 .menu-btn {
     display: none;
-    cursor: pointer;
-    font-size: 1.5rem;
+    color: white;
     background: none;
     border: none;
-    color: var(--light-color);
-    padding: 0.5rem;
-    border-radius: var(--border-radius);
-    transition: background 0.3s ease;
-}
-
-.menu-btn:hover,
-.menu-btn:focus {
-    background: rgba(255,255,255,0.1);
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 /* Hero Section */
@@ -234,7 +246,7 @@ header nav {
 }
 
 #hero p {
-    font-size: clamp(1.125rem, 3vw, 1.5rem);
+    font-size: clamp(1rem, 2.8vw, 1.5rem);
     margin-bottom: 2rem;
     opacity: 0.95;
 }
@@ -426,6 +438,11 @@ header nav {
     line-height: 1.6;
     opacity: 0.9;
     font-weight: 600;
+}
+
+/* Services indicator hidden by default (desktop) */
+.services-indicator {
+    display: none;
 }
 
 /* Values Section */
@@ -805,12 +822,12 @@ section.visible {
 
     /* Optimize hero content for mobile */
     .hero-content {
-        padding: 0 1rem;
+        padding: 0 0.5rem;
         max-width: 100%;
     }
 
     .hero-text-dark {
-        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        font-size: clamp(0.85rem, 2.8vw, 1.05rem);
         line-height: 1.4;
     }
 
@@ -823,17 +840,69 @@ section.visible {
     }
 
     .services-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        display: flex !important;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 1rem;
+        padding: 1rem 0;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    
+    .services-grid::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+    
+    /* Services scroll indicators for mobile */
+    .services-indicator {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 1rem;
+    }
+    
+    .indicator-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #ddd;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .indicator-dot.active {
+        background-color: var(--primary-color);
+        transform: scale(1.2);
+    }
+    
+    .indicator-dot:hover {
+        background-color: var(--orange-accent);
     }
 
     /* Optimize service cards for mobile */
     .service-card {
-        padding: 1rem;
+        flex: 0 0 300px; /* Increased width for mobile cards */
+        padding: 1.2rem;
+        min-height: 300px;
+        scroll-snap-align: start;
     }
 
     .service-card img {
-        height: 150px;
+        height: 160px;
+    }
+    
+    .service-card h3 {
+        font-size: clamp(1rem, 3vw, 1.3rem);
+        margin-bottom: 0.8rem;
+    }
+    
+    .service-card p {
+        font-size: clamp(0.85rem, 2.5vw, 1rem);
+        line-height: 1.5;
     }
 
     /* Testimonials stacked */
@@ -878,20 +947,26 @@ section.visible {
 
     /* Optimize typography for mobile */
     h1 { 
-        font-size: clamp(1.8rem, 6vw, 2.5rem); 
+        font-size: clamp(1.6rem, 5vw, 2.2rem); 
         line-height: 1.2;
     }
     
     h2 { 
-        font-size: clamp(1.5rem, 5vw, 2rem); 
-        margin-bottom: 2rem;
+        font-size: clamp(1.3rem, 4vw, 1.8rem); 
+        margin-bottom: 1.5rem;
+    }
+    
+    h3 {
+        font-size: clamp(1.1rem, 3vw, 1.5rem);
+        margin-bottom: 1rem;
     }
 }
 
 @media (max-width: 480px) {
     /* Further mobile optimizations */
     .container {
-        padding: 0 1rem;
+        max-width: 98%;
+        padding: 0 0.5rem;
     }
 
     .service-card,
@@ -1016,13 +1091,14 @@ section.visible {
 
 /* Apple-style Blog Design */
 .blog-article {
+    padding-top: 80px; /* Header yüksekliği kadar padding */
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
     background: #fafafa;
     min-height: 100vh;
 }
 
 .blog-container {
-    max-width: 680px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 24px;
     background: white;
@@ -1039,9 +1115,10 @@ section.visible {
     font-size: 40px;
     font-weight: 700;
     line-height: 1.1;
-    color: #1d1d1f;
+    color: var(--primary-color);
     margin: 0 0 16px;
     letter-spacing: -0.5px;
+    text-align: center;
 }
 
 .blog-meta-info {
@@ -1077,25 +1154,27 @@ section.visible {
 }
 
 .blog-content h2 {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 700;
     line-height: 1.2;
-    color: #1d1d1f;
+    color: var(--primary-color);
     margin: 48px 0 16px;
     letter-spacing: -0.3px;
+    text-align: left;
 }
 
 .blog-content h3 {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 600;
     line-height: 1.3;
-    color: #1d1d1f;
+    color: var(--secondary-color);
     margin: 32px 0 12px;
     letter-spacing: -0.2px;
+    text-align: left;
 }
 
 .blog-content p {
-    font-size: 17px;
+    font-size: 19px;
     line-height: 1.65;
     color: #1d1d1f;
     margin: 0 0 24px;
@@ -1109,7 +1188,7 @@ section.visible {
 }
 
 .blog-content li {
-    font-size: 17px;
+    font-size: 19px;
     line-height: 1.65;
     color: #1d1d1f;
     margin: 8px 0;
@@ -1119,7 +1198,7 @@ section.visible {
 
 .blog-content li::before {
     content: "•";
-    color: #007aff;
+    color: var(--primary-color);
     font-weight: bold;
     position: absolute;
     left: 0;
@@ -1149,7 +1228,7 @@ section.visible {
 }
 
 .blog-cta-btn {
-    background: #007aff;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     color: white;
     padding: 12px 32px;
     border-radius: 22px;
@@ -1163,39 +1242,89 @@ section.visible {
 }
 
 .blog-cta-btn:hover {
-    background: #0056cc;
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
     transform: translateY(-1px);
 }
 
 .blog-navigation {
-    padding: 32px 0 48px;
-    border-top: 1px solid #f2f2f2;
+    padding: 60px 0 80px;
+    margin: 60px 0 40px;
+    border-top: 2px solid #f0f0f0;
+    border-bottom: 2px solid #f0f0f0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+}
+
+.blog-navigation::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 20px;
+    z-index: -1;
 }
 
 .blog-back-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    color: #007aff;
     text-decoration: none;
     font-weight: 500;
-    font-size: 17px;
-    transition: all 0.2s ease;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 6px;
+    min-width: 140px;
+    text-align: center;
 }
 
-.blog-back-btn:hover {
-    opacity: 0.7;
+/* Home button (Ana Sayfaya Dön) - Sol taraf */
+.blog-back-btn:first-child {
+    background: #e93935;
+    color: white;
+    border: 1px solid #e93935;
 }
 
-.blog-back-btn::before {
-    content: "←";
-    font-size: 18px;
+.blog-back-btn:first-child:hover {
+    background: #d32f2f;
+    border-color: #d32f2f;
+}
+
+.blog-back-btn:first-child::before {
+    content: "🏠";
+    font-size: 14px;
+}
+
+/* Blog List button (Blog Listesine Dön) - Sağ taraf */
+.blog-back-btn:last-child {
+    background: white;
+    color: #e93935;
+    border: 1px solid #e93935;
+}
+
+.blog-back-btn:last-child:hover {
+    background: #e93935;
+    color: white;
+}
+
+.blog-back-btn:last-child::before {
+    content: "📝";
+    font-size: 14px;
 }
 
 /* Mobile responsiveness for Apple style */
 @media (max-width: 768px) {
     .blog-container {
-        padding: 0 20px;
+        padding: 0 30px;
     }
     
     .blog-header {
@@ -1211,7 +1340,7 @@ section.visible {
     }
     
     .blog-content {
-        padding: 32px 0 48px;
+        padding: 32px 20px 48px;
     }
     
     .blog-content h2 {
@@ -1228,6 +1357,86 @@ section.visible {
     .blog-content li {
         font-size: 16px;
     }
+    
+    .blog-navigation {
+        padding: 40px 20px 50px;
+        margin: 40px 0 30px;
+        flex-direction: column;
+        gap: 20px;
+        border-radius: 15px;
+    }
+    
+    .blog-back-btn {
+        font-size: 14px;
+        padding: 12px 20px;
+        min-width: 120px;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+}
+
+/* Blog List Page Styles */
+.blog-page {
+    background: #fafafa;
+    padding-top: 80px; /* Header yüksekliği kadar padding */
+}
+
+#blog-list {
+    padding: 2rem 0 4rem;
+    background: #fafafa;
+}
+
+.blog-list-container {
+    margin-top: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* Blog Comments Section */
+.blog-comments {
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border: 1px solid #e5e5e7;
+    border-radius: 18px;
+    padding: 32px;
+    margin: 48px 0;
+}
+
+.blog-comments h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0 0 24px;
+    text-align: left;
+}
+
+.comment {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--primary-color);
+}
+
+.comment:last-child {
+    margin-bottom: 0;
+}
+
+.comment p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1d1d1f;
+    margin: 0 0 12px;
+    font-style: italic;
+}
+
+.comment-author {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-style: normal;
 }
 
 /* Print styles */

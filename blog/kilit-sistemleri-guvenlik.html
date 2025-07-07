@@ -4,22 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kilit Sistemleri ve Güvenlik Teknolojileri | Elazığ Çilingir</title>
-    <meta name="description" content="Modern kilit sistemleri ve güvenlik teknolojileri hakkında detaylı bilgiler.">
-    <link rel="stylesheet" href="../css/style.css">
+    <meta name="description" content="Modern kilit sistemleri ve güvenlik teknolojileri hakkında kapsamlı rehber. Elektronik kilitler, kartlı sistemler ve güvenlik önlemleri. Elazığ çilingir uzmanından profesyonel bilgiler.">
+    <link rel="stylesheet" href="../css/style.css?v=2.1">
+    
+    <!-- ANA SAYFA İLE BİREBİR AYNI NAVBAR -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Performance optimizations - Minified */
+        img{max-width:100%;height:auto;display:block}img.lazy{opacity:0;transition:opacity .3s}img.lazy.loaded{opacity:1}*{will-change:auto}.hero,.hero-content,.btn{will-change:transform}
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a1a2e) !important;
+            color: white !important;
+            padding: 15px 0 !important;
+            position: fixed !important;
+            width: 100% !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+            backdrop-filter: none !important;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #dc2626, #ea580c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin-left: 35px;
+        }
+        
+        .nav-links a {
+            color: white !important;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 1rem;
+            white-space: nowrap;
+            min-width: auto;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+        
+        .menu-btn {
+            display: none;
+            color: white;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+                max-width: 100%;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1a1a2e;
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .menu-btn {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+    </style>
 </head>
 <body class="blog-article">
     <header>
-        <div class="container">
-            <nav>
-                <a href="../index.html" class="logo-text">ELAZIĞ ÇİLİNGİR</a>
-                <ul class="nav-links">
-                    <li><a href="../index.html#services">Hizmetlerimiz</a></li>
-                    <li><a href="../index.html#about">Hakkımızda</a></li>
-                    <li><a href="../index.html#testimonials">Müşteri Yorumları</a></li>
-                    <li><a href="../index.html#contact">İletişim</a></li>
-                </ul>
-                <button class="menu-btn">☰</button>
-            </nav>
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-icon">🔑</span>
+                <span>ELAZIĞ ÇİLİNGİR & ANAHTARCI</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#services">Hizmetlerimiz</a></li>
+                <li><a href="../index.html#about">Hakkımızda</a></li>
+                <li><a href="../index.html">Ana Sayfa</a></li>
+                <li><a href="../index.html#testimonials">Yorumlar</a></li>
+                <li><a href="../index.html#contact">İletişim</a></li>
+            </ul>
+            <div class="menu-btn">☰</div>
         </div>
     </header>
 
@@ -27,78 +159,319 @@
         <article class="blog-container">
             <div class="blog-header">
                 <div class="blog-meta-info">
-                    <span class="blog-category-tag">Güvenlik</span>
-                    <span>12 Ocak 2025</span>
-                    <span>6 dk okuma</span>
+                    <span>5 Mart 2025</span>
+                    <span>7 dk okuma</span>
                 </div>
                 <h1 class="blog-title">Kilit Sistemleri ve Güvenlik Teknolojileri</h1>
-                <p class="blog-lead">Modern kilit sistemleri ve güvenlik teknolojilerinin detaylı incelemesi. Ev ve iş yerleriniz için en uygun seçenekler.</p>
+                <p class="blog-lead">Modern kilit sistemleri, elektronik güvenlik teknolojileri ve kartlı erişim sistemleri hakkında kapsamlı rehber. Elazığ çilingir uzmanından profesyonel güvenlik çözümleri.</p>
             </div>
 
             <div class="blog-content">
-                <p>Günümüzde güvenlik ihtiyaçları artık sadece geleneksel kilitlerle karşılanamaz. Modern teknolojiler sayesinde daha gelişmiş ve güvenli sistemler mevcuttur.</p>
+                <p><strong>Kilit sistemleri</strong>, ev ve iş yerlerinin güvenliğinde temel rol oynar. <strong>Elazığ çilingir</strong> olarak 20 yılı aşkın deneyimimizle, geleneksel mekanik kilitlerden günümüzün akıllı güvenlik sistemlerine kadar geniş bir yelpazede hizmet vermekteyiz. <strong>Güvenlik teknolojileri</strong> hızla gelişirken, doğru kilit seçimi yapmak her zamankinden daha kritik hale gelmiştir. <strong>Elazığ anahtarcı</strong> hizmetlerimizde en çok danışmanlık verdiğimiz konu olan kilit sistemleri ve güvenlik teknolojilerini detayıyla inceliyoruz.</p>
 
-                <h2>Geleneksel Kilit Sistemleri</h2>
-                <p>Temel kilit türleri ve özellikleri:</p>
+                <h2>Kilit Sistemlerinin Tarihsel Gelişimi</h2>
+                <p><strong>Kilit teknolojisinin</strong> gelişimi, insanlığın güvenlik ihtiyaçlarıyla paralel olarak ilerleyerek günümüze kadar gelmiştir:</p>
+
+                <h3>Antik Dönem Kilit Sistemleri (M.Ö. 4000-500)</h3>
+                <ul>
+                    <li><strong>Ahşap mandal sistemleri</strong> - İlk mekanik güvenlik çözümleri</li>
+                    <li><strong>Mısır pin kilitleri</strong> - Çivi prensibi ile çalışan sistemler</li>
+                    <li><strong>Roma warded kilitleri</strong> - Engel tabanlı koruma mekanizması</li>
+                    <li><strong>El işçiliği ağırlıklı</strong> - Tek tek özel üretim</li>
+                </ul>
+
+                <h3>Endüstriyel Dönem (1700-1950)</h3>
+                <ul>
+                    <li><strong>Yale silindir kilidi</strong> - Modern pin kilit sisteminin temeli</li>
+                    <li><strong>Seri üretim başlangıcı</strong> - Standartlaşmış kilit üretimi</li>
+                    <li><strong>Çelik malzeme kullanımı</strong> - Dayanıklılık artışı</li>
+                    <li><strong>Karmaşık anahtar sistemleri</strong> - Güvenlik seviyesi yükseltme</li>
+                </ul>
+
+                <h3>Modern Elektronik Çağ (1950-Günümüz)</h3>
+                <ul>
+                    <li><strong>Elektronik kilit sistemleri</strong> - Elektriksel kontrol mekanizmaları</li>
+                    <li><strong>Kartlı erişim sistemleri</strong> - Manyetik ve RFID teknolojileri</li>
+                    <li><strong>Biometrik güvenlik</strong> - Parmak izi ve yüz tanıma sistemleri</li>
+                    <li><strong>Akıllı ev entegrasyonu</strong> - IoT ve mobil uygulama kontrolü</li>
+                </ul>
+
+                <h2>Modern Kilit Türleri ve Özellikleri</h2>
+                <p><strong>Günümüz kilit sistemleri</strong> farklı teknolojiler ve güvenlik seviyeleri sunar:</p>
+
+                <h3>1. Mekanik Kilit Sistemleri</h3>
+                <p><strong>Geleneksel mekanik kilitler</strong> hala güvenlik sistemlerinin temelini oluşturur:</p>
+
+                <h4>Silindir Kilit Sistemleri</h4>
+                <ul>
+                    <li><strong>Euro profil silindirler</strong> - Avrupa standardı güvenlik</li>
+                    <li><strong>Amerikan silindir</strong> - Yüksek güvenlik seviyesi</li>
+                    <li><strong>İngiliz silindir</strong> - Geleneksel tasarım</li>
+                    <li><strong>Çok noktalı kilit sistemi</strong> - Birden fazla kilitleme noktası</li>
+                </ul>
+
+                <h4>Güvenlik Özellikleri</h4>
+                <ul>
+                    <li><strong>Anti-drill koruması</strong> - Delme saldırılarına karşı koruma</li>
+                    <li><strong>Anti-pick sistemi</strong> - Kilit açma saldırılarını engelleme</li>
+                    <li><strong>Snap koruması</strong> - Kırma saldırılarına direnç</li>
+                    <li><strong>Bump key koruması</strong> - Bump anahtar saldırılarını önleme</li>
+                </ul>
+
+                <h3>2. Elektronik Kilit Sistemleri</h3>
+                <p><strong>Elektronik kilitler</strong> modern güvenlik çözümlerinin merkezinde yer alır:</p>
+
+                <h4>Şifreli Kilit Sistemleri</h4>
+                <ul>
+                    <li><strong>Dijital tuş takım</strong> - Sayı kombinasyonu ile erişim</li>
+                    <li><strong>Değişken şifre sistemi</strong> - Dinamik kod üretimi</li>
+                    <li><strong>Çoklu kullanıcı desteği</strong> - Farklı şifre seviyeleri</li>
+                    <li><strong>Geçici erişim kodları</strong> - Zaman sınırlı girişler</li>
+                </ul>
+
+                <h4>Kartlı Erişim Sistemleri</h4>
+                <ul>
+                    <li><strong>RFID kart sistemleri</strong> - Radyo frekansı tanımlama</li>
+                    <li><strong>Manyetik kart okuyucuları</strong> - Manyetik şerit teknolojisi</li>
+                    <li><strong>Proximity kartlar</strong> - Yakınlık sensörlü erişim</li>
+                    <li><strong>Smart card teknolojisi</strong> - Çip tabanlı güvenlik</li>
+                </ul>
+
+                <h3>3. Biometrik Güvenlik Sistemleri</h3>
+                <p><strong>Biometrik kilitler</strong> kişisel özellikler kullanarak en yüksek güvenlik seviyesi sunar:</p>
+
+                <h4>Parmak İzi Tanıma Sistemleri</h4>
+                <ul>
+                    <li><strong>Optik sensör teknolojisi</strong> - Işık tabanlı tarama</li>
+                    <li><strong>Kapasitif sensörler</strong> - Elektriksel alan ölçümü</li>
+                    <li><strong>Çoklu parmak kayıt</strong> - Birden fazla kullanıcı desteği</li>
+                    <li><strong>Sahte parmak koruması</strong> - Canlılık tespiti</li>
+                </ul>
+
+                <h4>Diğer Biometrik Teknolojiler</h4>
+                <ul>
+                    <li><strong>Retina tarama</strong> - Göz arka planı analizi</li>
+                    <li><strong>Yüz tanıma</strong> - Facial recognition teknolojisi</li>
+                    <li><strong>Ses tanıma</strong> - Vokal kimlik doğrulama</li>
+                    <li><strong>El geometrisi</strong> - El şekli ve boyut ölçümü</li>
+                </ul>
+
+                <h2>Akıllı Kilit ve IoT Entegrasyonu</h2>
+                <p><strong>Akıllı kilit sistemleri</strong> modern yaşamın vazgeçilmez parçası haline gelmiştir:</p>
                 
-                <h3>Silindir Kilitler</h3>
+                <h3>Akıllı Ev Entegrasyonu</h3>
                 <ul>
-                    <li>En yaygın kullanılan kilit türü</li>
-                    <li>Kolay değiştirilebilir</li>
-                    <li>Çeşitli güvenlik seviyeleri</li>
-                    <li>Uygun maliyetli</li>
+                    <li><strong>WiFi bağlantılı kilitler</strong> - İnternet üzerinden uzaktan kontrol</li>
+                    <li><strong>Bluetooth düşük enerji</strong> - Yakın mesafe kontrolü</li>
+                    <li><strong>Zigbee/Z-Wave protokolleri</strong> - Mesh ağ teknolojileri</li>
+                    <li><strong>Voice assistant entegrasyonu</strong> - Sesli komut kontrolü</li>
                 </ul>
 
-                <h3>Çok Noktalı Kilit Sistemleri</h3>
+                <h3>Mobil Uygulama Özellikleri</h3>
                 <ul>
-                    <li>Yüksek güvenlik sağlar</li>
-                    <li>Çelik kapılar için ideal</li>
-                    <li>Birden fazla kilitleme noktası</li>
-                    <li>Zorla açılmaya karşı dirençli</li>
+                    <li><strong>Uzaktan kilit kontrolü</strong> - Her yerden erişim</li>
+                    <li><strong>Erişim günlüğü</strong> - Giriş-çıkış kayıtları</li>
+                    <li><strong>Misafir erişimi</strong> - Geçici kod paylaşımı</li>
+                    <li><strong>Güvenlik uyarıları</strong> - Anlık bildirimler</li>
                 </ul>
 
-                <h2>Akıllı Kilit Teknolojileri</h2>
-                <p>Teknolojinin getirdiği yenilikçi çözümler:</p>
-
-                <h3>Elektronik Kilitler</h3>
+                <h3>Güvenlik ve Gizlilik</h3>
                 <ul>
-                    <li>Şifreli giriş sistemleri</li>
-                    <li>Kartlı erişim kontrolü</li>
-                    <li>Biyometrik tanıma</li>
-                    <li>Uzaktan kontrol imkanı</li>
+                    <li><strong>End-to-end şifreleme</strong> - Uçtan uca güvenlik</li>
+                    <li><strong>İki faktörlü doğrulama</strong> - Çift katmanlı güvenlik</li>
+                    <li><strong>Yerel veri saklama</strong> - Gizlilik koruması</li>
+                    <li><strong>Düzenli güvenlik güncellemeleri</strong> - Sürekli iyileştirme</li>
                 </ul>
 
-                <h3>Smart Lock Sistemleri</h3>
+                <h2>Elazığ'da Kilit Güvenlik Hizmetleri</h2>
+                <p><strong>Elazığ çilingir</strong> olarak sunduğumuz kapsamlı kilit güvenlik çözümleri:</p>
+
+                <h3>Kilit Kurulum ve Montaj Hizmetleri</h3>
                 <ul>
-                    <li>Akıllı telefon entegrasyonu</li>
-                    <li>Sesli komut desteği</li>
-                    <li>Otomatik kilitleme</li>
-                    <li>Erişim log kaydı</li>
+                    <li><strong>Mekanik kilit kurulumu</strong> - Geleneksel kilit sistemleri</li>
+                    <li><strong>Elektronik kilit montajı</strong> - Dijital güvenlik sistemleri</li>
+                    <li><strong>Akıllı kilit kurulumu</strong> - IoT entegrasyonlu çözümler</li>
+                    <li><strong>Çok noktalı kilit sistemi</strong> - Yüksek güvenlik montajı</li>
                 </ul>
 
-                <h2>Güvenlik Seviyesi Seçimi</h2>
-                <p>İhtiyacınıza göre doğru güvenlik seviyesini belirleyin:</p>
-
+                <h3>Güvenlik Danışmanlığı</h3>
                 <ul>
-                    <li>Konut alanları için standart güvenlik</li>
-                    <li>İş yerleri için orta seviye güvenlik</li>
-                    <li>Kritik alanlar için yüksek güvenlik</li>
-                    <li>Özel tesisler için maksimum güvenlik</li>
+                    <li><strong>Güvenlik risk analizi</strong> - Mevcut durum değerlendirmesi</li>
+                    <li><strong>Kilit sistemi önerisi</strong> - İhtiyaca özel çözümler</li>
+                    <li><strong>Güvenlik protokol oluşturma</strong> - Kullanım kılavuzları</li>
+                    <li><strong>Periyodik güvenlik kontrolü</strong> - Düzenli inceleme hizmeti</li>
                 </ul>
 
-                <h2>Profesyonel Montaj ve Bakım</h2>
-                <p>Kilit sistemlerinin etkin çalışması için profesyonel hizmet alınması önemlidir. Yanlış montaj güvenlik açıklarına yol açabilir.</p>
+                <h3>Bakım ve Onarım Hizmetleri</h3>
+                <ul>
+                    <li><strong>Kilit tamiri</strong> - Arızalı sistemlerin onarımı</li>
+                    <li><strong>Güvenlik güncellemeleri</strong> - Sistem iyileştirmeleri</li>
+                    <li><strong>Yedek parça değişimi</strong> - Orijinal parça garantisi</li>
+                    <li><strong>Acil müdahale</strong> - 7/24 acil durum hizmeti</li>
+                </ul>
+
+                <h2>Güvenlik Seviyelerine Göre Kilit Seçimi</h2>
+                <p>Farklı güvenlik ihtiyaçları için uygun kilit sistemi seçimi:</p>
+
+                <h3>Düşük Risk Alanları</h3>
+                <ul>
+                    <li><strong>Standart silindir kilitler</strong> - Temel güvenlik</li>
+                    <li><strong>Basit elektronik kilitler</strong> - Şifreli erişim</li>
+                    <li><strong>Maliyet odaklı çözümler</strong> - Ekonomik seçenekler</li>
+                    <li><strong>Kolay kullanım</strong> - Basit işletim</li>
+                </ul>
+
+                <h3>Orta Risk Alanları</h3>
+                <ul>
+                    <li><strong>Güvenlik silindiri</strong> - Anti-drill koruması</li>
+                    <li><strong>Kartlı erişim sistemleri</strong> - Kullanıcı yönetimi</li>
+                    <li><strong>Çok noktalı kilit</strong> - Artırılmış güvenlik</li>
+                    <li><strong>Erişim kayıt sistemi</strong> - Giriş-çıkış kontrolü</li>
+                </ul>
+
+                <h3>Yüksek Risk Alanları</h3>
+                <ul>
+                    <li><strong>Biometrik sistemler</strong> - Kişisel tanımlama</li>
+                    <li><strong>Çoklu doğrulama</strong> - Birden fazla güvenlik katmanı</li>
+                    <li><strong>Zırhlı kapı kilitleri</strong> - Maksimum fiziksel koruma</li>
+                    <li><strong>Alarm entegrasyonu</strong> - Güvenlik sistemi bağlantısı</li>
+                </ul>
+
+                <h2>Kilit Güvenlik Saldırıları ve Korunma Yöntemleri</h2>
+                <p>Modern güvenlik tehditlerine karşı etkili koruma stratejileri:</p>
+
+                <h3>Fiziksel Saldırı Türleri</h3>
+                <ul>
+                    <li><strong>Lock picking</strong> - Kilit açma teknikleri</li>
+                    <li><strong>Bump key saldırıları</strong> - Özel anahtarlarla açma</li>
+                    <li><strong>Drilling saldırıları</strong> - Delme ile kilit tahrip etme</li>
+                    <li><strong>Snapping</strong> - Silindir kırma teknikleri</li>
+                </ul>
+
+                <h3>Korunma Yöntemleri</h3>
+                <ul>
+                    <li><strong>Anti-pick pin sistemi</strong> - Özel pin tasarımları</li>
+                    <li><strong>Sertleştirilmiş çelik</strong> - Delme direnci</li>
+                    <li><strong>Snap korumalı silindirler</strong> - Kırılma önleme</li>
+                    <li><strong>Görünür güvenlik önlemleri</strong> - Caydırıcı etkiler</li>
+                </ul>
+
+                <h3>Elektronik Güvenlik Tehditleri</h3>
+                <ul>
+                    <li><strong>Signal jamming</strong> - Sinyal karıştırma saldırıları</li>
+                    <li><strong>Replay attacks</strong> - Sinyal tekrarı saldırıları</li>
+                    <li><strong>Brute force</strong> - Şifre deneme saldırıları</li>
+                    <li><strong>Social engineering</strong> - Sosyal mühendislik</li>
+                </ul>
+
+                <h2>Kilit Bakım ve Uzun Ömür Stratejileri</h2>
+                <p>Kilit sistemlerinin uzun ömürlü olması için önemli bakım önerileri:</p>
+
+                <h3>Düzenli Bakım İşlemleri</h3>
+                <ul>
+                    <li><strong>Mekanik parça yağlama</strong> - 6 ayda bir bakım</li>
+                    <li><strong>Elektronik test</strong> - Pil ve devre kontrolü</li>
+                    <li><strong>Temizlik işlemleri</strong> - Toz ve kir temizliği</li>
+                    <li><strong>Ayar kontrolleri</strong> - Hassasiyet ayarlamaları</li>
+                </ul>
+
+                <h3>Çevresel Faktörler</h3>
+                <ul>
+                    <li><strong>Nem koruması</strong> - Su geçirmez önlemler</li>
+                    <li><strong>Sıcaklık kontrolü</strong> - Aşırı sıcak/soğuk koruması</li>
+                    <li><strong>Toz koruması</strong> - Hava filtreleme</li>
+                    <li><strong>UV koruması</strong> - Güneş ışığı etkilerine karşı</li>
+                </ul>
+
+                <h3>Yazılım Güncellemeleri</h3>
+                <ul>
+                    <li><strong>Firmware güncellemeleri</strong> - Sistem iyileştirmeleri</li>
+                    <li><strong>Güvenlik yamaları</strong> - Zafiyet gidermeler</li>
+                    <li><strong>Yeni özellik ekleme</strong> - Fonksiyon genişletme</li>
+                    <li><strong>Uyumluluk güncellemeleri</strong> - Cihaz entegrasyonu</li>
+                </ul>
+
+                <h2>Gelecek Kilit Teknolojileri</h2>
+                <p>Kilit güvenlik teknolojilerinin gelecekteki gelişim yönleri:</p>
+
+                <h3>Yapay Zeka Entegrasyonu</h3>
+                <ul>
+                    <li><strong>Davranış analizi</strong> - Kullanım paternlerini öğrenme</li>
+                    <li><strong>Anomali tespiti</strong> - Anormal erişim uyarıları</li>
+                    <li><strong>Prediktif bakım</strong> - Arıza öncesi uyarı sistemi</li>
+                    <li><strong>Otomatik optimizasyon</strong> - Kendini iyileştiren sistemler</li>
+                </ul>
+
+                <h3>Blockchain Güvenliği</h3>
+                <ul>
+                    <li><strong>Dağıtık erişim kontrolü</strong> - Merkezi olmayan güvenlik</li>
+                    <li><strong>Değiştirilemez erişim kayıtları</strong> - Blockchain tabanlı log</li>
+                    <li><strong>Smart contract entegrasyonu</strong> - Otomatik izin yönetimi</li>
+                    <li><strong>Kripto-güvenlik</strong> - Matematiksel güvenlik protokolleri</li>
+                </ul>
+
+                <h3>Quantum Güvenlik Hazırlığı</h3>
+                <ul>
+                    <li><strong>Quantum-resistant algoritma</strong> - Kuantum bilgisayar koruması</li>
+                    <li><strong>Gelişmiş şifreleme</strong> - Post-quantum cryptography</li>
+                    <li><strong>Multi-layer güvenlik</strong> - Çok katmanlı koruma</li>
+                    <li><strong>Adaptive security</strong> - Uyarlanabilir güvenlik sistemleri</li>
+                </ul>
+
+                <h2>Sık Sorulan Sorular</h2>
+                <p>Kilit sistemleri konusunda en çok merak edilen konular:</p>
+
+                <h3>Teknik Sorular</h3>
+                <ul>
+                    <li><strong>Hangi kilit sistemi en güvenli?</strong> - İhtiyaca göre biometrik veya çoklu doğrulama</li>
+                    <li><strong>Elektronik kilit pili ne kadar dayanır?</strong> - Ortalama 1-2 yıl</li>
+                    <li><strong>Akıllı kilit güvenli mi?</strong> - Doğru kullanıldığında geleneksel kilitlerden güvenli</li>
+                    <li><strong>Silindir kilit değişimi ne kadar sürer?</strong> - 15-30 dakika arası</li>
+                </ul>
+
+                <h3>Güvenlik Soruları</h3>
+                <ul>
+                    <li><strong>Bump key saldırısından nasıl korunurum?</strong> - Anti-bump silindir kullanarak</li>
+                    <li><strong>Elektronik kilit hack'lenebilir mi?</strong> - Kaliteli sistemlerde çok düşük risk</li>
+                    <li><strong>Çok noktalı kilit gerekli mi?</strong> - Yüksek güvenlik gereken yerlerde evet</li>
+                    <li><strong>Biometrik sistem sahte parmakla açılır mı?</strong> - Modern sistemler canlılık tespiti yapar</li>
+                </ul>
 
                 <div class="blog-cta">
-                    <h3>Güvenlik Sistemi Danışmanlığı</h3>
-                    <p>Size en uygun kilit sistemini belirlemek için uzman desteği alın!</p>
+                    <h3>Profesyonel Kilit Güvenlik Hizmetleri</h3>
+                    <p>Ev ve iş yerleriniz için en uygun kilit sistemi seçimi, kurulum ve bakım hizmetleri. Elazığ çilingir uzmanından güvenlik danışmanlığı alın!</p>
                     <a href="tel:+905432109949" class="blog-cta-btn">0543 210 99 49</a>
                 </div>
             </div>
 
-            <div class="blog-navigation">
-                <a href="../index.html" class="blog-back-btn">Ana Sayfaya Dön</a>
+            <div class="blog-comments">
+                <h3>Okuyucu Yorumları</h3>
+                
+                <div class="comment">
+                    <p>"Kilit sistemleri hakkında bu kadar detaylı bilgi beklemiyordum. Evim için hangi kilit sistemini seçeceğim konusunda artık kararlıyım."</p>
+                    <div class="comment-author">- Ahmet D****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Biometrik sistemler hakkındaki bilgiler çok faydalıydı. İş yerim için biometrik kilit düşünüyordum, artık daha bilinçliyim."</p>
+                    <div class="comment-author">- Sevgi K****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Güvenlik saldırıları bölümü çok öğretici. Hangi tehditlere karşı nasıl önlem alacağımı öğrendim."</p>
+                    <div class="comment-author">- Emre Y****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Gelecek teknolojiler kısmı ilginçti. Yapay zeka entegrasyonlu kilitler gerçekten gelecek vadediyor."</p>
+                    <div class="comment-author">- Zeynep M****</div>
+                </div>
             </div>
+
+                    <div class="blog-navigation">
+            <a href="../index.html" class="blog-back-btn">Ana Sayfaya Dön</a>
+            <a href="../blog.html" class="blog-back-btn">Blog Listesine Dön</a>
+        </div>
         </article>
     </main>
 
@@ -117,5 +490,55 @@
     </a>
 
     <button class="scroll-up-btn">↑</button>
+    
+    <script>
+        (function() {
+            'use strict';
+            
+            function ready(fn) {
+                if (document.readyState !== 'loading') {
+                    fn();
+                } else {
+                    document.addEventListener('DOMContentLoaded', fn);
+                }
+            }
+            
+            ready(function() {
+                const menuBtn = document.querySelector('.menu-btn');
+                const navLinks = document.querySelector('.nav-links');
+                
+                if (menuBtn && navLinks) {
+                    menuBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        navLinks.classList.toggle('active');
+                    });
+                    
+                    document.addEventListener('click', (e) => {
+                        if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                            navLinks.classList.remove('active');
+                        }
+                    });
+                }
+                
+                const scrollUpBtn = document.querySelector('.scroll-up-btn');
+                if (scrollUpBtn) {
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 300) {
+                            scrollUpBtn.classList.add('show');
+                        } else {
+                            scrollUpBtn.classList.remove('show');
+                        }
+                    });
+                    
+                    scrollUpBtn.addEventListener('click', () => {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    });
+                }
+            });
+        })();
+    </script>
 </body>
 </html> 

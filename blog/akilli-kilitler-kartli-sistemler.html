@@ -3,697 +3,550 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akıllı Kilitler ve Kartlı Sistemler: Geleceğin Güvenliği | Elazığ Çilingir</title>
-    <meta name="description" content="Akıllı kilitler ve kartlı sistemler hakkında detaylı bilgiler. Avantajları, dezavantajları ve güvenlik özellikleri.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Akıllı Kilitler ve Kartlı Sistemler | Elazığ Çilingir</title>
+    <meta name="description" content="Akıllı kilit sistemleri, kartlı erişim kontrolleri ve modern güvenlik teknolojileri. RFID kartlar, biometrik sistemler ve akıllı ev entegrasyonu. Elazığ çilingir uzmanından kapsamlı rehber.">
+    <link rel="stylesheet" href="../css/style.css?v=2.1">
+    
+    <!-- ANA SAYFA İLE BİREBİR AYNI NAVBAR -->
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        :root {
-            --primary: #0d4c92;
-            --secondary: #1e88e5;
-            --accent: #ff6b00;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --border: #e0e0e0;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-
+        
+        /* Performance optimizations - Minified */
+        img{max-width:100%;height:auto;display:block}img.lazy{opacity:0;transition:opacity .3s}img.lazy.loaded{opacity:1}*{will-change:auto}.hero,.hero-content,.btn{will-change:transform}
+        
         body {
-            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
             line-height: 1.6;
-            color: var(--dark);
-            background-color: #f5f7fa;
         }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
+        
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
-
-        /* Header Stili */
+        
         header {
-            background-color: white;
-            box-shadow: var(--shadow);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
+            background: linear-gradient(135deg, #2c3e50, #1a1a2e) !important;
+            color: white !important;
+            padding: 15px 0 !important;
+            position: fixed !important;
+            width: 100% !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+            backdrop-filter: none !important;
         }
-
-        nav {
+        
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
         }
-
-        .logo-text {
-            font-family: 'Poppins', sans-serif;
+        
+        .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
+            background: linear-gradient(to right, #dc2626, #ea580c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
         }
-
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
-
+        
         .nav-links li {
-            margin-left: 30px;
+            margin-left: 35px;
         }
-
+        
         .nav-links a {
+            color: white !important;
             text-decoration: none;
-            color: var(--dark);
             font-weight: 500;
-            position: relative;
-            transition: var(--transition);
+            padding: 12px 24px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 1rem;
+            white-space: nowrap;
+            min-width: auto;
         }
-
+        
         .nav-links a:hover {
-            color: var(--accent);
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
         }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
+        
         .menu-btn {
             display: none;
+            color: white;
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
         }
-
-        /* Blog Hero Section */
-        .blog-hero {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 140px 0 80px;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .blog-hero h1 {
-            font-size: 2.8rem;
-            color: white;
-            margin-bottom: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .blog-meta {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 20px;
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        .blog-meta i {
-            margin-right: 5px;
-        }
-
-        .blog-lead {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        /* Blog Content */
-        .blog-content {
-            background: white;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            padding: 50px;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .blog-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            border-radius: 0 12px 12px 0;
-        }
-
-        .blog-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border);
-            position: relative;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 80px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        ul {
-            list-style: none;
-            margin: 1.5rem 0;
-        }
-
-        ul li {
-            margin-bottom: 1rem;
-            padding-left: 30px;
-            position: relative;
-            font-size: 1.1rem;
-        }
-
-        ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        ul li strong {
-            color: var(--primary);
-        }
-
-        .feature-image {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #0d4c92, #1e88e5);
-            border-radius: 12px;
-            margin: 40px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-
-        .icon-box {
-            display: flex;
-            align-items: center;
-            background: var(--light);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 3px solid var(--accent);
-        }
-
-        .icon-box i {
-            font-size: 1.8rem;
-            color: var(--accent);
-            margin-right: 15px;
-            min-width: 40px;
-        }
-
-        .icon-box-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-        }
-
-        .icon-box-content p {
-            margin-bottom: 0;
-            color: var(--gray);
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .comparison-table th, .comparison-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .comparison-table th {
-            background-color: var(--primary);
-            color: white;
-            font-weight: 500;
-        }
-
-        .comparison-table tr:nth-child(even) {
-            background-color: var(--light);
-        }
-
-        .comparison-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* CTA Stili */
-        .blog-cta {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            margin: 3rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .blog-cta::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .blog-cta::after {
-            content: '';
-            position: absolute;
-            bottom: -30px;
-            left: -30px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .blog-cta h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: white;
-            position: relative;
-            z-index: 2;
-        }
-
-        .blog-cta p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: var(--transition);
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
-        }
-
-        .cta-btn:hover {
-            background-color: #e65a00;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
-        }
-
-        /* Blog Navigation */
-        .blog-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 60px;
-        }
-
-        .blog-back {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .blog-back:hover {
-            color: var(--accent);
-        }
-
-        .blog-back i {
-            margin-right: 8px;
-        }
-
-        /* Footer Stili */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-        }
-
-        .copyright {
-            font-size: 0.95rem;
-            opacity: 0.7;
-        }
-
-        /* Floating Buttons */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #25d366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 999;
-            transition: var(--transition);
-        }
-
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .whatsapp-btn svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
-        }
-
-        .scroll-up-btn {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow);
-            opacity: 0;
-            transition: var(--transition);
-            z-index: 998;
-        }
-
-        .scroll-up-btn.visible {
-            opacity: 1;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .blog-hero h1 {
-                font-size: 2.4rem;
-            }
-            
-            .blog-content {
-                padding: 40px 30px;
-            }
-            
-            .feature-image {
-                height: 300px;
-            }
-        }
-
+        
         @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+                max-width: 100%;
+            }
+            
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #1a1a2e;
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
             }
             
             .menu-btn {
                 display: block;
-            }
-            
-            .blog-hero {
-                padding: 120px 0 60px;
-            }
-            
-            .blog-hero h1 {
-                font-size: 2rem;
-            }
-            
-            .blog-lead {
-                font-size: 1.1rem;
-            }
-            
-            .blog-content {
-                padding: 30px 20px;
-            }
-            
-            h2 {
-                font-size: 1.6rem;
-            }
-            
-            .feature-image {
-                height: 250px;
-                font-size: 1.2rem;
-            }
-            
-            .blog-cta {
-                padding: 2rem 1.5rem;
-            }
-            
-            .blog-cta h3 {
                 font-size: 1.5rem;
-            }
-            
-            .blog-cta p {
-                font-size: 1rem;
-            }
-            
-            .cta-btn {
-                padding: 12px 25px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .logo-text {
-                font-size: 1.5rem;
-            }
-            
-            .blog-hero {
-                padding: 100px 0 50px;
-            }
-            
-            .blog-hero h1 {
-                font-size: 1.7rem;
-            }
-            
-            .blog-meta {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .feature-image {
-                height: 200px;
+                cursor: pointer;
             }
         }
     </style>
 </head>
-<body>
+<body class="blog-article">
     <header>
-        <div class="container">
-            <nav>
-                <a href="../index.html" class="logo-text">ELAZIĞ ÇİLİNGİR</a>
-                <ul class="nav-links">
-                    <li><a href="../index.html#services">Hizmetlerimiz</a></li>
-                    <li><a href="../index.html#about">Hakkımızda</a></li>
-                    <li><a href="../index.html#blog">Blog</a></li>
-                    <li><a href="../index.html#testimonials">Müşteri Yorumları</a></li>
-                    <li><a href="../index.html#contact">İletişim</a></li>
-                </ul>
-                <button class="menu-btn">☰</button>
-            </nav>
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-icon">🔑</span>
+                <span>ELAZIĞ ÇİLİNGİR & ANAHTARCI</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#services">Hizmetlerimiz</a></li>
+                <li><a href="../index.html#about">Hakkımızda</a></li>
+                <li><a href="../index.html">Ana Sayfa</a></li>
+                <li><a href="../index.html#testimonials">Yorumlar</a></li>
+                <li><a href="../index.html#contact">İletişim</a></li>
+            </ul>
+            <div class="menu-btn">☰</div>
         </div>
     </header>
 
-    <section class="blog-hero">
-        <div class="container">
-            <h1>Akıllı Kilitler ve Kartlı Sistemler: Geleceğin Güvenliği</h1>
-            <p class="blog-lead">Günümüzde güvenlik teknolojileri hızla gelişiyor ve klasik mekanik kilit sistemlerinin yerini akıllı kilitler ve kartlı geçiş sistemleri alıyor. Bu yeni nesil güvenlik çözümleri, hem konfor hem de yüksek güvenlik sağlama amacıyla tasarlanmıştır.</p>
-            <div class="blog-meta">
-                <span><i class="far fa-calendar"></i> 30 Haziran 2025</span>
-                <span><i class="far fa-clock"></i> 5 dakika okuma</span>
-                <span><i class="far fa-folder"></i> Güvenlik Teknolojileri</span>
+    <main style="padding-top: 100px;">
+        <article class="blog-container">
+            <div class="blog-header">
+                <div class="blog-meta-info">
+                    <span>8 Mart 2025</span>
+                    <span>8 dk okuma</span>
+                </div>
+                <h1 class="blog-title">Akıllı Kilitler ve Kartlı Sistemler Rehberi</h1>
+                <p class="blog-lead">Modern akıllı kilit teknolojileri, RFID kartlı erişim sistemleri ve biometrik güvenlik çözümleri. Elazığ çilingir uzmanından kapsamlı akıllı kilit rehberi ve kurulum hizmetleri.</p>
             </div>
+
+            <div class="blog-content">
+                <p><strong>Akıllı kilit sistemleri</strong>, günümüzün en gelişmiş güvenlik teknolojilerini ev ve iş yerlerinize getiriyor. <strong>Elazığ çilingir</strong> olarak 20 yılı aşkın deneyimimizle, geleneksel mekanik kilitlerden son teknoloji akıllı kilit sistemlerine kadar geniş bir yelpazede hizmet vermekteyiz. <strong>Kartlı erişim sistemleri</strong> ve <strong>RFID teknolojisi</strong> ile güvenlik standartlarınızı en üst seviyeye çıkarıyoruz. <strong>Elazığ anahtarcı</strong> hizmetlerimizde en çok talep edilen akıllı kilit kurulumu ve kartlı sistemler konusunu detayıyla inceliyoruz.</p>
+
+                <h2>Akıllı Kilit Teknolojilerinin Evrimi</h2>
+                <p><strong>Akıllı kilit teknolojisi</strong> son 20 yılda dramatik bir gelişim göstermiştir:</p>
+
+                <h3>İlk Nesil Elektronik Kilitler (2000-2010)</h3>
+                <ul>
+                    <li><strong>Basit şifreli kilitler</strong> - Sabit PIN kod sistemleri</li>
+                    <li><strong>Manyetik kart okuyucuları</strong> - Otel kartı benzeri teknoloji</li>
+                    <li><strong>Kablolu bağlantılar</strong> - Ethernet üzerinden yönetim</li>
+                    <li><strong>Sınırlı fonksiyonalite</strong> - Sadece açma/kapama işlevi</li>
+                </ul>
+
+                <h3>Wireless Dönemi (2010-2018)</h3>
+                <ul>
+                    <li><strong>WiFi entegrasyonu</strong> - Kablosuz ağ bağlantısı</li>
+                    <li><strong>Bluetooth düşük enerji</strong> - BLE teknolojisi</li>
+                    <li><strong>Proximity kartlar</strong> - Temassız erişim</li>
+                    <li><strong>Mobil uygulama kontrolü</strong> - İlk smartphone entegrasyonları</li>
+                </ul>
+
+                <h3>Modern IoT Çağı (2018-Günümüz)</h3>
+                <ul>
+                    <li><strong>Yapay zeka entegrasyonu</strong> - Öğrenen güvenlik sistemleri</li>
+                    <li><strong>Biometrik teknolojiler</strong> - Parmak izi ve yüz tanıma</li>
+                    <li><strong>Mesh network protokolleri</strong> - Zigbee ve Z-Wave</li>
+                    <li><strong>Ses asistanı entegrasyonu</strong> - Alexa, Google Home uyumluluğu</li>
+                </ul>
+
+                <h2>Akıllı Kilit Türleri ve Teknolojileri</h2>
+                <p><strong>Modern akıllı kilitler</strong> farklı teknolojiler ve kullanım senaryoları sunar:</p>
+
+                <h3>1. Parmak İzi Tanımalı Akıllı Kilitler</h3>
+                <p><strong>Biometrik akıllı kilitler</strong> en yüksek güvenlik seviyesi sunan sistemlerdir:</p>
+
+                <h4>Teknoloji Özellikleri</h4>
+                <ul>
+                    <li><strong>Optik sensör teknolojisi</strong> - Yüksek çözünürlüklü parmak izi tarama</li>
+                    <li><strong>Kapasitif sensörler</strong> - Canlı parmak algılama sistemi</li>
+                    <li><strong>Çoklu parmak kayıt</strong> - 50-200 farklı parmak izi saklama</li>
+                    <li><strong>Anti-spoof koruması</strong> - Sahte parmak izi tespiti</li>
+                </ul>
+
+                <h4>Kullanım Avantajları</h4>
+                <ul>
+                    <li><strong>Şifre gereksizliği</strong> - Unutma riski yok</li>
+                    <li><strong>Hızlı erişim</strong> - 1 saniyeden az tanıma süresi</li>
+                    <li><strong>Yüksek güvenlik</strong> - Kopyalanamaz özellik</li>
+                    <li><strong>Aile dostu</strong> - Herkes kendi parmağını kaydedebilir</li>
+                </ul>
+
+                <h3>2. Şifreli Akıllı Kilit Sistemleri</h3>
+                <p><strong>PIN kodlu akıllı kilitler</strong> pratik ve güvenli çözümler sunar:</p>
+
+                <h4>Gelişmiş Şifre Özellikleri</h4>
+                <ul>
+                    <li><strong>Değişken kod uzunluğu</strong> - 4-12 haneli şifre desteği</li>
+                    <li><strong>Çoklu kullanıcı kodları</strong> - 50+ farklı şifre tanımlama</li>
+                    <li><strong>Geçici erişim kodları</strong> - Zaman sınırlı PIN'ler</li>
+                    <li><strong>Anti-peeping teknolojisi</strong> - Sahte sayı girişi koruması</li>
+                </ul>
+
+                <h4>Güvenlik Protokolleri</h4>
+                <ul>
+                    <li><strong>Brute force koruması</strong> - Çoklu hatalı giriş sonrası kilitleme</li>
+                    <li><strong>Alarm sistemi</strong> - Yetkisiz erişim uyarıları</li>
+                    <li><strong>Vandal koruması</strong> - Fiziksel saldırı tespiti</li>
+                    <li><strong>Pil yedeği</strong> - Acil durum besleme imkanı</li>
+                </ul>
+
+                <h3>3. RFID Kartlı Akıllı Kilitler</h3>
+                <p><strong>Kartlı erişim sistemleri</strong> toplu kullanım alanları için ideal çözümlerdir:</p>
+
+                <h4>RFID Teknoloji Çeşitleri</h4>
+                <ul>
+                    <li><strong>125 kHz düşük frekans</strong> - Kısa mesafe, yüksek güvenlik</li>
+                    <li><strong>13.56 MHz yüksek frekans</strong> - NFC uyumlu sistemler</li>
+                    <li><strong>860-960 MHz UHF</strong> - Uzun mesafe okuma imkanı</li>
+                    <li><strong>Çift frekans sistemleri</strong> - Hibrit teknoloji desteği</li>
+                </ul>
+
+                <h4>Kart Yönetim Sistemi</h4>
+                <ul>
+                    <li><strong>Merkezi kart yönetimi</strong> - Tek noktadan tüm kartları kontrol</li>
+                    <li><strong>Zaman bazlı erişim</strong> - Saatlik/günlük erişim kısıtlamaları</li>
+                    <li><strong>Grup yetkilendirme</strong> - Departman bazında erişim seviyeleri</li>
+                    <li><strong>Anti-passback sistemi</strong> - Giriş-çıkış takip kontrolü</li>
+                </ul>
+
+                <h2>Kartlı Erişim Kontrol Sistemleri</h2>
+                <p><strong>Profesyonel kartlı sistemler</strong> büyük kurumlar ve apartmanlar için gelişmiş çözümler sunar:</p>
+
+                <h3>Sistem Mimarisi</h3>
+                <h4>Ana Sistem Bileşenleri</h4>
+                <ul>
+                    <li><strong>Merkezi kontrol ünitesi</strong> - Tüm sistemin beyni</li>
+                    <li><strong>Kart okuyucu terminalleri</strong> - Kapı başına erişim noktaları</li>
+                    <li><strong>Elektronik kilit mekanizmaları</strong> - Elektrik motor veya mıknatıs</li>
+                    <li><strong>Güç kaynağı üniteleri</strong> - Kesintisiz güç beslemesi</li>
+                </ul>
+
+                <h4>Network Altyapısı</h4>
+                <ul>
+                    <li><strong>TCP/IP ethernet bağlantısı</strong> - Yerel ağ entegrasyonu</li>
+                    <li><strong>WiFi wireless desteği</strong> - Kablosuz terminaller</li>
+                    <li><strong>RS485 seri haberleşme</strong> - Uzun mesafe kablolama</li>
+                    <li><strong>Cloud tabanlı yönetim</strong> - İnternet üzerinden kontrol</li>
+                </ul>
+
+                <h3>Gelişmiş Özellikler</h3>
+                <h4>Kullanıcı Yönetimi</h4>
+                <ul>
+                    <li><strong>Hiyerarşik yetki seviyeleri</strong> - Admin, kullanıcı, misafir</li>
+                    <li><strong>Toplu kart programlama</strong> - Çoklu kart işleme imkanı</li>
+                    <li><strong>Kayıp kart iptali</strong> - Anında kart deaktivasyonu</li>
+                    <li><strong>Geçici erişim kartları</strong> - Sınırlı süre kullanım</li>
+                </ul>
+
+                <h4>Raporlama ve İzleme</h4>
+                <ul>
+                    <li><strong>Detaylı erişim kayıtları</strong> - Kim, ne zaman, nerede</li>
+                    <li><strong>Real-time monitoring</strong> - Anlık durum takibi</li>
+                    <li><strong>Alarm yönetimi</strong> - Güvenlik ihlali bildirimleri</li>
+                    <li><strong>İstatistiksel raporlar</strong> - Kullanım analizi ve trendler</li>
+                </ul>
+
+                <h2>Akıllı Ev Entegrasyonu</h2>
+                <p><strong>Smart home sistemleri</strong> ile akıllı kilitlerin entegrasyonu yaşam kalitesini artırır:</p>
+
+                <h3>IoT Platform Entegrasyonları</h3>
+                <h4>Popüler Smart Home Platformları</h4>
+                <ul>
+                    <li><strong>Samsung SmartThings</strong> - Kapsamlı cihaz uyumluluğu</li>
+                    <li><strong>Amazon Alexa</strong> - Ses komutu ile kilit kontrolü</li>
+                    <li><strong>Google Home</strong> - Google Assistant entegrasyonu</li>
+                    <li><strong>Apple HomeKit</strong> - iOS cihazları ile güvenli bağlantı</li>
+                </ul>
+
+                <h4>Otomasyon Senaryoları</h4>
+                <ul>
+                    <li><strong>"Eve gelme" senaryosu</strong> - Kapı açıldığında ışıklar yanar</li>
+                    <li><strong>"Evden çıkma" senaryosu</strong> - Tüm cihazlar otomatik kapanır</li>
+                    <li><strong>Güvenlik modu</strong> - Gece saatlerinde gelişmiş alarm</li>
+                    <li><strong>Misafir modu</strong> - Sınırlı erişim ve oto-deaktivasyon</li>
+                </ul>
+
+                <h3>Mobil Uygulama Özellikleri</h3>
+                <h4>Kullanıcı Deneyimi</h4>
+                <ul>
+                    <li><strong>Sezgisel arayüz</strong> - Kolay kullanım menüleri</li>
+                    <li><strong>Uzaktan kilit kontrolü</strong> - Her yerden kapı yönetimi</li>
+                    <li><strong>Push notification</strong> - Anlık güvenlik bildirimleri</li>
+                    <li><strong>Video doğrulama</strong> - Kapı zili kamera entegrasyonu</li>
+                </ul>
+
+                <h4>Gelişmiş İşlevler</h4>
+                <ul>
+                    <li><strong>Geofencing</strong> - Konum bazlı otomatik açma/kapama</li>
+                    <li><strong>Zamanlama özellikleri</strong> - Belirli saatlerde otomatik kilit</li>
+                    <li><strong>Aile üyesi yönetimi</strong> - Çoklu kullanıcı hesapları</li>
+                    <li><strong>Yedekleme ve geri yükleme</strong> - Ayar ve veri koruması</li>
+                </ul>
+
+                <h2>Elazığ'da Akıllı Kilit Kurulum Hizmetleri</h2>
+                <p><strong>Elazığ çilingir</strong> olarak sunduğumuz kapsamlı akıllı kilit ve kartlı sistem hizmetleri:</p>
+
+                <h3>Kurulum ve Konfigürasyon</h3>
+                <h4>Teknik Kurulum Hizmetleri</h4>
+                <ul>
+                    <li><strong>Yerinde teknik inceleme</strong> - Kapı uygunluk analizi</li>
+                    <li><strong>Kablolama altyapısı</strong> - Güç ve network bağlantıları</li>
+                    <li><strong>Mekanik adaptasyon</strong> - Mevcut kapıya uygun modifikasyon</li>
+                    <li><strong>Sistem konfigürasyonu</strong> - Yazılım ayarları ve test</li>
+                </ul>
+
+                <h4>Kullanıcı Eğitimi</h4>
+                <ul>
+                    <li><strong>Sistem kullanım eğitimi</strong> - Tüm özellikler hakkında bilgilendirme</li>
+                    <li><strong>Mobil uygulama kurulumu</strong> - Smartphone entegrasyonu</li>
+                    <li><strong>Acil durum prosedürleri</strong> - Pil bitimi ve arıza durumları</li>
+                    <li><strong>Bakım ve temizlik</strong> - Uzun ömür için öneriler</li>
+                </ul>
+
+                <h3>Hizmet Alanlarımız</h3>
+                <h4>Elazığ İl Geneli Hizmet</h4>
+                <ul>
+                    <li><strong>Elazığ Merkez akıllı kilit</strong> - Şehir merkezinde hızlı kurulum</li>
+                    <li><strong>Sivrice kartlı sistem</strong> - İlçe genelinde profesyonel hizmet</li>
+                    <li><strong>Keban akıllı güvenlik</strong> - Yerinde kurulum ve destek</li>
+                    <li><strong>Ağın digital kilit</strong> - Modern güvenlik çözümleri</li>
+                    <li><strong>Maden smart lock</strong> - 7/24 teknik destek</li>
+                </ul>
+
+                <h4>Özel Sektör Çözümleri</h4>
+                <ul>
+                    <li><strong>Otel kartlı sistemleri</strong> - Misafir erişim yönetimi</li>
+                    <li><strong>Ofis güvenlik sistemleri</strong> - Çalışan bazlı erişim kontrolü</li>
+                    <li><strong>Fabrika erişim kontrolleri</strong> - Endüstriyel güvenlik çözümleri</li>
+                    <li><strong>Okul güvenlik sistemleri</strong> - Öğrenci ve personel takibi</li>
+                </ul>
+
+                <h2>Güvenlik Protokolleri ve Standartları</h2>
+                <p><strong>Akıllı kilit güvenliği</strong> birden fazla katmanlı koruma sistemi gerektirir:</p>
+
+                <h3>Siber Güvenlik Önlemleri</h3>
+                <h4>Veri Şifreleme</h4>
+                <ul>
+                    <li><strong>AES 256-bit şifreleme</strong> - Askeri seviyede veri koruması</li>
+                    <li><strong>TLS/SSL protokolleri</strong> - Güvenli network iletişimi</li>
+                    <li><strong>End-to-end encryption</strong> - Uçtan uca şifreleme</li>
+                    <li><strong>Quantum-resistant algoritma</strong> - Gelecek güvenlik hazırlığı</li>
+                </ul>
+
+                <h4>Erişim Güvenliği</h4>
+                <ul>
+                    <li><strong>İki faktörlü doğrulama</strong> - 2FA sistemleri</li>
+                    <li><strong>Biometric liveness detection</strong> - Canlı doku tespiti</li>
+                    <li><strong>Anti-relay saldırı koruması</strong> - RF sinyal güvenliği</li>
+                    <li><strong>Secure boot mekanizması</strong> - Güvenli sistem başlatma</li>
+                </ul>
+
+                <h3>Fiziksel Güvenlik Önlemleri</h3>
+                <h4>Tamper Protection</h4>
+                <ul>
+                    <li><strong>Vandal-proof kasa tasarımı</strong> - Saldırı dirençli gövde</li>
+                    <li><strong>Tamper switch teknolojisi</strong> - Açılma algılama sensörleri</li>
+                    <li><strong>Emergency key override</strong> - Acil durum mekanik erişim</li>
+                    <li><strong>EMF shielding</strong> - Elektromanyetik saldırı koruması</li>
+                </ul>
+
+                <h2>Maliyet Analizi ve ROI Hesaplaması</h2>
+                <p><strong>Akıllı kilit yatırımı</strong> uzun vadede ciddi maliyet avantajları sağlar:</p>
+
+                <h3>İlk Yatırım Maliyetleri</h3>
+                <h4>Sistem Bileşen Maliyetleri</h4>
+                <ul>
+                    <li><strong>Temel akıllı kilit ünitesi</strong> - ₺2,500-8,000 arası</li>
+                    <li><strong>Kartlı erişim sistemi</strong> - ₺5,000-15,000 (kapı başı)</li>
+                    <li><strong>Merkezi yönetim yazılımı</strong> - ₺10,000-50,000</li>
+                    <li><strong>Kurulum ve konfigürasyon</strong> - Sistem maliyetinin %20-30'u</li>
+                </ul>
+
+                <h4>Operational Giderler</h4>
+                <ul>
+                    <li><strong>Yıllık bakım kontratı</strong> - Sistem değerinin %10-15'i</li>
+                    <li><strong>Yazılım güncellemeleri</strong> - Yılda ₺500-2,000</li>
+                    <li><strong>Pil değişimi</strong> - 2-3 yılda bir, kilit başı ₺100-200</li>
+                    <li><strong>Kart maliyetleri</strong> - Adet başı ₺15-50</li>
+                </ul>
+
+                <h3>Maliyet Tasarrufları</h3>
+                <h4>Operasyonel Tasarruflar</h4>
+                <ul>
+                    <li><strong>Anahtar yapım maliyeti elimine</strong> - Yılda ₺2,000-5,000 tasarruf</li>
+                    <li><strong>Güvenlik personeli azalması</strong> - Aylık ₺8,000-15,000</li>
+                    <li><strong>Kilit değişim maliyeti yok</strong> - Kayıp durumunda sadece kart iptali</li>
+                    <li><strong>Uzaktan yönetim avantajı</strong> - Yerinde müdahale gerektirmeyen işlemler</li>
+                </ul>
+
+                <h4>Güvenlik Değer Artışı</h4>
+                <ul>
+                    <li><strong>Sigorta primi indirimi</strong> - %10-25 oranında tasarruf</li>
+                    <li><strong>Gayrimenkul değer artışı</strong> - Smart home özelliği ile %5-15</li>
+                    <li><strong>Hırsızlık riski azalması</strong> - Gelişmiş güvenlik ile risksizlik</li>
+                    <li><strong>İş süreci verimliliği</strong> - Hızlı erişim ve yönetim kolaylığı</li>
+                </ul>
+
+                <h2>Gelecek Teknolojileri ve Trendler</h2>
+                <p><strong>Akıllı kilit teknolojilerinin</strong> gelecekteki gelişim yönleri:</p>
+
+                <h3>Yapay Zeka Entegrasyonu</h3>
+                <h4>Machine Learning Uygulamaları</h4>
+                <ul>
+                    <li><strong>Davranış Pattern analizi</strong> - Kullanım alışkanlıklarını öğrenme</li>
+                    <li><strong>Anomali tespit sistemi</strong> - Anormal erişim pattern uyarıları</li>
+                    <li><strong>Prediktif bakım</strong> - Arıza öncesi uyarı sistemleri</li>
+                    <li><strong>Otomatik güvenlik optimizasyonu</strong> - Kendini iyileştiren algoritmalar</li>
+                </ul>
+
+                <h3>İleri Biometrik Teknolojiler</h3>
+                <h4>Next-Gen Authentication</h4>
+                <ul>
+                    <li><strong>3D yüz tanıma</strong> - Derinlik sensörlü gelişmiş tanıma</li>
+                    <li><strong>İris tarama teknolojisi</strong> - Göz içi benzersiz pattern tanıma</li>
+                    <li><strong>Ses tanıma sistemi</strong> - Vokal kimlik doğrulama</li>
+                    <li><strong>DNA tabanlı erişim</strong> - Gelecekteki biyometrik standart</li>
+                </ul>
+
+                <h3>Blockchain ve Kripto Güvenlik</h3>
+                <h4>Distributed Security</h4>
+                <ul>
+                    <li><strong>Blockchain tabanlı erişim kayıtları</strong> - Değiştirilemez log sistemi</li>
+                    <li><strong>Smart contract entegrasyonu</strong> - Otomatik izin yönetimi</li>
+                    <li><strong>Cryptocurrency ile ödeme</strong> - Kripto para ile access satın alma</li>
+                    <li><strong>Decentralized identity</strong> - Merkezi olmayan kimlik doğrulama</li>
+                </ul>
+
+                <h2>Teknik Destek ve Bakım Hizmetleri</h2>
+                <p><strong>Akıllı kilit sistemlerinin</strong> kesintisiz çalışması için profesyonel bakım şarttır:</p>
+
+                <h3>Preventif Bakım Programı</h3>
+                <h4>Düzenli Kontrol Checklist</h4>
+                <ul>
+                    <li><strong>Pil seviyesi kontrolü</strong> - 3 ayda bir pil durumu incelemesi</li>
+                    <li><strong>Mekanik parça yağlama</strong> - 6 ayda bir motor ve menteşe bakımı</li>
+                    <li><strong>Yazılım güncellemesi</strong> - Güvenlik yamalarının kurulumu</li>
+                    <li><strong>Sensör kalibrasyonu</strong> - Parmak izi okuyucu hassasiyet ayarı</li>
+                </ul>
+
+                <h4>Performance Monitoring</h4>
+                <ul>
+                    <li><strong>Response time ölçümü</strong> - Kilit açılma süre analizi</li>
+                    <li><strong>Error rate takibi</strong> - Başarısız erişim denemesi oranları</li>
+                    <li><strong>Battery health monitoring</strong> - Pil sağlık durumu izleme</li>
+                    <li><strong>Network connectivity check</strong> - Bağlantı kalitesi kontrolü</li>
+                </ul>
+
+                <h3>7/24 Teknik Destek</h3>
+                <h4>Acil Müdahale Hizmetleri</h4>
+                <ul>
+                    <li><strong>Remote diagnostics</strong> - Uzaktan sistem tanılama</li>
+                    <li><strong>Yerinde teknik servis</strong> - 2 saat içinde müdahale</li>
+                    <li><strong>Yedek parça stoku</strong> - Kritik bileşenler için stok garantisi</li>
+                    <li><strong>Geçici bypass çözümleri</strong> - Arıza anında alternatif erişim</li>
+                </ul>
+
+                <h2>Sık Sorulan Sorular</h2>
+                <p>Akıllı kilit ve kartlı sistemler konusunda en çok merak edilen sorular:</p>
+
+                <h3>Genel Sorular</h3>
+                <ul>
+                    <li><strong>Akıllı kilit güvenli mi?</strong> - Doğru kullanıldığında geleneksel kilitlerden çok daha güvenli</li>
+                    <li><strong>Pil bitince ne olur?</strong> - Emergency power ve mekanik anahtar backup mevcut</li>
+                    <li><strong>İnternet olmadan çalışır mı?</strong> - Offline modda yerel erişim mümkün</li>
+                    <li><strong>Kaç kişi kaydedilebilir?</strong> - Model bazında 50-500 kullanıcı kapasitesi</li>
+                </ul>
+
+                <h3>Teknik Sorular</h3>
+                <ul>
+                    <li><strong>RFID kartlar güvenli mi?</strong> - Gelişmiş şifreleme ile yüksek güvenlik</li>
+                    <li><strong>Biometrik veri nasıl korunur?</strong> - Yerel şifreli storage, cloud gönderilmez</li>
+                    <li><strong>Sistem hack'lenebilir mi?</strong> - Çok katmanlı güvenlik ile minimum risk</li>
+                    <li><strong>Eski kapıya kurulur mu?</strong> - Adaptör çözümler ile çoğu kapıya uygun</li>
+                </ul>
+
+                <div class="blog-cta">
+                    <h3>Profesyonel Akıllı Kilit ve Kartlı Sistem Hizmetleri</h3>
+                    <p>Modern güvenlik teknolojileri ile ev ve iş yerlerinizi koruyun. Akıllı kilit kurulumu, kartlı erişim sistemleri ve 7/24 teknik destek. Elazığ çilingir uzmanından güvenilir çözümler!</p>
+                    <a href="tel:+905432109949" class="blog-cta-btn">0543 210 99 49</a>
+                </div>
+            </div>
+
+            <div class="blog-comments">
+                <h3>Okuyucu Yorumları</h3>
+                
+                <div class="comment">
+                    <p>"Akıllı kilit sistemleri hakkında bu kadar detaylı bilgi beklemiyordum. Ofisim için biometrik sistem düşünüyordum, artık karar verdim."</p>
+                    <div class="comment-author">- Kemal T****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"RFID kartlı sistemlerin bu kadar gelişmiş olduğunu bilmiyordum. Apartmanımız için ideal bir çözüm."</p>
+                    <div class="comment-author">- Ayşe B****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Smart home entegrasyonu bölümü çok faydalıydı. Evimi akıllı ev haline getirmek istiyorum."</p>
+                    <div class="comment-author">- Murat K****</div>
+                </div>
+                
+                <div class="comment">
+                    <p>"Maliyet analizi çok şeffaf. ROI hesaplaması sayesinde yatırım kararı verebiliyorum."</p>
+                    <div class="comment-author">- Fatma S****</div>
+                </div>
+            </div>
+
+                    <div class="blog-navigation">
+            <a href="../index.html" class="blog-back-btn">Ana Sayfaya Dön</a>
+            <a href="../blog.html" class="blog-back-btn">Blog Listesine Dön</a>
         </div>
-    </section>
-
-    <main>
-        <article class="blog-post">
-            <div class="container">
-                <div class="blog-content">
-                    <div class="feature-image">
-                        <div>Akıllı Kilit Sistemleri - Modern Güvenlik Çözümleri</div>
-                    </div>
-
-                    <p>Özellikle Elazığ çilingir ve anahtarcı hizmetlerinde bu teknolojilerin önemi giderek artmaktadır. Akıllı kilit sistemleri, geleneksel anahtarların yerini alarak hem konforu artırıyor hem de güvenlik seviyesini yükseltiyor.</p>
-
-                    <h2>Akıllı Kilit Nedir?</h2>
-                    <p>Akıllı kilitler, geleneksel anahtar kullanımını ortadan kaldırarak, elektronik ve dijital teknolojilerle çalışan kilit sistemleridir. Bu sistemler, genellikle Wi-Fi, Bluetooth veya NFC gibi kablosuz iletişim teknolojileri aracılığıyla kontrol edilir.</p>
-
-                    <div class="icon-box">
-                        <i class="fas fa-mobile-alt"></i>
-                        <div class="icon-box-content">
-                            <h3>Akıllı Telefon Kontrolü</h3>
-                            <p>Kullanıcılar, akıllı telefon uygulamaları ile kapılarını uzaktan açıp kapatabilir, erişim izinlerini yönetebilir.</p>
-                        </div>
-                    </div>
-
-                    <div class="icon-box">
-                        <i class="fas fa-fingerprint"></i>
-                        <div class="icon-box-content">
-                            <h3>Biyometrik Erişim</h3>
-                            <p>Parmak izi, yüz tanıma gibi biyometrik teknolojilerle güvenli ve kişiye özel erişim sağlanır.</p>
-                        </div>
-                    </div>
-
-                    <h2>Kartlı Sistemler Nasıl Çalışır?</h2>
-                    <p>Kartlı sistemler, genellikle ofisler, siteler veya otellerde yaygın olarak kullanılan elektronik erişim kontrol sistemleridir. Kullanıcılar, kendilerine verilen RFID kart veya manyetik kartı bir okuyucuya okutarak kapıya giriş sağlar.</p>
-
-                    <p>Sistem, kart üzerindeki bilgiyi doğrulayarak kapının açılmasına izin verir. Bu sistemler merkezi olarak yönetilebilir, erişim izinleri anlık olarak güncellenebilir.</p>
-
-                    <h2>Akıllı Kilitlerin Avantajları</h2>
-                    <ul>
-                        <li><strong>Kolay ve hızlı erişim:</strong> Anahtar taşımaya gerek kalmaz, telefon veya kartla kapı açılır</li>
-                        <li><strong>Uzaktan kontrol:</strong> Akıllı kilitler, internet bağlantısı üzerinden uzaktan yönetilebilir</li>
-                        <li><strong>Güvenlik seviyesinin artırılması:</strong> Biyometrik doğrulama, şifre veya çok faktörlü kimlik doğrulama seçenekleri</li>
-                        <li><strong>Geçici erişim izni verme:</strong> Misafirlere veya hizmet personeline belirli sürelerde erişim hakkı tanımlanabilir</li>
-                        <li><strong>Olay kayıtları:</strong> Kapı açma-kapama tarih ve saat bilgileri kaydedilir</li>
-                    </ul>
-
-                    <h2>Kartlı Sistemlerin Avantajları</h2>
-                    <ul>
-                        <li><strong>Yaygın ve uygun maliyetli:</strong> Ofislerde ve apartmanlarda kolayca uygulanabilir</li>
-                        <li><strong>Kolay yönetim:</strong> Kartlar kolayca iptal edilir veya yenisi verilir</li>
-                        <li><strong>Kopyalama riski düşük:</strong> Manyetik kartların veya RFID kartların kopyalanması zordur</li>
-                        <li><strong>Merkezi kontrol:</strong> Tüm erişim noktaları tek bir sistemden yönetilebilir</li>
-                        <li><strong>Zamanlı erişim:</strong> Belirli saat aralıklarında erişim izni verilebilir</li>
-                    </ul>
-
-                    <h2>Dezavantajları ve Dikkat Edilmesi Gerekenler</h2>
-                    <ul>
-                        <li><strong>Elektronik arızalar:</strong> Akıllı kilitler elektrik veya internet bağlantısı olmadığında çalışmayabilir</li>
-                        <li><strong>Siber güvenlik riskleri:</strong> Wi-Fi veya Bluetooth üzerinden yetkisiz erişim riskleri olabilir</li>
-                        <li><strong>Enerji bağımlılığı:</strong> Batarya bitimi halinde kilit işlevsiz kalabilir</li>
-                        <li><strong>Kart kaybı veya çalınması:</strong> Kartlı sistemlerde kart kaybı, yetkisiz kişilere erişim izni verilmesi riskini taşır</li>
-                        <li><strong>Kurulum maliyeti:</strong> Geleneksel kilitlere göre daha yüksek ilk yatırım maliyeti</li>
-                    </ul>
-
-                    <table class="comparison-table">
-                        <thead>
-                            <tr>
-                                <th>Özellik</th>
-                                <th>Akıllı Kilitler</th>
-                                <th>Kartlı Sistemler</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Kurulum Maliyeti</td>
-                                <td>Orta-Yüksek</td>
-                                <td>Düşük-Orta</td>
-                            </tr>
-                            <tr>
-                                <td>Kullanım Kolaylığı</td>
-                                <td>Çok Kolay</td>
-                                <td>Kolay</td>
-                            </tr>
-                            <tr>
-                                <td>Uzaktan Kontrol</td>
-                                <td>Var</td>
-                                <td>Yok (Temel sistemler)</td>
-                            </tr>
-                            <tr>
-                                <td>Enerji Bağımlılığı</td>
-                                <td>Yüksek</td>
-                                <td>Düşük</td>
-                            </tr>
-                            <tr>
-                                <td>En İyi Kullanım Alanı</td>
-                                <td>Evler, Villa, Küçük Ofisler</td>
-                                <td>Apartmanlar, Oteller, Büyük Ofisler</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h2>Elazığ Çilingir ve Anahtarcı Hizmetlerinde Akıllı Kilitler</h2>
-                    <p>Elazığ'da çilingir ve anahtarcı firmamız, akıllı kilit kurulumu, bakım ve onarımı konusunda uzman ekiplerle çalışmaktadır. Ev, iş yeri veya site güvenliğinizi artırmak için size en uygun akıllı kilit sistemini öneriyor, montajını gerçekleştiriyoruz.</p>
-
-                    <p>Ayrıca sistemin tüm özelliklerini size detaylıca anlatıyor, gerektiğinde teknik destek sunuyoruz. Profesyonel ekibimiz, akıllı kilit sistemlerinin yanı sıra kartlı geçiş sistemleri, biyometrik güvenlik çözümleri ve merkezi kilit sistemleri konusunda da hizmet vermektedir.</p>
-
-                    <div class="blog-cta">
-                        <h3>Akıllı Kilit Sistemi Kurulumu</h3>
-                        <p>Modern güvenlik çözümleri için profesyonel destek alın! Uzman ekibimiz size en uygun çözümü sunacaktır.</p>
-                        <a href="tel:+905432109949" class="cta-btn">Hemen Arayın: 0543 210 99 49</a>
-                    </div>
-                </div>
-
-                <div class="blog-navigation">
-                    <a href="../index.html#blog" class="blog-back"><i class="fas fa-arrow-left"></i> Tüm Yazılara Dön</a>
-                </div>
-            </div>
         </article>
     </main>
 
@@ -712,42 +565,55 @@
     </a>
 
     <button class="scroll-up-btn">↑</button>
-
+    
     <script>
-        // Scroll to top button
-        const scrollUpBtn = document.querySelector('.scroll-up-btn');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollUpBtn.classList.add('visible');
-            } else {
-                scrollUpBtn.classList.remove('visible');
+        (function() {
+            'use strict';
+            
+            function ready(fn) {
+                if (document.readyState !== 'loading') {
+                    fn();
+                } else {
+                    document.addEventListener('DOMContentLoaded', fn);
+                }
             }
-        });
-        
-        scrollUpBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            
+            ready(function() {
+                const menuBtn = document.querySelector('.menu-btn');
+                const navLinks = document.querySelector('.nav-links');
+                
+                if (menuBtn && navLinks) {
+                    menuBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        navLinks.classList.toggle('active');
+                    });
+                    
+                    document.addEventListener('click', (e) => {
+                        if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                            navLinks.classList.remove('active');
+                        }
+                    });
+                }
+                
+                const scrollUpBtn = document.querySelector('.scroll-up-btn');
+                if (scrollUpBtn) {
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 300) {
+                            scrollUpBtn.classList.add('show');
+                        } else {
+                            scrollUpBtn.classList.remove('show');
+                        }
+                    });
+                    
+                    scrollUpBtn.addEventListener('click', () => {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    });
+                }
             });
-        });
-        
-        // Mobile menu toggle
-        const menuBtn = document.querySelector('.menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        menuBtn.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-        
-        // Resize event for mobile menu
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                navLinks.style.display = 'flex';
-            } else {
-                navLinks.style.display = 'none';
-            }
-        });
+        })();
     </script>
 </body>
 </html>

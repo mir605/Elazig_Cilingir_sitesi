@@ -10,13 +10,11 @@
     <!-- Performance Optimizations -->
     <link rel="preload" href="assets/hero-bg.webp" as="image">
     <link rel="preload" href="assets/intro-video-.mp4" as="video" type="video/mp4">
-    <link rel="dns-prefetch" href="//unpkg.com">
     <link rel="dns-prefetch" href="//tile.openstreetmap.org">
-    <link rel="preconnect" href="https://unpkg.com" crossorigin>
     
-    <!-- Optimize resource loading -->
-    <link rel="prefetch" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="prefetch" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    <!-- Local Leaflet Resources -->
+    <link rel="preload" href="vendor/leaflet/leaflet.css" as="style">
+    <link rel="preload" href="vendor/leaflet/leaflet.js" as="script">
     
     <!-- Additional Performance Meta Tags -->
     <meta name="robots" content="index, follow">
@@ -145,13 +143,15 @@
         }
         
         header {
-            background: linear-gradient(135deg, #2c3e50, #1a1a2e);
-            color: white;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #2c3e50, #1a1a2e) !important;
+            color: white !important;
+            padding: 15px 0 !important;
+            position: fixed !important;
+            width: 100% !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+            backdrop-filter: none !important;
         }
         
         .header-container {
@@ -179,23 +179,38 @@
         .nav-links {
             display: flex;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
         
         .nav-links li {
-            margin-left: 25px;
+            margin-left: 35px;
         }
         
         .nav-links a {
-            color: white;
+            color: white !important;
             text-decoration: none;
             font-weight: 500;
-            padding: 5px 10px;
+            padding: 12px 24px;
             border-radius: 4px;
             transition: all 0.3s;
+            font-size: 1rem;
+            white-space: nowrap;
+            min-width: auto;
         }
         
         .nav-links a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+        
+        .menu-btn {
+            display: none;
+            color: white;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         
         .hero {
@@ -206,6 +221,7 @@
             color: white;
             text-align: center;
             overflow: hidden;
+            margin-top: 80px; /* Header yüksekliği için boşluk */
         }
         
         #hero-video {
@@ -402,6 +418,66 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 30px;
+        }
+        
+        /* Mobile Slideable Services Container */
+        .services-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .services-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 20px;
+                padding: 0 20px 20px 20px;
+                margin: 20px -20px 0 -20px;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            .services-grid::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .service-card {
+                flex: 0 0 280px;
+                scroll-snap-align: start;
+                margin-bottom: 0;
+            }
+            
+            .services-indicator {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 20px;
+            }
+            
+            .indicator-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: rgba(220, 38, 38, 0.3);
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            
+            .indicator-dot.active {
+                background: #dc2626;
+                transform: scale(1.2);
+            }
+            
+            /* Smooth scroll behavior for services */
+            .services-grid {
+                scroll-behavior: smooth;
+            }
+            
+            /* Touch optimizations */
+            .service-card {
+                touch-action: pan-y;
+            }
         }
         
         .service-card {
@@ -818,34 +894,66 @@
         }
         
         @media (max-width: 768px) {
+            /* Container improvements for mobile */
+            .container {
+                padding: 0 20px;
+                max-width: 100%;
+            }
+            
+            /* More flexible typography scaling */
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: clamp(1.8rem, 5vw, 2.2rem);
+                line-height: 1.1;
             }
             
             .hero p {
-                font-size: 1.1rem;
+                font-size: clamp(1rem, 3vw, 1.1rem);
             }
             
             .section-title h2 {
-                font-size: 2rem;
+                font-size: clamp(1.8rem, 4vw, 2rem);
             }
             
+            .section-title p {
+                font-size: clamp(1rem, 3vw, 1.1rem);
+            }
+            
+            /* More spacious mobile containers */
             .shop-intro {
-                padding: 30px 20px;
+                padding: 25px 15px;
+                margin: 20px 0;
             }
             
             .shop-intro-header h2 {
-                font-size: 2.8rem;
+                font-size: clamp(2rem, 6vw, 2.5rem);
+                line-height: 1.2;
             }
             
             .shop-intro-header p {
-                font-size: 1.2rem;
+                font-size: clamp(1rem, 3.5vw, 1.1rem);
+                line-height: 1.5;
             }
             
             .item-text {
-                font-size: 1.1rem;
+                font-size: clamp(1rem, 3vw, 1.05rem);
             }
             
+            /* Service cards mobile optimization */
+            .service-content {
+                padding: 20px 15px;
+            }
+            
+            .service-content h3 {
+                font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+                margin-bottom: 12px;
+            }
+            
+            .service-content p {
+                font-size: clamp(0.9rem, 2.8vw, 1rem);
+                line-height: 1.5;
+            }
+            
+            /* Navigation improvements */
             .nav-links {
                 display: none;
                 position: absolute;
@@ -873,61 +981,225 @@
                 cursor: pointer;
             }
             
+            /* Contact section mobile */
             #contact {
-                padding: 30px;
+                padding: 25px 15px;
+                margin: 20px 0;
             }
             
+            /* Footer adjustments */
+            .footer-content {
+                gap: 25px;
+                padding: 0 15px;
+            }
+            
+            .footer-section h3 {
+                font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            }
+            
+            .footer-section p,
+            .footer-section ul li a {
+                font-size: clamp(0.9rem, 2.8vw, 1rem);
+            }
+            
+            /* CTA section mobile */
+            .cta {
+                padding: 50px 20px;
+                margin: 20px 0;
+            }
+            
+            .cta h3 {
+                font-size: clamp(1.8rem, 5vw, 2.2rem);
+            }
+            
+            .cta p {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+            }
+            
+            /* Testimonials mobile */
+            .testimonial-card {
+                padding: 20px 15px;
+            }
+            
+            .testimonial-card p {
+                font-size: clamp(0.9rem, 2.8vw, 1rem);
+                margin-bottom: 15px;
+            }
+            
+            /* Blog section mobile */
             .blog-section-header h2 {
-                font-size: 2rem;
+                font-size: clamp(1.8rem, 4vw, 2rem);
             }
             
             .blog-section-header p {
-                font-size: 1.1rem;
+                font-size: clamp(1rem, 3vw, 1.1rem);
             }
             
             .blog-section-header {
-                padding: 30px 0;
-                margin-bottom: 30px;
+                padding: 25px 0;
+                margin-bottom: 25px;
             }
         }
         
         @media (max-width: 480px) {
+            /* Extra small screens optimization */
+            .container {
+                padding: 0 15px;
+            }
+            
             .hero {
                 height: 70vh;
+                margin-top: 70px;
             }
             
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: clamp(1.6rem, 4.5vw, 1.8rem);
+                margin-bottom: 15px;
+            }
+            
+            .hero p {
+                font-size: clamp(0.9rem, 2.5vw, 1rem);
+                margin-bottom: 25px;
             }
             
             .btn {
-                padding: 12px 25px;
-                font-size: 1rem;
+                padding: 12px 20px;
+                font-size: clamp(0.9rem, 2.5vw, 1rem);
             }
             
             section {
-                padding: 60px 0;
+                padding: 50px 0;
+            }
+            
+            .section-title {
+                margin-bottom: 35px;
             }
             
             .section-title h2 {
-                font-size: 1.7rem;
+                font-size: clamp(1.5rem, 4vw, 1.7rem);
+                margin-bottom: 12px;
+            }
+            
+            .section-title p {
+                font-size: clamp(0.9rem, 2.5vw, 1rem);
+            }
+            
+            /* Services cards on very small screens */
+            .service-card {
+                flex: 0 0 260px;
+            }
+            
+            .service-content {
+                padding: 15px 12px;
+            }
+            
+            .service-content h3 {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+                margin-bottom: 10px;
+            }
+            
+            .service-content p {
+                font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            }
+            
+            /* Shop intro adjustments */
+            .shop-intro {
+                padding: 20px 12px;
+            }
+            
+            .shop-intro-header h2 {
+                font-size: clamp(1.8rem, 5.5vw, 2.2rem);
+            }
+            
+            .shop-intro-header p {
+                font-size: clamp(0.9rem, 3vw, 1rem);
             }
             
             .shop-intro-list {
-                grid-template-columns: 1fr;
+                padding: 20px 15px;
             }
             
+            .item-text {
+                font-size: clamp(0.9rem, 2.8vw, 1rem);
+            }
+            
+            /* CTA section */
+            .cta {
+                padding: 40px 15px;
+            }
+            
+            .cta h3 {
+                font-size: clamp(1.6rem, 4.5vw, 2rem);
+                margin-bottom: 15px;
+            }
+            
+            .cta p {
+                font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+                margin-bottom: 25px;
+            }
+            
+            /* Contact section */
+            #contact {
+                padding: 20px 12px;
+            }
+            
+            .contact-info-card {
+                padding: 20px 15px;
+            }
+            
+            .contact-info-card h3 {
+                font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            }
+            
+            .contact-details h4 {
+                font-size: clamp(1rem, 3vw, 1.1rem);
+            }
+            
+            .contact-details p,
+            .contact-details a {
+                font-size: clamp(0.9rem, 2.5vw, 1rem);
+            }
+            
+            /* Fixed buttons */
             .whatsapp-btn {
                 bottom: 20px;
-                left: 20px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
+                left: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
             }
             
             .scroll-up-btn {
-                bottom: 80px;
-                right: 20px;
+                bottom: 75px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            /* Footer adjustments */
+            .footer-content {
+                gap: 20px;
+                padding: 0 12px;
+            }
+            
+            .footer-section {
+                text-align: center;
+            }
+            
+            .footer-section h3 {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+                margin-bottom: 15px;
+            }
+            
+            .footer-section p,
+            .footer-section ul li a {
+                font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            }
+            
+            .copyright {
+                padding-top: 15px;
+                font-size: clamp(0.8rem, 2.2vw, 0.9rem);
             }
         }
     </style>
@@ -942,7 +1214,7 @@
             <ul class="nav-links">
                 <li><a href="#services">Hizmetlerimiz</a></li>
                 <li><a href="#about">Hakkımızda</a></li>
-                <li><a href="#blog">Blog</a></li>
+                <li><a href="#" onclick="toggleBlog()" id="blog-nav-btn">Blog</a></li>
                 <li><a href="#testimonials">Yorumlar</a></li>
                 <li><a href="#contact">İletişim</a></li>
             </ul>
@@ -1033,67 +1305,79 @@
                 <p>Profesyonel ekibimizle tüm anahtar ve çilingir ihtiyaçlarınız için hızlı ve güvenilir çözümler sunuyoruz</p>
                         </div>
             
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img data-src="assets/anahtar.webp" alt="Elazığ Oto Çilingir ve Elazığ Anahtarcı" class="lazy" width="300" height="200">
-                    </div>
-                    <div class="service-content">
-                        <h3>Elazığ Oto Çilingir ve Anahtarcı</h3>
-                        <p>Her marka ve model araç için elazığ oto çilingir, anahtar kopyalama, immobilizer anahtar yapımı ve oto kumanda çoğaltma hizmetleri. Elazığ çilingir uzmanından profesyonel çözümler.</p>
+            <div class="services-container">
+                <div class="services-grid" id="servicesGrid">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img data-src="assets/anahtar.webp" alt="Elazığ Oto Çilingir ve Elazığ Anahtarcı" class="lazy" width="300" height="200">
+                        </div>
+                        <div class="service-content">
+                            <h3>Elazığ Oto Çilingir ve Anahtarcı</h3>
+                            <p>Her marka ve model araç için elazığ oto çilingir, anahtar kopyalama, immobilizer anahtar yapımı ve oto kumanda çoğaltma hizmetleri. Elazığ çilingir uzmanından profesyonel çözümler.</p>
                         </div>
                     </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img data-src="assets/kapi.webp" alt="Acil Daire Kapı Açma" class="lazy" width="300" height="200">
+                    
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img data-src="assets/kapi.webp" alt="Acil Daire Kapı Açma" class="lazy" width="300" height="200">
                         </div>
-                    <div class="service-content">
-                        <h3>Acil Daire Kapı Açma</h3>
-                        <p>7/24 acil elazığ çilingir hizmeti ile çelik kapı açma, daire kapı açma, ev anahtarı tamiri hizmetleri. Acil çilingir ihtiyaçlarınızda hızlı müdahale.</p>
+                        <div class="service-content">
+                            <h3>Acil Daire Kapı Açma</h3>
+                            <p>7/24 acil elazığ çilingir hizmeti ile çelik kapı açma, daire kapı açma, ev anahtarı tamiri hizmetleri. Acil çilingir ihtiyaçlarınızda hızlı müdahale.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img data-src="assets/yedek-anahtar.webp" alt="Araba Kapı Açma Hizmeti" class="lazy" width="300" height="200">
+                        </div>
+                        <div class="service-content">
+                            <h3>Araba Kapı Açma Hizmeti</h3>
+                            <p>Arabada kilitli kaldıysanız, acil elazığ oto çilingir hizmetimizle dakikalar içerisinde yanınızdayız. Hasarsız araba kapı açma garantisi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).webp" alt="Kilit Değiştirme ve Tamiri" class="lazy" width="300" height="200">
+                        </div>
+                        <div class="service-content">
+                            <h3>Kilit Değiştirme ve Tamiri</h3>
+                            <p>Ev, daire ve iş yerleriniz için elazığ kilit değiştirme, kilit tamiri, güvenlik kilidi montajı ve elazığ çilingir hizmetleri.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.35.webp" alt="Kumanda Programlama" class="lazy" width="300" height="200">
+                        </div>
+                        <div class="service-content">
+                            <h3>Kumanda Programlama</h3>
+                            <p>Garaj kapısı, kepenk ve bariyer sistemleriniz için kumanda kopyalama, tamir ve programlama hizmetleri. Elazığ anahtarcı ekibimizle.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.34.webp" alt="Anahtar Kopyalama ve Tamiri" class="lazy" width="300" height="200">
+                        </div>
+                        <div class="service-content">
+                            <h3>Anahtar Kopyalama ve Tamiri</h3>
+                            <p>Ev, ofis, daire ve kasa anahtarlarınızın yedeklerini modern teknoloji ile elazığ anahtarcı hizmeti. Hızlı ve güvenilir çözümler.</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-img">
-                        <img data-src="assets/yedek-anahtar.webp" alt="Araba Kapı Açma Hizmeti" class="lazy" width="300" height="200">
+                <!-- Mobile scroll indicators -->
+                <div class="services-indicator" id="servicesIndicator" style="display: none;">
+                    <span class="indicator-dot active" data-index="0"></span>
+                    <span class="indicator-dot" data-index="1"></span>
+                    <span class="indicator-dot" data-index="2"></span>
+                    <span class="indicator-dot" data-index="3"></span>
+                    <span class="indicator-dot" data-index="4"></span>
+                    <span class="indicator-dot" data-index="5"></span>
+                </div>
             </div>
-                    <div class="service-content">
-                        <h3>Araba Kapı Açma Hizmeti</h3>
-                        <p>Arabada kilitli kaldıysanız, acil elazığ oto çilingir hizmetimizle dakikalar içerisinde yanınızdayız. Hasarsız araba kapı açma garantisi.</p>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).webp" alt="Kilit Değiştirme ve Tamiri" class="lazy" width="300" height="200">
-                        </div>
-                    <div class="service-content">
-                        <h3>Kilit Değiştirme ve Tamiri</h3>
-                        <p>Ev, daire ve iş yerleriniz için elazığ kilit değiştirme, kilit tamiri, güvenlik kilidi montajı ve elazığ çilingir hizmetleri.</p>
-                    </div>
-                        </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.35.webp" alt="Kumanda Programlama" class="lazy" width="300" height="200">
-                    </div>
-                    <div class="service-content">
-                        <h3>Kumanda Programlama</h3>
-                        <p>Garaj kapısı, kepenk ve bariyer sistemleriniz için kumanda kopyalama, tamir ve programlama hizmetleri. Elazığ anahtarcı ekibimizle.</p>
-                        </div>
-                    </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.34.webp" alt="Anahtar Kopyalama ve Tamiri" class="lazy" width="300" height="200">
-                    </div>
-                    <div class="service-content">
-                        <h3>Anahtar Kopyalama ve Tamiri</h3>
-                        <p>Ev, ofis, daire ve kasa anahtarlarınızın yedeklerini modern teknoloji ile elazığ anahtarcı hizmeti. Hızlı ve güvenilir çözümler.</p>
-                    </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -1399,6 +1683,61 @@
                     window.addEventListener('scroll', handleScroll, { passive: true });
                 }
                 
+                // Mobile slideable services functionality
+                function initMobileServices() {
+                    const servicesGrid = document.getElementById('servicesGrid');
+                    const servicesIndicator = document.getElementById('servicesIndicator');
+                    const indicatorDots = document.querySelectorAll('.indicator-dot');
+                    
+                    if (!servicesGrid || !servicesIndicator) return;
+                    
+                    // Show indicators only on mobile
+                    function checkMobile() {
+                        if (window.innerWidth <= 768) {
+                            servicesIndicator.style.display = 'flex';
+                            updateActiveIndicator();
+                        } else {
+                            servicesIndicator.style.display = 'none';
+                        }
+                    }
+                    
+                    // Update active indicator based on scroll position
+                    function updateActiveIndicator() {
+                        if (window.innerWidth > 768) return;
+                        
+                        const scrollLeft = servicesGrid.scrollLeft;
+                        const cardWidth = 300; // 280px width + 20px gap
+                        const currentIndex = Math.round(scrollLeft / cardWidth);
+                        
+                        indicatorDots.forEach((dot, index) => {
+                            dot.classList.toggle('active', index === currentIndex);
+                        });
+                    }
+                    
+                    // Scroll to specific card when indicator is clicked
+                    indicatorDots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => {
+                            if (window.innerWidth <= 768) {
+                                const cardWidth = 300;
+                                servicesGrid.scrollTo({
+                                    left: index * cardWidth,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        });
+                    });
+                    
+                    // Listen to scroll events on services grid
+                    servicesGrid.addEventListener('scroll', throttle(updateActiveIndicator, 100), { passive: true });
+                    
+                    // Initial check and listen to resize
+                    checkMobile();
+                    window.addEventListener('resize', throttle(checkMobile, 250), { passive: true });
+                }
+                
+                // Initialize mobile services
+                initMobileServices();
+                
                 // Mobile menu toggle
                 const menuBtn = document.querySelector('.menu-btn');
                 const navLinks = document.querySelector('.nav-links');
@@ -1467,6 +1806,19 @@
                 
                 // Open the Google Maps location directly
                 window.open(businessUrl, '_blank');
+            };
+
+            // Blog navigation functionality
+            window.toggleBlog = function() {
+                const currentPage = window.location.pathname.toLowerCase();
+                
+                if (currentPage.includes('blog.html') || currentPage.includes('/blog/')) {
+                    // Currently on blog page or blog article, go to home
+                    window.location.href = '/';
+                } else {
+                    // Currently on home page, go to blog list
+                    window.location.href = 'blog.html';
+                }
             };
         })();
     </script>

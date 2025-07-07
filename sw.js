@@ -10,13 +10,19 @@ const STATIC_FILES = [
     '/css/style.css',
     '/js/script.js',
     '/assets/hero-poster.webp',
-    '/manifest.json'
+    '/manifest.json',
+    '/vendor/leaflet/leaflet.css',
+    '/vendor/leaflet/leaflet.js',
+    '/vendor/leaflet/images/marker-icon.png',
+    '/vendor/leaflet/images/marker-shadow.png',
+    '/vendor/leaflet/images/layers.png',
+    '/vendor/leaflet/images/layers-2x.png'
 ];
 
 // Network-first strategy for dynamic content
 const NETWORK_FIRST = [
     '/api/',
-    'https://unpkg.com/',
+  
     'https://fonts.googleapis.com/',
     'https://cdnjs.cloudflare.com/'
 ];
@@ -24,6 +30,7 @@ const NETWORK_FIRST = [
 // Cache-first strategy for assets
 const CACHE_FIRST = [
     '/assets/',
+    '/vendor/',
     '.webp',
     '.jpg',
     '.jpeg',
@@ -34,7 +41,9 @@ const CACHE_FIRST = [
     '.woff',
     '.woff2',
     '.ttf',
-    '.otf'
+    '.otf',
+    '.css',
+    '.js'
 ];
 
 // Install event - cache static files
