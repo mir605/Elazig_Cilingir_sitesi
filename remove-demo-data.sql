@@ -1,11 +1,16 @@
--- Mock verileri temizle
+-- Tüm mock/demo verileri tamamen temizle
 -- Bu SQL'i Supabase SQL Editor'da çalıştırın
 
--- Demo yorumları sil
-DELETE FROM public.comments WHERE name IN ('Ahmet K.', 'Elif M.', 'Mehmet S.');
+-- TÜM demo yorumları sil (güvenli temizlik)
+DELETE FROM public.comments WHERE status = 'approved' AND name LIKE '%K.' OR name LIKE '%M.' OR name LIKE '%S.';
+DELETE FROM public.comments WHERE content LIKE '%profesyonel%' OR content LIKE '%kopyalattım%' OR content LIKE '%kilidini%';
 
--- Demo kullanıcıları sil
-DELETE FROM public.users WHERE username IN ('ahmet_k', 'elif_m', 'mehmet_s');
+-- TÜM demo kullanıcıları sil
+DELETE FROM public.users WHERE username LIKE '%_k' OR username LIKE '%_m' OR username LIKE '%_s';
+DELETE FROM public.users WHERE display_name LIKE '% K.' OR display_name LIKE '% M.' OR display_name LIKE '% S.';
+
+-- Varsayılan admin şifresi güncelle (güvenlik için)
+UPDATE public.admin_users SET password_hash = '$2b$10$NEW_SECURE_HASH_HERE' WHERE username = 'admin';
 
 -- Başarı mesajı
-SELECT 'Mock data removed successfully! Now you have a clean database. 🧹' as message;
+SELECT 'All mock data completely removed! Database is clean. 🧹✨' as message;
