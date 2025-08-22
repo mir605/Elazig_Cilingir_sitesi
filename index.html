@@ -1398,51 +1398,42 @@
                 <p>Elazığ çilingir ve anahtarcı hizmetlerimizden memnun kalan müşterilerimizin görüşleri</p>
             </div>
 
-            <!-- User Authentication Section -->
-            <div id="auth-container" class="auth-container">
-                <div class="auth-form">
-                    <h3>Yorum Yapmak İçin Giriş Yapın</h3>
-                    <p>Hizmetlerimizle ilgili görüşlerinizi paylaşmak için lütfen kullanıcı adınızı girin.</p>
+            <!-- Modern Comment Form -->
+            <div class="modern-comment-section">
+                <div class="comment-form-card">
+                    <h3>✍️ Görüşünüzü Paylaşın</h3>
+                    <p>Hizmetimizle ilgili deneyiminizi diğer müşterilerimizle paylaşın</p>
                     
-                    <form class="username-form">
-                        <div class="form-group">
-                            <label for="username">Kullanıcı Adı:</label>
-                            <input type="text" id="username" name="username" required 
-                                   placeholder="Kullanıcı adınızı girin (en az 3 karakter)" 
-                                   minlength="3" maxlength="50">
-                            <small>Sadece harf, rakam ve _ kullanabilirsiniz.</small>
+                    <form id="simple-comment-form" class="simple-comment-form">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <input type="text" id="comment-name" name="name" required 
+                                       placeholder="Adınız (örn: Ahmet K.)" maxlength="50">
+                            </div>
+                            <div class="form-col">
+                                <select id="comment-rating" name="rating">
+                                    <option value="5">⭐⭐⭐⭐⭐ Mükemmel</option>
+                                    <option value="4">⭐⭐⭐⭐ Çok İyi</option>
+                                    <option value="3">⭐⭐⭐ İyi</option>
+                                    <option value="2">⭐⭐ Orta</option>
+                                    <option value="1">⭐ Kötü</option>
+                                </select>
+                            </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="display_name">Görünen Ad (İsteğe bağlı):</label>
-                            <input type="text" id="display_name" name="display_name" 
-                                   placeholder="Yorumda görünecek adınız" maxlength="100">
+                        <div class="comment-textarea-wrapper">
+                            <textarea id="comment-text" name="comment" required 
+                                      placeholder="Yorumunuzu buraya yazın... (en az 20 karakter)" 
+                                      minlength="20" maxlength="500" rows="4"></textarea>
+                            <div class="char-counter">
+                                <span id="char-count">0</span>/500
+                            </div>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Giriş Yap</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- User Info Section -->
-            <div id="user-info-container" class="user-info-container" style="display: none;">
-                <!-- User info will be populated by JavaScript -->
-            </div>
-
-            <!-- Comment Form Section -->
-            <div id="comment-form-container" class="comment-form-container" style="display: none;">
-                <div class="comment-form-wrapper">
-                    <h3>Yorum Yazın</h3>
-                    <form class="comment-form">
-                        <div class="form-group">
-                            <label for="comment-content">Yorumunuz:</label>
-                            <textarea id="comment-content" name="content" required 
-                                      placeholder="Hizmetimizle ilgili görüşlerinizi paylaşın..." 
-                                      minlength="10" maxlength="1000" rows="4"></textarea>
-                            <small>En az 10, en fazla 1000 karakter</small>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Yorum Gönder</button>
+                        <button type="submit" class="btn-modern">
+                            <span class="btn-text">Yorum Gönder</span>
+                            <span class="btn-icon">📝</span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -1672,13 +1663,8 @@
     
     <button class="scroll-up-btn" aria-label="Sayfanın başına dön" title="Sayfanın başına dön">↑</button>
 
-    <!-- Supabase -->
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    
     <!-- Comment System Scripts -->
-    <script src="config/supabase.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/comments.js"></script>
+    <script src="js/simple-comments.js"></script>
 
     <script>
         // Performance optimized JavaScript
