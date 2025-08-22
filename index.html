@@ -1229,7 +1229,7 @@
         <div class="container hero-content">
             <h1><span class="hero-brand">ELAZIĞ ÇİLİNGİR</span> <span>7/24 Acil Elazığ Çilingir ve Anahtarcı Hizmeti</span></h1>
             <p>Güvenilir ve hızlı elazığ çilingir ve elazığ anahtarcı hizmetleri. Acil kapı açma, anahtar kopyalama ve immobilizer anahtar ihtiyaçlarınız için bir telefon uzağınızdayız.</p>
-            <a href="tel:+905432109949" class="btn">Hemen Ara: 0543 210 99 49</a>
+            <a href="tel:+905432109949" class="btn">Hemen Ara</a>
             </div>
         </section>
 
@@ -1398,24 +1398,67 @@
                 <p>Elazığ çilingir ve anahtarcı hizmetlerimizden memnun kalan müşterilerimizin görüşleri</p>
             </div>
 
-            <div class="testimonial-cards">
-                <div class="testimonial-card">
-                    <p>"Gece yarısı evde anahtarımı unuttuğumda acil elazığ çilingir hizmetinizden yararlandım. 15 dakikada geldiler ve kapıyı hasarsız açtılar. 7/24 elazığ çilingir hizmeti gerçekten hayat kurtarıcı."</p>
-                    <cite>- Ahmet Y.</cite>
-                </div>
-                
-                <div class="testimonial-card">
-                    <p>"Arabamın anahtarını kaybetmiştim, elazığ oto çilingir hizmetinizle yerinde yeni anahtar yaptılar. Anahtar kopyalama hizmeti hem çok hızlı hem de yetkili servisten çok daha uygun fiyata geldi."</p>
-                    <cite>- Elif K.</cite>
-                </div>
-                
-                <div class="testimonial-card">
-                    <p>"İş yerimin kepenk kumandasını kopyalattım. Elazığ çilingir hizmetiniz çok ilgili ve işinizi gerçekten iyi biliyorsunuz. Kesinlikle tavsiye ederim."</p>
-                    <cite>- Mehmet A.</cite>
-                </div>
+            <!-- User Authentication Section -->
+            <div id="auth-container" class="auth-container">
+                <div class="auth-form">
+                    <h3>Yorum Yapmak İçin Giriş Yapın</h3>
+                    <p>Hizmetlerimizle ilgili görüşlerinizi paylaşmak için lütfen kullanıcı adınızı girin.</p>
+                    
+                    <form class="username-form">
+                        <div class="form-group">
+                            <label for="username">Kullanıcı Adı:</label>
+                            <input type="text" id="username" name="username" required 
+                                   placeholder="Kullanıcı adınızı girin (en az 3 karakter)" 
+                                   minlength="3" maxlength="50">
+                            <small>Sadece harf, rakam ve _ kullanabilirsiniz.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="display_name">Görünen Ad (İsteğe bağlı):</label>
+                            <input type="text" id="display_name" name="display_name" 
+                                   placeholder="Yorumda görünecek adınız" maxlength="100">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                    </form>
                 </div>
             </div>
-        </section>
+
+            <!-- User Info Section -->
+            <div id="user-info-container" class="user-info-container" style="display: none;">
+                <!-- User info will be populated by JavaScript -->
+            </div>
+
+            <!-- Comment Form Section -->
+            <div id="comment-form-container" class="comment-form-container" style="display: none;">
+                <div class="comment-form-wrapper">
+                    <h3>Yorum Yazın</h3>
+                    <form class="comment-form">
+                        <div class="form-group">
+                            <label for="comment-content">Yorumunuz:</label>
+                            <textarea id="comment-content" name="content" required 
+                                      placeholder="Hizmetimizle ilgili görüşlerinizi paylaşın..." 
+                                      minlength="10" maxlength="1000" rows="4"></textarea>
+                            <small>En az 10, en fazla 1000 karakter</small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Yorum Gönder</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Comments Display Section -->
+            <div id="comments-section" class="comments-section">
+                <div id="comments-loading" class="loading-message" style="display: none;">
+                    <p>Yorumlar yükleniyor...</p>
+                </div>
+                
+                <div id="comments-container" class="comments-container">
+                    <!-- Comments will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="contact">
         <div class="container">
@@ -1628,6 +1671,14 @@
     </a>
     
     <button class="scroll-up-btn" aria-label="Sayfanın başına dön" title="Sayfanın başına dön">↑</button>
+
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    
+    <!-- Comment System Scripts -->
+    <script src="config/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/comments.js"></script>
 
     <script>
         // Performance optimized JavaScript

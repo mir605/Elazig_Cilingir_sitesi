@@ -473,7 +473,7 @@
         }
     }
 
-    // Mobile Services Slider
+    // Mobile Services Slider - Enhanced
     function initMobileServicesSlider() {
         const servicesGrid = document.getElementById('servicesGrid');
         const servicesIndicator = document.getElementById('servicesIndicator');
@@ -482,87 +482,133 @@
         
         if (!servicesGrid || !servicesIndicator || serviceCards.length === 0) return;
         
-        // Only activate on mobile devices
-        if (window.innerWidth <= 768) {
-            let currentIndex = 0;
-            
-            // Function to update active indicator
-            function updateActiveIndicator(index) {
-                indicators.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === index);
-                });
-                currentIndex = index;
-            }
-            
-            // Function to scroll to specific card
-            function scrollToCard(index) {
-                if (index >= 0 && index < serviceCards.length) {
-                    const cardWidth = serviceCards[0].offsetWidth;
-                    const gap = 16; // 1rem gap
-                    const scrollPosition = index * (cardWidth + gap);
-                    
-                    servicesGrid.scrollTo({
-                        left: scrollPosition,
-                        behavior: 'smooth'
-                    });
-                    
-                    updateActiveIndicator(index);
-                }
-            }
-            
-            // Add click listeners to indicators
-            indicators.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    scrollToCard(index);
-                });
+        let currentIndex = 0;
+        let isScrolling = false;
+        
+        // Function to check if mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+        
+        // Function to update active indicator
+        function updateActiveIndicator(index) {
+            indicators.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
             });
-            
-            // Listen to scroll events to update active indicator
-            let scrollTimeout;
-            servicesGrid.addEventListener('scroll', () => {
+            currentIndex = index;
+        }
+        
+        // Function to scroll to specific card
+        function scrollToCard(index) {
+            if (index >= 0 && index < serviceCards.length && !isScrolling) {
+                isScrolling = true;
+                const cardWidth = serviceCards[0].offsetWidth;
+                const gap = 24; // 1.5rem gap
+                const scrollPosition = index * (cardWidth + gap);
+                
+                servicesGrid.scrollTo({
+                    left: scrollPosition,
+                    behavior: 'smooth'
+                });
+                
+                updateActiveIndicator(index);
+                
+                // Reset scrolling flag after animation
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 500);
+            }
+        }
+        
+        // Function to get current card index based on scroll position
+        function getCurrentIndex() {
+            const scrollLeft = servicesGrid.scrollLeft;
+            const cardWidth = serviceCards[0].offsetWidth;
+            const gap = 24;
+            return Math.round(scrollLeft / (cardWidth + gap));
+        }
+        
+        // Add click listeners to indicators
+        indicators.forEach((dot, index) => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isMobile()) {
+                    scrollToCard(index);
+                }
+            });
+        });
+        
+        // Listen to scroll events to update active indicator
+        let scrollTimeout;
+        servicesGrid.addEventListener('scroll', () => {
+            if (!isScrolling) {
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => {
-                    const scrollLeft = servicesGrid.scrollLeft;
-                    const cardWidth = serviceCards[0].offsetWidth;
-                    const gap = 16;
-                    const newIndex = Math.round(scrollLeft / (cardWidth + gap));
-                    
+                    const newIndex = getCurrentIndex();
                     if (newIndex !== currentIndex && newIndex >= 0 && newIndex < serviceCards.length) {
                         updateActiveIndicator(newIndex);
                     }
-                }, 150);
-            });
+                }, 100);
+            }
+        }, { passive: true });
+        
+        // Enhanced touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartTime = 0;
+        
+        servicesGrid.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].clientX;
+            touchStartTime = Date.now();
+        }, { passive: true });
+        
+        servicesGrid.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            if (!isMobile()) return;
             
-            // Touch swipe support
-            let touchStartX = 0;
-            let touchEndX = 0;
+            const swipeThreshold = 30;
+            const timeThreshold = 300; // ms
+            const diff = touchStartX - touchEndX;
+            const timeDiff = Date.now() - touchStartTime;
             
-            servicesGrid.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-            
-            servicesGrid.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, { passive: true });
-            
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                const diff = touchStartX - touchEndX;
-                
-                if (Math.abs(diff) > swipeThreshold) {
-                    if (diff > 0 && currentIndex < serviceCards.length - 1) {
-                        // Swipe left - next card
-                        scrollToCard(currentIndex + 1);
-                    } else if (diff < 0 && currentIndex > 0) {
-                        // Swipe right - previous card
-                        scrollToCard(currentIndex - 1);
-                    }
+            if (Math.abs(diff) > swipeThreshold && timeDiff < timeThreshold) {
+                if (diff > 0 && currentIndex < serviceCards.length - 1) {
+                    // Swipe left - next card
+                    scrollToCard(currentIndex + 1);
+                } else if (diff < 0 && currentIndex > 0) {
+                    // Swipe right - previous card
+                    scrollToCard(currentIndex - 1);
                 }
             }
-            
-            // Initialize first indicator as active
-            updateActiveIndicator(0);
+        }
+        
+        // Handle resize events
+        function handleResize() {
+            if (isMobile()) {
+                servicesIndicator.style.display = 'flex';
+                // Recalculate current index after resize
+                setTimeout(() => {
+                    const newIndex = getCurrentIndex();
+                    updateActiveIndicator(newIndex);
+                }, 100);
+            } else {
+                servicesIndicator.style.display = 'none';
+            }
+        }
+        
+        // Initialize
+        handleResize();
+        window.addEventListener('resize', debounce(handleResize, 250));
+        
+        // Auto-scroll to first card on mobile if needed
+        if (isMobile()) {
+            setTimeout(() => {
+                scrollToCard(0);
+            }, 100);
         }
     }
 
