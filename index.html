@@ -210,17 +210,13 @@
             border-radius: 8px !important;
             font-weight: 600 !important;
             transition: all 0.3s ease !important;
+            font-size: 0.9rem !important;
         }
         
         .admin-btn:hover {
             background: linear-gradient(135deg, #b91c1c, #dc2626) !important;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3) !important;
-        }
-        
-        .admin-btn i {
-            margin-right: 6px;
-            font-size: 0.9rem;
         }
         
         .menu-btn {
@@ -1237,7 +1233,7 @@
                 <li><a href="#testimonials">Yorumlar</a></li>
                 <li><a href="#contact">İletişim</a></li>
                 <li><a href="#" onclick="openAdminPanel()" id="admin-nav-btn" class="admin-btn">
-                    <i class="fas fa-cog"></i> Admin
+                    🔧 Admin Panel
                 </a></li>
             </ul>
             <div class="menu-btn">☰</div>
@@ -1876,7 +1872,7 @@
             // Admin panel access
             window.openAdminPanel = function() {
                 // Open admin panel in new tab
-                window.open('/admin/supabase-admin.html', '_blank');
+                window.open('./admin/supabase-admin.html', '_blank');
             };
             
             // Blog navigation functionality
