@@ -11,6 +11,11 @@ class BlogCommentsSystem {
     async init() {
         this.createCommentSection();
         
+        // Wait for DOM elements to be available
+        setTimeout(() => {
+            this.setupEventListeners();
+        }, 100);
+        
         if (this.supabase) {
             await this.loadBlogComments();
         } else {
