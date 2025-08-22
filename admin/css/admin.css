@@ -3,20 +3,22 @@
 /* Root Variables */
 :root {
     --primary-color: #dc2626;
-    --secondary-color: #6b7280;
+    --secondary-color: #ea580c;
     --success-color: #10b981;
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
-    --dark-color: #1f2937;
-    --light-color: #f9fafb;
-    --border-color: #e5e7eb;
+    --dark-color: #1e293b;
+    --light-color: #f8fafc;
+    --border-color: #e2e8f0;
     --text-color: #374151;
-    --text-light: #6b7280;
+    --text-light: #64748b;
     --sidebar-width: 280px;
     --header-height: 70px;
-    --border-radius: 8px;
-    --box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --border-radius: 12px;
+    --gradient-primary: linear-gradient(135deg, #dc2626, #ea580c);
+    --gradient-dark: linear-gradient(135deg, #2c3e50, #1a1a2e);
+    --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --box-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Reset */
@@ -42,9 +44,9 @@ body {
 /* Sidebar */
 .admin-sidebar {
     width: var(--sidebar-width);
-    background: white;
+    background: var(--gradient-dark);
     border-right: 1px solid var(--border-color);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-lg);
     position: fixed;
     height: 100vh;
     overflow-y: auto;
@@ -54,18 +56,22 @@ body {
 
 .admin-logo {
     padding: 2rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
 }
 
 .admin-logo h2 {
-    color: var(--primary-color);
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
 .admin-logo p {
-    color: var(--text-light);
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.9rem;
 }
 

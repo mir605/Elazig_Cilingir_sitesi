@@ -22,6 +22,7 @@ CREATE TABLE public.comments (
     rating INTEGER CHECK (rating >= 1 AND rating <= 5) DEFAULT 5,
     content TEXT NOT NULL CHECK (LENGTH(content) >= 20 AND LENGTH(content) <= 1000),
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
+    blog_url VARCHAR(500), -- Blog sayfası URL'si (opsiyonel)
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

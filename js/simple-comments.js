@@ -208,34 +208,9 @@ class SimpleCommentsSystem {
         }
     }
 
-    // Varsayılan yorumlar (demo için)
+    // Varsayılan yorumlar (gerçek yorumlar için Supabase kullanın)
     getDefaultComments() {
-        return [
-            {
-                id: '1',
-                name: 'Ahmet K.',
-                rating: 5,
-                comment: 'Gece yarısı kapıda kaldığımda hemen gelip yardımcı oldular. Çok hızlı ve profesyonel hizmet. Kesinlikle tavsiye ederim.',
-                date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-                status: 'approved'
-            },
-            {
-                id: '2',
-                name: 'Elif M.',
-                rating: 5,
-                comment: 'Arabamın anahtarını kopyalattım. Hem uygun fiyat hem de kaliteli iş. Çok memnun kaldım.',
-                date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
-                status: 'approved'
-            },
-            {
-                id: '3',
-                name: 'Mehmet S.',
-                rating: 4,
-                comment: 'İş yerimin kilidini değiştirdiler. Titiz ve güvenilir çalışma. Teşekkürler.',
-                date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-                status: 'approved'
-            }
-        ];
+        return []; // Mock yorumlar kaldırıldı
     }
 
     // Admin için tüm yorumları al
