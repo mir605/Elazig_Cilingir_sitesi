@@ -34,23 +34,40 @@ class SupabaseCommentsSystem {
     }
 
     setupCharCounter() {
-        const textarea = document.getElementById('comment-text');
-        const counter = document.getElementById('char-count');
+        // Try both homepage and blog comment textareas
+        const textareas = [
+            { textarea: document.getElementById('comment-text'), counter: document.getElementById('char-count') },
+            { textarea: document.getElementById('comment-content'), counter: document.getElementById('comment-char-count') }
+        ];
         
-        if (textarea && counter) {
-            textarea.addEventListener('input', () => {
-                const length = textarea.value.length;
-                counter.textContent = length;
+        textareas.forEach(({ textarea, counter }) => {
+            if (textarea && counter) {
+                console.log('Setting up char counter for:', textarea.id);
                 
-                if (length > 450) {
-                    counter.style.color = '#dc2626';
-                } else if (length > 400) {
-                    counter.style.color = '#ea580c';
-                } else {
-                    counter.style.color = '#64748b';
-                }
-            });
-        }
+                // Set initial count
+                const initialLength = textarea.value.length;
+                counter.textContent = initialLength;
+                
+                textarea.addEventListener('input', () => {
+                    const length = textarea.value.length;
+                    counter.textContent = length;
+                    
+                    if (length > 450) {
+                        counter.style.color = '#dc2626';
+                    } else if (length > 400) {
+                        counter.style.color = '#ea580c';
+                    } else {
+                        counter.style.color = '#64748b';
+                    }
+                });
+                
+                // Also trigger on keyup for better responsiveness
+                textarea.addEventListener('keyup', () => {
+                    const length = textarea.value.length;
+                    counter.textContent = length;
+                });
+            }
+        });
     }
 
     async handleCommentSubmit(form) {

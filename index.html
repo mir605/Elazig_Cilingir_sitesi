@@ -1417,43 +1417,42 @@
             </div>
 
             <!-- Modern Comment Form -->
-            <div class="modern-comment-section">
-                <div class="comment-form-card">
-                    <h3>✍️ Görüşünüzü Paylaşın</h3>
-                    <p>Hizmetimizle ilgili deneyiminizi diğer müşterilerimizle paylaşın</p>
+            <!-- Modern Comment Form - Blog Style -->
+            <div class="blog-comment-form">
+                <h3>💭 Bu Yazı Hakkında Görüşünüz</h3>
+                <p>Bu konu hakkındaki deneyiminizi paylaşın</p>
+                
+                <form id="blog-comment-form" class="comment-form">
+                    <div class="form-group">
+                        <label for="comment-author">👤 Adınız</label>
+                        <input type="text" 
+                               id="comment-author" 
+                               name="author" 
+                               placeholder="Adınız Soyadınız"
+                               maxlength="50"
+                               required>
+                    </div>
                     
-                    <form id="simple-comment-form" class="simple-comment-form">
-                        <div class="form-row">
-                            <div class="form-col">
-                                <input type="text" id="comment-name" name="name" required 
-                                       placeholder="Adınız (örn: Ahmet K.)" maxlength="50">
-                            </div>
-                            <div class="form-col">
-                                <select id="comment-rating" name="rating">
-                                    <option value="5">⭐⭐⭐⭐⭐ Mükemmel</option>
-                                    <option value="4">⭐⭐⭐⭐ Çok İyi</option>
-                                    <option value="3">⭐⭐⭐ İyi</option>
-                                    <option value="2">⭐⭐ Orta</option>
-                                    <option value="1">⭐ Kötü</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="comment-textarea-wrapper">
-                            <textarea id="comment-text" name="comment" required 
-                                      placeholder="Yorumunuzu buraya yazın... (en az 20 karakter)" 
-                                      minlength="20" maxlength="500" rows="4"></textarea>
-                            <div class="char-counter">
-                                <span id="char-count">0</span>/500
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn-modern">
-                            <span class="btn-text">Yorum Gönder</span>
-                            <span class="btn-icon">📝</span>
-                        </button>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <label for="comment-content">
+                            💬 Yorumunuz 
+                            <span class="char-counter">
+                                (<span id="comment-char-count">0</span>/500 karakter)
+                            </span>
+                        </label>
+                        <textarea id="comment-content" 
+                                  name="content" 
+                                  placeholder="Görüşlerinizi, sorularınızı veya deneyimlerinizi paylaşın..."
+                                  maxlength="500"
+                                  rows="4"
+                                  required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-comment-btn">
+                        <span class="btn-text">Yorum Gönder</span>
+                        <span class="btn-icon">📤</span>
+                    </button>
+                </form>
             </div>
 
             <!-- Comments Display Section -->
