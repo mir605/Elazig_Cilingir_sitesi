@@ -13,9 +13,13 @@ class SupabaseCommentsSystem {
             return;
         }
         
-        this.setupEventListeners();
+        // Wait for DOM to be ready
+        setTimeout(() => {
+            this.setupEventListeners();
+            this.setupCharCounter();
+        }, 100);
+        
         await this.loadComments();
-        this.setupCharCounter();
         console.log('Supabase Comments System initialized');
     }
 
