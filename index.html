@@ -1422,30 +1422,41 @@
                 <h3>💭 Bu Yazı Hakkında Görüşünüz</h3>
                 <p>Bu konu hakkındaki deneyiminizi paylaşın</p>
                 
-                <form id="blog-comment-form" class="comment-form">
+                <form id="simple-comment-form" class="comment-form">
                     <div class="form-group">
-                        <label for="comment-author">👤 Adınız</label>
+                        <label for="comment-name">👤 Adınız</label>
                         <input type="text" 
-                               id="comment-author" 
-                               name="author" 
+                               id="comment-name" 
+                               name="name" 
                                placeholder="Adınız Soyadınız"
                                maxlength="50"
                                required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="comment-content">
+                        <label for="comment-text">
                             💬 Yorumunuz 
                             <span class="char-counter">
-                                (<span id="comment-char-count">0</span>/500 karakter)
+                                (<span id="char-count">0</span>/500 karakter)
                             </span>
                         </label>
-                        <textarea id="comment-content" 
-                                  name="content" 
+                        <textarea id="comment-text" 
+                                  name="comment" 
                                   placeholder="Görüşlerinizi, sorularınızı veya deneyimlerinizi paylaşın..."
                                   maxlength="500"
                                   rows="4"
                                   required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comment-rating">⭐ Değerlendirme</label>
+                        <select id="comment-rating" name="rating">
+                            <option value="5">⭐⭐⭐⭐⭐ Mükemmel</option>
+                            <option value="4">⭐⭐⭐⭐ Çok İyi</option>
+                            <option value="3">⭐⭐⭐ İyi</option>
+                            <option value="2">⭐⭐ Orta</option>
+                            <option value="1">⭐ Kötü</option>
+                        </select>
                     </div>
                     
                     <button type="submit" class="submit-comment-btn">
@@ -1897,22 +1908,30 @@
                         const data = JSON.parse(heroContent);
                         console.log('Loading hero content:', data);
                         
-                        const heroTitle = document.querySelector('.hero h1');
-                        const heroDescription = document.querySelector('.hero p');
-                        const heroButton = document.querySelector('.hero .btn');
+                        // More specific selectors for hero
+                        const heroTitle = document.querySelector('.hero-content h1');
+                        const heroDescription = document.querySelector('.hero-content p');
+                        const heroButton = document.querySelector('.hero-content .btn');
                         
                         if (heroTitle && data.title) {
+                            console.log('Updating hero title:', data.title);
                             heroTitle.innerHTML = data.title;
                         }
                         if (heroDescription && data.description) {
+                            console.log('Updating hero description:', data.description);
                             heroDescription.textContent = data.description;
                         }
                         if (heroButton && data.phone) {
+                            console.log('Updating hero phone:', data.phone);
                             heroButton.href = `tel:+90${data.phone.replace(/\s/g, '')}`;
                         }
+                        
+                        console.log('Hero content updated successfully');
                     } catch (error) {
                         console.error('Error loading CMS hero content:', error);
                     }
+                } else {
+                    console.log('No hero content found in localStorage');
                 }
 
                 // Load service cards from CMS
@@ -1924,11 +1943,15 @@
                         
                         // Update service cards dynamically
                         const serviceCards = document.querySelectorAll('.service-card');
+                        console.log('Found service cards:', serviceCards.length);
+                        
                         services.forEach((service, index) => {
                             if (serviceCards[index]) {
                                 const card = serviceCards[index];
                                 const titleEl = card.querySelector('h3');
                                 const descEl = card.querySelector('p');
+                                
+                                console.log(`Updating service ${index}:`, service.title);
                                 
                                 if (titleEl && service.title) {
                                     titleEl.textContent = service.title;
@@ -1938,9 +1961,13 @@
                                 }
                             }
                         });
+                        
+                        console.log('Service cards updated successfully');
                     } catch (error) {
                         console.error('Error loading CMS services:', error);
                     }
+                } else {
+                    console.log('No CMS services found in localStorage');
                 }
 
                 // Load site settings

@@ -245,6 +245,10 @@ class BlogCommentsSystem {
         const textarea = document.getElementById('blog-comment-text');
         const counter = document.getElementById('blog-char-count');
 
+        console.log('Blog comment form:', form);
+        console.log('Blog textarea:', textarea);
+        console.log('Blog counter:', counter);
+
         if (form) {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -253,9 +257,15 @@ class BlogCommentsSystem {
         }
 
         if (textarea && counter) {
+            console.log('Setting up blog character counter');
+            
+            // Set initial count
+            counter.textContent = textarea.value.length;
+            
             textarea.addEventListener('input', () => {
                 const length = textarea.value.length;
                 counter.textContent = length;
+                console.log('Blog chars:', length);
                 
                 if (length > 450) {
                     counter.style.color = '#dc2626';
