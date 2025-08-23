@@ -1886,6 +1886,65 @@
                     window.location.href = 'blog.html';
                 }
             };
+
+            // Load CMS content on page load
+            function loadCMSContent() {
+                // Load hero content
+                const heroContent = localStorage.getItem('hero_content');
+                if (heroContent) {
+                    try {
+                        const data = JSON.parse(heroContent);
+                        const heroTitle = document.querySelector('.hero h1');
+                        const heroDescription = document.querySelector('.hero p');
+                        const heroButton = document.querySelector('.hero .btn');
+                        
+                        if (heroTitle && data.title) {
+                            heroTitle.innerHTML = data.title;
+                        }
+                        if (heroDescription && data.description) {
+                            heroDescription.textContent = data.description;
+                        }
+                        if (heroButton && data.phone) {
+                            heroButton.href = `tel:+90${data.phone.replace(/\s/g, '')}`;
+                        }
+                    } catch (error) {
+                        console.error('Error loading CMS hero content:', error);
+                    }
+                }
+
+                // Load site settings
+                const siteSettings = localStorage.getItem('site_settings');
+                if (siteSettings) {
+                    try {
+                        const settings = JSON.parse(siteSettings);
+                        if (settings.title) {
+                            document.title = settings.title;
+                        }
+                        
+                        // Update all phone links
+                        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+                        phoneLinks.forEach(link => {
+                            if (settings.phone) {
+                                link.href = `tel:+90${settings.phone.replace(/\s/g, '')}`;
+                                if (link.textContent.includes('0543')) {
+                                    link.textContent = settings.phone;
+                                }
+                            }
+                        });
+
+                        // Update WhatsApp link
+                        const whatsappLink = document.querySelector('a[href*="wa.me"]');
+                        if (whatsappLink && settings.whatsapp) {
+                            whatsappLink.href = `https://wa.me/${settings.whatsapp}`;
+                        }
+                    } catch (error) {
+                        console.error('Error loading CMS site settings:', error);
+                    }
+                }
+            }
+
+            // Load CMS content when page loads
+            document.addEventListener('DOMContentLoaded', loadCMSContent);
         })();
     </script>
 </body>
