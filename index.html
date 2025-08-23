@@ -1889,11 +1889,15 @@
 
             // Load CMS content on page load
             function loadCMSContent() {
+                console.log('Loading CMS content...');
+                
                 // Load hero content
                 const heroContent = localStorage.getItem('hero_content');
                 if (heroContent) {
                     try {
                         const data = JSON.parse(heroContent);
+                        console.log('Loading hero content:', data);
+                        
                         const heroTitle = document.querySelector('.hero h1');
                         const heroDescription = document.querySelector('.hero p');
                         const heroButton = document.querySelector('.hero .btn');
@@ -1912,11 +1916,41 @@
                     }
                 }
 
+                // Load service cards from CMS
+                const cmsServices = localStorage.getItem('cms_services');
+                if (cmsServices) {
+                    try {
+                        const services = JSON.parse(cmsServices);
+                        console.log('Loading CMS services:', services);
+                        
+                        // Update service cards dynamically
+                        const serviceCards = document.querySelectorAll('.service-card');
+                        services.forEach((service, index) => {
+                            if (serviceCards[index]) {
+                                const card = serviceCards[index];
+                                const titleEl = card.querySelector('h3');
+                                const descEl = card.querySelector('p');
+                                
+                                if (titleEl && service.title) {
+                                    titleEl.textContent = service.title;
+                                }
+                                if (descEl && service.description) {
+                                    descEl.textContent = service.description;
+                                }
+                            }
+                        });
+                    } catch (error) {
+                        console.error('Error loading CMS services:', error);
+                    }
+                }
+
                 // Load site settings
                 const siteSettings = localStorage.getItem('site_settings');
                 if (siteSettings) {
                     try {
                         const settings = JSON.parse(siteSettings);
+                        console.log('Loading site settings:', settings);
+                        
                         if (settings.title) {
                             document.title = settings.title;
                         }
@@ -1941,10 +1975,28 @@
                         console.error('Error loading CMS site settings:', error);
                     }
                 }
+                
+                console.log('CMS content loading completed');
             }
 
             // Load CMS content when page loads
             document.addEventListener('DOMContentLoaded', loadCMSContent);
+            
+            // Listen for localStorage changes from admin panel
+            window.addEventListener('storage', function(e) {
+                console.log('Storage changed:', e.key, e.newValue);
+                
+                if (e.key === 'hero_content' || e.key === 'cms_services' || e.key === 'site_settings') {
+                    console.log('CMS content updated, reloading...');
+                    setTimeout(loadCMSContent, 100); // Small delay to ensure data is ready
+                }
+            });
+            
+            // Also listen for custom events (for same-window updates)
+            window.addEventListener('cmsUpdate', function(e) {
+                console.log('CMS update event:', e.detail);
+                loadCMSContent();
+            });
         })();
     </script>
 </body>
