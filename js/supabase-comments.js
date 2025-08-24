@@ -13,11 +13,14 @@ class SupabaseCommentsSystem {
             return;
         }
         
-        // Wait for DOM to be ready
+        // Setup immediately
+        this.setupEventListeners();
+        this.setupCharCounter();
+        
+        // Also setup after a small delay to catch dynamically loaded elements
         setTimeout(() => {
-            this.setupEventListeners();
             this.setupCharCounter();
-        }, 100);
+        }, 500);
         
         await this.loadComments();
         console.log('Supabase Comments System initialized');
@@ -34,9 +37,13 @@ class SupabaseCommentsSystem {
     }
 
     setupCharCounter() {
-        // Try both homepage and blog comment textareas
+        // Try all possible textarea and counter combinations
         const textareas = [
+            // Ana sayfa
             { textarea: document.getElementById('comment-text'), counter: document.getElementById('char-count') },
+            // Blog sayfaları
+            { textarea: document.getElementById('blog-comment-text'), counter: document.getElementById('blog-char-count') },
+            // Alternatif id'ler
             { textarea: document.getElementById('comment-content'), counter: document.getElementById('comment-char-count') }
         ];
         
@@ -48,24 +55,37 @@ class SupabaseCommentsSystem {
                 const initialLength = textarea.value.length;
                 counter.textContent = initialLength;
                 
-                textarea.addEventListener('input', () => {
+                // Input event listener
+                const updateCounter = () => {
                     const length = textarea.value.length;
                     counter.textContent = length;
                     
+                    // Color coding based on length
                     if (length > 450) {
                         counter.style.color = '#dc2626';
+                        counter.parentElement.style.color = '#dc2626';
                     } else if (length > 400) {
                         counter.style.color = '#ea580c';
+                        counter.parentElement.style.color = '#ea580c';
                     } else {
                         counter.style.color = '#64748b';
+                        counter.parentElement.style.color = '#64748b';
                     }
-                });
+                };
                 
-                // Also trigger on keyup for better responsiveness
-                textarea.addEventListener('keyup', () => {
-                    const length = textarea.value.length;
-                    counter.textContent = length;
+                // Multiple event listeners for maximum compatibility
+                textarea.addEventListener('input', updateCounter);
+                textarea.addEventListener('keyup', updateCounter);
+                textarea.addEventListener('paste', () => {
+                    setTimeout(updateCounter, 10); // Small delay for paste events
                 });
+                textarea.addEventListener('change', updateCounter);
+                
+                // Initial call
+                updateCounter();
+            } else {
+                if (!textarea) console.log('Textarea not found for counter setup');
+                if (!counter) console.log('Counter not found for counter setup');
             }
         });
     }
@@ -113,7 +133,24 @@ class SupabaseCommentsSystem {
 
             // Success
             form.reset();
-            document.getElementById('char-count').textContent = '0';
+            
+            // Reset character counters
+            const charCounters = [
+                document.getElementById('char-count'),
+                document.getElementById('blog-char-count'),
+                document.getElementById('comment-char-count')
+            ];
+            
+            charCounters.forEach(counter => {
+                if (counter) {
+                    counter.textContent = '0';
+                    counter.style.color = '#64748b';
+                    if (counter.parentElement) {
+                        counter.parentElement.style.color = '#64748b';
+                    }
+                }
+            });
+            
             this.showMessage('✅ Yorumunuz gönderildi! Admin onayından sonra yayınlanacaktır.', 'success');
             
             // Reload comments

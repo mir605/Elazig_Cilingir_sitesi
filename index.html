@@ -204,13 +204,11 @@
             color: white !important;
         }
         
-        /* Admin Button Styling */
         .admin-btn {
             background: linear-gradient(135deg, #dc2626, #ea580c) !important;
-            border-radius: 8px !important;
-            font-weight: 600 !important;
-            transition: all 0.3s ease !important;
+            color: white !important;
             font-size: 0.9rem !important;
+            border-radius: 6px !important;
         }
         
         .admin-btn:hover {
@@ -564,46 +562,197 @@
             margin: 0 auto 30px;
         }
         
-        .testimonial-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+        /* Universal comment system styles */
+        .blog-comments-section, .comments-section {
+            margin: 4rem 0 2rem 0;
+            padding: 2rem 0;
+            border-top: 2px solid #e2e8f0;
         }
-        
-        .testimonial-card {
-            background: #fdf2f8;
-            color: #374151;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            position: relative;
-            border: 2px solid #f3e8ff;
+
+        .comments-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
         }
-        
-        .testimonial-card:before {
-            content: '"';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 5rem;
-            color: rgba(219, 39, 119, 0.2);
-            font-family: Georgia, serif;
-            line-height: 1;
+
+        .comments-header h3 {
+            font-size: 1.75rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
         }
-        
-        .testimonial-card p {
-            margin-bottom: 20px;
+
+        .comments-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .blog-comment-form-section, .modern-comment-section {
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .blog-comments-display, .comments-container {
+            margin-top: 2rem;
+        }
+
+        .loading-message {
+            text-align: center;
+            color: #64748b;
+            padding: 2rem;
             font-style: italic;
-            color: #374151;
-            position: relative;
-            z-index: 1;
         }
-        
-        .testimonial-card cite {
+
+        .no-blog-comments {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 2px dashed #e2e8f0;
+        }
+
+        .no-comments-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .no-blog-comments h4 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .no-blog-comments p {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        .blog-comments-header h4 {
+            color: #1e293b;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .blog-comment-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .blog-comment-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .blog-comment-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .blog-author-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #dc2626, #ea580c);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .blog-author-info h5 {
+            margin: 0;
+            color: #1e293b;
             font-weight: 600;
-            color: #b91c1c;
-            font-style: normal;
+            font-size: 1rem;
+        }
+
+        .blog-comment-rating {
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+
+        .blog-comment-date {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .blog-comment-content {
+            color: #374151;
+            line-height: 1.6;
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        /* Comment notifications */
+        .comment-notification {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .comment-notification-success {
+            background-color: #d1fae5;
+            border-color: #10b981;
+            color: #065f46;
+        }
+
+        .comment-notification-error {
+            background-color: #fee2e2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .notification-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: inherit;
+        }
+
+        @media (max-width: 768px) {
+            .blog-comments-section, .comments-section {
+                margin: 2rem 0;
+                padding: 1rem;
+            }
+
+            .blog-comment-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .blog-comment-date {
+                align-self: flex-end;
+            }
+
+            .blog-comment-item {
+                padding: 1rem;
+            }
         }
         
         footer {
@@ -1031,15 +1180,7 @@
                 font-size: clamp(1rem, 3vw, 1.2rem);
             }
             
-            /* Testimonials mobile */
-            .testimonial-card {
-                padding: 20px 15px;
-            }
-            
-            .testimonial-card p {
-                font-size: clamp(0.9rem, 2.8vw, 1rem);
-                margin-bottom: 15px;
-            }
+            /* Eski testimonial mobile styles kaldırıldı */
             
             /* Blog section mobile */
             .blog-section-header h2 {
@@ -1407,7 +1548,9 @@
             </div>
         </section>
 
-
+    <!-- ============================================ -->
+    <!--                  Testimonials                  -->
+    <!-- ============================================ -->
 
     <section id="testimonials">
         <div class="container">
@@ -1417,67 +1560,57 @@
             </div>
 
             <!-- Modern Comment Form -->
-            <!-- Modern Comment Form - Blog Style -->
-            <div class="blog-comment-form">
-                <h3>💭 Bu Yazı Hakkında Görüşünüz</h3>
-                <p>Bu konu hakkındaki deneyiminizi paylaşın</p>
-                
-                <form id="simple-comment-form" class="comment-form">
-                    <div class="form-group">
-                        <label for="comment-name">👤 Adınız</label>
-                        <input type="text" 
-                               id="comment-name" 
-                               name="name" 
-                               placeholder="Adınız Soyadınız"
-                               maxlength="50"
-                               required>
-                    </div>
+            <div class="modern-comment-section">
+                <div class="comment-form-card">
+                    <h3>✍️ Hizmetimiz Hakkında Görüşünüz</h3>
+                    <p>Çilingir ve anahtarcı hizmetlerimiz hakkındaki deneyiminizi paylaşın</p>
                     
-                    <div class="form-group">
-                        <label for="comment-text">
-                            💬 Yorumunuz 
-                            <span class="char-counter">
-                                (<span id="char-count">0</span>/500 karakter)
-                            </span>
-                        </label>
-                        <textarea id="comment-text" 
-                                  name="comment" 
-                                  placeholder="Görüşlerinizi, sorularınızı veya deneyimlerinizi paylaşın..."
-                                  maxlength="500"
-                                  rows="4"
-                                  required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="comment-rating">⭐ Değerlendirme</label>
-                        <select id="comment-rating" name="rating">
-                            <option value="5">⭐⭐⭐⭐⭐ Mükemmel</option>
-                            <option value="4">⭐⭐⭐⭐ Çok İyi</option>
-                            <option value="3">⭐⭐⭐ İyi</option>
-                            <option value="2">⭐⭐ Orta</option>
-                            <option value="1">⭐ Kötü</option>
-                        </select>
-                    </div>
-                    
-                    <button type="submit" class="submit-comment-btn">
-                        <span class="btn-text">Yorum Gönder</span>
-                        <span class="btn-icon">📤</span>
-                    </button>
-                </form>
+                    <form id="blog-comment-form" class="simple-comment-form">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <input type="text" id="blog-comment-name" name="name" required 
+                                       placeholder="Adınız" maxlength="50">
+                            </div>
+                            <div class="form-col">
+                                <select id="blog-comment-rating" name="rating">
+                                    <option value="5">⭐⭐⭐⭐⭐ Mükemmel</option>
+                                    <option value="4">⭐⭐⭐⭐ Çok İyi</option>
+                                    <option value="3">⭐⭐⭐ İyi</option>
+                                    <option value="2">⭐⭐ Orta</option>
+                                    <option value="1">⭐ Kötü</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="comment-textarea-wrapper">
+                            <textarea id="blog-comment-text" name="comment" required 
+                                      placeholder="Hizmetimiz hakkındaki görüşlerinizi yazın... (en az 20 karakter)" 
+                                      minlength="20" maxlength="500" rows="4"></textarea>
+                            <div class="char-counter">
+                                <span id="blog-char-count">0</span>/500
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-modern">
+                            <span class="btn-text">Yorum Gönder</span>
+                            <span class="btn-icon">📝</span>
+                        </button>
+                    </form>
+                </div>
             </div>
 
             <!-- Comments Display Section -->
-            <div id="comments-section" class="comments-section">
-                <div id="comments-loading" class="loading-message" style="display: none;">
-                    <p>Yorumlar yükleniyor...</p>
-                </div>
-                
-                <div id="comments-container" class="comments-container">
-                    <!-- Comments will be loaded here by JavaScript -->
+            <div id="blog-comments-section" class="comments-section">
+                <div id="blog-comments-container" class="comments-container">
+                    <!-- Gerçek yorumlar JavaScript tarafından buraya yüklenecek -->
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ============================================ -->
+    <!--                     Contact                    -->
+    <!-- ============================================ -->
 
     <section id="contact">
         <div class="container">
@@ -1694,10 +1827,9 @@
     <!-- Supabase -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     
-    <!-- Comment System Scripts -->
+    <!-- Universal Comment System -->
     <script src="config/supabase.js"></script>
-    <script src="js/supabase-comments.js"></script>
-    <script src="js/blog-comments.js"></script>
+    <script src="js/universal-comments.js"></script>
 
     <script>
         // Performance optimized JavaScript
@@ -1880,8 +2012,8 @@
 
             // Admin panel access
             window.openAdminPanel = function() {
-                // Open secure admin login in new tab
-                window.open('./admin/secure-admin.html', '_blank');
+                // Open Supabase admin panel in new tab
+                window.open('./admin/supabase-admin.html', '_blank');
             };
             
             // Blog navigation functionality
