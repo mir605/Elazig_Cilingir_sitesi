@@ -2481,8 +2481,9 @@
 
             // Admin panel access
             window.openAdminPanel = function() {
-                // Open Supabase comment manager in new tab
-                window.open('./admin/login.html', '_blank');
+                // Open admin panel with absolute path for Vercel deployment
+                const baseUrl = window.location.origin;
+                window.open(baseUrl + '/admin/login.html', '_blank');
             };
             
             // Blog navigation functionality
