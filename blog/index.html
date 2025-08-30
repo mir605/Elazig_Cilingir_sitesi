@@ -261,7 +261,8 @@
         <span class="arrow-up-icon">↑</span>
     </div>
 
-    <script src="../js/script.js?v=1.1"></script>
+    <!-- Blog specific JavaScript -->
+    <script src="../js/blog-script.js"></script>
     
     <!-- Comment System -->
     <script defer src="../js/comment-system-config.js"></script>
@@ -269,63 +270,5 @@
     
     <!-- Supabase -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    
-    <!-- Ana sayfa ile aynı JavaScript functionality -->
-    <script>
-        // Ana sayfa navbar JavaScript ile birebir aynı
-        (function() {
-            'use strict';
-            
-            // DOM ready check
-            function ready(fn) {
-                if (document.readyState !== 'loading') {
-                    fn();
-                } else {
-                    document.addEventListener('DOMContentLoaded', fn);
-                }
-            }
-            
-            ready(function() {
-                // Mobile menu toggle - Ana sayfa ile aynı
-                const menuBtn = document.querySelector('.menu-btn');
-                const navLinks = document.querySelector('.nav-links');
-                
-                if (menuBtn && navLinks) {
-                    menuBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        navLinks.classList.toggle('active');
-                    });
-                    
-                    // Close menu on outside click
-                    document.addEventListener('click', (e) => {
-                        if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                            navLinks.classList.remove('active');
-                        }
-                    });
-                }
-                
-                // Scroll to top functionality
-                const scrollUpBtn = document.querySelector('.scroll-up-btn');
-                if (scrollUpBtn) {
-                    // Show/hide scroll up button
-                    window.addEventListener('scroll', () => {
-                        if (window.scrollY > 300) {
-                            scrollUpBtn.classList.add('show');
-                        } else {
-                            scrollUpBtn.classList.remove('show');
-                        }
-                    });
-                    
-                    // Scroll to top when clicked
-                    scrollUpBtn.addEventListener('click', () => {
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth'
-                        });
-                    });
-                }
-            });
-        })();
-    </script>
 </body>
 </html> 
