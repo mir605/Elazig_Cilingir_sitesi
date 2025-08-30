@@ -41,7 +41,7 @@ yarn-error.log*
 # Config files (if sensitive)
 config/
 private/
-admin/
+
 
 # Backup files
 *.backup
