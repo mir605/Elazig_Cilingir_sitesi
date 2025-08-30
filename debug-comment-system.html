@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment System Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .debug-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .debug-output {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .test-button {
+            background: #007cba;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #005a87;
+        }
+        .comment-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .comment-form button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comment System Debug Tool</h1>
+    
+    <div class="debug-section">
+        <h2>Database Debug</h2>
+        <button class="test-button" onclick="debugDatabase()">Check Database State</button>
+        <button class="test-button" onclick="getAllComments()">Get All Comments</button>
+        <button class="test-button" onclick="clearDebug()">Clear Debug Output</button>
+        <div id="debug-output" class="debug-output">Debug output will appear here...</div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>Test Comment Submission</h2>
+        <div class="comment-form">
+            <label>Page ID:</label>
+            <input type="text" id="test-page-id" value="test-page-1" placeholder="Enter page ID">
+            
+            <label>Nickname:</label>
+            <input type="text" id="test-nickname" value="Test User" placeholder="Enter nickname">
+            
+            <label>Content:</label>
+            <textarea id="test-content" rows="3" placeholder="Enter comment content">This is a test comment for debugging page_id filtering.</textarea>
+            
+            <label>Rating:</label>
+            <select id="test-rating">
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Good</option>
+                <option value="3">3 - Average</option>
+                <option value="2">2 - Poor</option>
+                <option value="1">1 - Very Poor</option>
+            </select>
+            
+            <br><br>
+            <button onclick="submitTestComment()">Submit Test Comment</button>
+        </div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>Test Comment Loading</h2>
+        <input type="text" id="load-page-id" value="test-page-1" placeholder="Enter page ID to load comments for">
+        <button class="test-button" onclick="loadTestComments()">Load Comments</button>
+        <div id="comments-display"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>Comment System Instances</h2>
+        <button class="test-button" onclick="checkInstances()">Check Instances</button>
+        <div id="instances-display"></div>
+    </div>
+
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    
+    <!-- Comment System -->
+    <script src="js/comment-system-config.js"></script>
+    <script src="js/comment-system-manager.js"></script>
+    
+    <script>
+        function log(message) {
+            const output = document.getElementById('debug-output');
+            const timestamp = new Date().toLocaleTimeString();
+            output.textContent += `[${timestamp}] ${message}\n`;
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function clearDebug() {
+            document.getElementById('debug-output').textContent = '';
+        }
+        
+        async function debugDatabase() {
+            log('=== Starting Database Debug ===');
+            try {
+                const result = await window.commentSystemManager.debugDatabaseState();
+                if (result.success) {
+                    log('Database debug completed successfully');
+                    log(`Found ${result.data.allComments?.length || 0} total comments`);
+                } else {
+                    log(`Database debug failed: ${result.error}`);
+                }
+            } catch (error) {
+                log(`Database debug error: ${error.message}`);
+            }
+        }
+        
+        async function getAllComments() {
+            log('=== Getting All Comments ===');
+            try {
+                const result = await window.commentSystemManager.getAllComments();
+                if (result.success) {
+                    log(`Retrieved ${result.data.length} comments`);
+                    result.data.forEach(comment => {
+                        log(`  ID: ${comment.id}, Page: ${comment.page_id}, User: ${comment.nickname}, Status: ${comment.status}`);
+                    });
+                } else {
+                    log(`Failed to get comments: ${result.error}`);
+                }
+            } catch (error) {
+                log(`Error getting comments: ${error.message}`);
+            }
+        }
+        
+        async function submitTestComment() {
+            const pageId = document.getElementById('test-page-id').value;
+            const nickname = document.getElementById('test-nickname').value;
+            const content = document.getElementById('test-content').value;
+            const rating = document.getElementById('test-rating').value;
+            
+            log(`=== Submitting Test Comment ===`);
+            log(`Page ID: ${pageId}`);
+            log(`Nickname: ${nickname}`);
+            log(`Content: ${content}`);
+            log(`Rating: ${rating}`);
+            
+            try {
+                const result = await window.commentSystemManager.submitComment(pageId, nickname, content, rating);
+                if (result.success) {
+                    log('Comment submitted successfully');
+                    log(`Comment ID: ${result.data.id}`);
+                } else {
+                    log(`Comment submission failed: ${result.error}`);
+                }
+            } catch (error) {
+                log(`Comment submission error: ${error.message}`);
+            }
+        }
+        
+        async function loadTestComments() {
+            const pageId = document.getElementById('load-page-id').value;
+            const display = document.getElementById('comments-display');
+            
+            log(`=== Loading Comments for Page ID: ${pageId} ===`);
+            
+            try {
+                const result = await window.commentSystemManager.getComments(pageId);
+                if (result.success) {
+                    log(`Found ${result.data.length} comments for page ${pageId}`);
+                    
+                    let html = '<h3>Comments:</h3>';
+                    if (result.data.length === 0) {
+                        html += '<p>No comments found for this page.</p>';
+                    } else {
+                        result.data.forEach(comment => {
+                            html += `
+                                <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 4px;">
+                                    <strong>${comment.nickname}</strong> (${comment.rating}/5)<br>
+                                    <small>${new Date(comment.created_at).toLocaleString()}</small><br>
+                                    ${comment.content}
+                                </div>
+                            `;
+                        });
+                    }
+                    display.innerHTML = html;
+                } else {
+                    log(`Failed to load comments: ${result.error}`);
+                    display.innerHTML = `<p style="color: red;">Error: ${result.error}</p>`;
+                }
+            } catch (error) {
+                log(`Error loading comments: ${error.message}`);
+                display.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+        
+        function checkInstances() {
+            const display = document.getElementById('instances-display');
+            const instances = window.commentSystemManager?.instances;
+            
+            log('=== Checking Comment System Instances ===');
+            
+            if (!instances) {
+                log('No instances found');
+                display.innerHTML = '<p>No comment system instances found.</p>';
+                return;
+            }
+            
+            log(`Found ${instances.size} instances`);
+            
+            let html = '<h3>Instances:</h3>';
+            instances.forEach((instance, containerId) => {
+                html += `
+                    <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 4px;">
+                        <strong>Container ID:</strong> ${containerId}<br>
+                        <strong>Page ID:</strong> ${instance.pageId}<br>
+                        <strong>Container Found:</strong> ${instance.container ? 'Yes' : 'No'}<br>
+                        <strong>Config:</strong> ${JSON.stringify(instance.config)}
+                    </div>
+                `;
+                log(`Instance ${containerId}: pageId=${instance.pageId}, container=${!!instance.container}`);
+            });
+            
+            display.innerHTML = html;
+        }
+        
+        // Auto-run some checks when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                log('=== Page Loaded ===');
+                log('Comment System Manager available: ' + !!window.commentSystemManager);
+                if (window.commentSystemManager) {
+                    log('Manager config: ' + JSON.stringify(window.commentSystemManager.getConfig()));
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -25,16 +25,23 @@ class CommentSystemManager {
     }
 
     async initSupabase() {
-        if (typeof window !== 'undefined' && window.supabase) {
-            this.supabase = window.supabase.createClient(this.config.supabaseUrl, this.config.supabaseKey, {
-                auth: {
-                    autoRefreshToken: false,
-                    persistSession: false
-                }
-            });
-            console.log('Comment System Manager: Supabase initialized');
-        } else {
-            console.error('Comment System Manager: Supabase not available');
+        try {
+            if (typeof window !== 'undefined' && window.supabase) {
+                this.supabase = window.supabase.createClient(this.config.supabaseUrl, this.config.supabaseKey, {
+                    auth: {
+                        autoRefreshToken: false,
+                        persistSession: false
+                    }
+                });
+                console.log('Comment System Manager: Supabase initialized successfully');
+                console.log('Supabase URL:', this.config.supabaseUrl);
+                console.log('Supabase Key (first 20 chars):', this.config.supabaseKey.substring(0, 20) + '...');
+            } else {
+                console.error('Comment System Manager: Supabase not available');
+                console.error('window.supabase:', typeof window.supabase);
+            }
+        } catch (error) {
+            console.error('Comment System Manager: Error initializing Supabase:', error);
         }
     }
 
@@ -49,7 +56,8 @@ class CommentSystemManager {
             getAllComments: () => this.getAllComments(),
             updateCommentStatus: (commentId, status) => this.updateCommentStatus(commentId, status),
             deleteComment: (commentId) => this.deleteComment(commentId),
-            getCommentStats: () => this.getCommentStats()
+            getCommentStats: () => this.getCommentStats(),
+            debugDatabaseState: () => this.debugDatabaseState()
         };
 
         // Global initialization function
@@ -62,7 +70,11 @@ class CommentSystemManager {
         document.addEventListener('DOMContentLoaded', () => {
             const containers = document.querySelectorAll('[data-supabase-comment-system]');
             containers.forEach(container => {
-                const pageId = container.dataset.pageId || window.location.pathname;
+                const pageId = container.dataset.pageId;
+                if (!pageId) {
+                    console.error('Comment container missing data-page-id attribute:', container);
+                    return;
+                }
                 const options = {};
                 this.createInstance(container.id, pageId, options);
             });
@@ -89,6 +101,8 @@ class CommentSystemManager {
             if (!this.supabase) {
                 throw new Error('Supabase not initialized');
             }
+
+            console.log('Submitting comment for page_id:', pageId);
 
             const commentData = {
                 page_id: pageId,
@@ -156,6 +170,8 @@ class CommentSystemManager {
                 throw new Error('Supabase not initialized');
             }
 
+            console.log('Fetching comments for page_id:', pageId);
+
             // Get only main comments (not replies) for this page
             const { data: comments, error: commentsError } = await this.supabase
                 .from('comments')
@@ -166,6 +182,8 @@ class CommentSystemManager {
                 .order('created_at', { ascending: false });
 
             if (commentsError) throw commentsError;
+
+            console.log(`Found ${comments?.length || 0} comments for page_id: ${pageId}`);
 
             // Get replies for these comments
             if (comments && comments.length > 0) {
@@ -204,6 +222,8 @@ class CommentSystemManager {
                 throw new Error('Supabase not initialized');
             }
 
+            console.log('Fetching all comments...');
+
             // First, get all comments
             const { data: comments, error: commentsError } = await this.supabase
                 .from('comments')
@@ -211,6 +231,14 @@ class CommentSystemManager {
                 .order('created_at', { ascending: false });
 
             if (commentsError) throw commentsError;
+
+            console.log(`Found ${comments?.length || 0} total comments`);
+            
+            // Log unique page_ids for debugging
+            if (comments && comments.length > 0) {
+                const uniquePageIds = [...new Set(comments.map(c => c.page_id))];
+                console.log('Unique page_ids in database:', uniquePageIds);
+            }
 
             return { success: true, data: comments || [] };
         } catch (error) {
@@ -364,6 +392,61 @@ class CommentSystemManager {
     getConfig() {
         return { ...this.config };
     }
+
+    // Debug method to check database state
+    async debugDatabaseState() {
+        try {
+            if (!this.supabase) {
+                throw new Error('Supabase not initialized');
+            }
+
+            console.log('=== DATABASE DEBUG INFO ===');
+            
+            // Get all comments
+            const { data: allComments, error: allError } = await this.supabase
+                .from('comments')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (allError) throw allError;
+
+            console.log(`Total comments in database: ${allComments?.length || 0}`);
+            
+            if (allComments && allComments.length > 0) {
+                // Group by page_id
+                const pageIdGroups = {};
+                allComments.forEach(comment => {
+                    if (!pageIdGroups[comment.page_id]) {
+                        pageIdGroups[comment.page_id] = [];
+                    }
+                    pageIdGroups[comment.page_id].push(comment);
+                });
+
+                console.log('Comments grouped by page_id:');
+                Object.keys(pageIdGroups).forEach(pageId => {
+                    console.log(`  ${pageId}: ${pageIdGroups[pageId].length} comments`);
+                });
+            }
+
+            // Get unique page_ids
+            const { data: uniquePageIds, error: uniqueError } = await this.supabase
+                .from('comments')
+                .select('page_id')
+                .order('page_id');
+
+            if (!uniqueError && uniquePageIds) {
+                const uniqueIds = [...new Set(uniquePageIds.map(c => c.page_id))];
+                console.log('Unique page_ids:', uniqueIds);
+            }
+
+            console.log('=== END DATABASE DEBUG ===');
+            
+            return { success: true, data: { allComments, uniquePageIds } };
+        } catch (error) {
+            console.error('Database debug error:', error);
+            return { success: false, error: error.message };
+        }
+    }
 }
 
 // Individual Comment Instance
@@ -374,6 +457,8 @@ class CommentInstance {
         this.config = config;
         this.manager = manager;
         this.container = document.getElementById(containerId);
+        
+        console.log('Creating CommentInstance:', { containerId, pageId });
         
         if (!this.container) {
             console.error(`Comment container with ID "${containerId}" not found`);
@@ -527,7 +612,10 @@ class CommentInstance {
         submitBtn.disabled = true;
         
         try {
+            console.log('Submitting comment with pageId:', this.pageId);
             const result = await this.manager.submitComment(this.pageId, nickname, content, rating);
+            
+            console.log('Submit result:', result);
             
             if (result.success) {
                 this.showMessage('Yorum başarıyla gönderildi ve onay bekliyor', 'success');
@@ -562,8 +650,12 @@ class CommentInstance {
         const commentsList = document.getElementById(`commentsList_${this.containerId}`);
         if (!commentsList) return;
         
+        console.log('Loading comments for instance:', this.containerId, 'pageId:', this.pageId);
+        
         try {
             const result = await this.manager.getComments(this.pageId);
+            
+            console.log('Load comments result:', result);
             
             if (result.success) {
                 this.renderComments(result.data);
