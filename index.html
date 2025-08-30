@@ -2481,9 +2481,9 @@
 
             // Admin panel access
             window.openAdminPanel = function() {
-                // Open admin panel with absolute path for Vercel deployment
+                // Open admin panel from root directory
                 const baseUrl = window.location.origin;
-                window.open(baseUrl + '/admin/login.html', '_blank');
+                window.open(baseUrl + '/admin-login.html', '_blank');
             };
             
             // Blog navigation functionality
