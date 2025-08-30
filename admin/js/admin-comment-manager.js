@@ -6,6 +6,7 @@ class AdminCommentManager {
         this.currentPage = 1;
         this.itemsPerPage = 10;
         this.currentFilter = 'all';
+        this.currentPageFilter = 'all';
         this.comments = [];
         this.init();
     }
@@ -22,6 +23,39 @@ class AdminCommentManager {
             this.currentFilter = e.target.value;
             this.currentPage = 1;
             this.loadComments();
+        });
+
+        // Page filter changes
+        document.getElementById('page-filter')?.addEventListener('change', (e) => {
+            this.currentPageFilter = e.target.value;
+            this.currentPage = 1;
+            this.filterComments();
+            this.renderCommentsTable();
+            this.renderPagination();
+            this.updateFilteredStats();
+        });
+
+        // Filter button clicks
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                e.preventDefault();
+                
+                // Remove active class from all filter buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                e.target.classList.add('active');
+                
+                // Update filter
+                this.currentFilter = e.target.dataset.filter;
+                this.currentPage = 1;
+                this.filterComments();
+                this.renderCommentsTable();
+                this.renderPagination();
+                this.updateFilteredStats();
+            }
         });
 
         // Refresh button
@@ -96,6 +130,7 @@ class AdminCommentManager {
                 this.filterComments();
                 this.renderCommentsTable();
                 this.renderPagination();
+                this.updateFilteredStats();
             } else {
                 console.error('Failed to load comments:', result.error);
                 this.showNotification('Yorumlar yüklenirken hata oluştu.', 'error');
@@ -158,6 +193,7 @@ class AdminCommentManager {
                 this.showNotification('Cevap başarıyla eklendi.', 'success');
                 this.closeReplyModal();
                 this.loadComments(); // Yorumları yenile
+                this.updateFilteredStats();
             } else {
                 this.showNotification(result.error || 'Cevap eklenirken hata oluştu.', 'error');
             }
@@ -170,9 +206,17 @@ class AdminCommentManager {
     filterComments() {
         let filteredComments = [...this.comments];
         
+        // Filter by status
         if (this.currentFilter !== 'all') {
             filteredComments = filteredComments.filter(comment => 
                 comment.status === this.currentFilter
+            );
+        }
+        
+        // Filter by page
+        if (this.currentPageFilter !== 'all') {
+            filteredComments = filteredComments.filter(comment => 
+                comment.page_id === this.currentPageFilter
             );
         }
         
@@ -405,6 +449,7 @@ class AdminCommentManager {
                 this.closeModal();
                 this.loadComments();
                 this.updateBadges();
+                this.updateFilteredStats();
             } else {
                 this.showNotification('Yorum onaylanırken hata oluştu.', 'error');
             }
@@ -425,6 +470,7 @@ class AdminCommentManager {
                 this.closeModal();
                 this.loadComments();
                 this.updateBadges();
+                this.updateFilteredStats();
             } else {
                 this.showNotification('Yorum reddedilirken hata oluştu.', 'error');
             }
@@ -444,6 +490,7 @@ class AdminCommentManager {
                 this.showNotification('Yorum başarıyla silindi.', 'success');
                 this.loadComments();
                 this.updateBadges();
+                this.updateFilteredStats();
             } else {
                 this.showNotification('Yorum silinirken hata oluştu.', 'error');
             }
@@ -476,6 +523,27 @@ class AdminCommentManager {
         } catch (error) {
             console.error('Error updating badges:', error);
         }
+    }
+
+    updateFilteredStats() {
+        // Calculate stats based on current filters
+        const filteredStats = {
+            total: this.filteredComments.length,
+            pending: this.filteredComments.filter(c => c.status === 'pending').length,
+            approved: this.filteredComments.filter(c => c.status === 'approved').length,
+            rejected: this.filteredComments.filter(c => c.status === 'rejected').length
+        };
+
+        // Update the stats display
+        const totalComments = document.getElementById('totalComments');
+        const pendingComments = document.getElementById('pendingComments');
+        const approvedComments = document.getElementById('approvedComments');
+        const rejectedComments = document.getElementById('rejectedComments');
+
+        if (totalComments) totalComments.textContent = filteredStats.total;
+        if (pendingComments) pendingComments.textContent = filteredStats.pending;
+        if (approvedComments) approvedComments.textContent = filteredStats.approved;
+        if (rejectedComments) rejectedComments.textContent = filteredStats.rejected;
     }
 
     closeModal() {
