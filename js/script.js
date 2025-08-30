@@ -198,50 +198,7 @@
         });
     }
 
-    // Blog navigation functionality
-    window.toggleBlog = function() {
-        const currentPage = window.location.pathname.toLowerCase();
-        
-        if (currentPage.includes('blog.html') || currentPage.includes('/blog/')) {
-            // Currently on blog page or blog article, go to home
-            window.location.href = '/';
-        } else {
-            // Currently on home page, go to blog list
-            window.location.href = 'blog.html';
-        }
-    };
 
-    // Update blog button text based on current page
-    function updateBlogButton() {
-        const blogNavBtn = document.getElementById('blog-nav-btn');
-        const currentPage = window.location.pathname.toLowerCase();
-        
-        if (blogNavBtn) {
-            // Check if we're on blog.html or in blog directory
-            if (currentPage.includes('blog.html') || currentPage.includes('/blog/')) {
-                blogNavBtn.textContent = 'Ana Sayfa';
-                blogNavBtn.setAttribute('aria-label', 'Ana sayfaya dön');
-            } else {
-                blogNavBtn.textContent = 'Blog';
-                blogNavBtn.setAttribute('aria-label', 'Blog sayfasına git');
-            }
-        }
-    }
-
-    // Initialize blog button on page load
-    function initBlogButton() {
-        // Run immediately
-        updateBlogButton();
-        
-        // Run after a small delay to ensure DOM is fully loaded
-        setTimeout(updateBlogButton, 100);
-        
-        // Update button on page navigation
-        window.addEventListener('popstate', updateBlogButton);
-        
-        // Update on hash change
-        window.addEventListener('hashchange', updateBlogButton);
-    }
 
     // Lazy loading for images with Intersection Observer
     function initLazyLoading() {
@@ -619,7 +576,6 @@
         initSmoothScroll();
         initAccordion();
         initScrollToTop();
-        initBlogButton();
         initLazyLoading();
         initScrollAnimations();
         initMapLazyLoading();
