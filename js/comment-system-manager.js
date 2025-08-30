@@ -500,9 +500,11 @@ class CommentInstance {
                                 >
                             </div>
                             <div class="form-col">
+                                <label for="rating_${this.containerId}" class="form-label">Değerlendirme</label>
                                 <select 
                                     id="rating_${this.containerId}" 
                                     name="rating"
+                                    aria-label="Yorum değerlendirmesi seçin"
                                 >
                                     <option value="5">⭐⭐⭐⭐⭐ Çok Faydalı</option>
                                     <option value="4">⭐⭐⭐⭐ Faydalı</option>
