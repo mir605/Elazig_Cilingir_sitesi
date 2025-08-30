@@ -1,0 +1,10 @@
+[33m995f25e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevelopment[m[33m)[m feat: complete development branch with comment system, admin panel, and design improvements
+[33m298dfc5[m[33m ([m[1;31morigin/development[m[33m)[m feat(comments): Refactor to universal comment system
+[33mea0442a[m feat: Implement real-time updates on all blog pages
+[33mdbdacc5[m fix: Complete comment system & expand homepage CMS
+[33m5bc0c05[m fix: Professional colors + maximum content width
+* [32mdevelopment[m
+  final[m
+  guncelleme[m
+  master[m
+  yeni-deneme[m
