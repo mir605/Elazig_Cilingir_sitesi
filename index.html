@@ -3,18 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elazığ Çilingir ve Elazığ Anahtarcı | 7/24 Acil Hizmet</title>
+    <title>MURAT OTO ANAHTAR | 7/24 Acil Oto Anahtar ve Çilingir Hizmeti</title>
     <meta name="description" content="Elazığ çilingir, elazığ anahtarcı, acil kapı açma, anahtar kopyalama, immobilizer anahtar ve chip anahtar programlama hizmetleri. 7/24 elazığ çilingir hizmeti.">
     <meta name="keywords" content="elazığ çilingir, elazığ anahtarcı, acil elazığ çilingir, elazığ kilit değiştirme, elazığ oto çilingir">
     
-    <!-- Performance Optimizations -->
-    <link rel="preload" href="assets/hero-bg.webp" as="image">
-    <link rel="preload" href="assets/intro-video-.mp4" as="video" type="video/mp4">
-    <link rel="dns-prefetch" href="//tile.openstreetmap.org">
+    <!-- Performance optimizations -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//gc.kis.v2.scr.kaspersky-labs.com">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/hero-bg.webp" as="image" type="image/webp">
+    <link rel="preload" href="assets/logo.webp" as="image" type="image/webp">
+    <link rel="preload" href="js/script.min.js" as="script">
+    
+    <!-- Preconnect to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
     <!-- Local Leaflet Resources -->
     <link rel="preload" href="vendor/leaflet/leaflet.css" as="style">
     <link rel="preload" href="vendor/leaflet/leaflet.js" as="script">
+    
+    <!-- Font Awesome for icons - Preload and defer -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Additional Performance Meta Tags -->
     <meta name="robots" content="index, follow">
@@ -26,10 +46,10 @@
     <meta name="msapplication-config" content="/browserconfig.xml">
     <link rel="icon" type="image/png" href="assets/icon-192x192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="assets/icon-192x192.png">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
     
     <!-- SEO Enhancements -->
-    <meta name="author" content="Elazığ Çilingir">
+    <meta name="author" content="MURAT OTO ANAHTAR">
     <meta name="geo.region" content="TR-23">
     <meta name="geo.placename" content="Elazığ">
     <meta name="geo.position" content="38.6695;39.2058">
@@ -57,11 +77,48 @@
     
     <!-- Critical CSS Inline - Ultra Optimized -->
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f8f9fa;color:#333;line-height:1.6}header{background:linear-gradient(135deg,#2c3e50,#1a1a2e);color:#fff;padding:15px 0;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}.header-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 40px}.logo{font-size:1.8rem;font-weight:700;background:linear-gradient(to right,#dc2626,#ea580c);-webkit-background-clip:text;background-clip:text;color:transparent;display:flex;align-items:center}.nav-links{display:flex;list-style:none}.nav-links li{margin-left:25px}.nav-links a{color:#fff;text-decoration:none;font-weight:500;padding:5px 10px;border-radius:4px;transition:all .3s}.nav-links a:hover{background:rgba(255,255,255,.1)}.hero{position:relative;height:80vh;display:flex;align-items:center;color:#fff;text-align:center;overflow:hidden}#hero-video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translateX(-50%) translateY(-50%);z-index:-1;object-fit:cover}.hero::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:0}.hero-content{max-width:800px;margin:0 auto;padding:20px;position:relative;z-index:1}.hero h1{font-size:3rem;margin-bottom:20px;line-height:1.2}.hero-brand{color:#dc2626;font-weight:700}.hero p{font-size:1.3rem;margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto}.btn{display:inline-block;background:linear-gradient(to right,#dc2626,#ea580c);color:#fff;padding:15px 35px;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:all .3s;border:0;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.2)}.btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3)}.menu-btn{display:none;color:#fff;background:0;border:0;font-size:1.5rem;cursor:pointer}@media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.hero h1{font-size:2.2rem}.hero p{font-size:1.1rem}}
+        /*! CSS optimization for MURAT OTO ANAHTAR - Critical Above-the-Fold Styles Only */
+        *{box-sizing:border-box;margin:0;padding:0}html{font-family:sans-serif;line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#f8f9fa;color:#333;line-height:1.6}header{background:linear-gradient(135deg,#2c3e50,#1a1a2e);color:#fff;padding:15px 0;position:fixed;top:0;width:100%;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}a:focus{outline:2px solid #dc2626;outline-offset:2px}.container{max-width:1200px;margin:0 auto;padding:0 20px}.header-container{display:flex;justify-content:space-between;align-items:center}.logo{font-size:1.5rem;font-weight:700;background:linear-gradient(to right,#dc2626,#ea580c);-webkit-background-clip:text;background-clip:text;color:transparent;display:flex;align-items:center;text-decoration:none}.nav-links{display:flex;list-style:none}.nav-links li{margin-left:15px}.nav-links a{color:#fff;text-decoration:none;font-weight:500;padding:8px 12px;border-radius:4px;transition:all .2s ease}.nav-links a:hover{background:rgba(255,255,255,.1)}.menu-btn{display:none;color:#fff;background:0 0;border:0;font-size:1.5rem;cursor:pointer}.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;color:#fff;text-align:center;overflow:hidden;margin-top:80px}#hero-video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);z-index:-1;object-fit:cover}.hero::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:0}.hero-content{max-width:800px;margin:0 auto;padding:20px;position:relative;z-index:1}.hero h1{font-size:2.5rem;margin-bottom:20px;line-height:1.2;font-weight:700}.hero-brand{color:#dc2626;font-weight:700}.hero p{font-size:1.2rem;margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto}.btn{display:inline-block;background:linear-gradient(to right,#dc2626,#ea580c);color:#fff;padding:15px 30px;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:all .3s ease;border:0;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.2)}.btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3)}@media(max-width:768px){.nav-links{display:none}.menu-btn{display:block}.hero{height:80vh;min-height:500px;margin-top:70px}.hero h1{font-size:2rem}.hero p{font-size:1rem;padding:0 10px}}@media(max-width:480px){.hero{height:70vh;min-height:400px;margin-top:60px}.hero h1{font-size:1.8rem}.hero p{font-size:.9rem}}
     </style>
     
+    <!-- Non-critical CSS - Deferred -->
+    <link rel="preload" href="css/style.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/style.min.css"></noscript>
+    
+    <!-- Critical JavaScript - Inline for immediate execution -->
+    <script>
+    // Critical performance optimizations
+    (function() {
+        // Preload critical images
+        const criticalImages = ['assets/hero-bg.webp', 'assets/logo.webp'];
+        criticalImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+        
+        // Optimize font loading
+        if ('fonts' in document) {
+            document.fonts.ready.then(() => {
+                document.documentElement.classList.add('fonts-loaded');
+            });
+        }
+        
+        // Immediate DOM ready check
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+        
+        function initApp() {
+            // Critical functionality only
+            console.log('Critical app initialized');
+        }
+    })();
+    </script>
+    
     <!-- Open Graph -->
-    <meta property="og:title" content="Elazığ Çilingir ve Elazığ Anahtarcı | 7/24 Acil Elazığ Çilingir Hizmeti">
+    <meta property="og:title" content="MURAT OTO ANAHTAR | 7/24 Acil Oto Anahtar ve Çilingir Hizmeti">
     <meta property="og:description" content="Güvenilir ve hızlı elazığ çilingir, elazığ anahtarcı hizmetleri. Acil elazığ çilingir, anahtar kopyalama, immobilizer anahtar ve chip anahtar programlama hizmetleri.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.elazigcilingir.net/">
@@ -69,7 +126,7 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Elazığ Çilingir ve Elazığ Anahtarcı | 7/24 Acil Elazığ Çilingir Hizmeti">
+    <meta name="twitter:title" content="MURAT OTO ANAHTAR | 7/24 Acil Oto Anahtar ve Çilingir Hizmeti">
     <meta name="twitter:description" content="Güvenilir ve hızlı elazığ çilingir, elazığ anahtarcı hizmetleri. Acil elazığ çilingir, anahtar kopyalama, immobilizer anahtar ve chip anahtar programlama hizmetleri.">
     <meta name="twitter:image" content="https://www.elazigcilingir.net/assets/anahtar.webp">
     
@@ -78,7 +135,7 @@
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "Elazığ Çilingir ve Elazığ Anahtarcı",
+      "name": "MURAT OTO ANAHTAR",
       "description": "Elazığ çilingir, elazığ anahtarcı, acil elazığ çilingir, elazığ kilit değiştirme ve 7/24 elazığ çilingir hizmeti. Anahtar kopyalama, immobilizer anahtar, chip anahtar programlama, elazığ oto çilingir ve acil çilingir hizmetleri.",
       "url": "https://www.elazigcilingir.net/",
       "telephone": "+905432109949",
@@ -154,6 +211,18 @@
             backdrop-filter: none !important;
         }
         
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 0 !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 8px 0 !important;
+            }
+        }
+        
         .header-container {
             display: flex;
             justify-content: space-between;
@@ -169,6 +238,28 @@
             color: transparent;
             display: flex;
             align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.6rem;
+                margin-right: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.4rem;
+                margin-right: 6px;
+            }
         }
         
         .logo-icon {
@@ -235,6 +326,20 @@
             text-align: center;
             overflow: hidden;
             margin-top: 80px; /* Header yüksekliği için boşluk */
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                margin-top: 70px;
+                height: 70vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                margin-top: 60px;
+                height: 65vh;
+            }
         }
         
         #hero-video {
@@ -701,6 +806,356 @@
             font-style: italic;
         }
 
+        /* Modern Comment System Styles - Ana sayfa için */
+        .comments-section {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .comments-title {
+            font-size: 1.75rem;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .comment-form-container {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .comment-form-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .comment-form-header h4 {
+            font-size: 1.25rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .comment-form-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+
+        /* Blog-style comment form */
+        .comment-form-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .simple-comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-col input,
+        .form-col select {
+            padding: 0.875rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-col input:focus,
+        .form-col select:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+
+        .comment-textarea-wrapper {
+            position: relative;
+        }
+
+        .comment-textarea-wrapper textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .comment-textarea-wrapper textarea:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+
+        .btn-modern {
+            background: linear-gradient(135deg, #dc2626, #ea580c);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .btn-modern:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-text {
+            font-weight: 600;
+        }
+
+        .btn-icon {
+            font-size: 1.1rem;
+        }
+
+        .char-counter {
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-align: right;
+            margin-top: 0.25rem;
+        }
+
+        .char-counter.error {
+            color: #dc2626;
+        }
+
+        .char-counter.warning {
+            color: #f59e0b;
+        }
+
+        .char-counter.success {
+            color: #10b981;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #dc2626, #ea580c);
+            color: white;
+            border: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .comments-list-container {
+            margin-top: 2rem;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .loading-comments {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .comment-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .comment-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comment-author i {
+            color: #dc2626;
+            font-size: 1rem;
+        }
+
+        .nickname {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+
+        .comment-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.25rem;
+        }
+
+        .comment-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comment-date {
+            color: #64748b;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .comment-content {
+            color: #374151;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .comment-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .comment-message-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .comment-message-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .comment-message-info {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+
         /* Comment notifications */
         .comment-notification {
             margin-bottom: 1rem;
@@ -751,6 +1206,23 @@
             }
 
             .blog-comment-item {
+                padding: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .comment-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .comment-meta {
+                align-items: flex-start;
+            }
+
+            .comment-item {
                 padding: 1rem;
             }
         }
@@ -1365,13 +1837,13 @@
         <div class="container header-container">
             <div class="logo">
                 <span class="logo-icon">🔑</span>
-                <span>ELAZIĞ ÇİLİNGİR & ANAHTARCI</span>
+                <span>MURAT OTO ANAHTAR</span>
             </div>
             <ul class="nav-links">
                 <li><a href="#services">Hizmetlerimiz</a></li>
                 <li><a href="#about">Hakkımızda</a></li>
                 <li><a href="#" onclick="toggleBlog()" id="blog-nav-btn">Blog</a></li>
-                <li><a href="#testimonials">Yorumlar</a></li>
+                <li><a href="#homepageComments">Yorumlar</a></li>
                 <li><a href="#contact">İletişim</a></li>
                 <li><a href="#" onclick="openAdminPanel()" id="admin-nav-btn" class="admin-btn">
                     🔧 Admin Panel
@@ -1382,11 +1854,11 @@
     </header>
 
     <section class="hero">
-        <video autoplay muted loop playsinline preload="none" id="hero-video" poster="assets/hero-bg.webp">
+        <video autoplay muted loop playsinline preload="none" id="hero-video" poster="assets/hero-bg.webp" width="1920" height="1080">
             <source src="assets/intro-video-.mp4" type="video/mp4">
         </video>
         <div class="container hero-content">
-            <h1><span class="hero-brand">ELAZIĞ ÇİLİNGİR</span> <span>7/24 Acil Elazığ Çilingir ve Anahtarcı Hizmeti</span></h1>
+            <h1><span class="hero-brand">MURAT OTO ANAHTAR</span> <span>7/24 Acil Oto Anahtar ve Çilingir Hizmeti</span></h1>
             <p>Güvenilir ve hızlı elazığ çilingir ve elazığ anahtarcı hizmetleri. Acil kapı açma, anahtar kopyalama ve immobilizer anahtar ihtiyaçlarınız için bir telefon uzağınızdayız.</p>
             <a href="tel:+905432109949" class="btn">Hemen Ara</a>
             </div>
@@ -1396,7 +1868,7 @@
         <div class="shop-intro">
                 <div class="shop-intro-content">
                 <div class="shop-intro-header">
-                    <h2><span class="brand-highlight">ELAZIĞ ÇİLİNGİR</span> ve <span class="brand-highlight">ELAZIĞ ANAHTARCI</span> Tüm Anahtar İşleri İçin Tek Adres</h2>
+                    <h2><span class="brand-highlight">MURAT OTO ANAHTAR</span> Tüm Anahtar İşleri İçin Tek Adres</h2>
                     <p>
                         <strong>ELAZIĞ ÇİLİNGİR</strong> ve <strong>ELAZIĞ ANAHTARCI</strong> olarak, elazığ kilit değiştirme, elazığ oto çilingir, anahtar kopyalama ve acil çilingir hizmetlerimizle her anahtarla ilgili ihtiyacı çözmek için son teknoloji, mükemmel altyapı ve uzman ekibi ile donatılmıştır. 7/24 elazığ çilingir hizmeti sunarak, tüm daire ve araba kapı açma işlemleri, immobilizer anahtar yapımı, chip anahtar programlama ve uzaktan kumanda imalatı konularında acil elazığ çilingir ihtiyaçlarınızı karşılıyoruz. Elazığ anahtarcı hizmetlerimizle her türlü anahtar probleminize çözüm sunuyoruz.
                     </p>
@@ -1468,7 +1940,11 @@
                 <div class="services-grid" id="servicesGrid">
                     <div class="service-card">
                         <div class="service-img">
-                            <img data-src="assets/anahtar.webp" alt="Elazığ Oto Çilingir ve Elazığ Anahtarcı" class="lazy" width="300" height="200">
+                            <picture>
+                                <source data-srcset="assets/anahtar.webp" type="image/webp">
+                                <source data-srcset="assets/anahtar.jpg" type="image/jpeg">
+                                <img data-src="assets/anahtar.webp" alt="Elazığ Oto Çilingir ve Elazığ Anahtarcı" class="lazy" width="300" height="200" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="service-content">
                             <h3>Elazığ Oto Çilingir ve Anahtarcı</h3>
@@ -1478,7 +1954,11 @@
                     
                     <div class="service-card">
                         <div class="service-img">
-                            <img data-src="assets/kapi.webp" alt="Acil Daire Kapı Açma" class="lazy" width="300" height="200">
+                            <picture>
+                                <source data-srcset="assets/kapi.webp" type="image/webp">
+                                <source data-srcset="assets/kapi.jpg" type="image/jpeg">
+                                <img data-src="assets/kapi.webp" alt="Acil Daire Kapı Açma" class="lazy" width="300" height="200" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="service-content">
                             <h3>Acil Daire Kapı Açma</h3>
@@ -1488,7 +1968,11 @@
                     
                     <div class="service-card">
                         <div class="service-img">
-                            <img data-src="assets/yedek-anahtar.webp" alt="Araba Kapı Açma Hizmeti" class="lazy" width="300" height="200">
+                            <picture>
+                                <source data-srcset="assets/yedek-anahtar.webp" type="image/webp">
+                                <source data-srcset="assets/yedek-anahtar.jpg" type="image/jpeg">
+                                <img data-src="assets/yedek-anahtar.webp" alt="Araba Kapı Açma Hizmeti" class="lazy" width="300" height="200" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="service-content">
                             <h3>Araba Kapı Açma Hizmeti</h3>
@@ -1498,17 +1982,25 @@
                     
                     <div class="service-card">
                         <div class="service-img">
-                            <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).webp" alt="Kilit Değiştirme ve Tamiri" class="lazy" width="300" height="200">
+                            <picture>
+                                <source data-srcset="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).webp" type="image/webp">
+                                <source data-srcset="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).jpg" type="image/jpeg">
+                                <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.34 (1).webp" alt="Kilit Değiştirme ve Tamiri" class="lazy" width="300" height="200" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="service-content">
                             <h3>Kilit Değiştirme ve Tamiri</h3>
-                            <p>Ev, daire ve iş yerleriniz için elazığ kilit değiştirme, kilit tamiri, güvenlik kilidi montajı ve elazığ çilingir hizmetleri.</p>
+                            <p>Ev, daire ve iş yerleriniz için elazığ kilit değiştirme, kilt tamiri, güvenlik kilidi montajı ve elazığ çilingir hizmetleri.</p>
                         </div>
                     </div>
                     
                     <div class="service-card">
                         <div class="service-img">
-                            <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.35.webp" alt="Kumanda Programlama" class="lazy" width="300" height="200">
+                            <picture>
+                                <source data-srcset="assets/WhatsApp Image 2025-05-28 at 19.32.35.webp" type="image/webp">
+                                <source data-srcset="assets/WhatsApp Image 2025-05-28 at 19.32.35.jpg" type="image/jpeg">
+                                <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.35.webp" alt="Kumanda Programlama" class="lazy" width="300" height="200" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="service-content">
                             <h3>Kumanda Programlama</h3>
@@ -1518,7 +2010,11 @@
                     
                     <div class="service-card">
                         <div class="service-img">
-                            <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.34.webp" alt="Anahtar Kopyalama ve Tamiri" class="lazy" width="300" height="200">
+                            <picture>
+                                <source data-srcset="assets/WhatsApp Image 2025-05-28 at 19.32.34.webp" type="image/webp">
+                                <source data-srcset="assets/WhatsApp Image 2025-05-28 at 19.32.34.jpg" type="image/jpeg">
+                                <img data-src="assets/WhatsApp Image 2025-05-28 at 19.32.34.webp" alt="Anahtar Kopyalama ve Tamiri" class="lazy" width="300" height="200" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="service-content">
                             <h3>Anahtar Kopyalama ve Tamiri</h3>
@@ -1549,62 +2045,16 @@
         </section>
 
     <!-- ============================================ -->
-    <!--                  Testimonials                  -->
+    <!--                  Comments                      -->
     <!-- ============================================ -->
 
-    <section id="testimonials">
+    <section id="homepage-comments-section">
         <div class="container">
             <div class="section-title">
                 <h2>Müşteri <span class="brand-highlight">Yorumları</span></h2>
                 <p>Elazığ çilingir ve anahtarcı hizmetlerimizden memnun kalan müşterilerimizin görüşleri</p>
             </div>
-
-            <!-- Modern Comment Form -->
-            <div class="modern-comment-section">
-                <div class="comment-form-card">
-                    <h3>✍️ Hizmetimiz Hakkında Görüşünüz</h3>
-                    <p>Çilingir ve anahtarcı hizmetlerimiz hakkındaki deneyiminizi paylaşın</p>
-                    
-                    <form id="blog-comment-form" class="simple-comment-form">
-                        <div class="form-row">
-                            <div class="form-col">
-                                <input type="text" id="blog-comment-name" name="name" required 
-                                       placeholder="Adınız" maxlength="50">
-                            </div>
-                            <div class="form-col">
-                                <select id="blog-comment-rating" name="rating">
-                                    <option value="5">⭐⭐⭐⭐⭐ Mükemmel</option>
-                                    <option value="4">⭐⭐⭐⭐ Çok İyi</option>
-                                    <option value="3">⭐⭐⭐ İyi</option>
-                                    <option value="2">⭐⭐ Orta</option>
-                                    <option value="1">⭐ Kötü</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="comment-textarea-wrapper">
-                            <textarea id="blog-comment-text" name="comment" required 
-                                      placeholder="Hizmetimiz hakkındaki görüşlerinizi yazın... (en az 20 karakter)" 
-                                      minlength="20" maxlength="500" rows="4"></textarea>
-                            <div class="char-counter">
-                                <span id="blog-char-count">0</span>/500
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn-modern">
-                            <span class="btn-text">Yorum Gönder</span>
-                            <span class="btn-icon">📝</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Comments Display Section -->
-            <div id="blog-comments-section" class="comments-section">
-                <div id="blog-comments-container" class="comments-container">
-                    <!-- Gerçek yorumlar JavaScript tarafından buraya yüklenecek -->
-                </div>
-            </div>
+            <div id="homepageComments" data-supabase-comment-system data-page-id="homepage"></div>
         </div>
     </section>
 
@@ -1779,7 +2229,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <div class="footer-logo">ELAZIĞ ÇİLİNGİR & ANAHTARCI</div>
+                    <div class="footer-logo">MURAT OTO ANAHTAR</div>
                     <p>7/24 elazığ çilingir ve anahtarcı hizmetleri ile yanınızdayız. Acil kapı açma, anahtar kopyalama ve tüm çilingir ihtiyaçlarınız için profesyonel çözümler.</p>
                 </div>
                 
@@ -1789,7 +2239,7 @@
                         <li><a href="#services">Hizmetlerimiz</a></li>
                         <li><a href="#about">Hakkımızda</a></li>
                         <li><a href="#blog">Blog</a></li>
-                        <li><a href="#testimonials">Müşteri Yorumları</a></li>
+                        <li><a href="#homepageComments">Müşteri Yorumları</a></li>
                         <li><a href="#contact">İletişim</a></li>
                     </ul>
                 </div>
@@ -1824,12 +2274,30 @@
     
     <button class="scroll-up-btn" aria-label="Sayfanın başına dön" title="Sayfanın başına dön">↑</button>
 
-    <!-- Supabase -->
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <!-- Supabase - Deferred loading -->
+    <script defer src="https://unpkg.com/@supabase/supabase-js@2"></script>
     
-    <!-- Universal Comment System -->
-    <script src="config/supabase.js"></script>
-    <script src="js/universal-comments.js"></script>
+    <!-- Supabase Comment System - Deferred loading -->
+    <script defer src="js/comment-system-config.js"></script>
+    <script defer src="js/comment-system-manager.js"></script>
+    
+    <!-- Main Script - Optimized and deferred -->
+    <script defer src="js/script.min.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 
     <script>
         // Performance optimized JavaScript
@@ -2012,8 +2480,8 @@
 
             // Admin panel access
             window.openAdminPanel = function() {
-                // Open Supabase admin panel in new tab
-                window.open('./admin/supabase-admin.html', '_blank');
+                // Open Supabase comment manager in new tab
+                window.open('./admin/login.html', '_blank');
             };
             
             // Blog navigation functionality

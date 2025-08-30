@@ -1,23 +1,23 @@
 {
-  "name": "Elazığ Çilingir - 7/24 Acil Elazığ Çilingir Hizmeti",
-  "short_name": "Elazığ Çilingir",
+  "name": "MURAT OTO ANAHTAR - 7/24 Acil Oto Anahtar ve Çilingir Hizmeti",
+  "short_name": "MURAT OTO ANAHTAR",
   "description": "Güvenilir ve hızlı elazığ çilingir hizmetleri. Acil elazığ çilingir ihtiyaçlarınız için bir telefon uzağınızdayız.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#dc2626",
   "orientation": "portrait-primary",
   "lang": "tr",
-  "scope": "/",
+  "scope": "./",
   "icons": [
     {
-      "src": "/assets/icon-192x192.png",
+      "src": "assets/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/icon-512x512.png",
+      "src": "assets/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -26,13 +26,13 @@
   "categories": ["business", "utilities"],
   "screenshots": [
     {
-      "src": "/assets/screenshot-mobile.png",
+      "src": "assets/screenshot-mobile.png",
       "sizes": "414x896",
       "type": "image/png",
       "form_factor": "narrow"
     },
     {
-      "src": "/assets/screenshot-desktop.png",
+      "src": "assets/screenshot-desktop.png",
       "sizes": "1920x1080",
       "type": "image/png",
       "form_factor": "wide"
@@ -46,7 +46,7 @@
       "url": "tel:+905432109949",
       "icons": [
         {
-          "src": "/assets/phone-icon.png",
+          "src": "assets/phone-icon.png",
           "sizes": "96x96"
         }
       ]
@@ -58,7 +58,7 @@
       "url": "https://wa.me/905432109949",
       "icons": [
         {
-          "src": "/assets/whatsapp-icon.png",
+          "src": "assets/whatsapp-icon.png",
           "sizes": "96x96"
         }
       ]

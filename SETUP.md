@@ -1,8 +1,8 @@
-# Elazığ Çilingir Sitesi - Kurulum Rehberi
+# MURAT OTO ANAHTAR Sitesi - Kurulum Rehberi
 
 ## Proje Özeti
 
-Bu proje, Elazığ Çilingir ve Anahtarcı işletmesi için geliştirilmiş modern bir web sitesidir. CMS admin panel, kullanıcı yorum sistemi ve Supabase entegrasyonu ile birlikte gelir.
+Bu proje, MURAT OTO ANAHTAR işletmesi için geliştirilmiş modern bir web sitesidir. CMS admin panel, kullanıcı yorum sistemi ve Supabase entegrasyonu ile birlikte gelir.
 
 ## Yeni Özellikler
 
@@ -145,4 +145,4 @@ Herhangi bir sorunla karşılaştığınızda:
 
 ## Lisans
 
-Bu proje Elazığ Çilingir & Anahtarcı işletmesi için özel olarak geliştirilmiştir.
+Bu proje MURAT OTO ANAHTAR işletmesi için özel olarak geliştirilmiştir.

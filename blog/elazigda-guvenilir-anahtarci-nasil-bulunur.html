@@ -142,7 +142,7 @@
         <div class="container header-container">
             <div class="logo">
                 <span class="logo-icon">🔑</span>
-                <span>ELAZIĞ ÇİLİNGİR & ANAHTARCI</span>
+                <span>MURAT OTO ANAHTAR</span>
             </div>
             <ul class="nav-links">
                 <li><a href="../index.html#services">Hizmetlerimiz</a></li>
@@ -504,7 +504,16 @@
                 </div>
             </div>
 
-                        <!-- Yorum sistemi JavaScript tarafından dinamik olarak eklenecek -->
+                        <!-- Real User Comments Section -->
+            <div id="homepage-comments-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Okuyucu <span class="brand-highlight">Yorumları</span></h2>
+                        <p>Bu yazı hakkındaki görüşlerinizi paylaşın</p>
+                    </div>
+                    <div id="homepageComments" data-supabase-comment-system data-page-id="homepage"></div>
+                </div>
+            </div>
 
                     <div class="blog-navigation">
             <a href="../index.html" class="blog-back-btn">Ana Sayfaya Dön</a>
@@ -583,10 +592,7 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     
     <!-- Universal Comment System -->
-    <script src="../config/supabase.js"></script>
-    <script src="../js/universal-comments.js"></script>
-    
-    <!-- Blog Updater -->
-    <script src="../js/blog-updater.js"></script>
+    <script src="../js/comment-system-config.js"></script>
+    <script src="../js/comment-system-manager.js"></script>
 </body>
 </html> 

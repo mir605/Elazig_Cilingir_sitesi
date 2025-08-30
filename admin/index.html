@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Elazığ Çilingir</title>
+    <title>Admin Panel - MURAT OTO ANAHTAR</title>
     
     <!-- Supabase -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -13,6 +13,7 @@
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/security.js"></script>
 </head>
 <body>
     <div class="admin-container">
@@ -20,7 +21,7 @@
         <nav class="admin-sidebar">
             <div class="admin-logo">
                 <h2>🔑 Admin Panel</h2>
-                <p>Elazığ Çilingir</p>
+                <p>MURAT OTO ANAHTAR</p>
             </div>
             
             <ul class="admin-menu">
@@ -49,7 +50,7 @@
             </ul>
             
             <div class="admin-footer">
-                <button id="logout-btn" class="btn btn-secondary">
+                <button id="logout-btn" class="btn btn-secondary" onclick="adminLogout()">
                     <i class="fas fa-sign-out-alt"></i>
                     Çıkış Yap
                 </button>
@@ -155,21 +156,8 @@
                         </div>
                     </div>
                     
-                    <div class="table-container">
-                        <table id="comments-table" class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Kullanıcı</th>
-                                    <th>Yorum</th>
-                                    <th>Durum</th>
-                                    <th>Tarih</th>
-                                    <th>İşlemler</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Comments will be loaded here -->
-                            </tbody>
-                        </table>
+                    <div class="comments-grid" id="comments-grid">
+                        <!-- Comments will be loaded here as cards -->
                     </div>
                     
                     <div class="pagination" id="comments-pagination">
@@ -321,6 +309,27 @@
         </div>
     </div>
 
+    <div id="reply-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Yoruma Cevap</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="reply-detail">
+                    <!-- Reply form will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="submit-reply" class="btn btn-primary">
+                    <i class="fas fa-reply"></i>
+                    Cevap Gönder
+                </button>
+                <button class="btn btn-secondary modal-close">Kapat</button>
+            </div>
+        </div>
+    </div>
+
     <div id="message-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -351,8 +360,11 @@
     </div>
 
     <!-- Scripts -->
-    <script src="../config/supabase.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="../js/comment-system-config.js"></script>
+    <script src="../js/comment-system-manager.js"></script>
     <script src="js/admin-auth.js"></script>
+    <script src="js/admin-comment-manager.js"></script>
     <script src="js/admin.js"></script>
 </body>
 </html>

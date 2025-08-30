@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yorum Sistemi Test - Anahtar Sitesi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>🔑 MURAT OTO ANAHTAR</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="margin-top: 100px; padding: 2rem 0;">
+        <div class="container">
+            <h1>Yorum Sistemi Test</h1>
+            <p>Bu sayfa yeni yorum formu tasarımını test etmek için oluşturulmuştur. Açık tema ve eşit hizalamalar ile optimize edilmiştir.</p>
+            
+            <div style="margin: 3rem 0; padding: 2rem; background: #f8f9fa; border-radius: 12px;">
+                <h2>Test İçeriği</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+
+            <!-- Debug Info -->
+            <div id="debug-info" style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-family: monospace; font-size: 0.9rem;">
+                <h3>Debug Bilgileri:</h3>
+                <div id="debug-content">Yükleniyor...</div>
+            </div>
+
+            <!-- Comment System -->
+            <div id="comments" data-supabase-comment-system data-page-id="test-page"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: #1a1a2e; color: white; padding: 2rem 0; margin-top: 4rem;">
+        <div class="container">
+            <p>&copy; 2024 Anahtar Sitesi. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/comment-system-config.js"></script>
+    <script src="js/comment-system-manager.js"></script>
+    <script>
+        // Debug function
+        function updateDebugInfo(message) {
+            const debugContent = document.getElementById('debug-content');
+            const timestamp = new Date().toLocaleTimeString();
+            debugContent.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+        }
+
+        // Initialize comment system
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDebugInfo('DOM loaded, initializing comment system...');
+            
+            if (window.commentSystemManager) {
+                updateDebugInfo('Comment system manager found');
+                
+                try {
+                    window.commentSystemManager.createInstance('comments', 'test-page', {
+                        maxLength: 500,
+                        minLength: 10
+                    });
+                    updateDebugInfo('Comment system initialized successfully');
+                } catch (error) {
+                    updateDebugInfo('Error initializing comment system: ' + error.message);
+                }
+            } else {
+                updateDebugInfo('ERROR: Comment system manager not found');
+            }
+            
+            // Check Supabase client
+            if (window.supabaseClient) {
+                updateDebugInfo('Supabase client available');
+            } else {
+                updateDebugInfo('WARNING: Supabase client not available');
+            }
+        });
+        
+        // Global error handler
+        window.addEventListener('error', function(e) {
+            updateDebugInfo('Global error: ' + e.message);
+        });
+    </script>
+</body>
+</html>

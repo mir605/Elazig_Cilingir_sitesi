@@ -6,8 +6,8 @@ class AdminAuth {
         this.isAuthenticated = false;
         this.adminCredentials = {
             // Bu bilgileri production'da environment variables'dan alın
-            username: 'admin',
-            password: 'admin123' // Bu şifreyi mutlaka değiştirin!
+            username: 'MuratOto',
+            password: 'MuratOto2312' // Bu şifreyi mutlaka değiştirin!
         };
         this.init();
     }

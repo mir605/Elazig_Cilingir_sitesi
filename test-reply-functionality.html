@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yorum Yanıtlama Testi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                        <div class="logo">
+            <h1>🔑 MURAT OTO ANAHTAR</h1>
+        </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="margin-top: 100px; padding: 2rem 0;">
+        <div class="container">
+            <h1>Yorum Yanıtlama Fonksiyonu Testi</h1>
+            
+            <div style="margin: 2rem 0; padding: 1rem; background: #f0f0f0; border-radius: 8px;">
+                <h3>Test Talimatları:</h3>
+                <ol>
+                    <li>Önce bir yorum ekleyin</li>
+                    <li>Ardından bu yoruma bir yanıt ekleyin</li>
+                    <li>Yorumlar ve yanıtların doğru şekilde görüntülendiğini kontrol edin</li>
+                </ol>
+            </div>
+
+            <!-- Test Controls -->
+            <div style="margin: 2rem 0; padding: 1rem; background: #e8f4f8; border-radius: 8px;">
+                <h3>Test Kontrolleri:</h3>
+                <button id="addTestComment" class="btn btn-primary" style="margin-right: 1rem;">Test Yorumu Ekle</button>
+                <button id="addTestReply" class="btn btn-success" style="margin-right: 1rem;">Test Yanıtı Ekle</button>
+                <button id="loadComments" class="btn btn-secondary">Yorumları Yenile</button>
+            </div>
+
+            <!-- Debug Info -->
+            <div id="debug-info" style="background: #f0f0f0; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-family: monospace; font-size: 0.9rem;">
+                <h3>Debug Bilgileri:</h3>
+                <div id="debug-content">Yükleniyor...</div>
+            </div>
+
+            <!-- Comment System -->
+            <div id="comments" data-supabase-comment-system data-page-id="reply-test"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: #1a1a2e; color: white; padding: 2rem 0; margin-top: 4rem;">
+        <div class="container">
+            <p>&copy; 2024 Anahtar Sitesi. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/comment-system-config.js"></script>
+    <script src="js/comment-system-manager.js"></script>
+    <script>
+        // Debug function
+        function updateDebugInfo(message) {
+            const debugContent = document.getElementById('debug-content');
+            const timestamp = new Date().toLocaleTimeString();
+            debugContent.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            debugContent.scrollTop = debugContent.scrollHeight;
+        }
+
+        // Test variables
+        let testCommentId = null;
+
+        // Initialize comment system
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDebugInfo('DOM loaded, initializing comment system...');
+            
+            if (window.commentSystemManager) {
+                updateDebugInfo('Comment system manager found');
+                
+                try {
+                    window.commentSystemManager.createInstance('comments', 'reply-test', {
+                        maxLength: 500,
+                        minLength: 10
+                    });
+                    updateDebugInfo('Comment system initialized successfully');
+                } catch (error) {
+                    updateDebugInfo('Error initializing comment system: ' + error.message);
+                }
+            } else {
+                updateDebugInfo('ERROR: Comment system manager not found');
+            }
+            
+            // Setup test buttons
+            document.getElementById('addTestComment').addEventListener('click', addTestComment);
+            document.getElementById('addTestReply').addEventListener('click', addTestReply);
+            document.getElementById('loadComments').addEventListener('click', loadComments);
+        });
+
+        // Add test comment
+        async function addTestComment() {
+            updateDebugInfo('Adding test comment...');
+            
+            try {
+                const result = await window.commentSystemManager.submitComment(
+                    'reply-test', 
+                    'Test Kullanıcı', 
+                    'Bu bir test yorumudur. Lütfen yanıtlamayı deneyin.', 
+                    5
+                );
+                
+                if (result.success) {
+                    testCommentId = result.data.id;
+                    updateDebugInfo('Test comment added successfully with ID: ' + testCommentId);
+                    loadComments();
+                } else {
+                    updateDebugInfo('Error adding test comment: ' + result.error);
+                }
+            } catch (error) {
+                updateDebugInfo('Error adding test comment: ' + error.message);
+            }
+        }
+
+        // Add test reply
+        async function addTestReply() {
+            if (!testCommentId) {
+                updateDebugInfo('ERROR: Önce bir test yorumu eklemelisiniz');
+                return;
+            }
+            
+            updateDebugInfo('Adding test reply to comment ID: ' + testCommentId);
+            
+            try {
+                const replyData = {
+                    page_id: 'reply-test',
+                    nickname: 'Murat Oto Anahtar',
+                    content: 'Bu bir test yanıtıdır. Yönetici tarafından yanıtlanmıştır.',
+                    rating: 5,
+                    status: 'approved',
+                    parent_id: testCommentId
+                };
+                
+                const result = await window.commentSystemManager.submitReply(replyData);
+                
+                if (result.success) {
+                    updateDebugInfo('Test reply added successfully');
+                    loadComments();
+                } else {
+                    updateDebugInfo('Error adding test reply: ' + result.error);
+                }
+            } catch (error) {
+                updateDebugInfo('Error adding test reply: ' + error.message);
+            }
+        }
+
+        // Load comments
+        function loadComments() {
+            updateDebugInfo('Loading comments...');
+            // This will trigger the comment system to reload
+            if (window.commentSystemManager.instances.has('comments')) {
+                const instance = window.commentSystemManager.instances.get('comments');
+                instance.loadComments();
+            }
+        }
+
+        // Global error handler
+        window.addEventListener('error', function(e) {
+            updateDebugInfo('Global error: ' + e.message);
+        });
+    </script>
+</body>
+</html>

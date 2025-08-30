@@ -1,6 +1,6 @@
-# Elazığ Çilingir - Modern Web Sitesi
+# MURAT OTO ANAHTAR - Modern Web Sitesi
 
-Modern, performanslı ve mobil uyumlu Elazığ Çilingir web sitesi. Bu proje, son teknoloji web standartları kullanılarak optimize edilmiştir.
+Modern, performanslı ve mobil uyumlu MURAT OTO ANAHTAR web sitesi. Bu proje, son teknoloji web standartları kullanılarak optimize edilmiştir.
 
 ## 🚀 PageSpeed Insights Optimizasyonları
 

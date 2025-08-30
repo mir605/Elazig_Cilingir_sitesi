@@ -142,7 +142,7 @@
         <div class="container header-container">
             <div class="logo">
                 <span class="logo-icon">🔑</span>
-                <span>ELAZIĞ ÇİLİNGİR & ANAHTARCI</span>
+                <span>MURAT OTO ANAHTAR</span>
             </div>
             <ul class="nav-links">
                 <li><a href="../index.html#services">Hizmetlerimiz</a></li>
@@ -442,68 +442,20 @@
                     <p>Ev ve iş yerleriniz için en uygun kilit sistemi seçimi, kurulum ve bakım hizmetleri. Elazığ çilingir uzmanından güvenlik danışmanlığı alın!</p>
                     <a href="tel:+905432109949" class="blog-cta-btn">0543 210 99 49</a>
                 </div>
-            </div>
-
+            </div>            <!-- Supabase Comment System -->
             <!-- Real User Comments Section -->
-            <div id="blog-testimonials" class="blog-testimonials">
+            <div id="homepage-comments-section">
                 <div class="container">
                     <div class="section-title">
                         <h2>Okuyucu <span class="brand-highlight">Yorumları</span></h2>
                         <p>Bu yazı hakkındaki görüşlerinizi paylaşın</p>
                     </div>
-
-                    <!-- Modern Comment Form -->
-                    <div class="modern-comment-section">
-                        <div class="comment-form-card">
-                            <h3>✍️ Bu Yazı Hakkında Görüşünüz</h3>
-                            <p>Kilit sistemleri ve güvenlik konusundaki deneyiminizi paylaşın</p>
-                            
-                            <form id="blog-comment-form" class="simple-comment-form">
-                                <div class="form-row">
-                                    <div class="form-col">
-                                        <input type="text" id="blog-comment-name" name="name" required 
-                                               placeholder="Adınız (örn: Ahmet K.)" maxlength="50">
-                                    </div>
-                                    <div class="form-col">
-                                        <select id="blog-comment-rating" name="rating">
-                                            <option value="5">⭐⭐⭐⭐⭐ Çok Faydalı</option>
-                                            <option value="4">⭐⭐⭐⭐ Faydalı</option>
-                                            <option value="3">⭐⭐⭐ Orta</option>
-                                            <option value="2">⭐⭐ Az Faydalı</option>
-                                            <option value="1">⭐ Faydasız</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="comment-textarea-wrapper">
-                                    <textarea id="blog-comment-text" name="comment" required 
-                                              placeholder="Bu yazı hakkındaki görüşlerinizi yazın... (en az 20 karakter)" 
-                                              minlength="20" maxlength="500" rows="4"></textarea>
-                                    <div class="char-counter">
-                                        <span id="blog-char-count">0</span>/500
-                                    </div>
-                                </div>
-                                
-                                <button type="submit" class="btn-modern">
-                                    <span class="btn-text">Yorum Gönder</span>
-                                    <span class="btn-icon">📝</span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- Comments Display Section -->
-                    <div id="blog-comments-section" class="comments-section">
-                        <div id="blog-comments-loading" class="loading-message" style="display: none;">
-                            <p>Yorumlar yükleniyor...</p>
-                        </div>
-                        
-                        <div id="blog-comments-container" class="comments-container">
-                            <!-- Blog comments will be loaded here by JavaScript -->
-                        </div>
-                    </div>
+                    <div id="homepageComments" data-supabase-comment-system data-page-id="homepage"></div>
                 </div>
             </div>
+
+
+            
 
                     <div class="blog-navigation">
             <a href="../index.html" class="blog-back-btn">Ana Sayfaya Dön</a>
@@ -582,10 +534,9 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     
     <!-- Universal Comment System -->
-    <script src="../config/supabase.js"></script>
-    <script src="../js/universal-comments.js"></script>
+    <script src="../js/comment-system-config.js"></script>
+    <script src="../js/comment-system-manager.js"></script>
 
-    <!-- Blog Updater -->
-    <script src="../js/blog-updater.js"></script>
+
 </body>
 </html> 
