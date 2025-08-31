@@ -2126,7 +2126,16 @@
                                     const lng = 39.2058;
                                     
                                     // Harita oluştur
-                                    const map = L.map('map').setView([lat, lng], 16);
+                                    const map = L.map('map', {
+                                        center: [lat, lng],
+                                        zoom: 16,
+                                        scrollWheelZoom: false,
+                                        touchZoom: true,
+                                        doubleClickZoom: true,
+                                        boxZoom: false,
+                                        keyboard: true,
+                                        dragging: true
+                                    });
                                     
                                     // OpenStreetMap tile layer ekle
                                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -2134,8 +2143,19 @@
                                         maxZoom: 19
                                     }).addTo(map);
                                     
+                                    // Custom marker icon
+                                    const customIcon = L.icon({
+                                        iconUrl: 'vendor/leaflet/images/marker-icon.png',
+                                        iconSize: [25, 41],
+                                        iconAnchor: [12, 41],
+                                        popupAnchor: [1, -34],
+                                        shadowUrl: 'vendor/leaflet/images/marker-shadow.png',
+                                        shadowSize: [41, 41],
+                                        shadowAnchor: [12, 41]
+                                    });
+                                    
                                     // Marker ve popup ekle
-                                    const marker = L.marker([lat, lng]).addTo(map);
+                                    const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
                                     marker.bindPopup(`
                                         <div style="text-align: center; padding: 10px; font-family: Arial, sans-serif;">
                                             <h3 style="color: #dc2626; margin: 0 0 8px 0;">🔑 ELAZIĞ ÇİLİNGİR</h3>
@@ -2146,18 +2166,25 @@
                                     `).openPopup();
                                     
                                     // Scroll zoom kontrolü
-                                    map.scrollWheelZoom.disable();
-                                    map.on('focus', () => map.scrollWheelZoom.enable());
-                                    map.on('blur', () => map.scrollWheelZoom.disable());
+                                    map.on('click', () => {
+                                        map.scrollWheelZoom.enable();
+                                    });
+                                    
+                                    map.on('mouseout', () => {
+                                        map.scrollWheelZoom.disable();
+                                    });
                                     
                                 } catch (error) {
                                     console.error('Harita yüklenemedi:', error);
                                     document.getElementById('map').innerHTML = `
-                                        <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
+                                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
                                             <div style="text-align: center; padding: 20px;">
                                                 <h3 style="color: #2c3e50; margin-bottom: 1rem;">📍 Konum</h3>
                                                 <p style="margin-bottom: 10px; color: #666;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p>
                                                 <p style="color: #666;">Harita yüklenemedi</p>
+                                                <button onclick="window.open('https://maps.google.com/maps?q=38.6695,39.2058', '_blank')" style="background: #dc2626; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                                                    Google Maps'te Aç
+                                                </button>
                                             </div>
                                         </div>
                                     `;
@@ -2171,22 +2198,26 @@
                                     return;
                                 }
                                 
-                                // CSS yükle
+                                // CSS yükle - Yerel dosya
                                 const css = document.createElement('link');
                                 css.rel = 'stylesheet';
-                                css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                                css.href = 'vendor/leaflet/leaflet.css';
                                 css.onload = () => {
-                                    // JavaScript yükle
+                                    // JavaScript yükle - Yerel dosya
                                     const script = document.createElement('script');
-                                    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                                    script.src = 'vendor/leaflet/leaflet.js';
                                     script.onload = () => setTimeout(initializeMap, 100);
                                     script.onerror = () => {
+                                        console.error('Leaflet JS yüklenemedi');
                                         document.getElementById('map').innerHTML = `
-                                            <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
+                                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
                                                 <div style="text-align: center; padding: 20px;">
                                                     <h3 style="color: #2c3e50; margin-bottom: 1rem;">📍 Konum</h3>
                                                     <p style="margin-bottom: 10px; color: #666;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p>
                                                     <p style="color: #666;">Harita yüklenemedi</p>
+                                                    <button onclick="window.open('https://maps.google.com/maps?q=38.6695,39.2058', '_blank')" style="background: #dc2626; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                                                        Google Maps'te Aç
+                                                    </button>
                                                 </div>
                                             </div>
                                         `;
@@ -2194,12 +2225,16 @@
                                     document.head.appendChild(script);
                                 };
                                 css.onerror = () => {
+                                    console.error('Leaflet CSS yüklenemedi');
                                     document.getElementById('map').innerHTML = `
-                                        <div style="display: flex; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
+                                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 400px; background: #f8f9fa; border-radius: 12px;">
                                             <div style="text-align: center; padding: 20px;">
                                                 <h3 style="color: #2c3e50; margin-bottom: 1rem;">📍 Konum</h3>
                                                 <p style="margin-bottom: 10px; color: #666;">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p>
                                                 <p style="color: #666;">Harita yüklenemedi</p>
+                                                <button onclick="window.open('https://maps.google.com/maps?q=38.6695,39.2058', '_blank')" style="background: #dc2626; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                                                    Google Maps'te Aç
+                                                </button>
                                             </div>
                                         </div>
                                     `;
