@@ -299,6 +299,23 @@ class AdminCommentManager {
             
             // Ana yorumlar arasında tarihe göre sırala (en yeni önce)
             if (!aIsReply && !bIsReply) {
+                // Cevaplanan yorumlar için admin yanıt tarihine göre sırala
+                if (this.currentFilter === 'answered') {
+                    const aReply = this.comments.find(reply => 
+                        String(reply.parent_id) === String(a.id) && reply.nickname === 'Murat Oto Anahtar'
+                    );
+                    const bReply = this.comments.find(reply => 
+                        String(reply.parent_id) === String(b.id) && reply.nickname === 'Murat Oto Anahtar'
+                    );
+                    
+                    if (aReply && bReply) {
+                        return new Date(bReply.created_at) - new Date(aReply.created_at);
+                    } else if (aReply) {
+                        return -1; // a'nın yanıtı var, önce
+                    } else if (bReply) {
+                        return 1; // b'nin yanıtı var, önce
+                    }
+                }
                 return new Date(b.created_at) - new Date(a.created_at);
             }
             
@@ -388,58 +405,58 @@ class AdminCommentManager {
                  reply.parent_id === mainComment.id && reply.nickname === 'Murat Oto Anahtar'
              );
             
-            html += `
-                <div class="comment-group">
-                    <div class="comment-card">
-                        <div class="comment-header">
-                            <div class="comment-user">
-                                <i class="fas fa-user"></i>
-                                <span>${this.escapeHtml(mainComment.nickname)}</span>
-                            </div>
-                            <span class="status-badge status-${mainComment.status}">
-                                ${this.getStatusText(mainComment.status)}
-                            </span>
-                        </div>
-                        
-                        <div class="comment-meta">
-                            <span><i class="fas fa-calendar"></i> ${new Date(mainComment.created_at).toLocaleDateString('tr-TR')}</span>
-                            <span><i class="fas fa-globe"></i> ${this.escapeHtml(mainComment.page_id)}</span>
-                            ${mainComment.rating ? `<span><i class="fas fa-star"></i> ${mainComment.rating}/5</span>` : ''}
-                            <span style="color: #666; font-size: 0.8rem;">ID: ${mainComment.id} | Parent: ${mainComment.parent_id || 'Yok'} | Status: ${mainComment.status}</span>
-                        </div>
-                        
-                        <div class="comment-content">
-                            ${this.escapeHtml(mainComment.content)}
-                        </div>
-                        
-                        <div class="comment-actions">
-                            <button class="action-btn view" onclick="adminCommentManager.viewComment('${mainComment.id}')" title="Görüntüle">
-                                <i class="fas fa-eye"></i> Görüntüle
-                            </button>
-                            ${mainComment.status === 'pending' ? `
-                                <button class="action-btn approve" onclick="adminCommentManager.approveComment('${mainComment.id}')" title="Onayla">
-                                    <i class="fas fa-check"></i> Onayla
-                                </button>
-                                <button class="action-btn reject" onclick="adminCommentManager.rejectComment('${mainComment.id}')" title="Reddet">
-                                    <i class="fas fa-times"></i> Reddet
-                                </button>
-                            ` : ''}
-                            ${mainComment.status === 'approved' ? `
-                                ${commentReplies.length > 0 ? `
-                                    <button class="action-btn edit-reply" onclick="adminCommentManager.editReply('${mainComment.id}')" title="Yanıtı Düzenle">
-                                        <i class="fas fa-edit"></i> Yanıtı Düzenle
-                                    </button>
-                                ` : `
-                                    <button class="action-btn reply" onclick="adminCommentManager.showReplyModal('${mainComment.id}')" title="Cevap Ver">
-                                        <i class="fas fa-reply"></i> Cevap Ver
-                                    </button>
-                                `}
-                            ` : ''}
-                            <button class="action-btn delete" onclick="adminCommentManager.deleteComment('${mainComment.id}')" title="Sil">
-                                <i class="fas fa-trash"></i> Sil
-                            </button>
-                        </div>
-                    </div>`;
+                         html += `
+                 <div class="comment-group" style="margin-bottom: 16px;">
+                     <div class="comment-card" style="padding: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                         <div class="comment-header" style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                             <div class="comment-user" style="display: flex; align-items: center; gap: 8px;">
+                                 <i class="fas fa-user" style="color: #6b7280;"></i>
+                                 <span style="font-weight: 600; color: #374151;">${this.escapeHtml(mainComment.nickname)}</span>
+                             </div>
+                             <span class="status-badge status-${mainComment.status}" style="font-size: 0.8rem;">
+                                 ${this.getStatusText(mainComment.status)}
+                             </span>
+                         </div>
+                         
+                         <div class="comment-meta" style="margin-bottom: 12px; font-size: 0.85rem; color: #6b7280; display: flex; flex-wrap: wrap; gap: 12px;">
+                             <span><i class="fas fa-calendar"></i> ${new Date(mainComment.created_at).toLocaleDateString('tr-TR')}</span>
+                             <span><i class="fas fa-globe"></i> ${this.escapeHtml(mainComment.page_id)}</span>
+                             ${mainComment.rating ? `<span><i class="fas fa-star" style="color: #fbbf24;"></i> ${mainComment.rating}/5</span>` : ''}
+                             <span style="color: #9ca3af; font-size: 0.75rem;">ID: ${mainComment.id}</span>
+                         </div>
+                         
+                         <div class="comment-content" style="margin-bottom: 12px; line-height: 1.5; color: #374151;">
+                             ${this.escapeHtml(mainComment.content)}
+                         </div>
+                         
+                         <div class="comment-actions" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                             <button class="action-btn view" onclick="adminCommentManager.viewComment('${mainComment.id}')" title="Görüntüle" style="padding: 6px 12px; font-size: 0.85rem;">
+                                 <i class="fas fa-eye"></i> Görüntüle
+                             </button>
+                             ${mainComment.status === 'pending' ? `
+                                 <button class="action-btn approve" onclick="adminCommentManager.approveComment('${mainComment.id}')" title="Onayla" style="padding: 6px 12px; font-size: 0.85rem;">
+                                     <i class="fas fa-check"></i> Onayla
+                                 </button>
+                                 <button class="action-btn reject" onclick="adminCommentManager.rejectComment('${mainComment.id}')" title="Reddet" style="padding: 6px 12px; font-size: 0.85rem;">
+                                     <i class="fas fa-times"></i> Reddet
+                                 </button>
+                             ` : ''}
+                             ${mainComment.status === 'approved' ? `
+                                 ${commentReplies.length > 0 ? `
+                                     <button class="action-btn edit-reply" onclick="adminCommentManager.editReply('${mainComment.id}')" title="Yanıtı Düzenle" style="padding: 6px 12px; font-size: 0.85rem;">
+                                         <i class="fas fa-edit"></i> Yanıtı Düzenle
+                                     </button>
+                                 ` : `
+                                     <button class="action-btn reply" onclick="adminCommentManager.showReplyModal('${mainComment.id}')" title="Cevap Ver" style="padding: 6px 12px; font-size: 0.85rem;">
+                                         <i class="fas fa-reply"></i> Cevap Ver
+                                     </button>
+                                 `}
+                             ` : ''}
+                             <button class="action-btn delete" onclick="adminCommentManager.deleteComment('${mainComment.id}')" title="Sil" style="padding: 6px 12px; font-size: 0.85rem;">
+                                 <i class="fas fa-trash"></i> Sil
+                             </button>
+                         </div>
+                     </div>`;
             
             // Bu ana yoruma ait yanıtları bul ve ekle
             // commentReplies zaten yukarıda tanımlandı
@@ -447,42 +464,42 @@ class AdminCommentManager {
             // Parent_id ile eşleşen yanıtları kullanıldı olarak işaretle
             commentReplies.forEach(reply => usedReplies.add(reply.id));
             
-            if (commentReplies.length > 0) {
-                commentReplies.forEach(reply => {
-                    html += `
-                        <div class="comment-card reply-card">
-                            <div class="comment-header">
-                                <div class="comment-user">
-                                    <i class="fas fa-reply" style="color: #8b5cf6;"></i>
-                                    <span>${this.escapeHtml(reply.nickname)}</span>
-                                    <span class="admin-badge">Admin</span>
-                                </div>
-                                <span class="status-badge status-${reply.status}">
-                                    ${this.getStatusText(reply.status)}
-                                </span>
-                            </div>
-                            
-                            <div class="comment-meta">
-                                <span><i class="fas fa-calendar"></i> ${new Date(reply.created_at).toLocaleDateString('tr-TR')}</span>
-                                <span style="color: #666; font-size: 0.8rem;">Yanıt ID: ${reply.id} | Parent: ${reply.parent_id || 'Otomatik Eşleştirildi'}</span>
-                            </div>
-                            
-                            <div class="comment-content">
-                                ${this.escapeHtml(reply.content)}
-                            </div>
-                            
-                            <div class="comment-actions">
-                                <button class="action-btn view" onclick="adminCommentManager.viewComment('${reply.id}')" title="Görüntüle">
-                                    <i class="fas fa-eye"></i> Görüntüle
-                                </button>
-                                <button class="action-btn delete" onclick="adminCommentManager.deleteComment('${reply.id}')" title="Sil">
-                                    <i class="fas fa-trash"></i> Sil
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
+                         if (commentReplies.length > 0) {
+                 commentReplies.forEach(reply => {
+                     html += `
+                         <div class="comment-card reply-card" style="background-color: #f0f9ff; border-left: 4px solid #10b981; margin-left: 20px; padding: 12px; margin-top: 8px; margin-bottom: 8px;">
+                             <div class="comment-header" style="margin-bottom: 8px;">
+                                 <div class="comment-user">
+                                     <i class="fas fa-reply" style="color: #10b981;"></i>
+                                     <span style="font-weight: 600; color: #065f46;">${this.escapeHtml(reply.nickname)}</span>
+                                     <span class="admin-badge" style="background-color: #10b981; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 8px;">Admin</span>
+                                 </div>
+                                 <span class="status-badge status-${reply.status}" style="font-size: 0.8rem;">
+                                     ${this.getStatusText(reply.status)}
+                                 </span>
+                             </div>
+                             
+                             <div class="comment-meta" style="font-size: 0.8rem; margin-bottom: 8px; color: #374151;">
+                                 <span><i class="fas fa-calendar"></i> ${new Date(reply.created_at).toLocaleDateString('tr-TR')}</span>
+                                 <span style="color: #6b7280; font-size: 0.7rem; margin-left: 12px;">Yanıt ID: ${reply.id}</span>
+                             </div>
+                             
+                             <div class="comment-content" style="margin-bottom: 8px; line-height: 1.4;">
+                                 ${this.escapeHtml(reply.content)}
+                             </div>
+                             
+                             <div class="comment-actions" style="gap: 6px;">
+                                 <button class="action-btn view" onclick="adminCommentManager.viewComment('${reply.id}')" title="Görüntüle" style="padding: 4px 8px; font-size: 0.8rem;">
+                                     <i class="fas fa-eye"></i> Görüntüle
+                                 </button>
+                                 <button class="action-btn delete" onclick="adminCommentManager.deleteComment('${reply.id}')" title="Sil" style="padding: 4px 8px; font-size: 0.8rem;">
+                                     <i class="fas fa-trash"></i> Sil
+                                 </button>
+                             </div>
+                         </div>
+                     `;
+                 });
+             }
             
             html += '</div>'; // comment-group kapat
         });
@@ -806,11 +823,17 @@ class AdminCommentManager {
                     pendingBadge.style.display = stats.pending > 0 ? 'flex' : 'none';
                 }
                 
-                // Update dashboard stats
+                // Update dashboard stats - admin yanıtları hariç
                 const totalComments = document.getElementById('total-comments');
                 const pendingComments = document.getElementById('pending-comments');
                 
-                if (totalComments) totalComments.textContent = stats.total;
+                // Toplam yorum sayısından admin yanıtlarını çıkar
+                const adminReplies = this.comments.filter(c => 
+                    c.nickname === 'Murat Oto Anahtar'
+                ).length;
+                const actualTotal = Math.max(0, stats.total - adminReplies);
+                
+                if (totalComments) totalComments.textContent = actualTotal;
                 if (pendingComments) pendingComments.textContent = stats.pending;
             }
         } catch (error) {
@@ -819,12 +842,17 @@ class AdminCommentManager {
     }
 
     updateFilteredStats() {
-        // Calculate stats based on current filters
+        // Admin yanıtlarını hariç tut, sadece kullanıcı yorumlarını say
+        const userComments = this.filteredComments.filter(c => 
+            c.nickname !== 'Murat Oto Anahtar' && !c.parent_id
+        );
+        
+        // Calculate stats based on current filters (admin yanıtları hariç)
         const filteredStats = {
-            total: this.filteredComments.length,
-            pending: this.filteredComments.filter(c => c.status === 'pending').length,
-            approved: this.filteredComments.filter(c => c.status === 'approved').length,
-            rejected: this.filteredComments.filter(c => c.status === 'rejected').length
+            total: userComments.length,
+            pending: userComments.filter(c => c.status === 'pending').length,
+            approved: userComments.filter(c => c.status === 'approved').length,
+            rejected: userComments.filter(c => c.status === 'rejected').length
         };
 
         // Update the stats display
