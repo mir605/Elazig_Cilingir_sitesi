@@ -453,11 +453,17 @@ class AdminCommentManager {
                                     <i class="fas fa-times"></i> Reddet
                                 </button>
                             ` : ''}
-                            ${mainComment.status === 'approved' ? `
-                                <button class="action-btn reply" onclick="adminCommentManager.showReplyModal('${mainComment.id}')" title="Cevap Ver">
-                                    <i class="fas fa-reply"></i> Cevap Ver
-                                </button>
-                            ` : ''}
+                                                         ${mainComment.status === 'approved' ? `
+                                 ${commentReplies.length > 0 ? `
+                                     <button class="action-btn edit-reply" onclick="adminCommentManager.editReply('${mainComment.id}')" title="Yanıtı Düzenle">
+                                         <i class="fas fa-edit"></i> Yanıtı Düzenle
+                                     </button>
+                                 ` : `
+                                     <button class="action-btn reply" onclick="adminCommentManager.showReplyModal('${mainComment.id}')" title="Cevap Ver">
+                                         <i class="fas fa-reply"></i> Cevap Ver
+                                     </button>
+                                 `}
+                             ` : ''}
                             <button class="action-btn delete" onclick="adminCommentManager.deleteComment('${mainComment.id}')" title="Sil">
                                 <i class="fas fa-trash"></i> Sil
                             </button>
@@ -474,22 +480,7 @@ class AdminCommentManager {
             // Parent_id ile eşleşen yanıtları kullanıldı olarak işaretle
             commentReplies.forEach(reply => usedReplies.add(reply.id));
             
-                         // Yanıt butonlarını güncelle
-             if (commentReplies.length > 0) {
-                 // Yanıt varsa "Düzenle" butonuna çevir
-                 html = html.replace(
-                     `onclick="adminCommentManager.showReplyModal('${mainComment.id}')" title="Cevap Ver">`,
-                     `onclick="adminCommentManager.editReply('${mainComment.id}')" title="Yanıtı Düzenle">`
-                 );
-                 html = html.replace(
-                     '<i class="fas fa-reply"></i> Cevap Ver',
-                     '<i class="fas fa-edit"></i> Yanıtı Düzenle'
-                 );
-                 html = html.replace(
-                     'class="action-btn reply"',
-                     'class="action-btn edit-reply"'
-                 );
-             }
+            
             
             if (commentReplies.length > 0) {
                 commentReplies.forEach(reply => {
@@ -685,6 +676,10 @@ class AdminCommentManager {
          const adminReply = this.comments.find(reply => 
              reply.parent_id === commentId && reply.nickname === 'Murat Oto Anahtar'
          );
+         
+         console.log('Looking for admin reply to comment:', commentId);
+         console.log('Available replies:', this.comments.filter(r => r.parent_id || r.nickname === 'Murat Oto Anahtar'));
+         console.log('Found admin reply:', adminReply);
          
          if (adminReply) {
              this.showEditReplyModal(commentId, adminReply.id, adminReply.content);
