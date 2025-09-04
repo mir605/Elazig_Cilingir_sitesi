@@ -375,23 +375,21 @@ class AdminCommentManager {
         );
         
         // Detaylı yanıt eşleşme debug (sadece geliştirme aşamasında)
-        if (process.env.NODE_ENV === 'development') {
-            const replyDetails = replies.map(r => ({
-                id: r.id,
-                parent_id: r.parent_id,
-                parent_id_type: typeof r.parent_id,
-                nickname: r.nickname,
-                matched: mainComments.some(mc => String(mc.id) === String(r.parent_id))
-            }));
-            
-            console.log('Reply matching debug:', {
-                totalComments: this.comments.length,
-                totalReplies: replies.length,
-                mainCommentIds: mainComments.map(c => ({ id: c.id, type: typeof c.id })),
-                replyDetails,
-                unmatchedReplies: replyDetails.filter(r => !r.matched)
-            });
-        }
+        const replyDetails = replies.map(r => ({
+            id: r.id,
+            parent_id: r.parent_id,
+            parent_id_type: typeof r.parent_id,
+            nickname: r.nickname,
+            matched: mainComments.some(mc => String(mc.id) === String(r.parent_id))
+        }));
+        
+        console.log('Reply matching debug:', {
+            totalComments: this.comments.length,
+            totalReplies: replies.length,
+            mainCommentIds: mainComments.map(c => ({ id: c.id, type: typeof c.id })),
+            replyDetails,
+            unmatchedReplies: replyDetails.filter(r => !r.matched)
+        });
 
         // Kullanılan yanıtları takip et
         const usedReplies = new Set();
