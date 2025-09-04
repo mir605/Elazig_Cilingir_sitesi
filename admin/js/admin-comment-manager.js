@@ -397,7 +397,8 @@ class AdminCommentManager {
         const mainComments = pageComments.filter(comment => 
             !comment.parent_id && comment.nickname !== 'Murat Oto Anahtar'
         );
-        const replies = pageComments.filter(comment => 
+        // Yanıtları tüm yorumlardan bul (sayfa yorumlarından değil)
+        const replies = this.comments.filter(comment => 
             comment.parent_id || comment.nickname === 'Murat Oto Anahtar'
         );
 
@@ -418,7 +419,7 @@ class AdminCommentManager {
         mainComments.forEach(mainComment => {
             html += `
                 <div class="comment-group">
-                    <div class="comment-card main-comment-card">
+                    <div class="comment-card">
                         <div class="comment-header">
                             <div class="comment-user">
                                 <i class="fas fa-user"></i>
