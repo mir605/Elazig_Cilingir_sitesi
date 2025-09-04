@@ -16,7 +16,17 @@ class AdminCommentManager {
         this.setupEventListeners();
         this.loadComments();
         this.updateBadges();
+        
+        // HTML'den seçili items per page değerini al
+        const itemsPerPageSelect = document.getElementById('items-per-page');
+        if (itemsPerPageSelect) {
+            const selectedValue = itemsPerPageSelect.value;
+            this.itemsPerPage = selectedValue === 'all' ? Infinity : parseInt(selectedValue);
+            console.log('Initial itemsPerPage set to:', this.itemsPerPage);
+        }
     }
+
+
 
     setupEventListeners() {
         // Filter changes
@@ -341,12 +351,42 @@ class AdminCommentManager {
     }
 
     renderCommentsTable() {
+        console.log('renderCommentsTable called:', {
+            totalComments: this.comments?.length || 0,
+            filteredComments: this.filteredComments?.length || 0,
+            currentPage: this.currentPage,
+            itemsPerPage: this.itemsPerPage,
+            totalPages: this.itemsPerPage === Infinity ? 1 : Math.ceil((this.filteredComments?.length || 0) / this.itemsPerPage)
+        });
+        
         const grid = document.querySelector('#comments-grid');
         if (!grid) return;
 
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        const endIndex = startIndex + this.itemsPerPage;
-        const pageComments = this.filteredComments.slice(startIndex, endIndex);
+        if (!this.filteredComments || this.filteredComments.length === 0) {
+            grid.innerHTML = '<div class="text-center" style="grid-column: 1 / -1; padding: 40px; color: #6b7280;">Yorum bulunamadı.</div>';
+            return;
+        }
+
+        // Sayfa başına yorum sayısı kontrolü
+        let pageComments;
+        if (this.itemsPerPage === Infinity) {
+            // Tüm yorumları göster
+            pageComments = this.filteredComments;
+        } else {
+            // Sayfalama yap
+            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const endIndex = startIndex + this.itemsPerPage;
+            pageComments = this.filteredComments.slice(startIndex, endIndex);
+            
+            console.log('Pagination details:', {
+                startIndex,
+                endIndex,
+                itemsPerPage: this.itemsPerPage,
+                currentPage: this.currentPage,
+                totalFiltered: this.filteredComments.length,
+                pageCommentsCount: pageComments.length
+            });
+        }
 
         if (pageComments.length === 0) {
             grid.innerHTML = '<div class="text-center" style="grid-column: 1 / -1; padding: 40px; color: #6b7280;">Yorum bulunamadı.</div>';
