@@ -271,10 +271,19 @@ class AdminCommentManager {
                         return false;
                     }
                     
-                    // Bu yoruma admin yanıtı var mı kontrol et - sadece parent_id ile eşleşen yanıtları kabul et
-                    const hasAdminReply = this.comments.some(reply => 
+                    // Bu yoruma admin yanıtı var mı kontrol et - önce parent_id ile ara, bulunamazsa sayfa ve tarih ile ara
+                    let hasAdminReply = this.comments.some(reply => 
                         reply.parent_id === comment.id && reply.nickname === 'Murat Oto Anahtar'
                     );
+                    
+                    // Eğer parent_id ile bulunamazsa, sayfa ve tarih ile ara
+                    if (!hasAdminReply) {
+                        hasAdminReply = this.comments.some(reply => 
+                            reply.nickname === 'Murat Oto Anahtar' && 
+                            reply.page_id === comment.page_id &&
+                            new Date(reply.created_at) > new Date(comment.created_at)
+                        );
+                    }
                     
                     return !hasAdminReply;
                 });
@@ -286,10 +295,19 @@ class AdminCommentManager {
                         return false;
                     }
                     
-                    // Bu yoruma admin yanıtı var mı kontrol et - sadece parent_id ile eşleşen yanıtları kabul et
-                    const hasAdminReply = this.comments.some(reply => 
+                    // Bu yoruma admin yanıtı var mı kontrol et - önce parent_id ile ara, bulunamazsa sayfa ve tarih ile ara
+                    let hasAdminReply = this.comments.some(reply => 
                         reply.parent_id === comment.id && reply.nickname === 'Murat Oto Anahtar'
                     );
+                    
+                    // Eğer parent_id ile bulunamazsa, sayfa ve tarih ile ara
+                    if (!hasAdminReply) {
+                        hasAdminReply = this.comments.some(reply => 
+                            reply.nickname === 'Murat Oto Anahtar' && 
+                            reply.page_id === comment.page_id &&
+                            new Date(reply.created_at) > new Date(comment.created_at)
+                        );
+                    }
                     
                     return hasAdminReply;
                 });
@@ -424,10 +442,19 @@ class AdminCommentManager {
         
         // Ana yorumları render et
         mainComments.forEach(mainComment => {
-            // Bu ana yoruma ait yanıtları bul
-            const commentReplies = replies.filter(reply => 
-                reply.parent_id === mainComment.id && reply.nickname === 'Murat Oto Anahtar'
-            );
+                         // Bu ana yoruma ait yanıtları bul - önce parent_id ile ara, bulunamazsa sayfa ve tarih ile ara
+             let commentReplies = replies.filter(reply => 
+                 reply.parent_id === mainComment.id && reply.nickname === 'Murat Oto Anahtar'
+             );
+             
+             // Eğer parent_id ile bulunamazsa, sayfa ve tarih ile ara
+             if (commentReplies.length === 0) {
+                 commentReplies = replies.filter(reply => 
+                     reply.nickname === 'Murat Oto Anahtar' && 
+                     reply.page_id === mainComment.page_id &&
+                     new Date(reply.created_at) > new Date(mainComment.created_at)
+                 );
+             }
             
             html += `
                 <div class="comment-group">
@@ -678,10 +705,22 @@ class AdminCommentManager {
          editReply(commentId) {
          console.log('editReply called with commentId:', commentId);
          
-         // Bu yoruma ait admin yanıtını bul
-         const adminReply = this.comments.find(reply => 
+         // Bu yoruma ait admin yanıtını bul - önce parent_id ile ara, bulunamazsa sayfa ve tarih ile ara
+         let adminReply = this.comments.find(reply => 
              reply.parent_id === commentId && reply.nickname === 'Murat Oto Anahtar'
          );
+         
+         // Eğer parent_id ile bulunamazsa, sayfa ve tarih ile ara
+         if (!adminReply) {
+             const comment = this.comments.find(c => c.id == commentId);
+             if (comment) {
+                 adminReply = this.comments.find(reply => 
+                     reply.nickname === 'Murat Oto Anahtar' && 
+                     reply.page_id === comment.page_id &&
+                     new Date(reply.created_at) > new Date(comment.created_at)
+                 );
+             }
+         }
          
          console.log('Looking for admin reply to comment:', commentId);
          console.log('Available replies:', this.comments.filter(r => r.parent_id || r.nickname === 'Murat Oto Anahtar'));
