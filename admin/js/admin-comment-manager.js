@@ -271,10 +271,9 @@ class AdminCommentManager {
                         return false;
                     }
                     
-                    // Bu yoruma admin yanıtı var mı kontrol et
+                    // Bu yoruma admin yanıtı var mı kontrol et - sadece parent_id ile eşleşen yanıtları kabul et
                     const hasAdminReply = this.comments.some(reply => 
-                        (reply.parent_id === comment.id) || 
-                        (reply.nickname === 'Murat Oto Anahtar' && reply.created_at > comment.created_at)
+                        reply.parent_id === comment.id && reply.nickname === 'Murat Oto Anahtar'
                     );
                     
                     return !hasAdminReply;
@@ -287,10 +286,9 @@ class AdminCommentManager {
                         return false;
                     }
                     
-                    // Bu yoruma admin yanıtı var mı kontrol et
+                    // Bu yoruma admin yanıtı var mı kontrol et - sadece parent_id ile eşleşen yanıtları kabul et
                     const hasAdminReply = this.comments.some(reply => 
-                        (reply.parent_id === comment.id) || 
-                        (reply.nickname === 'Murat Oto Anahtar' && reply.created_at > comment.created_at)
+                        reply.parent_id === comment.id && reply.nickname === 'Murat Oto Anahtar'
                     );
                     
                     return hasAdminReply;
@@ -467,37 +465,13 @@ class AdminCommentManager {
             `;
             
             // Bu ana yoruma ait yanıtları bul ve ekle
-            // Önce parent_id ile eşleşen yanıtları bul
-            let commentReplies = replies.filter(reply => reply.parent_id === mainComment.id);
+            // Sadece parent_id ile eşleşen yanıtları bul
+            let commentReplies = replies.filter(reply => 
+                reply.parent_id === mainComment.id && reply.nickname === 'Murat Oto Anahtar'
+            );
             
-            // Eğer parent_id ile eşleşen yanıt yoksa, admin yanıtlarını tarih sırasına göre eşleştir
-            if (commentReplies.length === 0) {
-                // Bu ana yorumdan sonra gelen ve henüz kullanılmamış admin yanıtlarını bul
-                const adminReplies = replies.filter(reply => 
-                    reply.nickname === 'Murat Oto Anahtar' && 
-                    reply.created_at > mainComment.created_at &&
-                    !usedReplies.has(reply.id) // Henüz kullanılmamış
-                );
-                
-                console.log(`Finding admin replies for comment ${mainComment.id}:`, {
-                    commentDate: mainComment.created_at,
-                    availableAdminReplies: adminReplies.length,
-                    adminReplyIds: adminReplies.map(r => r.id)
-                });
-                
-                // En yakın tarihli admin yanıtını bu yoruma ata
-                if (adminReplies.length > 0) {
-                    const closestReply = adminReplies.sort((a, b) => 
-                        new Date(a.created_at) - new Date(b.created_at)
-                    )[0];
-                    commentReplies = [closestReply];
-                    usedReplies.add(closestReply.id); // Bu yanıtı kullanıldı olarak işaretle
-                    console.log(`Assigned admin reply ${closestReply.id} to comment ${mainComment.id}`);
-                }
-            } else {
-                // Parent_id ile eşleşen yanıtları da kullanıldı olarak işaretle
-                commentReplies.forEach(reply => usedReplies.add(reply.id));
-            }
+            // Parent_id ile eşleşen yanıtları kullanıldı olarak işaretle
+            commentReplies.forEach(reply => usedReplies.add(reply.id));
             
             // Yanıt butonlarını güncelle
             if (commentReplies.length > 0) {
@@ -754,7 +728,6 @@ class AdminCommentManager {
             `;
             
             // Set comment ID for reply button
-            const submitButton = document.getElementById('submit-reply');
             if (submitButton) {
                 submitButton.dataset.commentId = commentId;
                 console.log('Reply button comment ID set to:', commentId);
