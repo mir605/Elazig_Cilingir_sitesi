@@ -52,6 +52,8 @@ class CommentSystemManager {
                 this.submitComment(pageId, nickname, content, rating),
             submitAdminReply: (parentId, content, pageId) => 
                 this.submitAdminReply(parentId, content, pageId),
+            updateAdminReply: (replyId, content) => 
+                this.updateAdminReply(replyId, content),
             getComments: (pageId) => this.getComments(pageId),
             getAllComments: () => this.getAllComments(),
             updateCommentStatus: (commentId, status) => this.updateCommentStatus(commentId, status),
@@ -157,6 +159,36 @@ class CommentSystemManager {
             return { success: true, data };
         } catch (error) {
             console.error('Admin reply submission error:', error);
+            return { 
+                success: false, 
+                error: error.message || 'Unknown error occurred' 
+            };
+        }
+    }
+
+    // Admin reply güncelleme
+    async updateAdminReply(replyId, content) {
+        try {
+            if (!this.supabase) {
+                throw new Error('Supabase not initialized');
+            }
+
+            const { data, error } = await this.supabase
+                .from('comments')
+                .update({ 
+                    content: content.trim(),
+                    updated_at: new Date().toISOString()
+                })
+                .eq('id', replyId)
+                .eq('nickname', 'Murat Oto Anahtar') // Sadece admin yanıtlarını güncelleyebilir
+                .select()
+                .single();
+
+            if (error) throw error;
+
+            return { success: true, data };
+        } catch (error) {
+            console.error('Admin reply update error:', error);
             return { 
                 success: false, 
                 error: error.message || 'Unknown error occurred' 
