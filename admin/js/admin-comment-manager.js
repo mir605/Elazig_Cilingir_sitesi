@@ -474,17 +474,22 @@ class AdminCommentManager {
             // Parent_id ile eşleşen yanıtları kullanıldı olarak işaretle
             commentReplies.forEach(reply => usedReplies.add(reply.id));
             
-            // Yanıt butonlarını güncelle
-            if (commentReplies.length > 0) {
-                // Yanıt varsa "Düzenle" butonuna çevir
-                const replyButton = document.querySelector(`[onclick*="showReplyModal('${mainComment.id}')"]`);
-                if (replyButton) {
-                    replyButton.innerHTML = '<i class="fas fa-edit"></i> Yanıtı Düzenle';
-                    replyButton.className = 'action-btn edit-reply';
-                    replyButton.onclick = () => adminCommentManager.editReply(mainComment.id);
-                    replyButton.title = 'Yanıtı Düzenle';
-                }
-            }
+                         // Yanıt butonlarını güncelle
+             if (commentReplies.length > 0) {
+                 // Yanıt varsa "Düzenle" butonuna çevir
+                 html = html.replace(
+                     `onclick="adminCommentManager.showReplyModal('${mainComment.id}')" title="Cevap Ver">`,
+                     `onclick="adminCommentManager.editReply('${mainComment.id}')" title="Yanıtı Düzenle">`
+                 );
+                 html = html.replace(
+                     '<i class="fas fa-reply"></i> Cevap Ver',
+                     '<i class="fas fa-edit"></i> Yanıtı Düzenle'
+                 );
+                 html = html.replace(
+                     'class="action-btn reply"',
+                     'class="action-btn edit-reply"'
+                 );
+             }
             
             if (commentReplies.length > 0) {
                 commentReplies.forEach(reply => {
@@ -673,21 +678,20 @@ class AdminCommentManager {
         }
     }
 
-    editReply(commentId) {
-        console.log('editReply called with commentId:', commentId);
-        
-        // Bu yoruma ait admin yanıtını bul
-        const adminReply = this.comments.find(reply => 
-            (reply.parent_id === commentId) || 
-            (reply.nickname === 'Murat Oto Anahtar' && reply.created_at > this.comments.find(c => c.id === commentId)?.created_at)
-        );
-        
-        if (adminReply) {
-            this.showEditReplyModal(commentId, adminReply.id, adminReply.content);
-        } else {
-            this.showNotification('Bu yoruma ait admin yanıtı bulunamadı.', 'error');
-        }
-    }
+         editReply(commentId) {
+         console.log('editReply called with commentId:', commentId);
+         
+         // Bu yoruma ait admin yanıtını bul - sadece parent_id ile eşleşen yanıtları kabul et
+         const adminReply = this.comments.find(reply => 
+             reply.parent_id === commentId && reply.nickname === 'Murat Oto Anahtar'
+         );
+         
+         if (adminReply) {
+             this.showEditReplyModal(commentId, adminReply.id, adminReply.content);
+         } else {
+             this.showNotification('Bu yoruma ait admin yanıtı bulunamadı.', 'error');
+         }
+     }
 
     showReplyModal(commentId) {
         console.log('showReplyModal called with commentId:', commentId);
