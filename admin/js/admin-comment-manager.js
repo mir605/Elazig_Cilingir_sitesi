@@ -680,27 +680,23 @@ class AdminCommentManager {
          }
      }
 
-         editReply(commentId) {
-         console.log('editReply called with commentId:', commentId);
-         console.log('All comments:', this.comments);
-         console.log('Looking for replies with parent_id:', commentId);
-         
-         // Bu yoruma ait admin yanıtını bul - parent_id ile direkt eşleştir
-         const adminReply = this.comments.find(reply => 
-             reply.parent_id === commentId && reply.nickname === 'Murat Oto Anahtar'
-         );
-         
-         console.log('Found admin reply:', adminReply);
-         console.log('All admin replies:', this.comments.filter(r => r.nickname === 'Murat Oto Anahtar'));
-         
-         if (adminReply) {
-             console.log('Opening edit modal for reply:', adminReply.id);
-             this.showEditReplyModal(commentId, adminReply.id, adminReply.content);
-         } else {
-             console.log('No admin reply found for comment:', commentId);
-             this.showNotification('Bu yoruma ait admin yanıtı bulunamadı.', 'error');
-         }
-     }
+             editReply(commentId) {
+        console.log('editReply called with commentId:', commentId);
+
+        // Yalnızca admin'in o yoruma verdiği yanıtı ara
+        let adminReply = this.comments.find(reply =>
+            String(reply.parent_id) === String(commentId) &&
+            reply.nickname === 'Murat Oto Anahtar'
+        );
+
+        if (adminReply) {
+            console.log('Opening edit modal for reply:', adminReply.id);
+            this.showEditReplyModal(commentId, adminReply.id, adminReply.content);
+        } else {
+            console.log('No admin reply found for comment:', commentId);
+            this.showNotification('Bu yoruma ait admin yanıtı bulunamadı.', 'error');
+        }
+    }
 
     showReplyModal(commentId) {
         console.log('showReplyModal called with commentId:', commentId);
