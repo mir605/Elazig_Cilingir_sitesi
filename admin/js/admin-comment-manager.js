@@ -271,12 +271,12 @@ class AdminCommentManager {
                         return false;
                     }
                     
-                    // Bu yoruma admin yanıtı var mı kontrol et - sadece parent_id ile eşleşen yanıtları kabul et
-                    const hasAdminReply = this.comments.some(reply => 
-                        reply.parent_id === comment.id && reply.nickname === 'Murat Oto Anahtar'
-                    );
-                    
-                    return !hasAdminReply;
+                                         // Bu yoruma admin yanıtı var mı kontrol et - parent_id ile direkt eşleştir
+                     const hasAdminReply = this.comments.some(reply => 
+                         reply.parent_id === comment.id && reply.nickname === 'Murat Oto Anahtar'
+                     );
+                     
+                     return !hasAdminReply;
                 });
                 console.log(`Unanswered filter: Found ${filteredComments.length} unanswered comments`);
             } else if (this.currentFilter === 'answered') {
@@ -286,12 +286,12 @@ class AdminCommentManager {
                         return false;
                     }
                     
-                    // Bu yoruma admin yanıtı var mı kontrol et - sadece parent_id ile eşleşen yanıtları kabul et
-                    const hasAdminReply = this.comments.some(reply => 
-                        reply.parent_id === comment.id && reply.nickname === 'Murat Oto Anahtar'
-                    );
-                    
-                    return hasAdminReply;
+                                         // Bu yoruma admin yanıtı var mı kontrol et - parent_id ile direkt eşleştir
+                     const hasAdminReply = this.comments.some(reply => 
+                         reply.parent_id === comment.id && reply.nickname === 'Murat Oto Anahtar'
+                     );
+                     
+                     return hasAdminReply;
                 });
                 console.log(`Answered filter: Found ${filteredComments.length} answered comments`);
             } else {
@@ -424,7 +424,7 @@ class AdminCommentManager {
         
         // Ana yorumları render et
         mainComments.forEach(mainComment => {
-                         // Bu ana yoruma ait yanıtları bul - sadece parent_id ile eşleşen yanıtları kabul et
+                         // Bu ana yoruma ait yanıtları bul - parent_id ile direkt eşleştir
              const commentReplies = replies.filter(reply => 
                  reply.parent_id === mainComment.id && reply.nickname === 'Murat Oto Anahtar'
              );
@@ -678,14 +678,10 @@ class AdminCommentManager {
          editReply(commentId) {
          console.log('editReply called with commentId:', commentId);
          
-         // Bu yoruma ait admin yanıtını bul - sadece parent_id ile eşleşen yanıtları kabul et
+         // Bu yoruma ait admin yanıtını bul - parent_id ile direkt eşleştir
          const adminReply = this.comments.find(reply => 
              reply.parent_id === commentId && reply.nickname === 'Murat Oto Anahtar'
          );
-         
-         console.log('Looking for admin reply to comment:', commentId);
-         console.log('Available replies:', this.comments.filter(r => r.parent_id || r.nickname === 'Murat Oto Anahtar'));
-         console.log('Found admin reply:', adminReply);
          
          if (adminReply) {
              this.showEditReplyModal(commentId, adminReply.id, adminReply.content);
