@@ -401,6 +401,13 @@ class AdminCommentManager {
         const replies = this.comments.filter(comment => 
             comment.parent_id || comment.nickname === 'Murat Oto Anahtar'
         );
+        
+        console.log('Reply matching debug:', {
+            totalComments: this.comments.length,
+            totalReplies: replies.length,
+            mainCommentIds: mainComments.map(c => c.id),
+            replyParentIds: replies.map(r => ({ id: r.id, parent_id: r.parent_id, nickname: r.nickname }))
+        });
 
         console.log('Comment grouping:', {
             totalPageComments: pageComments.length,
@@ -671,7 +678,7 @@ class AdminCommentManager {
          editReply(commentId) {
          console.log('editReply called with commentId:', commentId);
          
-         // Bu yoruma ait admin yanıtını bul - sadece parent_id ile eşleşen yanıtları kabul et
+         // Bu yoruma ait admin yanıtını bul
          const adminReply = this.comments.find(reply => 
              reply.parent_id === commentId && reply.nickname === 'Murat Oto Anahtar'
          );
