@@ -279,6 +279,7 @@ class AdminCommentManager {
                     
                     return !hasAdminReply;
                 });
+                console.log(`Unanswered filter: Found ${filteredComments.length} unanswered comments`);
             } else if (this.currentFilter === 'answered') {
                 // Cevaplanan yorumlar: onaylanmış ve yanıtlanmış ana yorumlar
                 filteredComments = filteredComments.filter(comment => {
@@ -294,6 +295,7 @@ class AdminCommentManager {
                     
                     return hasAdminReply;
                 });
+                console.log(`Answered filter: Found ${filteredComments.length} answered comments`);
             } else {
                 filteredComments = filteredComments.filter(comment => 
                     comment.status === this.currentFilter
@@ -393,53 +395,163 @@ class AdminCommentManager {
             return;
         }
 
-        grid.innerHTML = pageComments.map(comment => `
-            <div class="comment-card">
-                <div class="comment-header">
-                    <div class="comment-user">
-                        <i class="fas fa-user"></i>
-                        <span>${this.escapeHtml(comment.nickname)}</span>
-                        ${comment.parent_id ? '<span class="reply-indicator" style="color: #8b5cf6; font-size: 0.8rem; margin-left: 8px;">↳ Yanıt</span>' : ''}
+        // Ana yorumları ve yanıtları ayır
+        const mainComments = pageComments.filter(comment => 
+            !comment.parent_id && comment.nickname !== 'Murat Oto Anahtar'
+        );
+        const replies = pageComments.filter(comment => 
+            comment.parent_id || comment.nickname === 'Murat Oto Anahtar'
+        );
+
+        console.log('Comment grouping:', {
+            totalPageComments: pageComments.length,
+            mainComments: mainComments.length,
+            replies: replies.length,
+            mainCommentIds: mainComments.map(c => c.id),
+            replyIds: replies.map(r => r.id)
+        });
+
+        // Kullanılan yanıtları takip et
+        const usedReplies = new Set();
+
+        let html = '';
+        
+        // Ana yorumları render et
+        mainComments.forEach(mainComment => {
+            html += `
+                <div class="comment-group">
+                    <div class="comment-card main-comment-card">
+                        <div class="comment-header">
+                            <div class="comment-user">
+                                <i class="fas fa-user"></i>
+                                <span>${this.escapeHtml(mainComment.nickname)}</span>
+                            </div>
+                            <span class="status-badge status-${mainComment.status}">
+                                ${this.getStatusText(mainComment.status)}
+                            </span>
+                        </div>
+                        
+                        <div class="comment-meta">
+                            <span><i class="fas fa-calendar"></i> ${new Date(mainComment.created_at).toLocaleDateString('tr-TR')}</span>
+                            <span><i class="fas fa-globe"></i> ${this.escapeHtml(mainComment.page_id)}</span>
+                            ${mainComment.rating ? `<span><i class="fas fa-star"></i> ${mainComment.rating}/5</span>` : ''}
+                            <span style="color: #666; font-size: 0.8rem;">ID: ${mainComment.id} | Parent: ${mainComment.parent_id || 'Yok'} | Status: ${mainComment.status}</span>
+                        </div>
+                        
+                        <div class="comment-content">
+                            ${this.escapeHtml(mainComment.content)}
+                        </div>
+                        
+                        <div class="comment-actions">
+                            <button class="action-btn view" onclick="adminCommentManager.viewComment('${mainComment.id}')" title="Görüntüle">
+                                <i class="fas fa-eye"></i> Görüntüle
+                            </button>
+                            ${mainComment.status === 'pending' ? `
+                                <button class="action-btn approve" onclick="adminCommentManager.approveComment('${mainComment.id}')" title="Onayla">
+                                    <i class="fas fa-check"></i> Onayla
+                                </button>
+                                <button class="action-btn reject" onclick="adminCommentManager.rejectComment('${mainComment.id}')" title="Reddet">
+                                    <i class="fas fa-times"></i> Reddet
+                                </button>
+                            ` : ''}
+                            ${mainComment.status === 'approved' ? `
+                                <button class="action-btn reply" onclick="adminCommentManager.showReplyModal('${mainComment.id}')" title="Cevap Ver">
+                                    <i class="fas fa-reply"></i> Cevap Ver
+                                </button>
+                            ` : ''}
+                            <button class="action-btn delete" onclick="adminCommentManager.deleteComment('${mainComment.id}')" title="Sil">
+                                <i class="fas fa-trash"></i> Sil
+                            </button>
+                        </div>
                     </div>
-                    <span class="status-badge status-${comment.status}">
-                        ${this.getStatusText(comment.status)}
-                    </span>
-                </div>
+            `;
+            
+            // Bu ana yoruma ait yanıtları bul ve ekle
+            // Önce parent_id ile eşleşen yanıtları bul
+            let commentReplies = replies.filter(reply => reply.parent_id === mainComment.id);
+            
+            // Eğer parent_id ile eşleşen yanıt yoksa, admin yanıtlarını tarih sırasına göre eşleştir
+            if (commentReplies.length === 0) {
+                // Bu ana yorumdan sonra gelen ve henüz kullanılmamış admin yanıtlarını bul
+                const adminReplies = replies.filter(reply => 
+                    reply.nickname === 'Murat Oto Anahtar' && 
+                    reply.created_at > mainComment.created_at &&
+                    !usedReplies.has(reply.id) // Henüz kullanılmamış
+                );
                 
-                <div class="comment-meta">
-                    <span><i class="fas fa-calendar"></i> ${new Date(comment.created_at).toLocaleDateString('tr-TR')}</span>
-                    <span><i class="fas fa-globe"></i> ${this.escapeHtml(comment.page_id)}</span>
-                    ${comment.rating ? `<span><i class="fas fa-star"></i> ${comment.rating}/5</span>` : ''}
-                    <span style="color: #666; font-size: 0.8rem;">ID: ${comment.id} | Parent: ${comment.parent_id || 'Yok'} | Status: ${comment.status}</span>
-                </div>
+                console.log(`Finding admin replies for comment ${mainComment.id}:`, {
+                    commentDate: mainComment.created_at,
+                    availableAdminReplies: adminReplies.length,
+                    adminReplyIds: adminReplies.map(r => r.id)
+                });
                 
-                <div class="comment-content">
-                    ${this.escapeHtml(comment.content)}
-                </div>
-                
-                <div class="comment-actions">
-                    <button class="action-btn view" onclick="adminCommentManager.viewComment('${comment.id}')" title="Görüntüle">
-                        <i class="fas fa-eye"></i> Görüntüle
-                    </button>
-                    ${comment.status === 'pending' && !comment.parent_id ? `
-                        <button class="action-btn approve" onclick="adminCommentManager.approveComment('${comment.id}')" title="Onayla">
-                            <i class="fas fa-check"></i> Onayla
-                        </button>
-                        <button class="action-btn reject" onclick="adminCommentManager.rejectComment('${comment.id}')" title="Reddet">
-                            <i class="fas fa-times"></i> Reddet
-                        </button>
-                    ` : ''}
-                    ${comment.status === 'approved' && !comment.parent_id ? `
-                        <button class="action-btn reply" onclick="console.log('Reply button clicked for comment:', '${comment.id}'); adminCommentManager.showReplyModal('${comment.id}')" title="Cevap Ver">
-                            <i class="fas fa-reply"></i> Cevap Ver
-                        </button>
-                    ` : ''}
-                    <button class="action-btn delete" onclick="adminCommentManager.deleteComment('${comment.id}')" title="Sil">
-                        <i class="fas fa-trash"></i> Sil
-                    </button>
-                </div>
-            </div>
-        `).join('');
+                // En yakın tarihli admin yanıtını bu yoruma ata
+                if (adminReplies.length > 0) {
+                    const closestReply = adminReplies.sort((a, b) => 
+                        new Date(a.created_at) - new Date(b.created_at)
+                    )[0];
+                    commentReplies = [closestReply];
+                    usedReplies.add(closestReply.id); // Bu yanıtı kullanıldı olarak işaretle
+                    console.log(`Assigned admin reply ${closestReply.id} to comment ${mainComment.id}`);
+                }
+            } else {
+                // Parent_id ile eşleşen yanıtları da kullanıldı olarak işaretle
+                commentReplies.forEach(reply => usedReplies.add(reply.id));
+            }
+            
+            // Yanıt butonlarını güncelle
+            if (commentReplies.length > 0) {
+                // Yanıt varsa "Düzenle" butonuna çevir
+                const replyButton = document.querySelector(`[onclick*="showReplyModal('${mainComment.id}')"]`);
+                if (replyButton) {
+                    replyButton.innerHTML = '<i class="fas fa-edit"></i> Yanıtı Düzenle';
+                    replyButton.className = 'action-btn edit-reply';
+                    replyButton.onclick = () => adminCommentManager.editReply(mainComment.id);
+                    replyButton.title = 'Yanıtı Düzenle';
+                }
+            }
+            
+            if (commentReplies.length > 0) {
+                commentReplies.forEach(reply => {
+                    html += `
+                        <div class="comment-card reply-card">
+                            <div class="comment-header">
+                                <div class="comment-user">
+                                    <i class="fas fa-reply" style="color: #8b5cf6;"></i>
+                                    <span>${this.escapeHtml(reply.nickname)}</span>
+                                    <span class="admin-badge">Admin</span>
+                                </div>
+                                <span class="status-badge status-${reply.status}">
+                                    ${this.getStatusText(reply.status)}
+                                </span>
+                            </div>
+                            
+                            <div class="comment-meta">
+                                <span><i class="fas fa-calendar"></i> ${new Date(reply.created_at).toLocaleDateString('tr-TR')}</span>
+                                <span style="color: #666; font-size: 0.8rem;">Yanıt ID: ${reply.id} | Parent: ${reply.parent_id || 'Otomatik Eşleştirildi'}</span>
+                            </div>
+                            
+                            <div class="comment-content">
+                                ${this.escapeHtml(reply.content)}
+                            </div>
+                            
+                            <div class="comment-actions">
+                                <button class="action-btn view" onclick="adminCommentManager.viewComment('${reply.id}')" title="Görüntüle">
+                                    <i class="fas fa-eye"></i> Görüntüle
+                                </button>
+                                <button class="action-btn delete" onclick="adminCommentManager.deleteComment('${reply.id}')" title="Sil">
+                                    <i class="fas fa-trash"></i> Sil
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            html += '</div>'; // comment-group kapat
+        });
+        
+        grid.innerHTML = html;
     }
 
     renderPagination() {

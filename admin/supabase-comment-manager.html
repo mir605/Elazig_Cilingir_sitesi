@@ -155,6 +155,54 @@
             transform: translateY(-2px);
         }
 
+        .comment-group {
+            margin-bottom: 2rem;
+            border: 2px solid #f1f5f9;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fafafa;
+        }
+
+        .main-comment-card {
+            background: white;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 0;
+        }
+
+        .reply-card {
+            background: #f8fafc;
+            border: none;
+            border-radius: 0;
+            border-left: 4px solid #8b5cf6;
+            margin-left: 2rem;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .reply-card::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 1.5rem;
+            width: 0.5rem;
+            height: 0.5rem;
+            background: #8b5cf6;
+            border-radius: 50%;
+        }
+
+        .admin-badge {
+            background: #8b5cf6;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
         .comment-header {
             display: flex;
             justify-content: space-between;
