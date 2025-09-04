@@ -4,10 +4,11 @@
 class AdminCommentManager {
     constructor() {
         this.currentPage = 1;
-        this.itemsPerPage = 10;
+        this.itemsPerPage = 50; // Varsayılan olarak 50 yorum göster
         this.currentFilter = 'all';
         this.currentPageFilter = 'all';
         this.comments = [];
+        this.filteredComments = [];
         this.init();
     }
 
@@ -64,14 +65,27 @@ class AdminCommentManager {
             this.updateBadges();
         });
 
+        // Items per page changes
+        document.getElementById('items-per-page')?.addEventListener('change', (e) => {
+            this.itemsPerPage = e.target.value === 'all' ? Infinity : parseInt(e.target.value);
+            this.currentPage = 1;
+            this.filterComments();
+            this.renderCommentsTable();
+            this.renderPagination();
+            this.updateFilteredStats();
+        });
+
         // Pagination
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('pagination-btn')) {
                 e.preventDefault();
                 const page = parseInt(e.target.dataset.page);
-                if (page) {
+                if (page && !isNaN(page)) {
                     this.currentPage = page;
-                    this.loadComments();
+                    this.filterComments();
+                    this.renderCommentsTable();
+                    this.renderPagination();
+                    this.updateFilteredStats();
                 }
             }
         });
@@ -179,23 +193,43 @@ class AdminCommentManager {
             }
 
             console.log('Found comment:', comment);
-            console.log('Using commentSystemManager:', window.commentSystemManager);
-
-            const result = await window.commentSystemManager.submitAdminReply(
-                commentId, 
-                content, 
-                comment.page_id
-            );
-
-            console.log('Reply result:', result);
-
-            if (result.success) {
-                this.showNotification('Cevap başarıyla eklendi.', 'success');
-                this.closeReplyModal();
-                this.loadComments(); // Yorumları yenile
-                this.updateFilteredStats();
+            
+            // Check if this is edit mode or add mode
+            const submitButton = document.getElementById('submit-reply');
+            const mode = submitButton?.dataset?.mode || 'add';
+            
+            if (mode === 'edit') {
+                // Update existing reply
+                const replyId = submitButton.dataset.replyId;
+                if (replyId) {
+                    const result = await window.commentSystemManager.updateAdminReply(replyId, content);
+                    if (result.success) {
+                        this.showNotification('Yanıt başarıyla güncellendi.', 'success');
+                        this.closeReplyModal();
+                        this.loadComments();
+                        this.updateFilteredStats();
+                    } else {
+                        this.showNotification(result.error || 'Yanıt güncellenirken hata oluştu.', 'error');
+                    }
+                }
             } else {
-                this.showNotification(result.error || 'Cevap eklenirken hata oluştu.', 'error');
+                // Submit new admin reply
+                const result = await window.commentSystemManager.submitAdminReply(
+                    commentId, 
+                    content, 
+                    comment.page_id
+                );
+
+                console.log('Reply result:', result);
+
+                if (result.success) {
+                    this.showNotification('Cevap başarıyla eklendi.', 'success');
+                    this.closeReplyModal();
+                    this.loadComments(); // Yorumları yenile
+                    this.updateFilteredStats();
+                } else {
+                    this.showNotification(result.error || 'Cevap eklenirken hata oluştu.', 'error');
+                }
             }
         } catch (error) {
             console.error('Error adding reply:', error);
@@ -204,13 +238,58 @@ class AdminCommentManager {
     }
 
     filterComments() {
+        console.log('filterComments called with:', {
+            currentFilter: this.currentFilter,
+            currentPageFilter: this.currentPageFilter,
+            totalComments: this.comments?.length || 0
+        });
+        
+        if (!this.comments || this.comments.length === 0) {
+            console.log('No comments to filter');
+            this.filteredComments = [];
+            return;
+        }
+        
         let filteredComments = [...this.comments];
         
         // Filter by status
         if (this.currentFilter !== 'all') {
-            filteredComments = filteredComments.filter(comment => 
-                comment.status === this.currentFilter
-            );
+            if (this.currentFilter === 'unanswered') {
+                // Cevaplanmamış yorumlar: onaylanmış ama yanıtlanmamış ana yorumlar
+                filteredComments = filteredComments.filter(comment => {
+                    if (comment.status !== 'approved' || comment.parent_id || comment.nickname === 'Murat Oto Anahtar') {
+                        return false;
+                    }
+                    
+                    // Bu yoruma admin yanıtı var mı kontrol et
+                    const hasAdminReply = this.comments.some(reply => 
+                        (reply.parent_id === comment.id) || 
+                        (reply.nickname === 'Murat Oto Anahtar' && reply.created_at > comment.created_at)
+                    );
+                    
+                    return !hasAdminReply;
+                });
+            } else if (this.currentFilter === 'answered') {
+                // Cevaplanan yorumlar: onaylanmış ve yanıtlanmış ana yorumlar
+                filteredComments = filteredComments.filter(comment => {
+                    if (comment.status !== 'approved' || comment.parent_id || comment.nickname === 'Murat Oto Anahtar') {
+                        return false;
+                    }
+                    
+                    // Bu yoruma admin yanıtı var mı kontrol et
+                    const hasAdminReply = this.comments.some(reply => 
+                        (reply.parent_id === comment.id) || 
+                        (reply.nickname === 'Murat Oto Anahtar' && reply.created_at > comment.created_at)
+                    );
+                    
+                    return hasAdminReply;
+                });
+            } else {
+                filteredComments = filteredComments.filter(comment => 
+                    comment.status === this.currentFilter
+                );
+            }
+            console.log(`After status filter (${this.currentFilter}):`, filteredComments.length);
         }
         
         // Filter by page
@@ -218,12 +297,47 @@ class AdminCommentManager {
             filteredComments = filteredComments.filter(comment => 
                 comment.page_id === this.currentPageFilter
             );
+            console.log(`After page filter (${this.currentPageFilter}):`, filteredComments.length);
         }
         
-        // Sort by creation date (newest first)
-        filteredComments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        // Sort by creation date (newest first) and group replies with their parent comments
+        filteredComments.sort((a, b) => {
+            // Ana yorumlar ve yanıtları ayrı ayrı sırala
+            const aIsReply = a.parent_id || a.nickname === 'Murat Oto Anahtar';
+            const bIsReply = b.parent_id || b.nickname === 'Murat Oto Anahtar';
+            
+            if (aIsReply && !bIsReply) return 1; // Yanıtlar ana yorumlardan sonra
+            if (!aIsReply && bIsReply) return -1; // Ana yorumlar önce
+            
+            // Ana yorumlar arasında tarihe göre sırala (en yeni önce)
+            if (!aIsReply && !bIsReply) {
+                return new Date(b.created_at) - new Date(a.created_at);
+            }
+            
+            // Yanıtlar arasında tarihe göre sırala (en yeni önce)
+            if (aIsReply && bIsReply) {
+                return new Date(b.created_at) - new Date(a.created_at);
+            }
+            
+            return 0;
+        });
         
         this.filteredComments = filteredComments;
+        
+        console.log('Filtered comments result:', {
+            total: this.comments.length,
+            filtered: filteredComments.length,
+            mainComments: filteredComments.filter(c => !c.parent_id && c.nickname !== 'Murat Oto Anahtar').length,
+            adminReplies: filteredComments.filter(c => c.nickname === 'Murat Oto Anahtar').length,
+            otherReplies: filteredComments.filter(c => c.parent_id && c.nickname !== 'Murat Oto Anahtar').length,
+            unanswered: this.currentFilter === 'unanswered' ? filteredComments.length : 'N/A',
+            answered: this.currentFilter === 'answered' ? filteredComments.length : 'N/A',
+            statusCounts: {
+                pending: filteredComments.filter(c => c.status === 'pending').length,
+                approved: filteredComments.filter(c => c.status === 'approved').length,
+                rejected: filteredComments.filter(c => c.status === 'rejected').length
+            }
+        });
     }
 
     renderCommentsTable() {
@@ -292,22 +406,51 @@ class AdminCommentManager {
         const pagination = document.getElementById('comments-pagination');
         if (!pagination) return;
 
+        // Eğer tüm yorumlar gösteriliyorsa sayfalama gerekmez
+        if (this.itemsPerPage === Infinity) {
+            pagination.innerHTML = '';
+            return;
+        }
+
         const totalPages = Math.ceil(this.filteredComments.length / this.itemsPerPage);
         
+        // Sayfalama her zaman gösterilsin (test için)
         if (totalPages <= 1) {
-            pagination.innerHTML = '';
+            pagination.innerHTML = '<span class="pagination-info">Tüm yorumlar tek sayfada gösteriliyor</span>';
             return;
         }
 
         let paginationHTML = '';
         
+        // Pagination info
+        const startItem = (this.currentPage - 1) * this.itemsPerPage + 1;
+        const endItem = Math.min(this.currentPage * this.itemsPerPage, this.filteredComments.length);
+        paginationHTML += `<span class="pagination-info">${startItem}-${endItem} / ${this.filteredComments.length} yorum</span>`;
+        
         // Previous button
         if (this.currentPage > 1) {
             paginationHTML += `<button class="pagination-btn" data-page="${this.currentPage - 1}">Önceki</button>`;
+        } else {
+            paginationHTML += `<button class="pagination-btn" disabled>Önceki</button>`;
         }
         
-        // Page numbers
-        for (let i = 1; i <= totalPages; i++) {
+        // Page numbers (smart display - max 7 visible)
+        const maxVisiblePages = 7;
+        let startPage = Math.max(1, this.currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        if (startPage > 1) {
+            paginationHTML += `<button class="pagination-btn" data-page="1">1</button>`;
+            if (startPage > 2) {
+                paginationHTML += `<span class="pagination-info">...</span>`;
+            }
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
             if (i === this.currentPage) {
                 paginationHTML += `<span class="pagination-current">${i}</span>`;
             } else {
@@ -315,9 +458,18 @@ class AdminCommentManager {
             }
         }
         
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationHTML += `<span class="pagination-info">...</span>`;
+            }
+            paginationHTML += `<button class="pagination-btn" data-page="${totalPages}">${totalPages}</button>`;
+        }
+        
         // Next button
         if (this.currentPage < totalPages) {
             paginationHTML += `<button class="pagination-btn" data-page="${this.currentPage + 1}">Sonraki</button>`;
+        } else {
+            paginationHTML += `<button class="pagination-btn" disabled>Sonraki</button>`;
         }
         
         pagination.innerHTML = paginationHTML;
@@ -364,10 +516,54 @@ class AdminCommentManager {
         }
     }
 
+    showEditReplyModal(commentId, replyId, replyContent) {
+        console.log('showEditReplyModal called with commentId:', commentId, 'replyId:', replyId);
+        
+        const modal = document.getElementById('reply-modal');
+        const detailDiv = document.getElementById('reply-detail');
+        const submitButton = document.getElementById('submit-reply');
+        
+        if (modal && detailDiv && submitButton) {
+            // Set data attributes for editing mode
+            submitButton.dataset.commentId = commentId;
+            submitButton.dataset.replyId = replyId;
+            submitButton.dataset.mode = 'edit'; // Düzenleme modu
+            submitButton.innerHTML = '<i class="fas fa-edit"></i> Yanıtı Güncelle';
+            
+            detailDiv.innerHTML = `
+                <div class="reply-detail-content">
+                    <div class="reply-detail-header">
+                        <h4>Admin Yanıtını Düzenle</h4>
+                        <p><strong>Mevcut Yanıt:</strong></p>
+                    </div>
+                    <div class="reply-form">
+                        <textarea id="reply-content" placeholder="Yanıtınızı yazın..." required>${this.escapeHtml(replyContent)}</textarea>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+    }
+
+    editReply(commentId) {
+        console.log('editReply called with commentId:', commentId);
+        
+        // Bu yoruma ait admin yanıtını bul
+        const adminReply = this.comments.find(reply => 
+            (reply.parent_id === commentId) || 
+            (reply.nickname === 'Murat Oto Anahtar' && reply.created_at > this.comments.find(c => c.id === commentId)?.created_at)
+        );
+        
+        if (adminReply) {
+            this.showEditReplyModal(commentId, adminReply.id, adminReply.content);
+        } else {
+            this.showNotification('Bu yoruma ait admin yanıtı bulunamadı.', 'error');
+        }
+    }
+
     showReplyModal(commentId) {
         console.log('showReplyModal called with commentId:', commentId);
-        console.log('Available comments:', this.comments);
-        console.log('Comment IDs:', this.comments.map(c => c.id));
         
         // Try to find comment by ID
         let comment = this.comments.find(c => c.id == commentId);
@@ -377,26 +573,21 @@ class AdminCommentManager {
             comment = this.comments.find(c => String(c.id) === String(commentId));
         }
         
-        // If still not found, create a dummy comment for testing
         if (!comment) {
             console.error('Comment not found:', commentId);
-            console.error('Available comment IDs:', this.comments.map(c => c.id));
-            
-            // Create a dummy comment for testing
-            comment = {
-                id: commentId,
-                nickname: 'Unknown User',
-                content: 'Test content',
-                page_id: 'test-page',
-                status: 'approved'
-            };
-            console.log('Using dummy comment for testing:', comment);
+            this.showNotification('Yorum bulunamadı.', 'error');
+            return;
         }
 
         const modal = document.getElementById('reply-modal');
         const detailDiv = document.getElementById('reply-detail');
+        const submitButton = document.getElementById('submit-reply');
         
-        if (modal && detailDiv) {
+        if (modal && detailDiv && submitButton) {
+            // Set comment ID for the reply button
+            submitButton.dataset.commentId = comment.id;
+            submitButton.dataset.mode = 'add'; // Yeni yanıt ekleme modu
+            
             detailDiv.innerHTML = `
                 <div class="reply-detail-content">
                     <div class="reply-detail-header">
@@ -428,6 +619,8 @@ class AdminCommentManager {
 
     closeReplyModal() {
         const modal = document.getElementById('reply-modal');
+        const submitButton = document.getElementById('submit-reply');
+        
         if (modal) {
             modal.style.display = 'none';
             // Clear textarea
@@ -435,6 +628,13 @@ class AdminCommentManager {
             if (textarea) {
                 textarea.value = '';
             }
+        }
+        
+        // Reset submit button state
+        if (submitButton) {
+            submitButton.innerHTML = '<i class="fas fa-reply"></i> Cevap Gönder';
+            submitButton.dataset.mode = 'add';
+            delete submitButton.dataset.replyId;
         }
     }
 

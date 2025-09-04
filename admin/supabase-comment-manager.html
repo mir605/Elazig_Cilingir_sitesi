@@ -198,7 +198,121 @@
             display: flex;
             gap: 8px;
             margin-top: 16px;
-            flex-wrap: wrap;
+        }
+
+        /* Admin yanıtları için özel stiller */
+        .reply-card {
+            margin-left: 40px;
+            border-left: 4px solid #8b5cf6;
+            background: #f8fafc;
+            position: relative;
+        }
+
+        .reply-card::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 20px;
+            width: 16px;
+            height: 2px;
+            background: #8b5cf6;
+        }
+
+        .main-comment-card {
+            border-left: 4px solid #10b981;
+            margin-bottom: 8px;
+        }
+
+        .admin-badge {
+            background: #dc2626 !important;
+            color: white !important;
+            padding: 2px 8px !important;
+            border-radius: 4px !important;
+            font-size: 0.7rem !important;
+            margin-left: 8px !important;
+            font-weight: 600 !important;
+        }
+
+        .reply-indicator {
+            color: #8b5cf6 !important;
+            font-size: 0.8rem !important;
+            margin-left: 8px !important;
+            font-weight: 500 !important;
+        }
+
+                /* Yorum grupları için spacing */
+        .comment-group {
+            margin-bottom: 24px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .comment-group .main-comment-card {
+            border-radius: 0;
+            border-left: 4px solid #10b981;
+            margin-bottom: 0;
+        }
+
+        .comment-group .reply-card {
+            border-radius: 0;
+            margin-left: 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .comment-group .reply-card:last-child {
+            border-bottom: none;
+        }
+
+        /* Pagination Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+
+        .pagination-btn {
+            padding: 8px 16px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            color: #374151;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .pagination-btn:hover {
+            border-color: #dc2626;
+            color: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .pagination-current {
+            padding: 8px 16px;
+            background: #dc2626;
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .pagination-info {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin: 0 1rem;
         }
 
         .action-btn {
@@ -230,6 +344,11 @@
 
         .action-btn.reply {
             background: #8b5cf6;
+            color: white;
+        }
+
+        .action-btn.edit-reply {
+            background: #f59e0b;
             color: white;
         }
 
@@ -533,30 +652,58 @@
                     <i class="fas fa-times"></i>
                     Reddedilen
                 </button>
+                <button class="filter-btn" data-filter="unanswered">
+                    <i class="fas fa-comment-dots"></i>
+                    Cevaplanmamış
+                </button>
+                <button class="filter-btn" data-filter="answered">
+                    <i class="fas fa-reply"></i>
+                    Cevaplanan
+                </button>
             </div>
 
-            <!-- Page Filter -->
-            <div class="page-filter-section" style="margin-bottom: 2rem;">
-                <label for="page-filter" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Sayfa Filtresi:</label>
-                <select id="page-filter" class="page-filter-select" style="padding: 0.75rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; background: white; min-width: 200px;">
-                    <option value="all">Tüm Sayfalar</option>
-                    <option value="index">Ana Sayfa</option>
-                    <option value="acil-cilingir-hizmetleri">Acil Çilingir Hizmetleri</option>
-                    <option value="akilli-kilitler-kartli-sistemler">Akıllı Kilitler ve Kartlı Sistemler</option>
-                    <option value="araba-anahtarlari-nasil-calisir">Araba Anahtarları Nasıl Çalışır</option>
-                    <option value="arac-anahtari-kopyalama-islemi">Araç Anahtarı Kopyalama İşlemi</option>
-                    <option value="cilingir-hizmeti-ne-zaman-nasil-alinir">Çilingir Hizmeti Ne Zaman Nasıl Alınır</option>
-                    <option value="elazigda-guvenilir-anahtarci-nasil-bulunur">Elazığ'da Güvenilir Anahtarcı Nasıl Bulunur</option>
-                    <option value="ev-anahtarlari-kopyalanirken-dikkat-edilmesi-gerekenler">Ev Anahtarları Kopyalanırken Dikkat Edilmesi Gerekenler</option>
-                    <option value="kilit-degistirmek-anahtar-kopyalamak-hangisi-guvenli">Kilit Değiştirmek Anahtar Kopyalamak Hangisi Güvenli</option>
-                    <option value="kilit-sistemleri-guvenlik">Kilit Sistemleri ve Güvenlik</option>
-                    <option value="yedek-anahtar-kopyalama">Yedek Anahtar Kopyalama</option>
-                </select>
+            <!-- Page Filter and Items Per Page -->
+            <div style="display: flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <!-- Page Filter -->
+                <div class="page-filter-section">
+                    <label for="page-filter" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Sayfa Filtresi:</label>
+                    <select id="page-filter" class="page-filter-select" style="padding: 0.75rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; background: white; min-width: 200px;">
+                        <option value="all">Tüm Sayfalar</option>
+                        <option value="index">Ana Sayfa</option>
+                        <option value="acil-cilingir-hizmetleri">Acil Çilingir Hizmetleri</option>
+                        <option value="akilli-kilitler-kartli-sistemler">Akıllı Kilitler ve Kartlı Sistemler</option>
+                        <option value="araba-anahtarlari-nasil-calisir">Araba Anahtarları Nasıl Çalışır</option>
+                        <option value="arac-anahtari-kopyalama-islemi">Araç Anahtarı Kopyalama İşlemi</option>
+                        <option value="cilingir-hizmeti-ne-zaman-nasil-alinir">Çilingir Hizmeti Ne Zaman Nasıl Alınır</option>
+                        <option value="elazigda-guvenilir-anahtarci-nasil-bulunur">Elazığ'da Güvenilir Anahtarcı Nasıl Bulunur</option>
+                        <option value="ev-anahtarlari-kopyalanirken-dikkat-edilmesi-gerekenler">Ev Anahtarları Kopyalanırken Dikkat Edilmesi Gerekenler</option>
+                        <option value="kilit-degistirmek-anahtar-kopyalamak-hangisi-guvenli">Kilit Değiştirmek Anahtar Kopyalamak Hangisi Güvenli</option>
+                        <option value="kilit-sistemleri-guvenlik">Kilit Sistemleri ve Güvenlik</option>
+                        <option value="yedek-anahtar-kopyalama">Yedek Anahtar Kopyalama</option>
+                    </select>
+                </div>
+                
+                <!-- Items Per Page -->
+                <div class="items-per-page-section">
+                    <label for="items-per-page" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Sayfa Başına Yorum:</label>
+                    <select id="items-per-page" class="items-per-page-select" style="padding: 0.75rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; background: white; min-width: 150px;">
+                        <option value="10">10 Yorum</option>
+                        <option value="20">20 Yorum</option>
+                        <option value="50" selected>50 Yorum</option>
+                        <option value="100">100 Yorum</option>
+                        <option value="all">Tümü</option>
+                    </select>
+                </div>
             </div>
 
             <!-- Comments Grid -->
             <div class="comments-grid" id="comments-grid">
                 <!-- Comments will be loaded here -->
+            </div>
+
+            <!-- Pagination -->
+            <div id="comments-pagination" class="pagination-container">
+                <!-- Pagination buttons will be loaded here -->
             </div>
         </div>
     </div>
