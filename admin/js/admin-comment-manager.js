@@ -645,47 +645,59 @@ class AdminCommentManager {
         }
     }
 
-    showEditReplyModal(commentId, replyId, replyContent) {
-        console.log('showEditReplyModal called with commentId:', commentId, 'replyId:', replyId);
-        
-        const modal = document.getElementById('reply-modal');
-        const detailDiv = document.getElementById('reply-detail');
-        const submitButton = document.getElementById('submit-reply');
-        
-        if (modal && detailDiv && submitButton) {
-            // Set data attributes for editing mode
-            submitButton.dataset.commentId = commentId;
-            submitButton.dataset.replyId = replyId;
-            submitButton.dataset.mode = 'edit'; // Düzenleme modu
-            submitButton.innerHTML = '<i class="fas fa-edit"></i> Yanıtı Güncelle';
-            
-            detailDiv.innerHTML = `
-                <div class="reply-detail-content">
-                    <div class="reply-detail-header">
-                        <h4>Admin Yanıtını Düzenle</h4>
-                        <p><strong>Mevcut Yanıt:</strong></p>
-                    </div>
-                    <div class="reply-form">
-                        <textarea id="reply-content" placeholder="Yanıtınızı yazın..." required>${this.escapeHtml(replyContent)}</textarea>
-                    </div>
-                </div>
-            `;
-            
-            modal.style.display = 'flex';
-        }
-    }
+         showEditReplyModal(commentId, replyId, replyContent) {
+         console.log('showEditReplyModal called with commentId:', commentId, 'replyId:', replyId);
+         
+         const modal = document.getElementById('reply-modal');
+         const detailDiv = document.getElementById('reply-detail');
+         const submitButton = document.getElementById('submit-reply');
+         
+         console.log('Modal elements found:', { modal: !!modal, detailDiv: !!detailDiv, submitButton: !!submitButton });
+         
+         if (modal && detailDiv && submitButton) {
+             // Set data attributes for editing mode
+             submitButton.dataset.commentId = commentId;
+             submitButton.dataset.replyId = replyId;
+             submitButton.dataset.mode = 'edit'; // Düzenleme modu
+             submitButton.innerHTML = '<i class="fas fa-edit"></i> Yanıtı Güncelle';
+             
+             detailDiv.innerHTML = `
+                 <div class="reply-detail-content">
+                     <div class="reply-detail-header">
+                         <h4>Admin Yanıtını Düzenle</h4>
+                         <p><strong>Mevcut Yanıt:</strong></p>
+                     </div>
+                     <div class="reply-form">
+                         <textarea id="reply-content" placeholder="Yanıtınızı yazın..." required>${this.escapeHtml(replyContent)}</textarea>
+                     </div>
+                 </div>
+             `;
+             
+             modal.style.display = 'flex';
+             console.log('Edit modal opened successfully');
+         } else {
+             console.error('Required modal elements not found');
+         }
+     }
 
          editReply(commentId) {
          console.log('editReply called with commentId:', commentId);
+         console.log('All comments:', this.comments);
+         console.log('Looking for replies with parent_id:', commentId);
          
          // Bu yoruma ait admin yanıtını bul - parent_id ile direkt eşleştir
          const adminReply = this.comments.find(reply => 
              reply.parent_id === commentId && reply.nickname === 'Murat Oto Anahtar'
          );
          
+         console.log('Found admin reply:', adminReply);
+         console.log('All admin replies:', this.comments.filter(r => r.nickname === 'Murat Oto Anahtar'));
+         
          if (adminReply) {
+             console.log('Opening edit modal for reply:', adminReply.id);
              this.showEditReplyModal(commentId, adminReply.id, adminReply.content);
          } else {
+             console.log('No admin reply found for comment:', commentId);
              this.showNotification('Bu yoruma ait admin yanıtı bulunamadı.', 'error');
          }
      }
