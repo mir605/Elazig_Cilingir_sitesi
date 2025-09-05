@@ -649,18 +649,18 @@ header nav {
 }
 
 #homepage-comments-section .form-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    align-items: flex-end;
+    align-items: start;
+    margin-bottom: 1rem;
 }
 
 #homepage-comments-section .form-group {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
     position: relative;
-    margin-bottom: 1rem;
 }
 
 #homepage-comments-section .form-group label {
@@ -717,7 +717,6 @@ header nav {
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    margin-bottom: 1rem;
 }
 
 #homepage-comments-section .rating-select:hover {
@@ -2480,18 +2479,18 @@ section.visible {
 }
 
 .form-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    align-items: flex-end;
+    align-items: start;
+    margin-bottom: 1rem;
 }
 
 .form-group {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
     position: relative;
-    margin-bottom: 1rem;
 }
 
 .form-group label {
@@ -2548,7 +2547,6 @@ section.visible {
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    margin-bottom: 1rem;
 }
 
 .rating-select:hover {
@@ -3045,6 +3043,12 @@ section.visible {
     gap: 1.5rem;
     align-items: start;
     margin-bottom: 1rem;
+}
+
+.form-row .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 @media (max-width: 768px) {
