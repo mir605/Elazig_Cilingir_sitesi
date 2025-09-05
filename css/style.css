@@ -1861,6 +1861,12 @@ section.visible {
     gap: 1rem;
 }
 
+.form-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 .form-col input,
 .form-col select {
     width: 100%;
