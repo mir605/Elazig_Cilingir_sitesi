@@ -1867,6 +1867,10 @@ section.visible {
     gap: 0.5rem;
 }
 
+.form-col:first-child {
+    padding-top: 1.5rem;
+}
+
 .form-col input,
 .form-col select {
     width: 100%;
