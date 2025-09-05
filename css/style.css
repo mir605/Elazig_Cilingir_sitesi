@@ -799,6 +799,8 @@ header nav {
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
+    margin-top: 1.5rem;
+    margin-left: auto;
 }
 
 #homepage-comments-section .submit-btn::before {
@@ -2625,6 +2627,8 @@ section.visible {
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
+    margin-top: 1.5rem;
+    margin-left: auto;
 }
 
 .submit-btn::before {
