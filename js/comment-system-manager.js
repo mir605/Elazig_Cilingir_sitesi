@@ -522,6 +522,7 @@ class CommentInstance {
                     <form id="commentForm_${this.containerId}" class="simple-comment-form">
                         <div class="form-row">
                             <div class="form-col">
+                                <label for="nickname_${this.containerId}" class="form-label">Adınız</label>
                                 <input 
                                     type="text" 
                                     id="nickname_${this.containerId}" 
