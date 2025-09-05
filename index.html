@@ -566,7 +566,7 @@
             .service-card {
                 flex: 0 0 280px;
                 scroll-snap-align: start;
-                margin: 0;
+                margin-bottom: 0;
             }
             
             .services-indicator {
@@ -1033,11 +1033,8 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
             margin-left: auto;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            user-select: none;
         }
 
         .submit-btn:hover {
@@ -1049,21 +1046,6 @@
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
-        }
-        
-        /* Mobile touch optimization for submit buttons */
-        @media (max-width: 768px) {
-            .submit-btn {
-                min-height: 48px;
-                min-width: 120px;
-                font-size: 1rem;
-                padding: 1rem 2rem;
-            }
-            
-            .submit-btn:active {
-                transform: scale(0.98);
-                background: linear-gradient(135deg, #b91c1c, #c2410c);
-            }
         }
 
         .comments-list-container {
@@ -2413,31 +2395,6 @@
                     window.addEventListener('scroll', handleScroll, { passive: true });
                 }
                 
-                // Mobile touch optimization for submit buttons
-                function initMobileTouchEvents() {
-                    const submitButtons = document.querySelectorAll('.submit-btn');
-                    
-                    submitButtons.forEach(button => {
-                        // Add touch event listeners for better mobile experience
-                        button.addEventListener('touchstart', function(e) {
-                            e.preventDefault();
-                            this.style.transform = 'scale(0.98)';
-                        }, { passive: false });
-                        
-                        button.addEventListener('touchend', function(e) {
-                            e.preventDefault();
-                            this.style.transform = '';
-                            // Trigger click event
-                            this.click();
-                        }, { passive: false });
-                        
-                        button.addEventListener('touchcancel', function(e) {
-                            e.preventDefault();
-                            this.style.transform = '';
-                        }, { passive: false });
-                    });
-                }
-                
                 // Mobile slideable services functionality
                 function initMobileServices() {
                     const servicesGrid = document.getElementById('servicesGrid');
@@ -2490,8 +2447,7 @@
                     window.addEventListener('resize', throttle(checkMobile, 250), { passive: true });
                 }
                 
-                // Initialize mobile features
-                initMobileTouchEvents();
+                // Initialize mobile services
                 initMobileServices();
                 
                 // Mobile menu toggle
