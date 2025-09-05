@@ -2450,23 +2450,10 @@
                 // Initialize mobile services
                 initMobileServices();
                 
-                // Mobile menu toggle
-                const menuBtn = document.querySelector('.menu-btn');
-                const navLinks = document.querySelector('.nav-links');
-                
-                if (menuBtn && navLinks) {
-                    menuBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        navLinks.classList.toggle('active');
-                    });
-                    
-                    // Close menu on outside click
-                    document.addEventListener('click', (e) => {
-                        if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                            navLinks.classList.remove('active');
-                        }
-                    });
-                }
+                // Mobile menu toggle is handled by script.min.js
+                // Debug: Check if mobile menu elements exist
+                console.log('Menu button:', document.querySelector('.menu-btn'));
+                console.log('Nav links:', document.querySelector('.nav-links'));
                 
                 // Video basit fallback
                 const video = document.getElementById('hero-video');

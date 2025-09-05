@@ -170,6 +170,8 @@ header nav {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
+    z-index: 1002;
+    position: relative;
 }
 
 /* Hero Section */
@@ -1153,6 +1155,7 @@ section.visible {
         text-align: center;
         padding: 1rem 0;
         box-shadow: var(--shadow-medium);
+        z-index: 1001;
     }
 
     .nav-links.active {
