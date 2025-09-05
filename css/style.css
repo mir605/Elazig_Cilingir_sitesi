@@ -801,6 +801,9 @@ header nav {
     overflow: hidden;
     margin-top: 1.5rem;
     margin-left: auto;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
 }
 
 #homepage-comments-section .submit-btn::before {
@@ -1203,7 +1206,8 @@ section.visible {
         overflow-x: auto;
         overflow-y: hidden;
         gap: 1.5rem;
-        padding: 1rem 1rem 1rem 0;
+        padding: 1rem 1rem 1rem 1rem;
+        margin: 0;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none; /* Firefox */
@@ -1253,7 +1257,7 @@ section.visible {
         padding: 1.2rem;
         min-height: 320px;
         scroll-snap-align: start;
-        margin-right: 0;
+        margin: 0;
         touch-action: manipulation;
         user-select: none;
     }
@@ -2629,6 +2633,9 @@ section.visible {
     overflow: hidden;
     margin-top: 1.5rem;
     margin-left: auto;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
 }
 
 .submit-btn::before {
