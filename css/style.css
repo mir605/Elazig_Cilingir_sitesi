@@ -3499,5 +3499,152 @@ section.visible {
     font-size: 0.95rem;
 }
 
+/* Comments Controls - Filtreleme ve Sayfalama */
+.comments-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.comments-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.filter-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+.filter-label i {
+    color: #dc2626;
+    font-size: 0.85rem;
+}
+
+.filter-select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.9rem;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 140px;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.filter-select:hover {
+    border-color: #9ca3af;
+}
+
+/* Pagination Controls */
+.comments-pagination {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: #374151;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+    justify-content: center;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: #f9fafb;
+    border-color: #9ca3af;
+    color: #1f2937;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f9fafb;
+    color: #9ca3af;
+}
+
+.pagination-btn i {
+    font-size: 0.8rem;
+}
+
+.pagination-info {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Responsive Design for Comments Controls */
+@media (max-width: 768px) {
+    .comments-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .comments-filter {
+        justify-content: center;
+    }
+    
+    .comments-pagination {
+        justify-content: center;
+    }
+    
+    .pagination-btn {
+        min-width: 80px;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .filter-select {
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .comments-controls {
+        padding: 0.75rem;
+    }
+    
+    .pagination-btn {
+        min-width: 70px;
+        padding: 0.35rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    .pagination-info {
+        font-size: 0.8rem;
+    }
+}
+
 /* Light theme enforced - no dark mode */
 /* Light theme enforced - no dark mode */ 

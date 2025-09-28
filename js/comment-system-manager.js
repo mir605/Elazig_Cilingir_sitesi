@@ -490,6 +490,12 @@ class CommentInstance {
         this.manager = manager;
         this.container = document.getElementById(containerId);
         
+        // Pagination and filtering state
+        this.currentPage = 1;
+        this.commentsPerPage = 10; // Default: 10 yorum
+        this.totalComments = 0;
+        this.allComments = [];
+        
         console.log('Creating CommentInstance:', { containerId, pageId });
         
         if (!this.container) {
@@ -569,6 +575,35 @@ class CommentInstance {
                     </form>
                 </div>
                 
+                <!-- Comments Filter and Pagination Controls -->
+                <div class="comments-controls">
+                    <div class="comments-filter">
+                        <label for="commentsPerPage_${this.containerId}" class="filter-label">
+                            <i class="fas fa-list"></i>
+                            Yorum Sayısı:
+                        </label>
+                        <select id="commentsPerPage_${this.containerId}" class="filter-select">
+                            <option value="10">Son 10 Yorum</option>
+                            <option value="20">Son 20 Yorum</option>
+                            <option value="50">Son 50 Yorum</option>
+                        </select>
+                    </div>
+                    
+                    <div class="comments-pagination" id="pagination_${this.containerId}" style="display: none;">
+                        <button id="prevPage_${this.containerId}" class="pagination-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                            Önceki
+                        </button>
+                        <span class="pagination-info" id="pageInfo_${this.containerId}">
+                            Sayfa 1 / 1
+                        </span>
+                        <button id="nextPage_${this.containerId}" class="pagination-btn" disabled>
+                            Sonraki
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
                 <!-- Comments List -->
                 <div class="comments-list-container">
                     <div id="commentsList_${this.containerId}" class="comments-list">
@@ -587,6 +622,11 @@ class CommentInstance {
         const contentTextarea = document.getElementById(`commentContent_${this.containerId}`);
         const charCount = document.getElementById(`charCount_${this.containerId}`);
         const ratingSelect = document.getElementById(`rating_${this.containerId}`);
+        
+        // Pagination and filtering controls
+        const commentsPerPageSelect = document.getElementById(`commentsPerPage_${this.containerId}`);
+        const prevPageBtn = document.getElementById(`prevPage_${this.containerId}`);
+        const nextPageBtn = document.getElementById(`nextPage_${this.containerId}`);
         
         if (form) {
             form.addEventListener('submit', (e) => this.handleSubmit(e));
@@ -612,6 +652,35 @@ class CommentInstance {
         
         if (ratingSelect) {
             ratingSelect.value = '5';
+        }
+        
+        // Comments per page change handler
+        if (commentsPerPageSelect) {
+            commentsPerPageSelect.addEventListener('change', (e) => {
+                this.commentsPerPage = parseInt(e.target.value);
+                this.currentPage = 1; // Reset to first page
+                this.renderComments(this.allComments);
+            });
+        }
+        
+        // Pagination button handlers
+        if (prevPageBtn) {
+            prevPageBtn.addEventListener('click', () => {
+                if (this.currentPage > 1) {
+                    this.currentPage--;
+                    this.renderComments(this.allComments);
+                }
+            });
+        }
+        
+        if (nextPageBtn) {
+            nextPageBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(this.totalComments / this.commentsPerPage);
+                if (this.currentPage < totalPages) {
+                    this.currentPage++;
+                    this.renderComments(this.allComments);
+                }
+            });
         }
     }
 
@@ -693,6 +762,9 @@ class CommentInstance {
             console.log('Load comments result:', result);
             
             if (result.success) {
+                // Store all comments and render with pagination
+                this.allComments = result.data;
+                this.totalComments = result.data.length;
                 this.renderComments(result.data);
             } else {
                 commentsList.innerHTML = `
@@ -728,10 +800,20 @@ class CommentInstance {
                     Henüz yorum yapılmamış. İlk yorumu siz yapın!
                 </div>
             `;
+            this.updatePaginationControls(0, 0);
             return;
         }
         
-        const commentsHTML = topLevelComments.map(comment => {
+        // Calculate pagination
+        const totalPages = Math.ceil(topLevelComments.length / this.commentsPerPage);
+        const startIndex = (this.currentPage - 1) * this.commentsPerPage;
+        const endIndex = startIndex + this.commentsPerPage;
+        const paginatedComments = topLevelComments.slice(startIndex, endIndex);
+        
+        // Update pagination controls
+        this.updatePaginationControls(this.currentPage, totalPages);
+        
+        const commentsHTML = paginatedComments.map(comment => {
             const rating = comment.rating || 5;
             const ratingTexts = {
                 5: 'Çok Faydalı',
@@ -880,6 +962,33 @@ class CommentInstance {
                 day: 'numeric'
             });
         }
+    }
+    
+    updatePaginationControls(currentPage, totalPages) {
+        const paginationContainer = document.getElementById(`pagination_${this.containerId}`);
+        const prevBtn = document.getElementById(`prevPage_${this.containerId}`);
+        const nextBtn = document.getElementById(`nextPage_${this.containerId}`);
+        const pageInfo = document.getElementById(`pageInfo_${this.containerId}`);
+        
+        if (!paginationContainer || !prevBtn || !nextBtn || !pageInfo) return;
+        
+        if (totalPages <= 1) {
+            paginationContainer.style.display = 'none';
+            return;
+        }
+        
+        paginationContainer.style.display = 'flex';
+        
+        // Update button states
+        prevBtn.disabled = currentPage <= 1;
+        nextBtn.disabled = currentPage >= totalPages;
+        
+        // Update page info
+        pageInfo.textContent = `Sayfa ${currentPage} / ${totalPages}`;
+        
+        // Update button styles
+        prevBtn.style.opacity = prevBtn.disabled ? '0.5' : '1';
+        nextBtn.style.opacity = nextBtn.disabled ? '0.5' : '1';
     }
 }
 
