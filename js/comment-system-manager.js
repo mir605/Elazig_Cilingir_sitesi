@@ -575,6 +575,16 @@ class CommentInstance {
                     </form>
                 </div>
                 
+                <!-- Comments List -->
+                <div class="comments-list-container">
+                    <div id="commentsList_${this.containerId}" class="comments-list">
+                        <div class="loading-comments">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            Yorumlar yükleniyor...
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Comments Filter and Pagination Controls -->
                 <div class="comments-controls">
                     <div class="comments-filter">
@@ -601,16 +611,6 @@ class CommentInstance {
                             Sonraki
                             <i class="fas fa-chevron-right"></i>
                         </button>
-                    </div>
-                </div>
-                
-                <!-- Comments List -->
-                <div class="comments-list-container">
-                    <div id="commentsList_${this.containerId}" class="comments-list">
-                        <div class="loading-comments">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            Yorumlar yükleniyor...
-                        </div>
                     </div>
                 </div>
             </div>
