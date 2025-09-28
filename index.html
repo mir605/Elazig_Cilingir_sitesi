@@ -1361,6 +1361,80 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
         
+        .location-btn {
+            position: fixed;
+            bottom: 80px; /* WhatsApp butonunun üstünde */
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: #4285F4; /* Google Maps mavisi */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .location-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Map Modal Styles */
+        .map-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .close-map-modal {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-map-modal:hover,
+        .close-map-modal:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #modal-map-container {
+            height: 450px;
+            width: 100%;
+            border-radius: 12px;
+        }
+        
         .scroll-up-btn {
             position: fixed;
             bottom: 20px;
@@ -2327,7 +2401,20 @@
         </svg>
     </a>
     
+    <button class="location-btn" id="location-popup-btn" aria-label="Konumu Görüntüle" title="Konumu Görüntüle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+    </button>
+    
     <button class="scroll-up-btn" aria-label="Sayfanın başına dön" title="Sayfanın başına dön">↑</button>
+
+    <div id="map-modal" class="map-modal">
+        <div class="map-modal-content">
+            <span class="close-map-modal" id="close-map-modal-btn">&times;</span>
+            <div id="modal-map-container"></div>
+        </div>
+    </div>
 
     <!-- Supabase - Deferred loading -->
     <script defer src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -2657,6 +2744,72 @@
             window.addEventListener('cmsUpdate', function(e) {
                 console.log('CMS update event:', e.detail);
                 loadCMSContent();
+            });
+
+            // Map Modal Functionality
+            const mapModal = document.getElementById('map-modal');
+            const locationBtn = document.getElementById('location-popup-btn');
+            const closeModalBtn = document.getElementById('close-map-modal-btn');
+            let modalMap = null;
+
+            function openMapModal() {
+                if (mapModal) {
+                    mapModal.style.display = 'flex';
+                    // Invalidate map size after modal is shown to ensure it renders correctly
+                    setTimeout(() => {
+                        if (modalMap) {
+                            modalMap.invalidateSize();
+                        } else {
+                            initModalMap();
+                        }
+                    }, 10);
+                }
+            }
+
+            function closeMapModal() {
+                if (mapModal) {
+                    mapModal.style.display = 'none';
+                }
+            }
+
+            function initModalMap() {
+                if (window.L && !modalMap) {
+                     try {
+                        const lat = 38.6695;
+                        const lng = 39.2058;
+                        modalMap = L.map('modal-map-container').setView([lat, lng], 16);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '© OpenStreetMap contributors'
+                        }).addTo(modalMap);
+
+                        const customIcon = L.icon({
+                            iconUrl: 'vendor/leaflet/images/marker-icon.png',
+                            shadowUrl: 'vendor/leaflet/images/marker-shadow.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        });
+
+                        L.marker([lat, lng], {icon: customIcon}).addTo(modalMap)
+                            .bindPopup('<b>MURAT OTO ANAHTAR</b><br>Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ').openPopup();
+                    } catch(e) {
+                        console.error("Modal map initialization failed:", e);
+                        document.getElementById('modal-map-container').innerText = "Harita yüklenemedi.";
+                    }
+                }
+            }
+
+            if (locationBtn) {
+                locationBtn.addEventListener('click', openMapModal);
+            }
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeMapModal);
+            }
+            window.addEventListener('click', function(event) {
+                if (event.target == mapModal) {
+                    closeMapModal();
+                }
             });
         })();
     </script>
