@@ -588,27 +588,33 @@ class CommentInstance {
                 <!-- Comments Filter and Pagination Controls -->
                 <div class="comments-controls">
                     <div class="comments-filter">
-                        <label for="commentsPerPage_${this.containerId}" class="filter-label">
-                            <i class="fas fa-list"></i>
-                            Yorum Sayısı:
+                        <label class="filter-label">
+                            <i class="fas fa-filter"></i>
+                            Yorum Sayısı
                         </label>
-                        <select id="commentsPerPage_${this.containerId}" class="filter-select">
-                            <option value="10">Son 10 Yorum</option>
-                            <option value="20">Son 20 Yorum</option>
-                            <option value="50">Son 50 Yorum</option>
-                        </select>
+                        <div class="custom-select-wrapper">
+                            <select id="commentsPerPage_${this.containerId}" class="custom-select">
+                                <option value="10">Son 10 Yorum</option>
+                                <option value="20">Son 20 Yorum</option>
+                                <option value="50">Son 50 Yorum</option>
+                            </select>
+                            <div class="custom-select-arrow">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="comments-pagination" id="pagination_${this.containerId}" style="display: none;">
-                        <button id="prevPage_${this.containerId}" class="pagination-btn" disabled>
+                        <button id="prevPage_${this.containerId}" class="modern-pagination-btn" disabled>
                             <i class="fas fa-chevron-left"></i>
-                            Önceki
+                            <span>Önceki</span>
                         </button>
-                        <span class="pagination-info" id="pageInfo_${this.containerId}">
-                            Sayfa 1 / 1
-                        </span>
-                        <button id="nextPage_${this.containerId}" class="pagination-btn" disabled>
-                            Sonraki
+                        <div class="pagination-info" id="pageInfo_${this.containerId}">
+                            <span class="page-text">Sayfa</span>
+                            <span class="page-numbers">1 / 1</span>
+                        </div>
+                        <button id="nextPage_${this.containerId}" class="modern-pagination-btn" disabled>
+                            <span>Sonraki</span>
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
@@ -983,12 +989,15 @@ class CommentInstance {
         prevBtn.disabled = currentPage <= 1;
         nextBtn.disabled = currentPage >= totalPages;
         
-        // Update page info
-        pageInfo.textContent = `Sayfa ${currentPage} / ${totalPages}`;
+        // Update page info with new structure
+        const pageNumbers = pageInfo.querySelector('.page-numbers');
+        if (pageNumbers) {
+            pageNumbers.textContent = `${currentPage} / ${totalPages}`;
+        }
         
         // Update button styles
-        prevBtn.style.opacity = prevBtn.disabled ? '0.5' : '1';
-        nextBtn.style.opacity = nextBtn.disabled ? '0.5' : '1';
+        prevBtn.style.opacity = prevBtn.disabled ? '0.3' : '1';
+        nextBtn.style.opacity = nextBtn.disabled ? '0.3' : '1';
     }
 }
 
