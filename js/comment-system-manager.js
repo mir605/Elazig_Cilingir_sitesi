@@ -489,11 +489,10 @@ class CommentInstance {
         this.config = config;
         this.manager = manager;
         this.container = document.getElementById(containerId);
-        
-        // Pagination and filtering state
-        this.currentPage = 1;
-        this.commentsPerPage = 10; // Default: 10 yorum
-        this.totalComments = 0;
+
+        // "Load More" state
+        this.visibleCommentsCount = 10; // Initially show 10
+        this.commentsIncrement = 10;   // Load 10 more each time
         this.allComments = [];
         
         console.log('Creating CommentInstance:', { containerId, pageId });
@@ -585,39 +584,12 @@ class CommentInstance {
                     </div>
                 </div>
                 
-                <!-- Comments Filter and Pagination Controls -->
-                <div class="comments-controls">
-                    <div class="comments-filter">
-                        <label class="filter-label">
-                            <i class="fas fa-filter"></i>
-                            Yorum Sayısı
-                        </label>
-                        <div class="custom-select-wrapper">
-                            <select id="commentsPerPage_${this.containerId}" class="custom-select">
-                                <option value="10">Son 10 Yorum</option>
-                                <option value="20">Son 20 Yorum</option>
-                                <option value="50">Son 50 Yorum</option>
-                            </select>
-                            <div class="custom-select-arrow">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="comments-pagination" id="pagination_${this.containerId}" style="display: none;">
-                        <button id="prevPage_${this.containerId}" class="modern-pagination-btn" disabled>
-                            <i class="fas fa-chevron-left"></i>
-                            <span>Önceki</span>
-                        </button>
-                        <div class="pagination-info" id="pageInfo_${this.containerId}">
-                            <span class="page-text">Sayfa</span>
-                            <span class="page-numbers">1 / 1</span>
-                        </div>
-                        <button id="nextPage_${this.containerId}" class="modern-pagination-btn" disabled>
-                            <span>Sonraki</span>
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
+                <!-- Load More Button Container -->
+                <div id="loadMoreContainer_${this.containerId}" class="load-more-container" style="display: none;">
+                    <button id="loadMoreBtn_${this.containerId}" class="load-more-btn">
+                        <span>Daha Fazla Görüntüle</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
                 </div>
             </div>
         `;
@@ -628,11 +600,6 @@ class CommentInstance {
         const contentTextarea = document.getElementById(`commentContent_${this.containerId}`);
         const charCount = document.getElementById(`charCount_${this.containerId}`);
         const ratingSelect = document.getElementById(`rating_${this.containerId}`);
-        
-        // Pagination and filtering controls
-        const commentsPerPageSelect = document.getElementById(`commentsPerPage_${this.containerId}`);
-        const prevPageBtn = document.getElementById(`prevPage_${this.containerId}`);
-        const nextPageBtn = document.getElementById(`nextPage_${this.containerId}`);
         
         if (form) {
             form.addEventListener('submit', (e) => this.handleSubmit(e));
@@ -660,32 +627,12 @@ class CommentInstance {
             ratingSelect.value = '5';
         }
         
-        // Comments per page change handler
-        if (commentsPerPageSelect) {
-            commentsPerPageSelect.addEventListener('change', (e) => {
-                this.commentsPerPage = parseInt(e.target.value);
-                this.currentPage = 1; // Reset to first page
+        // Load More button handler
+        const loadMoreBtn = document.getElementById(`loadMoreBtn_${this.containerId}`);
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                this.visibleCommentsCount += this.commentsIncrement;
                 this.renderComments(this.allComments);
-            });
-        }
-        
-        // Pagination button handlers
-        if (prevPageBtn) {
-            prevPageBtn.addEventListener('click', () => {
-                if (this.currentPage > 1) {
-                    this.currentPage--;
-                    this.renderComments(this.allComments);
-                }
-            });
-        }
-        
-        if (nextPageBtn) {
-            nextPageBtn.addEventListener('click', () => {
-                const totalPages = Math.ceil(this.totalComments / this.commentsPerPage);
-                if (this.currentPage < totalPages) {
-                    this.currentPage++;
-                    this.renderComments(this.allComments);
-                }
             });
         }
     }
@@ -728,23 +675,15 @@ class CommentInstance {
             console.log('Submit result:', result);
             
             if (result.success) {
-                this.showMessage('Yorum başarıyla gönderildi ve onay bekliyor', 'success');
-                form.reset();
-                
-                const charCount = document.getElementById(`charCount_${this.containerId}`);
-                if (charCount) {
-                    charCount.textContent = '0';
-                    charCount.className = 'char-counter error';
-                }
-                
-                const ratingSelect = document.getElementById(`rating_${this.containerId}`);
-                if (ratingSelect) {
-                    ratingSelect.value = '5';
-                }
-                
-                this.loadComments();
+                this.allComments = result.data;
+                this.renderComments(this.allComments);
             } else {
-                this.showMessage(result.error || 'Yorum gönderilirken hata oluştu', 'error');
+                commentsList.innerHTML = `
+                    <div class="no-comments">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Yorumlar yüklenirken hata oluştu
+                    </div>
+                `;
             }
             
         } catch (error) {
@@ -770,13 +709,12 @@ class CommentInstance {
             if (result.success) {
                 // Store all comments and render with pagination
                 this.allComments = result.data;
-                this.totalComments = result.data.length;
-                this.renderComments(result.data);
+                this.renderComments(this.allComments);
             } else {
                 commentsList.innerHTML = `
                     <div class="no-comments">
                         <i class="fas fa-exclamation-triangle"></i>
-                        Yorumlar yüklenirken hata oluştu
+                        Yorumlar yüklenemedi
                     </div>
                 `;
             }
@@ -806,20 +744,14 @@ class CommentInstance {
                     Henüz yorum yapılmamış. İlk yorumu siz yapın!
                 </div>
             `;
-            this.updatePaginationControls(0, 0);
+            this.updateLoadMoreButton(0);
             return;
         }
         
-        // Calculate pagination
-        const totalPages = Math.ceil(topLevelComments.length / this.commentsPerPage);
-        const startIndex = (this.currentPage - 1) * this.commentsPerPage;
-        const endIndex = startIndex + this.commentsPerPage;
-        const paginatedComments = topLevelComments.slice(startIndex, endIndex);
+        // Slice comments based on how many should be visible
+        const commentsToShow = topLevelComments.slice(0, this.visibleCommentsCount);
         
-        // Update pagination controls
-        this.updatePaginationControls(this.currentPage, totalPages);
-        
-        const commentsHTML = paginatedComments.map(comment => {
+        const commentsHTML = commentsToShow.map(comment => {
             const rating = comment.rating || 5;
             const ratingTexts = {
                 5: 'Çok Faydalı',
@@ -865,6 +797,9 @@ class CommentInstance {
         }).join('');
         
         commentsList.innerHTML = commentsHTML;
+        
+        // Update the "Load More" button's state and visibility
+        this.updateLoadMoreButton(topLevelComments.length);
     }
 
     renderReplies(replies) {
@@ -970,34 +905,15 @@ class CommentInstance {
         }
     }
     
-    updatePaginationControls(currentPage, totalPages) {
-        const paginationContainer = document.getElementById(`pagination_${this.containerId}`);
-        const prevBtn = document.getElementById(`prevPage_${this.containerId}`);
-        const nextBtn = document.getElementById(`nextPage_${this.containerId}`);
-        const pageInfo = document.getElementById(`pageInfo_${this.containerId}`);
-        
-        if (!paginationContainer || !prevBtn || !nextBtn || !pageInfo) return;
-        
-        if (totalPages <= 1) {
-            paginationContainer.style.display = 'none';
-            return;
+    updateLoadMoreButton(totalComments) {
+        const loadMoreContainer = document.getElementById(`loadMoreContainer_${this.containerId}`);
+        if (!loadMoreContainer) return;
+
+        if (this.visibleCommentsCount < totalComments) {
+            loadMoreContainer.style.display = 'flex';
+        } else {
+            loadMoreContainer.style.display = 'none';
         }
-        
-        paginationContainer.style.display = 'flex';
-        
-        // Update button states
-        prevBtn.disabled = currentPage <= 1;
-        nextBtn.disabled = currentPage >= totalPages;
-        
-        // Update page info with new structure
-        const pageNumbers = pageInfo.querySelector('.page-numbers');
-        if (pageNumbers) {
-            pageNumbers.textContent = `${currentPage} / ${totalPages}`;
-        }
-        
-        // Update button styles
-        prevBtn.style.opacity = prevBtn.disabled ? '0.3' : '1';
-        nextBtn.style.opacity = nextBtn.disabled ? '0.3' : '1';
     }
 }
 
