@@ -1283,13 +1283,29 @@ section.visible {
 
 
 
-    /* Fixed buttons smaller and aligned */
-    .scroll-up-btn,
+    /* Fixed buttons - Mobile alignment fix */
     .whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
         width: 50px;
         height: 50px;
-        font-size: 1.25rem;
-        bottom: 20px; /* Aynı hizada */
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .scroll-up-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     /* Mobile icon adjustments */
@@ -1300,16 +1316,6 @@ section.visible {
     
     .arrow-up-icon {
         font-size: 1.5rem;
-    }
-
-    .whatsapp-btn {
-        left: 20px;
-        bottom: 20px; /* WhatsApp butonu için açık bottom değeri */
-    }
-
-    .scroll-up-btn {
-        right: 20px;
-        bottom: 20px; /* Yukarı ok butonu için açık bottom değeri */
     }
 
     /* Reduce shadows for better performance */
@@ -1361,6 +1367,23 @@ section.visible {
     .cta-numbers a {
         padding: 0.75rem 1.5rem;
         font-size: 1.25rem;
+    }
+
+    /* Fixed buttons for very small screens */
+    .whatsapp-btn {
+        bottom: 20px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
+    .scroll-up-btn {
+        bottom: 20px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
     }
 }
 
