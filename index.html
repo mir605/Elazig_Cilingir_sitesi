@@ -2408,8 +2408,8 @@
             
             // Open map function
             window.openMap = function() {
-                // Direct link to Google Maps location
-                const businessUrl = "https://www.google.com/maps?q=38.669360099204226,39.20581406211611";
+                // Using a more robust URL to ensure a pin is always shown
+                const businessUrl = "https://www.google.com/maps/search/?api=1&query=38.669360099204226,39.20581406211611";
                 
                 // Open the Google Maps location directly
                 window.open(businessUrl, '_blank');
