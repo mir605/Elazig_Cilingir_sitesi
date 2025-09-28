@@ -1304,10 +1304,12 @@ section.visible {
 
     .whatsapp-btn {
         left: 20px;
+        bottom: 20px; /* WhatsApp butonu için açık bottom değeri */
     }
 
     .scroll-up-btn {
         right: 20px;
+        bottom: 20px; /* Yukarı ok butonu için açık bottom değeri */
     }
 
     /* Reduce shadows for better performance */
@@ -3678,6 +3680,23 @@ section.visible {
         width: 180px; /* Çok küçük ekranlarda daha da küçük */
         padding: 10px 15px;
         font-size: 0.95rem;
+    }
+    
+    /* Fixed buttons alignment for very small screens */
+    .whatsapp-btn {
+        bottom: 20px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
+    .scroll-up-btn {
+        bottom: 20px; /* WhatsApp butonu ile aynı hizada */
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
     }
 }
 
