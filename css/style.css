@@ -3570,3 +3570,80 @@ section.visible {
     margin: 2rem 0;
     border: 1px solid #f0f0f0;
 } 
+
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-up-btn {
+    position: fixed;
+    bottom: 20px; /* WhatsApp butonu ile aynı hizada */
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: #ea580c;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.scroll-up-btn.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero Buttons Container */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Butonlar arası boşluk */
+    margin-top: 30px;
+    flex-wrap: wrap; /* Mobil için */
+}
+
+.location-popup-btn {
+    background: linear-gradient(to right, #3498db, #2980b9); /* Konum butonu için farklı bir renk */
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+}
+
+.location-popup-btn:hover {
+    background: linear-gradient(to right, #2980b9, #3498db);
+}
+
+section {
+    padding: 80px 0;
+}
