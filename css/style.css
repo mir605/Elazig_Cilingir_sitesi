@@ -3625,23 +3625,56 @@ section.visible {
 /* Hero Buttons Container */
 .hero-buttons {
     display: flex;
+    flex-direction: column; /* Butonları dikey olarak yerleştir */
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Butonlar arası boşluk */
+    gap: 15px; /* Butonlar arası boşluk */
     margin-top: 30px;
-    flex-wrap: wrap; /* Mobil için */
+}
+
+.call-btn {
+    background: linear-gradient(to right, #27ae60, #2ecc71); /* Yeşil renk */
+    width: 250px; /* Sabit genişlik */
+    text-align: center;
+}
+
+.call-btn:hover {
+    background: linear-gradient(to right, #2ecc71, #27ae60);
 }
 
 .location-popup-btn {
-    background: linear-gradient(to right, #3498db, #2980b9); /* Konum butonu için farklı bir renk */
+    background: linear-gradient(to right, #3498db, #2980b9); /* Mavi renk */
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     padding: 15px 30px;
+    width: 250px; /* Aynı genişlik */
+    text-align: center;
 }
 
 .location-popup-btn:hover {
     background: linear-gradient(to right, #2980b9, #3498db);
+}
+
+/* Mobil için buton boyutları */
+@media (max-width: 768px) {
+    .call-btn, .location-popup-btn {
+        width: 200px; /* Mobilde daha küçük */
+        padding: 12px 20px;
+    }
+    
+    .hero-buttons {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .call-btn, .location-popup-btn {
+        width: 180px; /* Çok küçük ekranlarda daha da küçük */
+        padding: 10px 15px;
+        font-size: 0.95rem;
+    }
 }
 
 section {
