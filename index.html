@@ -2116,7 +2116,7 @@
                         <div class="contact-icon">📍</div>
                         <div class="contact-details">
                             <h4>Adres</h4>
-                            <p class="address-link" onclick="openMap()">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p>
+                            <p class="address-link" onclick="window.open('https://www.google.com/maps?q=38.669360099204226,39.20581406211611&z=15', '_blank')">Olgunlar mahallesi Şehit feyzi gürsu caddesi no 1 A, Elazığ</p>
                         </div>
                     </div>
                     
@@ -2137,9 +2137,9 @@
                     </div>
                 </div>
                 
-                <div class="map-container" onclick="openMap()">
+                <div class="map-container">
                     <iframe 
-                        src="https://maps.google.com/maps?q=38.669360099204226,39.20581406211611&hl=tr&z=18&amp;output=embed" 
+                        src="https://www.google.com/maps?q=38.669360099204226,39.20581406211611&z=15&output=embed" 
                         width="100%" 
                         height="450" 
                         style="border:0;" 
@@ -2213,11 +2213,11 @@
         </svg>
     </a>
     
-    <button onclick="openMap()" class="location-btn" aria-label="Konumu Görüntüle" title="Konumu Görüntüle">
+    <a href="https://www.google.com/maps?q=38.669360099204226,39.20581406211611&z=15" target="_blank" class="location-btn" aria-label="Konumu Görüntüle" title="Konumu Görüntüle">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
         </svg>
-    </button>
+    </a>
     
     <button class="scroll-up-btn" aria-label="Sayfanın başına dön" title="Sayfanın başına dön">↑</button>
 
@@ -2406,14 +2406,6 @@
                 }
             });
             
-            // Open map function
-            window.openMap = function() {
-                // A URL that is more robust for showing a specific, pinned business location on Google Maps.
-                const businessUrl = "https://www.google.com/maps/place/Murat+Oto+Anahtar/@38.6693601,39.2058141,17z";
-                
-                // Open the Google Maps location directly
-                window.open(businessUrl, '_blank');
-            };
 
             // Admin panel access
             window.openAdminPanel = function() {
