@@ -1283,29 +1283,29 @@ section.visible {
 
 
 
-    /* Fixed buttons - Mobile alignment fix */
+    /* Fixed buttons - Mobile alignment fix - ensure consistent positioning */
     .whatsapp-btn {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
+        position: fixed !important;
+        bottom: 20px !important;
+        left: 20px !important;
         width: 50px;
         height: 50px;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        z-index: 100 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
     .scroll-up-btn {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
         width: 50px;
         height: 50px;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        z-index: 100 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
     /* Mobile icon adjustments */
@@ -1369,21 +1369,31 @@ section.visible {
         font-size: 1.25rem;
     }
 
-    /* Fixed buttons for very small screens */
+    /* Fixed buttons for very small screens - maintain consistent positioning */
     .whatsapp-btn {
-        bottom: 20px;
-        left: 15px;
+        position: fixed !important;
+        bottom: 20px !important;
+        left: 20px !important;
         width: 45px;
         height: 45px;
         font-size: 1.3rem;
+        z-index: 100 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     
     .scroll-up-btn {
-        bottom: 20px;
-        right: 15px;
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
         width: 45px;
         height: 45px;
         font-size: 1.3rem;
+        z-index: 100 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 }
 
