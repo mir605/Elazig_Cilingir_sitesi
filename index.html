@@ -77,6 +77,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="Tue, 05 Sep 2025 15:30:00 GMT">
     
     <!-- Critical CSS Inline - Ultra Optimized -->
     <style>
@@ -85,11 +86,20 @@
     </style>
     
     <!-- Non-critical CSS - Deferred -->
-    <link rel="preload" href="css/style.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/style.min.css"></noscript>
+    <link rel="preload" href="css/style.min.css?v=2.7" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/style.min.css?v=2.7"></noscript>
     
     <!-- Critical JavaScript - Inline for immediate execution -->
     <script>
+    // Force cache refresh
+    if ('caches' in window) {
+        caches.keys().then(function(names) {
+            for (let name of names) {
+                caches.delete(name);
+            }
+        });
+    }
+    
     // Critical performance optimizations
     (function() {
         // Preload critical images
@@ -2234,7 +2244,7 @@
     <script src="performance-optimizer.js"></script>
     
     <!-- Main Script - Optimized and deferred -->
-    <script defer src="js/script.min.js?v=2.6"></script>
+    <script defer src="js/script.min.js?v=2.8"></script>
     
     <!-- Service Worker Registration -->
     <script>
