@@ -587,7 +587,7 @@ class CommentInstance {
                 <!-- Load More Button Container -->
                 <div id="loadMoreContainer_${this.containerId}" class="load-more-container" style="display: none;">
                     <button id="loadMoreBtn_${this.containerId}" class="load-more-btn">
-                        <span>Daha Fazla Görüntüle</span>
+                        <span>Daha Fazla Göster</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
                 </div>
