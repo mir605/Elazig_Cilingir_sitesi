@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const compression = require('compression');
 const fs = require('fs').promises;
 const path = require('path');
 const multer = require('multer');
@@ -108,6 +109,39 @@ const commentOperations = {
 initDatabase().catch(console.error);
 
 // Middleware
+app.use(compression({
+    level: 6,
+    threshold: 1024,
+    filter: (req, res) => {
+        if (req.headers['x-no-compression']) {
+            return false;
+        }
+        return compression.filter(req, res);
+    }
+}));
+
+// Security headers
+app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+    next();
+});
+
+// Cache headers for static assets
+app.use(express.static(path.join(__dirname, '..'), {
+    maxAge: '1y',
+    setHeaders: (res, path) => {
+        if (path.match(/\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$/)) {
+            res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        } else if (path.match(/\.(html|htm)$/)) {
+            res.setHeader('Cache-Control', 'public, max-age=3600');
+        }
+    }
+}));
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -530,8 +564,7 @@ app.post('/admin/save-blog', upload.none(), async (req, res) => {
     }
 });
 
-// Static files
-app.use(express.static(path.join(__dirname, '..')));
+// Static files are already configured above with compression and caching
 
 // Start server
 app.listen(PORT, () => {
